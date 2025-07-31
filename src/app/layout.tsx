@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import GridOverlay from "./components/gridOverlay";
+import { Geist, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -25,8 +26,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${plusJakartaSans.variable} antialiased`}
+        className={`${geistSans.variable} ${plusJakartaSans.variable} antialiased cursor-default select-none`}
       >
+        <GridOverlay />
         {children}
       </body>
     </html>

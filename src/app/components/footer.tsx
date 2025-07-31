@@ -4,7 +4,7 @@ import Image from 'next/image'
 
 function Footer() {
     return (
-      <div className="bg-[#77777725] text-[#343330] font-jakarta text-lg w-full">
+      <div className="bg-[#00000025] text-[#343330] font-jakarta text-lg w-full">
         <div className="pl-12 pt-20 pb-6 flex gap-6 sm:flex-col">
           <div>
             <p>design & development</p>
