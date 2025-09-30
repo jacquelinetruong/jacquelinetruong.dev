@@ -1,4 +1,4 @@
-import '../../../public/arrow.svg'
+import '../../../public/default-arrow.svg'
 import '../../../public/default footer jt.svg'
 import Image from 'next/image'
 
@@ -10,7 +10,7 @@ function Footer() {
             <p>design & development</p>
             <div className="flex gap-2 items-center flex-col sm:flex-row">
               <Image
-                src="/arrow.svg"
+                src="/default-arrow.svg"
                 alt="arrow icon"
                 width={16}
                 height={16}

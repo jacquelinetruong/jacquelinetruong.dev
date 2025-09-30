@@ -4,7 +4,7 @@ import Grid from "./grid";
 import Clock from "./clock";
 import Image from "next/image";
 
-import './../../../public/arrow.svg';
+import './../../../public/default-arrow.svg';
 import './../../../public/default flower.svg';
 import './../../../public/default hero jt.svg';
 
@@ -17,7 +17,7 @@ const Hero = () => {
             <p className="font-jakarta">based in Toronto, CA</p>
             <div className="font-geist font-semibold text-wrap w-full h-full flex gap-2 items-start flex-col sm:flex-row">
               <Image
-                src="/arrow.svg"
+                src="/default-arrow.svg"
                 alt="arrow icon"
                 width={16}
                 height={16}
@@ -29,7 +29,7 @@ const Hero = () => {
             <p className="font-jakarta">status</p>
             <div className="w-full h-full flex gap-2 items-start flex-col sm:flex-row">
               <Image
-                src="/arrow.svg"
+                src="/default-arrow.svg"
                 alt="arrow icon"
                 width={16}
                 height={16}
@@ -44,7 +44,7 @@ const Hero = () => {
             <p className="font-jakarta">currently</p>
             <div className="w-full h-full flex gap-2 items-start flex-col sm:flex-row">
               <Image
-                src="/arrow.svg"
+                src="/default-arrow.svg"
                 alt="arrow icon"
                 width={16}
                 height={16}
@@ -53,7 +53,7 @@ const Hero = () => {
             </div>
             <div className="w-full h-full flex gap-2 items-start flex-col sm:flex-row">
               <Image
-                src="/arrow.svg"
+                src="/default-arrow.svg"
                 alt="arrow icon"
                 width={16}
                 height={16}
@@ -65,7 +65,7 @@ const Hero = () => {
             <p className="font-jakarta">education</p>
             <div className="w-full h-full flex gap-2 items-start flex-col sm:flex-row">
               <Image
-                src="/arrow.svg"
+                src="/default-arrow.svg"
                 alt="arrow icon"
                 width={16}
                 height={16}

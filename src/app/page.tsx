@@ -1,5 +1,6 @@
 import Navbar from "./components/navbar";
 import Hero from "./components/hero";
+import Portfolio from "./components/portfolio";
 import Footer from "./components/footer";
 
 export default function Home() {
@@ -7,7 +8,7 @@ export default function Home() {
     <>
       <Navbar />
       <main className="snap-y snap-mandatory h-screen overflow-y-scroll hide-scrollbar">
-        <Hero />
+        <Portfolio />
         <Footer />
       </main>
     </>
