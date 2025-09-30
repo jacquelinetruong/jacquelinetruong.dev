@@ -2,8 +2,8 @@ import Grid from "./grid";
 import Image from "next/image";
 
 import './../../../public/alt-arrow.svg';
-import './../../../public/default flower.svg';
-import './../../../public/default portfolio.svg';
+import './../../../public/default-flower.svg';
+import './../../../public/default-portfolio.svg';
 
 const Portfolio = () => {
   return (
@@ -42,7 +42,7 @@ const Portfolio = () => {
 
       <div className="absolute bottom-0">
         <Image
-          src="/default portfolio.svg"
+          src="/default-portfolio.svg"
           alt="portfolio typography"
           width={945.36}
           height={232.3}

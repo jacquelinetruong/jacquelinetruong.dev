@@ -1,4 +1,4 @@
-import '../../../public/transparent logo.svg'
+import '../../../public/transparent-logo.svg'
 import '../../../public/coffee.svg'
 import Image from 'next/image'
 
@@ -8,7 +8,7 @@ function Navbar() {
             <div className='font-geist text-xl tracking-tight fixed w-full flex flex-row justify-between px-12 py-6 top-0 z-50'>
                 <div className='flex flex-row gap-12 items-center'>
                     <Image
-                        src="/transparent logo.svg"
+                        src="/transparent-logo.svg"
                         alt="hand-drawn site logo"
                         width={70}
                         height={48}

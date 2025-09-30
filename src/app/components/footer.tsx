@@ -1,5 +1,5 @@
 import '../../../public/default-arrow.svg'
-import '../../../public/default footer jt.svg'
+import '../../../public/default-footer-jt.svg'
 import Image from 'next/image'
 
 function Footer() {
@@ -23,7 +23,7 @@ function Footer() {
   
         <div className="w-full">
           <Image
-            src="/default footer jt.svg"
+            src="/default-footer-jt.svg"
             alt="jacqueline truong typography"
             width={1920}
             height={237.79}
