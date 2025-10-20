@@ -5,8 +5,8 @@ import Clock from "./clock";
 import Image from "next/image";
 
 import './../../../public/default-arrow.svg';
-import './../../../public/default flower.svg';
-import './../../../public/default hero jt.svg';
+import './../../../public/default-flower.svg';
+import './../../../public/default-hero-jt.svg';
 
 const Hero = () => {
   return (
