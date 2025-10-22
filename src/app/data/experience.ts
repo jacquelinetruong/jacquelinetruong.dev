@@ -1,6 +1,6 @@
 // temporary until Notion CMS integration is added
 
-export type Experience = {
+export interface Experience {
   company: string;
   role: string;
   duration: string;
@@ -13,9 +13,7 @@ export const experience: Experience[] = [
     role: "UX/UI Designer",
     duration: "june 2025 — present",
     points: [
-      "Led all creative across 3+ hackathons with 3,000+ attendees and 35+ company sponsors.",
-      "Designed responsive web UIs in Figma—landing pages, hacker dashboards, admin portals, and forms, all with mobile views.",
-      "Partnered with 5 engineers in an agile environment to iterate through usability testing and team feedback, ensuring smooth hand-off and design implementation.",
+      "TBD"
     ],
   },
   {
