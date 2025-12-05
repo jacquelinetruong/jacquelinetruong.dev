@@ -96,9 +96,7 @@ export default function Hero() {
 		<div className='font-inter font-semibold text-3xl text-right
 						col-start-5 col-span-1 row-start-4 row-span-1
 						p-8'>
-			<p>
-				Based in Toronto, CA.
-			</p>
+			<p>Based in Toronto, CA.</p>
 		</div>
 	</>
   );
