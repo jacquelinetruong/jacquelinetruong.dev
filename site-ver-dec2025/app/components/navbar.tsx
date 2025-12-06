@@ -1,10 +1,10 @@
 'use client';
 
-import Grid from './grid'
-import Image from 'next/image'
+import Grid from './grid';
+import Image from 'next/image';
 
-import '../../public/jt-logo-black.svg'
-import '../../public/jt-logo-white.svg'
+import '../../public/jt-logo-black.svg';
+import '../../public/jt-logo-white.svg';
 
 
 export default function Navbar() {
@@ -12,7 +12,7 @@ export default function Navbar() {
         <>
             <div className='font-inter font-medium text-xl
                             col-start-1 col-span-5 row-start-1 row-span-1
-                            p-8 z-100 
+                            p-8 z-100
                             flex flex-row justify-between items-center'>
                 {/* left side */}
                 <div className='flex flex-row gap-16 items-center'>

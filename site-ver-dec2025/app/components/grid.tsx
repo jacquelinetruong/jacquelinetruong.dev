@@ -8,7 +8,7 @@ export default function Grid({
   className?: string;
 }) {
   return (
-    <section className={`relative ${className}`}>
+    <section className={`relative w-full ${className}`}>
       <div className='grid-lines' />
       <div className='grid-layout'>{children}</div>
     </section>
