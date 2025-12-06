@@ -1,18 +1,19 @@
 'use client';
 
 import Image from 'next/image';
+import Grid from './grid';
 
 import '../../public/me.jpg';
-import '../../public/detail-arrow-black.svg'
+import '../../public/detail-arrow-black.svg';
 import '../../public/coffee-icon-white.svg';
 import '../../public/jt-grey.svg';
 import '../../public/guide-arrow-black.svg';
 import '../../public/cat.svg';
 
 
-export default function About() {
+export default function About({ className = '' }: { className?: string }) {
     return(
-        <>
+        <Grid className={className}>
             {/* pic of me! */}
             <div className='col-start-1 col-span-1 row-start-2 row-span-2'>
                 <Image 
@@ -45,11 +46,11 @@ export default function About() {
                 </div>
 
                 {/* quick info */}
-                <div className='flex flex-col gap-6'>
+                <div className='flex flex-col gap-8'>
                     {/* current work */}
-                    <div>
+                    <div className='flex flex-col gap-1'>
                         <p className='font-medium text-xl text-[#888888]'>Currently</p>
-                        <div className='font-semibold text-xl
+                        <p className='font-semibold text-xl
                                         flex flex-row gap-2 items-center'>
                             <Image 
                                 src='/detail-arrow-black.svg'
@@ -57,9 +58,9 @@ export default function About() {
                                 width={24}
                                 height={24}
                             />
-                            <p>UX/UI Designer @ MobCoder,</p>
-                        </div>
-                        <div className='font-semibold text-xl
+                            UX/UI Designer @ MobCoder,
+                        </p>                        
+                        <p className='font-semibold text-xl
                                         flex flex-row gap-2 items-center'>
                             <Image 
                                 src='/detail-arrow-black.svg'
@@ -67,14 +68,14 @@ export default function About() {
                                 width={24}
                                 height={24}
                             />
-                            <p>Chief Creative Officer @ Konfer</p>
-                        </div>
+                            Chief Creative Officer @ Konfer
+                        </p>
                     </div>
 
                     {/* education */}
-                    <div>
+                    <div className='flex flex-col gap-1'>
                         <p className='font-medium text-xl text-[#888888]'>Education</p>
-                        <div className='font-semibold text-xl
+                        <p className='font-semibold text-xl
                                         flex flex-row gap-2 items-center'>
                             <Image 
                                 src='/detail-arrow-black.svg'
@@ -82,8 +83,8 @@ export default function About() {
                                 width={24}
                                 height={24}
                             />
-                            <p>BSc Computer Science @ Wilfrid Laurier University, 2025</p>
-                        </div>
+                            BSc Computer Science @ Wilfrid Laurier University, 2025
+                        </p>
                     </div>
                 </div>
             </div>
@@ -137,6 +138,24 @@ export default function About() {
                 {/* add later: project component */}
             </div>
 
+            {/* jump to 'experience' button */}
+                    <div className='col-start-3 col-span-1 row-start-4 row-span-1
+                                    flex flex-col justify-end items-center'>
+                        <a className='font-inter font-medium
+                                      flex flex-col items-center gap-2
+                                      p-8'
+                            href='#about'			  
+                        >
+                            My Experience
+                            <Image
+                                src='/guide-arrow-black.svg'
+                                alt='arrow pointing down'
+                                width={28}
+                                height={28}
+                            />
+                        </a>
+                    </div>
+
             {/* project display #2 */}
             <div className='font-inter
                             col-start-4 col-span-1 row-start-4 row-span-1
@@ -163,6 +182,6 @@ export default function About() {
                 </div>
             </div>
             
-        </>
+        </Grid>
     )
 }

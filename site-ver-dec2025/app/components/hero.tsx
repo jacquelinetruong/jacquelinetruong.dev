@@ -1,15 +1,16 @@
 'use client';
 
 import Image from 'next/image';
+import Grid from './grid';
 
-import '../../public/coffee-icon-white.svg'
-import '../../public/jt-black.svg'
-import '../../public/guide-arrow-black.svg'
+import '../../public/coffee-icon-white.svg';
+import '../../public/jt-black.svg';
+import '../../public/guide-arrow-black.svg';
 
 
-export default function Hero() {
+export default function Hero({ className = '' }: { className?: string }) {
   return (
-	<>
+	<Grid className={className}>
 		{/* integrate project.tsx later */}
 		{/* project display #1 */}
 		<div className='font-inter
@@ -98,6 +99,6 @@ export default function Hero() {
 						p-8'>
 			<p>Based in Toronto, CA.</p>
 		</div>
-	</>
+	</Grid>
   );
 };
