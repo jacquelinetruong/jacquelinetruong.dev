@@ -10,6 +10,8 @@
   /* other */
   --nav-height: 114px;
   --cell-height: calc((100vh - var(--nav-height)) / 3);
+  --cell-width: calc(100vw / 5);
+  --content-space: calc(100vh - var(--nav-height));
 }
 
 @theme inline {
@@ -25,7 +27,7 @@ body {
 /* grid content layout */
 .grid-layout {
   width: 100vw;
-  min-height: 100vh;
+  min-height: var(--content-space);
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-auto-rows: minmax(0, var(--cell-height));

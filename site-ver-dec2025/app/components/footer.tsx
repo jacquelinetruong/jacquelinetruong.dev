@@ -17,7 +17,7 @@ export default function Footer({ className = '' }: { className?: string }) {
             {/* cta */}
             <div className='font-inter
                             col-start-2 col-span-3 row-start-2 row-span-1
-                            flex flex-col gap-6 justify-center items-center
+                            flex flex-col gap-6 justify-end items-center
                             p-8'>
                 <p className='font-semibold text-3xl'>Have a project idea? Let's make it happen.</p>
                 <a className='font-medium text-xl text-white
@@ -49,7 +49,7 @@ export default function Footer({ className = '' }: { className?: string }) {
             {/* real footer */}
             <div className='font-inter font-medium text-lg text-[#888888]
                             col-start-1 col-span-5 row-start-4 row-span-1
-                            flex flex-col justify-between p-8 pt-16
+                            flex flex-col gap-16 p-8 pt-16 h-fit
                             bg-[#1B1C1D] border-t-[#1B1C1D]'>
                 {/* content */}
                 <div className='flex flex-row justify-between'>
@@ -84,7 +84,7 @@ export default function Footer({ className = '' }: { className?: string }) {
 
                     {/* cta */}
                     <div className='flex flex-col justify-between'>
-                        <div className='flex flex-col gap-2'>
+                        <div className='flex flex-col gap-4'>
                             <p className='text-white'>Like my work?</p>
                             <a className='font-medium text-xl text-[#1B1C1D]
                                         flex flex-row gap-2 items-center
