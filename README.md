@@ -1,4 +1,4 @@
 ## hi
-this is my new-new portfolio site!
+this is my portfolio site, still in progress!
 
 still cookin.

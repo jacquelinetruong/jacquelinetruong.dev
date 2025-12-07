@@ -14,14 +14,15 @@ export default function Hero({ className = '' }: { className?: string }) {
 		{/* integrate project.tsx later */}
 		{/* project display #1 */}
 		<div className='font-inter
-						col-start-2 col-span-1 row-start-2 row-span-
-						border-2 border-[#FF0000]'>
+						col-start-2 col-span-1 row-start-1 row-span-1
+						border-2 border-[#FF0000]
+					'>
 			{/* add later: project component */}
 		</div>
 
 		{/* cta, intro section */}
 		<div className='font-inter
-						col-start-4 col-span-2 row-start-2 row-span-1
+						col-start-4 col-span-2 row-start-1 row-span-1
 						flex flex-col justify-between items-end 
 						p-8'>
 
@@ -50,13 +51,13 @@ export default function Hero({ className = '' }: { className?: string }) {
 
 		{/* project display #2 (featured) */}
 		<div className='font-inter
-						col-start-1 col-span-2 row-start-3 row-span-2
+						col-start-1 col-span-2 row-start-2 row-span-2
 						border-2 border-[#FF0000]'>
 			{/* add later: project component */}
 		</div>
 
 		{/* big name */}
-		<div className='col-start-4 col-span-2 row-start-3 row-span-1
+		<div className='col-start-4 col-span-2 row-start-2 row-span-1
 						flex flex-col items-end
 						p-8'>
 			<Image 
@@ -69,7 +70,7 @@ export default function Hero({ className = '' }: { className?: string }) {
 		</div>
 
 		{/* jump to 'about' button */}
-		<div className='col-start-3 col-span-1 row-start-4 row-span-1
+		<div className='col-start-3 col-span-1 row-start-3 row-span-1
 						flex flex-col justify-end items-center'>
 			<a className='font-inter font-medium
 						  flex flex-col items-center gap-2
@@ -88,14 +89,14 @@ export default function Hero({ className = '' }: { className?: string }) {
 
 		{/* project display #3 */}
 		<div className='font-inter
-						col-start-4 col-span-1 row-start-4 row-span-1
+						col-start-4 col-span-1 row-start-3 row-span-1
 						border-2 border-[#FF0000]'>
 			{/* add later: project component */}
 		</div>
 
 		{/* city */}
 		<div className='font-inter font-semibold text-3xl text-right
-						col-start-5 col-span-1 row-start-4 row-span-1
+						col-start-5 col-span-1 row-start-3 row-span-1
 						p-8'>
 			<p>Based in Toronto, CA.</p>
 		</div>
