@@ -11,8 +11,7 @@ export default function Navbar() {
     return (
         <>
             <div className='font-inter font-medium text-xl
-                            col-start-1 col-span-5 row-start-1 row-span-1
-                            p-8 z-100
+                            p-8 z-100 sticky top-0
                             flex flex-row justify-between items-center'>
                 {/* left side */}
                 <div className='flex flex-row gap-16 items-center'>
