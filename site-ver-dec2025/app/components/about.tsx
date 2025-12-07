@@ -138,23 +138,23 @@ export default function About({ className = '' }: { className?: string }) {
                 {/* add later: project component */}
             </div>
 
-            {/* jump to 'experience' button */}
-                    <div className='col-start-3 col-span-1 row-start-3 row-span-1
-                                    flex flex-col justify-end items-center'>
-                        <a className='font-inter font-medium
-                                      flex flex-col items-center gap-2
-                                      p-8'
-                            href='#about'			  
-                        >
-                            My Experience
-                            <Image
-                                src='/guide-arrow-black.svg'
-                                alt='arrow pointing down'
-                                width={28}
-                                height={28}
-                            />
-                        </a>
-                    </div>
+            {/* jump to 'portfolio' button */}
+            <div className='col-start-3 col-span-1 row-start-3 row-span-1
+                            flex flex-col justify-end items-center'>
+                <a className='font-inter font-medium
+                                flex flex-col items-center gap-2
+                                p-8'
+                    href='#about'			  
+                >
+                    See Portfolio
+                    <Image
+                        src='/guide-arrow-black.svg'
+                        alt='arrow pointing down'
+                        width={28}
+                        height={28}
+                    />
+                </a>
+            </div>
 
             {/* project display #2 */}
             <div className='font-inter
@@ -171,15 +171,13 @@ export default function About({ className = '' }: { className?: string }) {
                 <p>Based in Toronto, CA.</p>
 
                 {/* cat! */}
-                <div className=''>
-                    <Image 
-                        src='/cat.svg'
-                        alt='hand-drawn cat'
-                        width={250}
-                        height={127.63}
-                        className='size-full'
-                    />
-                </div>
+                <Image 
+                    src='/cat.svg'
+                    alt='hand-drawn cat'
+                    width={250}
+                    height={127.63}
+                    className='size-full'
+                />
             </div>
             
         </Grid>
