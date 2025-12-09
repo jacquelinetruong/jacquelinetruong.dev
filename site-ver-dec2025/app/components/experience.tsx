@@ -1,5 +1,7 @@
 'use client';
 
+import { Project } from '@/lib/projectTypes';
+import ProjectCard from './projectcard';
 import Image from 'next/image';
 import Grid from './grid';
 
@@ -7,9 +9,50 @@ import '../../public/detail-arrow-black.svg';
 import '../../public/detail-arrow-grey.svg';
 import '../../public/experience.svg';
 
-export default function Experience({ className = '' }: { className?: string }) {
+export default function Experience({
+    className = '',
+    projects,
+ }: { 
+    className?: string; 
+    projects: Project[];
+ }) {
     return (
         <Grid className={className}>
+            {/* relevant projects */}
+            {/* project display #1 */}
+            <div className='col-start-5 col-span-1 row-start-2 row-span-1'>
+                {projects
+                    .filter(p => p.section === 'hero' && p.sectionId === '1')
+                    .map(project => (
+                        <ProjectCard
+                            key={project.id}
+                            project={project}
+                        />
+                    ))}            
+            </div>
+            {/* project display #2 */}
+            <div className='col-start-4 col-span-1 row-start-3 row-span-1'>
+                {projects
+                    .filter(p => p.section === 'hero' && p.sectionId === '2')
+                    .map(project => (
+                        <ProjectCard
+                            key={project.id}
+                            project={project}
+                        />
+                    ))} 
+            </div>
+            {/* project display #2 */}
+            <div className='col-start-2 col-span-1 row-start-4 row-span-1'>
+                {projects
+                    .filter(p => p.section === 'hero' && p.sectionId === '3')
+                    .map(project => (
+                        <ProjectCard
+                            key={project.id}
+                            project={project}
+                        />
+                    ))} 
+            </div>
+
             {/* experience menu */}
             <div className='font-inter
                             col-start-1 col-span-1 row-start-2 row-span-2
@@ -173,23 +216,6 @@ export default function Experience({ className = '' }: { className?: string }) {
                     Sample point of this job. I'm a newgrad designer who loves bringing ideas to life through clean, functional, high-impact products. 
                     Since I also code, I'm drawn to designs that aren't just beautiful, but realistic, buildable, and considerate of engineering workflows.
                 </li>
-            </div>
-
-            {/* relevant projects */}
-            <div className='font-inter
-                            col-start-5 col-span-1 row-start-2 row-span-1
-                            border-2 border-[#FF0000]'>
-                {/* add later: project component */}
-            </div>
-            <div className='font-inter
-                            col-start-4 col-span-1 row-start-3 row-span-1
-                            border-2 border-[#FF0000]'>
-                {/* add later: project component */}
-            </div>
-            <div className='font-inter
-                            col-start-2 col-span-1 row-start-4 row-span-1
-                            border-2 border-[#FF0000]'>
-                {/* add later: project component */}
             </div>
 
             {/* big title */}

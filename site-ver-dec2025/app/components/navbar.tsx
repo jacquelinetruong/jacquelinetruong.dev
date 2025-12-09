@@ -1,6 +1,5 @@
 'use client';
 
-import Grid from './grid';
 import Image from 'next/image';
 
 import '../../public/jt-logo-black.svg';

@@ -1,7 +1,6 @@
 'use client';
 
 import { Project } from '@/lib/projectTypes';
-
 import Image from 'next/image';
 import ProjectCard from './projectcard';
 import Grid from './grid';
@@ -24,7 +23,7 @@ export default function Hero({
 		{/* project display #1 */}
 		<div className='col-start-2 col-span-1 row-start-1 row-span-1' id='1'>
 			{projects
-				.filter(p => p.section === 'hero' && p.sectionId === '1')
+				.filter(p => p.sectionId === '1')
 				.map(project => (
 					<ProjectCard
 						key={project.id}
@@ -35,7 +34,7 @@ export default function Hero({
 		{/* project display #2 */}
 		<div className='col-start-1 col-span-2 row-start-2 row-span-2' id='2'>
 			{projects
-				.filter(p => p.section === 'hero' && p.sectionId === '2')
+				.filter(p => p.sectionId === '2')
 				.map(project => (
 					<ProjectCard
 						key={project.id}
@@ -46,7 +45,7 @@ export default function Hero({
 		{/* project display #3 */}
 		<div className='col-start-4 col-span-1 row-start-3 row-span-1' id='3'>
 			{projects
-				.filter(p => p.section === 'hero' && p.sectionId === '3')
+				.filter(p => p.sectionId === '3')
 				.map(project => (
 					<ProjectCard
 						key={project.id}

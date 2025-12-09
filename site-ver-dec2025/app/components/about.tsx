@@ -1,5 +1,7 @@
 'use client';
 
+import { Project } from '@/lib/projectTypes';
+import ProjectCard from './projectcard';
 import Image from 'next/image';
 import Grid from './grid';
 
@@ -11,9 +13,39 @@ import '../../public/guide-arrow-black.svg';
 import '../../public/cat.svg';
 
 
-export default function About({ className = '' }: { className?: string }) {
+export default function About({
+    className = '',
+    projects,
+ }: { 
+    className?: string; 
+    projects: Project[];
+ }) {
     return(
         <Grid className={className}>
+            {/* projects display */}
+            {/* project display #1 */}
+            <div className='col-start-2 col-span-1 row-start-3 row-span-1'>
+                {projects
+                    .filter(p => p.sectionId === '1')
+                    .map(project => (
+                        <ProjectCard
+                            key={project.id}
+                            project={project}
+                        />
+                    ))}
+            </div>
+            {/* project display #2 */}
+            <div className='col-start-4 col-span-1 row-start-3 row-span-1'>
+                {projects
+                    .filter(p => p.sectionId === '2')
+                    .map(project => (
+                        <ProjectCard
+                            key={project.id}
+                            project={project}
+                        />
+                    ))}
+            </div>
+
             {/* pic of me! */}
             <div className='col-start-1 col-span-1 row-start-1 row-span-2'>
                 <Image 
@@ -130,13 +162,6 @@ export default function About({ className = '' }: { className?: string }) {
                     className='size-full'
                 />
             </div>
-            
-            {/* project display #1 */}
-            <div className='font-inter
-                            col-start-2 col-span-1 row-start-3 row-span-1
-                            border-2 border-[#FF0000]'>
-                {/* add later: project component */}
-            </div>
 
             {/* jump to 'portfolio' button */}
             <div className='col-start-3 col-span-1 row-start-3 row-span-1
@@ -154,13 +179,6 @@ export default function About({ className = '' }: { className?: string }) {
                         height={28}
                     />
                 </a>
-            </div>
-
-            {/* project display #2 */}
-            <div className='font-inter
-                            col-start-4 col-span-1 row-start-3 row-span-1
-                            border-2 border-[#FF0000]'>
-                {/* add later: project component */}
             </div>
 
             {/* city */}
