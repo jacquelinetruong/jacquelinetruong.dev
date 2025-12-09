@@ -42,7 +42,7 @@ export default function ProjectCard({ project, className = '' }: ProjectCardProp
 				<div className='flex flex-col gap-1'>
 					{/* tags */}
 					{allTags.length > 0 && (
-						<div className='flex flex-nowrap gap-2 text-xs justify-center items-center'>
+						<div className='flex flex-nowrap gap-2 text-xs justify-start items-center'>
 							{allTags.map(tag => (
 								<span key={tag} className='px-3 py-1 border border-white rounded-full'>
 									{tag}
