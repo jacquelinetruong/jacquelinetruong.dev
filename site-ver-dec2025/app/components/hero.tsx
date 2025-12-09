@@ -1,6 +1,9 @@
 'use client';
 
+import { Project } from '@/lib/projectTypes';
+
 import Image from 'next/image';
+import ProjectCard from './projectcard';
 import Grid from './grid';
 
 import '../../public/coffee-icon-white.svg';
@@ -8,16 +11,48 @@ import '../../public/jt-black.svg';
 import '../../public/guide-arrow-black.svg';
 
 
-export default function Hero({ className = '' }: { className?: string }) {
-  return (
+export default function Hero({
+	className = '',
+	projects,
+ }: { 
+	className?: string; 
+	projects: Project[];
+ }) {
+  return (                                            
 	<Grid className={className}>
-		{/* integrate project.tsx later */}
+		{/* best projects :o */}
 		{/* project display #1 */}
-		<div className='font-inter
-						col-start-2 col-span-1 row-start-1 row-span-1
-						border-2 border-[#FF0000]
-					'>
-			{/* add later: project component */}
+		<div className='col-start-2 col-span-1 row-start-1 row-span-1' id='1'>
+			{projects
+				.filter(p => p.section === 'hero' && p.sectionId === '1')
+				.map(project => (
+					<ProjectCard
+						key={project.id}
+						project={project}
+					/>
+				))}
+		</div>
+		{/* project display #2 */}
+		<div className='col-start-1 col-span-2 row-start-2 row-span-2' id='2'>
+			{projects
+				.filter(p => p.section === 'hero' && p.sectionId === '2')
+				.map(project => (
+					<ProjectCard
+						key={project.id}
+						project={project}
+					/>
+				))}
+		</div>
+		{/* project display #3 */}
+		<div className='col-start-4 col-span-1 row-start-3 row-span-1' id='3'>
+			{projects
+				.filter(p => p.section === 'hero' && p.sectionId === '3')
+				.map(project => (
+					<ProjectCard
+						key={project.id}
+						project={project}
+					/>
+				))}
 		</div>
 
 		{/* cta, intro section */}
@@ -49,13 +84,6 @@ export default function Hero({ className = '' }: { className?: string }) {
 			</p>
 		</div>
 
-		{/* project display #2 (featured) */}
-		<div className='font-inter
-						col-start-1 col-span-2 row-start-2 row-span-2
-						border-2 border-[#FF0000]'>
-			{/* add later: project component */}
-		</div>
-
 		{/* big name */}
 		<div className='col-start-4 col-span-2 row-start-2 row-span-1
 						flex flex-col items-end
@@ -85,13 +113,6 @@ export default function Hero({ className = '' }: { className?: string }) {
 					height={28}
 				/>
 			</a>
-		</div>
-
-		{/* project display #3 */}
-		<div className='font-inter
-						col-start-4 col-span-1 row-start-3 row-span-1
-						border-2 border-[#FF0000]'>
-			{/* add later: project component */}
 		</div>
 
 		{/* city */}
