@@ -8,7 +8,7 @@
   --grid-line-colour: #88888840;
 
   /* other */
-  --nav-height: 114px;
+  --nav-height: 80px;
   --cell-height: calc((100vh - var(--nav-height)) / 3);
   --cell-width: calc(100vw / 5);
   --content-space: calc(100vh - var(--nav-height));
