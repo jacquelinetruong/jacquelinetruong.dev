@@ -21,12 +21,27 @@ export default async function Home() {
     return (
       <>
         <Navbar />
+
         <Grid>
           <Hero projects={heroProjects} className='col-span-5 row-start-1'/>
-          <About projects={aboutProjects} className='col-span-5 row-start-4'/>
-          <Portfolio projects={portfolioProjects} className='col-span-5 row-start-7'/>
-          <Experience projects={experienceProjects} className='col-span-5 row-start-9'/>
-          <Footer className='col-span-5 row-start-12'/>
+        </Grid>
+
+        <Grid>
+          <About projects={aboutProjects} className='col-span-5 row-start-1'/>
+        </Grid>
+
+        <section className='bg-[#1B1C1D]'>
+          <Grid>
+            <Portfolio projects={portfolioProjects} className='col-span-5 row-start-1'/>
+          </Grid>
+        </section>
+
+        <Grid>
+          <Experience projects={experienceProjects} className='col-span-5 row-start-1'/>
+        </Grid>
+
+        <Grid>
+          <Footer className='col-span-5 row-start-1'/>
         </Grid>
       </>
   );

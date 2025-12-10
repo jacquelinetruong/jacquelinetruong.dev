@@ -20,7 +20,7 @@ export default function Experience({
         <Grid className={className}>
             {/* relevant projects */}
             {/* project display #1 */}
-            <div className='col-start-5 col-span-1 row-start-2 row-span-1'>
+            <div className='col-start-5 col-span-1 row-start-1 row-span-1'>
                 {projects
                     .filter(p => p.section === 'hero' && p.sectionId === '1')
                     .map(project => (
@@ -31,7 +31,7 @@ export default function Experience({
                     ))}            
             </div>
             {/* project display #2 */}
-            <div className='col-start-4 col-span-1 row-start-3 row-span-1'>
+            <div className='col-start-4 col-span-1 row-start-2 row-span-1'>
                 {projects
                     .filter(p => p.section === 'hero' && p.sectionId === '2')
                     .map(project => (
@@ -42,7 +42,7 @@ export default function Experience({
                     ))} 
             </div>
             {/* project display #2 */}
-            <div className='col-start-2 col-span-1 row-start-4 row-span-1'>
+            <div className='col-start-2 col-span-1 row-start-3 row-span-1'>
                 {projects
                     .filter(p => p.section === 'hero' && p.sectionId === '3')
                     .map(project => (
@@ -55,7 +55,7 @@ export default function Experience({
 
             {/* experience menu */}
             <div className='font-inter
-                            col-start-1 col-span-1 row-start-2 row-span-2
+                            col-start-1 col-span-1 row-start-1 row-span-2
                             flex flex-col gap-8
                             p-8'>
                 {/* employment */}
@@ -184,7 +184,7 @@ export default function Experience({
 
             {/* experience details */}
             <div className='font-inter
-                            col-start-2 col-span-2 row-start-2 row-span-2
+                            col-start-2 col-span-2 row-start-1 row-span-2
                             flex flex-col gap-6
                             p-8'>
                 
@@ -219,7 +219,7 @@ export default function Experience({
             </div>
 
             {/* big title */}
-            <div className='col-start-3 col-span-3 row-start-4 row-span-1
+            <div className='col-start-3 col-span-3 row-start-3 row-span-1
                             flex flex-col justify-end
                             p-8'>
                 <Image 

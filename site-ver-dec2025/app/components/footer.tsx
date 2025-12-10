@@ -16,7 +16,7 @@ export default function Footer({ className = '' }: { className?: string }) {
         <Grid className={className}>
             {/* cta */}
             <div className='font-inter
-                            col-start-2 col-span-3 row-start-2 row-span-1
+                            col-start-2 col-span-3 row-start-1 row-span-1
                             flex flex-col gap-6 justify-end items-center
                             p-8'>
                 <p className='font-semibold text-3xl'>Have a project idea? Let's make it happen.</p>
@@ -35,7 +35,7 @@ export default function Footer({ className = '' }: { className?: string }) {
             </div>
 
             {/* signature name */}
-            <div className='col-start-1 col-span-5 row-start-3 row-span-1
+            <div className='col-start-1 col-span-5 row-start-2 row-span-1
                             flex flex-col justify-end'>
                 <Image 
                     src='/footer-jacqueline.svg'
@@ -48,7 +48,7 @@ export default function Footer({ className = '' }: { className?: string }) {
 
             {/* real footer */}
             <div className='font-inter font-medium text-lg text-[#888888]
-                            col-start-1 col-span-5 row-start-4 row-span-1
+                            col-start-1 col-span-5 row-start-3 row-span-1
                             flex flex-col gap-16 p-8 pt-16 h-fit
                             bg-[#1B1C1D] border-t-[#1B1C1D]'>
                 {/* content */}

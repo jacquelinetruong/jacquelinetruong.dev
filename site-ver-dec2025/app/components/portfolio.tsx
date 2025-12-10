@@ -1,11 +1,13 @@
 'use client';
 
+import { useState } from 'react';
 import { Project } from '@/lib/projectTypes';
 import ProjectCard from './projectcard';
 import Grid from './grid';
 import Image from 'next/image';
 
 import '../../public/portfolio.svg';
+import '../../public/projects.svg';
 import '../../public/palette-icon.svg';
 import '../../public/palette-icon-grey.svg';
 import '../../public/code-icon.svg';
@@ -23,10 +25,12 @@ export default function Portfolio({
     projects: Project[];
  }) {
 
-    const featured = projects.find(p => p.sectionId === '1');
+    // filter projects) 
+    const [filter, setFilter] = useState<'designer' | 'developer'>('designer');
+    const featured = projects.find(p => p.type === filter && p.sectionId === '1');
 
     return (
-        <Grid className={className}>
+        <Grid className=''>
             {/* big featured project */}
                 {/* preview */}
                 <div className='col-start-1 col-span-2 row-start-1 row-span-2'>
@@ -40,8 +44,7 @@ export default function Portfolio({
                 {/* description */}
                 <div className='font-inter
                                 col-start-1 col-span-2 row-start-3 row-span-1
-                                flex flex-col gap-6 p-8
-                                bg-[#1B1C1D]'>
+                                flex flex-col gap-6 p-8'>
                     <p className='font-semibold text-3xl text-white'>{featured?.title}</p>
                     <p className='text-xl text-white'>
                         {featured?.description}
@@ -66,7 +69,7 @@ export default function Portfolio({
             {/* project display #2 */}
             <div className='col-start-5 col-span-1 row-start-2 row-span-1'>
                 {projects
-                    .filter(p => p.sectionId === '2')
+                    .filter(p => p.type === filter && p.sectionId === '2')
                     .map(project => (
                         <ProjectCard
                             key={project.id}
@@ -79,7 +82,7 @@ export default function Portfolio({
 
             <div className='col-start-4 col-span-1 row-start-3 row-span-1'>
                 {projects
-                    .filter(p => p.sectionId === '3')
+                    .filter(p => p.type === filter && p.sectionId === '3')
                     .map(project => (
                         <ProjectCard
                             key={project.id}
@@ -91,7 +94,7 @@ export default function Portfolio({
             {/* project display #4 */}
             <div className='col-start-5 col-span-1 row-start-3 row-span-1'>
                 {projects
-                    .filter(p => p.sectionId === '4')
+                    .filter(p => p.type === filter && p.sectionId === '4')
                     .map(project => (
                         <ProjectCard
                             key={project.id}
@@ -103,45 +106,51 @@ export default function Portfolio({
             {/* filters, title */}
             <div className='font-inter
                             col-start-4 col-span-2 row-start-1 row-span-1
-                            flex flex-col items-end justify-between p-8
-                            bg-[#1B1C1D]'>
+                            flex flex-col items-end justify-between p-'>
 
                 {/* filter buttons */}
                 <div className='flex flex-row gap-4'>
-                    <a className='font-medium text-xl text-white
-                                flex flex-row gap-2 items-center
-                                w-fit h-fit px-5 py-3 rounded-full
-                                border-1'
-                        href=''
+                    {/* designer button */}
+                    <button 
+                        onClick={() => setFilter('designer')}
+                        className={`font-medium text-xl
+                                    flex flex-row gap-2 items-center
+                                    w-fit h-fit px-5 py-3 rounded-full
+                                    border-1
+                                    ${filter === 'designer' ? 'text-white' : 'text-[#666666]'}`}
                     >
                         <Image 
-                            src='/palette-icon.svg'
+                            src={filter === 'designer' ? '/palette-icon.svg' : '/palette-icon-grey.svg'}
                             alt='palette icon'
                             width={32}
                             height={32}
                         />
                         UX/UI Designer Focus
-                    </a>
-                    <a className='font-medium text-xl text-[#666666]
-                                flex flex-row gap-2 items-center
-                                w-fit h-fit px-5 py-3 rounded-full
-                                border-1'
-                        href=''
+                    </button>
+
+                    {/* developer button */}
+                    <button 
+                        onClick={() => setFilter('developer')}
+                        className={`font-medium text-xl
+                                    flex flex-row gap-2 items-center
+                                    w-fit h-fit px-5 py-3 rounded-full
+                                    border-1
+                                    ${filter === 'developer' ? 'text-white' : 'text-[#666666]'}`}
                     >
                         <Image 
-                            src='/code-icon-grey.svg'
+                            src={filter === 'developer' ? '/code-icon.svg' : '/code-icon-grey.svg'}
                             alt='code icon'
                             width={32}
                             height={32}
                         />
                         Programmer Focus
-                    </a>
+                    </button>
                 </div>
 
                 {/* title */}
                 <Image 
-                    src='/portfolio.svg'
-                    alt='portfolio title'
+                    src={filter === 'designer' ? '/portfolio.svg' : '/projects.svg'}
+                    alt='section title'
                     width={632}
                     height={216}
                     className='size-full bottom-0'
@@ -150,8 +159,7 @@ export default function Portfolio({
             
             {/* jump to experience button */}
             <div className='col-start-3 col-span-1 row-start-3 row-span-1
-                            flex flex-col justify-end items-center
-                            bg-[#1B1C1D]'>
+                            flex flex-col justify-end items-cente'>
                 <a className='font-inter font-medium text-white
                               flex flex-col items-center gap-2
                               p-8'
@@ -166,11 +174,6 @@ export default function Portfolio({
                     />
                 </a>
             </div>
-
-            {/* colour in bg lol */}
-            <div className='col-start-3 col-span-1 row-start-1 row-span-1 bg-[#1B1C1D]'></div>
-            <div className='col-start-3 col-span-1 row-start-2 row-span-1 bg-[#1B1C1D]'></div>
-            <div className='col-start-4 col-span-1 row-start-2 row-span-1 bg-[#1B1C1D]'></div>
         </Grid>
     )
 }
