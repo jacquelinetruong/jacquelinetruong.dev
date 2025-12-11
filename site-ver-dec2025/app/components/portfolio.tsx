@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Project } from '@/lib/projectTypes';
 import ProjectCard from './projectcard';
 import Grid from './grid';
@@ -25,19 +25,52 @@ export default function Portfolio({
     projects: Project[];
  }) {
 
-    // filter projects) 
+    // filter state
     const [filter, setFilter] = useState<'designer' | 'developer'>('designer');
-    const featured = projects.find(p => p.type === filter && p.sectionId === '1');
+
+    // projects filtered by type
+    const filteredProjects = projects.filter(p => p.type === filter);
+
+    // carousel state: order of filtered projects
+    const [carouselProjects, setCarouselProjects] = useState<Project[]>(filteredProjects);
+
+    // first element is featured project
+    const featuredProject = carouselProjects[0];
+
+    // rotate carousel every 10s
+    useEffect(() => {
+        if (carouselProjects.length <= 1) return;
+
+        const interval = setInterval(() => {
+            setCarouselProjects(prev => {
+                const [first, ...rest] = prev;
+                return [...rest, first];
+            });
+        }, 10000);
+
+        return () => clearInterval(interval);
+    }, [carouselProjects]);
+
+    // update featured project if clicked
+    const newFeaturedProject = (clickedProject: Project) => {
+        setCarouselProjects(prev => {
+            const i = prev.findIndex(p => p.id === clickedProject.id);
+            if (i === -1) return prev;
+
+            // rotate array to make clicked project = first element
+            return [...prev.slice(i), ...prev.slice(0, i)];
+        });
+    };
 
     return (
         <Grid className=''>
-            {/* big featured project */}
+            {/* featured project */}
                 {/* preview */}
                 <div className='col-start-1 col-span-2 row-start-1 row-span-2'>
-                    {featured && (
+                    {featuredProject && (
                         <ProjectCard
-                            key={featured.id}
-                            project={featured}
+                            key={featuredProject.id}
+                            project={featuredProject}
                         />
                     )}
                 </div>
@@ -45,16 +78,17 @@ export default function Portfolio({
                 <div className='font-inter
                                 col-start-1 col-span-2 row-start-3 row-span-1
                                 flex flex-col gap-6 p-8'>
-                    <p className='font-semibold text-3xl text-white'>{featured?.title}</p>
+                    <p className='font-semibold text-3xl text-white'>{featuredProject?.title}</p>
                     <p className='text-xl text-white'>
-                        {featured?.description}
+                        {featuredProject?.description}
                     </p>
                     <a className='font-medium text-xl text-[#1B1C1D]
                                   flex flex-row gap-2 items-center
                                   w-fit h-fit px-5 py-3 rounded-full
                                   bg-white'
                         target='_blank'
-                        href={featured?.link}
+                        href={featuredProject?.link}
+                        rel='noopener noreferrer'
                     >    
                         Learn More
                         <Image
@@ -66,47 +100,38 @@ export default function Portfolio({
                     </a>
                 </div>
 
-            {/* project display #2 */}
-            <div className='col-start-5 col-span-1 row-start-2 row-span-1'>
-                {projects
-                    .filter(p => p.type === filter && p.sectionId === '2')
-                    .map(project => (
-                        <ProjectCard
-                            key={project.id}
-                            project={project}
-                        />
-                    ))}
-            </div>
+            {/* non-featured projects */}
+            {carouselProjects
+                .slice(1) // not featured
+                .map((project, i) => {
+                    // slot into grid layout
+                    const positions: {colStart: number; colSpan: number; rowStart: number; rowSpan: number}[] = [
+                        { colStart: 1, colSpan: 2, rowStart: 1, rowSpan: 2 },
+                        { colStart: 4, colSpan: 1, rowStart: 3, rowSpan: 1 },
+                        { colStart: 5, colSpan: 1, rowStart: 3, rowSpan: 1 },
+                        { colStart: 5, colSpan: 1, rowStart: 2, rowSpan: 1 },
+                    ];
 
-            {/* project display #3 */}
-
-            <div className='col-start-4 col-span-1 row-start-3 row-span-1'>
-                {projects
-                    .filter(p => p.type === filter && p.sectionId === '3')
-                    .map(project => (
+                    const pos = positions[i + 1];
+                    if (!pos) return null;
+                
+                return (
+                    <div
+                        key={project.id}
+                        className={`col-start-${pos.colStart} col-span-${pos.colSpan} row-start-${pos.rowStart} row-span-${pos.rowSpan}`}
+                    >
                         <ProjectCard
-                            key={project.id}
                             project={project}
+                            onClick={() => newFeaturedProject(project)}
                         />
-                    ))}
-            </div>
-
-            {/* project display #4 */}
-            <div className='col-start-5 col-span-1 row-start-3 row-span-1'>
-                {projects
-                    .filter(p => p.type === filter && p.sectionId === '4')
-                    .map(project => (
-                        <ProjectCard
-                            key={project.id}
-                            project={project}
-                        />
-                    ))}
-            </div>
+                    </div>
+                );
+            })}
             
             {/* filters, title */}
             <div className='font-inter
                             col-start-4 col-span-2 row-start-1 row-span-1
-                            flex flex-col items-end justify-between p-'>
+                            flex flex-col items-end justify-between'>
 
                 {/* filter buttons */}
                 <div className='flex flex-row gap-4'>
