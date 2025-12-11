@@ -10,16 +10,20 @@ import '../../public/link-arrow-white.svg';
 type ProjectCardProps = {
 	project: Project;
 	className?: string;
+	onClick?: () => void;
 };
 
-export default function ProjectCard({ project, className = '' }: ProjectCardProps) {
+export default function ProjectCard({
+	project,
+	className = '',
+	onClick,
+ }: ProjectCardProps) { 
+
 	const allTags = [...(project.languages ?? []), ...(project.programs ?? [])];
 	
 	return (
-		<a className={`relative w-full h-full ${className}`}
-			target='_blank'
-			href={project.link}
-			rel="noopener noreferrer"
+		<div className={`relative w-full h-full ${className} cursor-pointer`}
+			onClick={onClick}
 		>
 			{/* preview */}
 			<Image
@@ -63,6 +67,6 @@ export default function ProjectCard({ project, className = '' }: ProjectCardProp
 					className='h-full'
 				/>
 			</div>
-		</a>
+		</div>
 	);
 }
