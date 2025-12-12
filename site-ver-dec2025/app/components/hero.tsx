@@ -21,7 +21,7 @@ export default function Hero({
 	<Grid className={className}>
 		{/* best projects :o */}
 		{/* project display #1 */}
-		<div className='col-start-2 col-span-1 row-start-1 row-span-1' id='1'>
+		<div className='col-start-2 col-span-1 row-start-1 row-span-1'>
 			{projects
 				.filter(p => p.sectionId === '1')
 				.map(project => (
@@ -32,7 +32,7 @@ export default function Hero({
 				))}
 		</div>
 		{/* project display #2 */}
-		<div className='col-start-1 col-span-2 row-start-2 row-span-2' id='2'>
+		<div className='col-start-1 col-span-2 row-start-2 row-span-2'>
 			{projects
 				.filter(p => p.sectionId === '2')
 				.map(project => (
@@ -43,7 +43,7 @@ export default function Hero({
 				))}
 		</div>
 		{/* project display #3 */}
-		<div className='col-start-4 col-span-1 row-start-3 row-span-1' id='3'>
+		<div className='col-start-4 col-span-1 row-start-3 row-span-1'>
 			{projects
 				.filter(p => p.sectionId === '3')
 				.map(project => (
@@ -78,9 +78,9 @@ export default function Hero({
 			</a>
 
 			{/* quick intro text */}
-			<p className='font-semibold text-3xl text-right'>
+			<h1 className='font-semibold text-3xl text-right'>
 				Product designer first, software engineer second. Focused on crafting digital experiences and turning everyday ideas into art.
-			</p>
+			</h1>
 		</div>
 
 		{/* big name */}
@@ -118,7 +118,7 @@ export default function Hero({
 		<div className='font-inter font-semibold text-3xl text-right
 						col-start-5 col-span-1 row-start-3 row-span-1
 						p-8'>
-			<p>Based in Toronto, CA.</p>
+			<h2>Based in Toronto, CA.</h2>
 		</div>
 	</Grid>
   );

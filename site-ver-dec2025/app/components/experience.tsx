@@ -60,7 +60,7 @@ export default function Experience({
                             p-8'>
                 {/* employment */}
                 <div className='flex flex-col gap-1'>
-                    <p className='font-medium text-xl text-[#888888]'>Work</p>
+                    <h4 className='font-medium text-xl text-[#888888]'>Work</h4>
                     <a className='font-semibold text-xl
                                   flex flex-row gap-2 items-center
                                   w-fit h-fit'
@@ -101,7 +101,7 @@ export default function Experience({
 
                 {/* client work */}
                 <div className='flex flex-col gap-1'>
-                    <p className='font-medium text-xl text-[#888888]'>Work</p>
+                    <h4 className='font-medium text-xl text-[#888888]'>Commissions</h4>
                     <a className='font-semibold text-xl text-[#888888]
                                   flex flex-row gap-2 items-center
                                   w-fit h-fit'
@@ -142,7 +142,7 @@ export default function Experience({
 
                 {/* proficiencies */}
                 <div className='flex flex-col gap-1'>
-                    <p className='font-medium text-xl text-[#888888]'>Proficiencies</p>
+                    <h4 className='font-medium text-xl text-[#888888]'>Proficiencies</h4>
                     <a className='font-semibold text-xl text-[#888888]
                                   flex flex-row gap-2 items-center
                                   w-fit h-fit'
@@ -190,8 +190,8 @@ export default function Experience({
                 
                 {/* title, duration */}
                 <div>
-                    <p className='font-semibold text-3xl'>UX/UI Designer @ MobCoder</p>
-                    <p className='font-medium text-xl text-[#888888]
+                    <h1 className='font-semibold text-3xl'>UX/UI Designer @ MobCoder</h1>
+                    <h2 className='font-medium text-xl text-[#888888]
                                 flex flex-row gap-2'>
                         <Image 
                             src='/detail-arrow-grey.svg'
@@ -200,7 +200,7 @@ export default function Experience({
                             height={24}
                         />
                         June 2025 - Present
-                    </p>
+                    </h2>
                 </div>
 
                 {/* description */}
