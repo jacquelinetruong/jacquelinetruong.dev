@@ -78,7 +78,7 @@ export default function Portfolio({
                 <div className='font-inter
                                 col-start-1 col-span-2 row-start-3 row-span-1
                                 flex flex-col gap-6 p-8'>
-                    <p className='font-semibold text-3xl text-white'>{featuredProject?.title}</p>
+                    <h1 className='font-semibold text-3xl text-white'>{featuredProject?.title}</h1>
                     <p className='text-xl text-white'>
                         {featuredProject?.description}
                     </p>

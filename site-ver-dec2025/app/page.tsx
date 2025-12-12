@@ -11,8 +11,9 @@ import Grid from './components/grid';
 
 
 export default async function Home() {
+  
+  // get projects for each section
   const projects = await getProjects();
-
   const heroProjects = projects.filter(p => p.section === "hero");
   const aboutProjects = projects.filter(p => p.section === "about");
   const portfolioProjects = projects.filter(p => p.section === "portfolio");

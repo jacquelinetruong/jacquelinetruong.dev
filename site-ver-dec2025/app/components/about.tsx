@@ -64,9 +64,9 @@ export default function About({
                             p-8'>
                 {/* message */}
                 <div className='flex flex-col gap-6'>
-                    <p className='font-semibold text-3xl'>
+                    <h2 className='font-semibold text-3xl'>
                         Hey! Welcome to my portfolio site.
-                    </p>
+                    </h2>
                     <p className='text-xl'>
                         I'm a newgrad designer who loves bringing ideas to life through clean, functional, high-impact products. Since I also code, I'm drawn to 
                         creating designs that aren't just beautiful, but realistic, buildable, and considerate of engineering workflows. By speaking in both "design"
@@ -81,7 +81,7 @@ export default function About({
                 <div className='flex flex-col gap-8'>
                     {/* current work */}
                     <div className='flex flex-col gap-1'>
-                        <p className='font-medium text-xl text-[#888888]'>Currently</p>
+                        <h4 className='font-medium text-xl text-[#888888]'>Currently</h4>
                         <p className='font-semibold text-xl
                                         flex flex-row gap-2 items-center'>
                             <Image 
@@ -89,7 +89,7 @@ export default function About({
                                 alt='arrow'
                                 width={24}
                                 height={24}
-                            />
+                            />                                             {/* might make this pulled data in future */}
                             UX/UI Designer @ MobCoder,
                         </p>                        
                         <p className='font-semibold text-xl
@@ -106,7 +106,7 @@ export default function About({
 
                     {/* education */}
                     <div className='flex flex-col gap-1'>
-                        <p className='font-medium text-xl text-[#888888]'>Education</p>
+                        <h4 className='font-medium text-xl text-[#888888]'>Education</h4>
                         <p className='font-semibold text-xl
                                         flex flex-row gap-2 items-center'>
                             <Image 
@@ -145,9 +145,9 @@ export default function About({
                 </a>
     
                 {/* quick intro text */}
-                <p className='font-semibold text-3xl text-right text-[#BEBEBE]'>
+                <h1 className='font-semibold text-3xl text-right text-[#BEBEBE]'>
                     Product designer first, software engineer second. Focused on crafting digital experiences and turning everyday ideas into art.
-                </p>
+                </h1>
             </div>
 
             {/* big name */}
@@ -169,7 +169,7 @@ export default function About({
                 <a className='font-inter font-medium
                                 flex flex-col items-center gap-2
                                 p-8'
-                    href='#about'			  
+                    href='#portfolio'			  
                 >
                     See Portfolio
                     <Image
@@ -184,9 +184,9 @@ export default function About({
             {/* city */}
             <div className='font-inter font-semibold text-3xl text-right text-[#BEBEBE]
                             col-start-5 col-span-1 row-start-3 row-span-1
-                            flex flex-col md:gap-8 xl:justify-between
+                            flex flex-col justify-end 
                             p-8'>
-                <p>Based in Toronto, CA.</p>
+                <h2>Based in Toronto, CA.</h2>
 
                 {/* cat! */}
                 <Image 

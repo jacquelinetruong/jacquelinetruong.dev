@@ -19,7 +19,7 @@ export default function Footer({ className = '' }: { className?: string }) {
                             col-start-2 col-span-3 row-start-1 row-span-1
                             flex flex-col gap-6 justify-end items-center
                             p-8'>
-                <p className='font-semibold text-3xl'>Have a project idea? Let's make it happen.</p>
+                <h1 className='font-semibold text-3xl'>Have a project idea? Let's make it happen.</h1>
                 <a className='font-medium text-xl text-white
                               flex flex-row gap-2 items-center
                               w-fit h-fit px-5 py-3 rounded-full
@@ -62,12 +62,12 @@ export default function Footer({ className = '' }: { className?: string }) {
                             height={112.84}
                             className='w-full'
                         />
-                        <p className='text-[#888888] text-right'>Design and development by {"\n"} Jacqueline Truong</p>
+                        <h5 className='text-[#888888] text-right'>Design and development by {"\n"} Jacqueline Truong</h5>
                     </div>
 
                     {/* navigation pages */}
                     <div className='flex flex-col gap-2'>
-                        <p className='text-white'>Pages</p>
+                        <h5 className='text-white'>Pages</h5>
                         <a href='#home'>Home</a>
                         <a href='#about'>About</a>
                         <a href='#portfolio'>Portfolio</a>
@@ -76,7 +76,7 @@ export default function Footer({ className = '' }: { className?: string }) {
 
                     {/* links */}
                     <div className='flex flex-col gap-2'>
-                        <p className='text-white'>Find More</p>
+                        <h5 className='text-white'>Find More</h5>
                         <a href=''>Resume</a>
                         <a target='_blank' href='https://www.linkedin.com/in/jacquellinetruong'>LinkedIn</a>
                         <a target='_blank' href='https://github.com/jacquelinetruong'>GitHub</a>
@@ -85,7 +85,7 @@ export default function Footer({ className = '' }: { className?: string }) {
                     {/* cta */}
                     <div className='flex flex-col justify-between'>
                         <div className='flex flex-col gap-4'>
-                            <p className='text-white'>Like my work?</p>
+                            <h5 className='text-white'>Like my work?</h5>
                             <a className='font-medium text-xl text-[#1B1C1D]
                                         flex flex-row gap-2 items-center
                                         w-fit h-fit px-5 py-3 rounded-full
