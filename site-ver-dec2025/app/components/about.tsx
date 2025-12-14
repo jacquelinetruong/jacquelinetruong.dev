@@ -1,6 +1,8 @@
 'use client';
 
 import { Project } from '@/lib/projectTypes';
+import { Experience } from '@/lib/experienceTypes';
+
 import ProjectCard from './projectcard';
 import Image from 'next/image';
 import Grid from './grid';
@@ -16,10 +18,20 @@ import '../../public/cat.svg';
 export default function About({
     className = '',
     projects,
+    experience,
  }: { 
     className?: string; 
     projects: Project[];
+    experience: Experience[];
  }) {
+
+    // current work (already filtered) sorted by recency
+    const currentWork = [...experience]
+        .filter(e => e.startDate)
+        .sort(
+            (a, b) => new Date(b.startDate!).getTime() - new Date(a.startDate!).getTime()
+        );   
+
     return(
         <Grid className={className}>
             {/* projects display */}
@@ -82,26 +94,27 @@ export default function About({
                     {/* current work */}
                     <div className='flex flex-col gap-1'>
                         <h4 className='font-medium text-xl text-[#888888]'>Currently</h4>
-                        <p className='font-semibold text-xl
-                                        flex flex-row gap-2 items-center'>
-                            <Image 
-                                src='/detail-arrow-black.svg'
-                                alt='arrow'
-                                width={24}
-                                height={24}
-                            />                                             {/* might make this pulled data in future */}
-                            UX/UI Designer @ MobCoder,
-                        </p>                        
-                        <p className='font-semibold text-xl
-                                        flex flex-row gap-2 items-center'>
-                            <Image 
-                                src='/detail-arrow-black.svg'
-                                alt='arrow'
-                                width={24}
-                                height={24}
-                            />
-                            Chief Creative Officer @ Konfer
-                        </p>
+                        
+                        {/* if jobless :heartbreak: */}
+                        {currentWork.length === 0 && (
+                            <p className='text-xl'>Open to new opportunities</p>
+                        )}
+
+                        {currentWork.map((role, i) => (
+                            <p key={role.id}
+                                className='font-semibold text-xl
+                                           flex flex-row gap-2 items-center'
+                            >
+                                <Image
+                                    src='/detail-arrow-black.svg'
+                                    alt='arrow'
+                                    width={24}
+                                    height={24}
+                                />
+                                {role.position} @ {role.menuTitle}
+                                {i < currentWork.length - 1 && ','}
+                            </p>
+                        ))}
                     </div>
 
                     {/* education */}

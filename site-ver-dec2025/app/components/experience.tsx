@@ -1,21 +1,43 @@
 'use client';
 
-import { Project } from '@/lib/projectTypes';
-import ProjectCard from './projectcard';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
+
+import { Project } from '@/lib/projectTypes';
+import { Experience } from '@/lib/experienceTypes';
+
+import ProjectCard from './projectcard';
 import Grid from './grid';
 
 import '../../public/detail-arrow-black.svg';
 import '../../public/detail-arrow-grey.svg';
 import '../../public/experience.svg';
 
-export default function Experience({
+export default function ExperienceSection({
     className = '',
     projects,
+    experience,
  }: { 
     className?: string; 
     projects: Project[];
+    experience: Experience[];
  }) {
+
+    // filter by experience category
+    const xpCategorized = {
+        work: experience.filter(e => e.category === 'work'),
+        clients: experience.filter(e => e.category === 'clients'),
+        proficiencies: experience.filter(e => e.category === 'proficiencies'),
+    }
+
+    // active experience
+    const [activeExperience, setActiveExperience] = useState<Experience | null>(null);
+
+    // set default active experience
+    useEffect(() => {
+        setActiveExperience(xpCategorized.work[0] ?? null);
+    }, []);
+
     return (
         <Grid className={className}>
             {/* relevant projects */}
@@ -54,132 +76,46 @@ export default function Experience({
             </div>
 
             {/* experience menu */}
-            <div className='font-inter
+            <div className='font-inter text-xl
                             col-start-1 col-span-1 row-start-1 row-span-2
                             flex flex-col gap-8
-                            p-8'>
-                {/* employment */}
-                <div className='flex flex-col gap-1'>
-                    <h4 className='font-medium text-xl text-[#888888]'>Work</h4>
-                    <a className='font-semibold text-xl
-                                  flex flex-row gap-2 items-center
-                                  w-fit h-fit'
-                        href=''>
-                        <Image 
-                            src='/detail-arrow-black.svg'
-                            alt='arrow'
-                            width={24}
-                            height={24}
-                        />
-                        MobCoder
-                    </a>
-                    <a className='font-semibold text-xl text-[#888888]
-                                  flex flex-row gap-2 items-center
-                                  w-fit h-fit'
-                        href=''>
-                        <Image 
-                            src='/detail-arrow-grey.svg'
-                            alt='arrow'
-                            width={24}
-                            height={24}
-                        />
-                        Konfer
-                    </a>
-                    <a className='font-semibold text-xl text-[#888888]
-                                  flex flex-row gap-2 items-center
-                                  w-fit h-fit'
-                        href=''>
-                        <Image 
-                            src='/detail-arrow-grey.svg'
-                            alt='arrow'
-                            width={24}
-                            height={24}
-                        />
-                        Civiconnect
-                    </a>
-                </div>
+                            p-8'
+            >
+                {Object.entries(xpCategorized).map(([category, items]) => (
+                    <div key={category} className='flex flex-col gap-1'>
 
-                {/* client work */}
-                <div className='flex flex-col gap-1'>
-                    <h4 className='font-medium text-xl text-[#888888]'>Commissions</h4>
-                    <a className='font-semibold text-xl text-[#888888]
-                                  flex flex-row gap-2 items-center
-                                  w-fit h-fit'
-                        href=''>
-                        <Image 
-                            src='/detail-arrow-grey.svg'
-                            alt='arrow'
-                            width={24}
-                            height={24}
-                        />
-                        Serotte Law
-                    </a>
-                    <a className='font-semibold text-xl text-[#888888]
-                                  flex flex-row gap-2 items-center
-                                  w-fit h-fit'
-                        href=''>
-                        <Image 
-                            src='/detail-arrow-grey.svg'
-                            alt='arrow'
-                            width={24}
-                            height={24}
-                        />
-                        HawkHacks
-                    </a>
-                    <a className='font-semibold text-xl text-[#888888]
-                                  flex flex-row gap-2 items-center
-                                  w-fit h-fit'
-                        href=''>
-                        <Image 
-                            src='/detail-arrow-grey.svg'
-                            alt='arrow'
-                            width={24}
-                            height={24}
-                        />
-                        Laurier Computing Society
-                    </a>
-                </div>
+                        {/* category heading */}
+                        <h4 className='font-medium text-[#888888] capitalize'>
+                            {category}
+                        </h4>
 
-                {/* proficiencies */}
-                <div className='flex flex-col gap-1'>
-                    <h4 className='font-medium text-xl text-[#888888]'>Proficiencies</h4>
-                    <a className='font-semibold text-xl text-[#888888]
-                                  flex flex-row gap-2 items-center
-                                  w-fit h-fit'
-                        href=''>
-                        <Image 
-                            src='/detail-arrow-grey.svg'
-                            alt='arrow'
-                            width={24}
-                            height={24}
-                        />
-                        Technologies/Languages
-                    </a>
-                    <a className='font-semibold text-xl text-[#888888]
-                                  flex flex-row gap-2 items-center
-                                  w-fit h-fit'
-                        href=''>
-                        <Image 
-                            src='/detail-arrow-grey.svg'
-                            alt='arrow'
-                            width={24}
-                            height={24}
-                        />
-                        Frameworks
-                    </a>
-                    <a className='font-semibold text-xl text-[#888888]
-                                  flex flex-row gap-2 items-center
-                                  w-fit h-fit'
-                        href=''>
-                        <Image 
-                            src='/detail-arrow-grey.svg'
-                            alt='arrow'
-                            width={24}
-                            height={24}
-                        />
-                        Software
-                    </a>
-                </div>
+                        {/* category items */}
+                        {items.map(item => (
+                            <button
+                                key={item.id}
+                                onClick={() => setActiveExperience(item)}
+                                className={`
+                                    font-medium
+                                    flex flex-row gap-2 items-center
+                                    w-fit h-fit
+                                    ${activeExperience?.id === item.id
+                                        ? 'font-semibold'
+                                        : 'text-[#888888] hover:text-[#4D4D4D]'}
+                                `}
+                            >
+                                <Image 
+                                    src={`${activeExperience?.id === item.id
+                                        ? '/detail-arrow-black.svg'
+                                        : '/detail-arrow-grey.svg'}`}
+                                    alt='arrow'
+                                    width={24}
+                                    height={24}
+                                />
+                                {item.menuTitle}
+                            </button>
+                        ))}
+                    </div>
+                ))}
             </div>
 
             {/* experience details */}
@@ -187,35 +123,34 @@ export default function Experience({
                             col-start-2 col-span-2 row-start-1 row-span-2
                             flex flex-col gap-6
                             p-8'>
-                
-                {/* title, duration */}
-                <div>
-                    <h1 className='font-semibold text-3xl'>UX/UI Designer @ MobCoder</h1>
-                    <h2 className='font-medium text-xl text-[#888888]
-                                flex flex-row gap-2'>
-                        <Image 
-                            src='/detail-arrow-grey.svg'
-                            alt='arrow'
-                            width={24}
-                            height={24}
-                        />
-                        June 2025 - Present
-                    </h2>
-                </div>
+                {/* header */}
+                {activeExperience && (
+                    <div className='flex flex-col gap-2'>
+                        {/* position title */}
+                        <h1 className='font-semibold text-3xl text-nowrap'>
+                            {activeExperience.position} @ {activeExperience.menuTitle}     {/* future: link to company site */}
+                        </h1>
 
-                {/* description */}
-                <li className='text-xl'>
-                    Sample point of this job. I'm a newgrad designer who loves bringing ideas to life through clean, functional, high-impact products. 
-                    Since I also code, I'm drawn to designs that aren't just beautiful, but realistic, buildable, and considerate of engineering workflows.
-                </li>
-                <li className='text-xl'>
-                    Sample point of this job. I'm a newgrad designer who loves bringing ideas to life through clean, functional, high-impact products. 
-                    Since I also code, I'm drawn to designs that aren't just beautiful, but realistic, buildable, and considerate of engineering workflows.
-                </li>
-                <li className='text-xl'>
-                    Sample point of this job. I'm a newgrad designer who loves bringing ideas to life through clean, functional, high-impact products. 
-                    Since I also code, I'm drawn to designs that aren't just beautiful, but realistic, buildable, and considerate of engineering workflows.
-                </li>
+                        {/* date range */}
+                        <h2 className='font-medium text-xl text-[#888888]
+                                       flex flex-row gap-2'>
+                            <Image 
+                                src='/detail-arrow-grey.svg'
+                                alt='arrow'
+                                width={24}
+                                height={24}
+                            />
+                            {formatDateRange(activeExperience)}
+                        </h2>
+                    </div>
+                )}
+                
+                {/* experience description */}
+                {activeExperience?.points.map((point, i) => (
+                    <li key={i} className='text-xl ml-6'>
+                        {point}
+                    </li>
+                ))} 
             </div>
 
             {/* big title */}
@@ -232,4 +167,25 @@ export default function Experience({
             </div>
         </Grid>
     )
+}
+
+// helper function for sorting experiences by date
+function formatDateRange(xp: Experience) {
+    if (!xp.startDate) return '';
+
+    const start = new Date(xp.startDate).toLocaleDateString('en-US', {
+        month: 'short',
+        year: 'numeric',
+    });
+
+    if (xp.current || !xp.endDate) {
+        return `${start} — Present`;
+    }
+
+    const end = new Date(xp.endDate).toLocaleDateString('en-US', {
+        month: 'short',
+        year: 'numeric',
+    });
+
+    return `${start} — ${end}`;
 }
