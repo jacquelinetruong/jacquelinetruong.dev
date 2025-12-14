@@ -1,10 +1,11 @@
 import { getProjects } from '../lib/getProjects'
+import { getExperience } from '../lib/getExperience';
 
 import Navbar from './components/navbar';
 import Hero from './components/hero';
 import About from './components/about';
 import Portfolio from './components/portfolio';
-import Experience from './components/experience';
+import ExperienceSection from './components/experience';
 import Footer from './components/footer';
 
 import Grid from './components/grid';
@@ -19,26 +20,40 @@ export default async function Home() {
   const portfolioProjects = projects.filter(p => p.section === "portfolio");
   const experienceProjects = projects.filter(p => p.section === "experience");
 
+  // get experience data
+  const experience = await getExperience();
+  const currentXP = experience.filter(e => e.category === 'work' && e.current === true);
+  
     return (
       <>
         <Navbar />
 
         <Grid>
-          <Hero projects={heroProjects} className='col-span-5 row-start-1'/>
+          <Hero 
+            projects={heroProjects} 
+            className='col-span-5 row-start-1'/>
         </Grid>
 
         <Grid>
-          <About projects={aboutProjects} className='col-span-5 row-start-1'/>
+          <About 
+            projects={aboutProjects} 
+            experience={currentXP} 
+            className='col-span-5 row-start-1'/>
         </Grid>
 
         <section className='bg-[#1B1C1D]'>
           <Grid>
-            <Portfolio projects={portfolioProjects} className='col-span-5 row-start-1'/>
+            <Portfolio 
+              projects={portfolioProjects} 
+              className='col-span-5 row-start-1'/>
           </Grid>
         </section>
 
         <Grid>
-          <Experience projects={experienceProjects} className='col-span-5 row-start-1'/>
+          <ExperienceSection 
+            projects={experienceProjects} 
+            experience={experience} 
+            className='col-span-5 row-start-1'/>
         </Grid>
 
         <Grid>

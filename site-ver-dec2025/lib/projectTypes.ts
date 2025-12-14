@@ -8,7 +8,7 @@ export type Project = {
     programs: string[];
     link: string;
     image: string;
-    section: "hero" | "about" | "portfolio" | "experience";
-    sectionId: "1" | "2" | "3" | "4";
-    type: "designer" | "developer"
+    section: 'hero' | 'about' | 'portfolio' | 'experience';
+    sectionId: '1' | '2' | '3' | '4';
+    type: 'designer' | 'developer'
 };
