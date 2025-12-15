@@ -65,7 +65,8 @@ export default function About({
                     alt='pic of me'
                     width={2000}
                     height={2508}
-                    className='h-full object-cover'
+                    className='h-full object-cover pointer-events-none'
+                    draggable={false}
                 />
             </div>
 
@@ -110,6 +111,7 @@ export default function About({
                                     alt='arrow'
                                     width={24}
                                     height={24}
+                                    draggable={false}
                                 />
                                 {role.position} @ {role.menuTitle}
                                 {i < currentWork.length - 1 && ','}
@@ -127,6 +129,7 @@ export default function About({
                                 alt='arrow'
                                 width={24}
                                 height={24}
+                                draggable={false}
                             />
                             BSc Computer Science @ Wilfrid Laurier University, 2025
                         </p>
@@ -153,6 +156,7 @@ export default function About({
                         alt='coffee icon'
                         width={32}
                         height={32}
+                        draggable={false}
                     />
                     Say Hi!
                 </a>
@@ -173,6 +177,7 @@ export default function About({
                     width={736}
                     height={259.52}
                     className='size-full'
+                    draggable={false}
                 />
             </div>
 
@@ -190,6 +195,7 @@ export default function About({
                         alt='arrow pointing down'
                         width={28}
                         height={28}
+                        draggable={false}
                     />
                 </a>
             </div>
@@ -208,6 +214,7 @@ export default function About({
                     width={250}
                     height={127.63}
                     className='size-full'
+                    draggable={false}
                 />
             </div>
             

@@ -6,18 +6,25 @@ import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 
 import '../../public/link-arrow-white.svg';
+import '../../public/caret-left-icon.svg';
 
 
 type ProjectCardProps = {
 	project: Project;
 	className?: string;
 	onClick?: () => void;
+	featured?: boolean;
+	onMouseEnter?: () => void;
+	onMouseLeave?: () => void;
 };
 
 export default function ProjectCard({
 	project,
 	className = '',
 	onClick,
+	featured = false,
+	onMouseEnter,
+	onMouseLeave,
  }: ProjectCardProps) { 
 
 	// tags for each project
@@ -50,10 +57,23 @@ export default function ProjectCard({
 	}, [allTags]);
 
 	const hiddenCount = allTags.length - visibleCount;
+
+	const showIcon = featured || (!featured && project.section !== 'portfolio');
+	
+	// only open external link if NOT a non-featured portfolio card
+	const handleClick = () => {
+		if (showIcon && project.link) {
+			window.open(project.link, '_blank', 'noopener, noreferrer');
+			return;
+		}
+		onClick?.();
+	};
 	
 	return (
-		<div className={`relative w-full h-full ${className} cursor-pointer`}
-			onClick={onClick}
+		<div onClick={handleClick}
+			onMouseEnter={onMouseEnter}
+			onMouseLeave={onMouseLeave}
+			className={`relative w-full h-full ${className} group overflow-hidden cursor-pointer`}
 		>
 			{/* preview */}
 			<Image
@@ -61,11 +81,15 @@ export default function ProjectCard({
 				alt={project.title}
 				width={1142}
 				height={743}
-				className='size-full object-cover'
+				className='size-full object-cover
+						   transition-transform duration-500 ease-out
+						   group-hover:scale-115'
+				draggable={false}
 			/>	
 
 			{/* gradient for text readability */}
-			<div className='absolute inset-0 bg-gradient-to-t from-black/95 from-10% via-black/70 via-30% to-transparent to-50% point-events-none' />
+			<div className={`absolute inset-0 bg-gradient-to-t from-black/95 from-10% via-black/70 via-30% to-transparent to-50% point-events-none
+							${featured ? '' : 'bg-[#13131B]/15 transition duration-300 group-hover:bg-transparent'}`}/>
 
 			{/* project details section */}
 			<div className='font-inter text-white
@@ -107,18 +131,52 @@ export default function ProjectCard({
 						</div>
 					)}
 					{/* project title */}
-					<h3 className='font-medium text-lg'>{project.title}</h3>					
+					{!featured && <h3 className='font-medium text-lg'>{project.title}</h3>}
 				</div>
 
 				{/* project link icon */}
-				<Image 
-					src='/link-arrow-white.svg'
-					alt='link'
-					width={40}
-					height={40}
-					className='h-full'
-				/>
+				{showIcon && (
+					<div className='text-sm text-nowrap
+									flex flex-col gap-1 
+									w-fit items-end
+									opacity-0 translate-y-1
+									group-hover:opacity-100 group-hover:translate-y-0
+									transition-all duration-100'>	
+						<p>View live site</p>
+						<Image 
+							src='/link-arrow-white.svg'
+							alt='link arrow icon'
+							width={40}
+							height={40}
+							className='h-full'
+							draggable={false}
+						/>
+					</div>
+				)}
 			</div>
+
+			{/* hover: hint message */}
+			{!showIcon && (
+				<span className='font-inter font-medium text-sm text-white
+									absolute inset-0 p-6
+									opacity-0 translate-y-1
+									group-hover:opacity-100 group-hover:translate-y-0
+									transition-all duration-200
+									whitespace-nowrap
+									bg-gradient-to-t from-transparent via-black/15 via-70%  to-black/50 to-90% point-events-none'>
+					
+					<div className='flex flex-row gap-1'>
+						<Image
+							src='/caret-left-icon.svg'
+							alt='caret left icon'
+							width={14}
+							height={14}
+							draggable={false}
+						/>
+						<p>Expand project</p>
+					</div>
+				</span>
+			)}
 		</div>
 	);
 }

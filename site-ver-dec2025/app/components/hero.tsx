@@ -73,6 +73,7 @@ export default function Hero({
 					alt='coffee icon'
 					width={32}
 					height={32}
+					draggable={false}
 				/>
 				Say Hi!
 			</a>
@@ -93,6 +94,7 @@ export default function Hero({
 				width={736}
 				height={259.52}
 				className='size-full'
+				draggable={false}
 			/>
 		</div>
 
@@ -110,6 +112,7 @@ export default function Hero({
 					alt='arrow pointing down'
 					width={28}
 					height={28}
+					draggable={false}
 				/>
 			</a>
 		</div>

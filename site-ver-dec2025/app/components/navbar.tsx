@@ -19,6 +19,7 @@ export default function Navbar() {
                         alt='site logo'
                         width={72.64}
                         height={50}
+                        draggable={false}
                     />
                     {/* nav items */}
                     <div className='flex flex-row gap-8'>

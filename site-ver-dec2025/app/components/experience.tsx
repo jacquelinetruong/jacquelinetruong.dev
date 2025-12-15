@@ -23,11 +23,23 @@ export default function ExperienceSection({
     experience: Experience[];
  }) {
 
+    // sort experience by date
+    const orderedExperience = [...experience]
+        .filter(e => e.startDate)
+        .sort((a, b) => {
+            const startDiff = new Date(b.startDate!).getTime() - new Date(a.startDate!).getTime();
+            if (startDiff !== 0) return startDiff;
+
+            const aEnd = a.endDate ? new Date(a.endDate).getTime() : Date.now();
+            const bEnd = b.endDate ? new Date(b.endDate).getTime() : Date.now();
+            return bEnd - aEnd;
+        });
+        
     // filter by experience category
     const xpCategorized = {
-        work: experience.filter(e => e.category === 'work'),
-        clients: experience.filter(e => e.category === 'clients'),
-        proficiencies: experience.filter(e => e.category === 'proficiencies'),
+        work: orderedExperience.filter(e => e.category === 'work'),
+        clients: orderedExperience.filter(e => e.category === 'clients'),
+        proficiencies: orderedExperience.filter(e => e.category === 'proficiencies'),
     }
 
     // active experience

@@ -30,6 +30,7 @@ export default function Footer({ className = '' }: { className?: string }) {
                         alt='arrow'
                         width={28}
                         height={28}
+                        draggable={false}
                     />
                 </a>
             </div>
@@ -43,6 +44,7 @@ export default function Footer({ className = '' }: { className?: string }) {
                     width={1920}
                     height={260}
                     className='w-full'
+                    draggable={false}
                 />
             </div>
 
@@ -61,6 +63,7 @@ export default function Footer({ className = '' }: { className?: string }) {
                             width={320}
                             height={112.84}
                             className='w-full'
+                            draggable={false}
                         />
                         <h5 className='text-[#888888] text-right'>Design and development by {"\n"} Jacqueline Truong</h5>
                     </div>
@@ -99,6 +102,7 @@ export default function Footer({ className = '' }: { className?: string }) {
                                     alt='arrow'
                                     width={28}
                                     height={28}
+                                    draggable={false}
                                 />
                             </a>
                         </div>
@@ -107,6 +111,7 @@ export default function Footer({ className = '' }: { className?: string }) {
                             alt='handwritten note'
                             width={320}
                             height={100.68}
+                            draggable={false}
                         />
                     </div>
                 </div>
