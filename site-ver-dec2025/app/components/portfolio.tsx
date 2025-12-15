@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Project } from '@/lib/projectTypes';
 import ProjectCard from './projectcard';
 import Grid from './grid';
@@ -15,6 +15,8 @@ import '../../public/code-icon-grey.svg';
 import '../../public/link-arrow-white.svg';
 import '../../public/link-arrow-black.svg';
 import '../../public/guide-arrow-white.svg';
+import { start } from 'repl';
+import { request } from 'http';
 
 
 export default function Portfolio({
@@ -37,19 +39,61 @@ export default function Portfolio({
     // first element is featured project
     const featuredProject = carouselProjects[0];
 
-    // rotate carousel every 10s
+    // for rotation timer
+    const DURATION = 10000;
+    const TRANSITION_DELAY = 3000;
+    const [paused, setPaused] = useState(false);
+    const [progress, setProgress] = useState(0);
+    const [delay, setDelay] = useState(true);
+
+    const startTimeRef = useRef<number | null>(null);
+    const elapsedRef = useRef(0);
+
+    // pause timer when hovering featured card
     useEffect(() => {
-        if (carouselProjects.length <= 1) return;
+        if (paused || delay) return;
 
-        const interval = setInterval(() => {
-            setCarouselProjects(prev => {
-                const [first, ...rest] = prev;
-                return [...rest, first];
+        let start = performance.now();
+        let frame: number;
+
+        const tick = (now: number) => {
+            const elapsed = now - start;
+
+            setProgress(prev => {
+                const next = prev + elapsed / DURATION;
+                return next >= 1 ? 1 : next;
             });
-        }, 10000);
 
-        return () => clearInterval(interval);
-    }, [carouselProjects]);
+            if (elapsed < DURATION) {
+                start = now;
+                frame = requestAnimationFrame(tick);
+            }
+        };
+
+        frame = requestAnimationFrame(tick);
+        return () => cancelAnimationFrame(frame);
+    }, [paused, delay, featuredProject?.id]);
+
+    // visual transition delay
+    useEffect(() => {
+        setDelay(true);
+        setProgress(0);
+
+        const timeout = setTimeout(() => {
+            setDelay(false);
+        }, TRANSITION_DELAY);
+
+        return () => clearTimeout(timeout);
+    }, [featuredProject?.id]);
+
+    useEffect(() => {
+        if (progress < 1) return;
+
+        setCarouselProjects(prev => {
+            const [first, ...rest] = prev;
+            return [...rest, first];
+        });
+    }, [progress]);
 
     // update featured project if clicked
     const newFeaturedProject = (clickedProject: Project) => {
@@ -60,6 +104,10 @@ export default function Portfolio({
             // rotate array to make clicked project = first element
             return [...prev.slice(i), ...prev.slice(0, i)];
         });
+        // reset timer + progress
+        setProgress(0);
+        startTimeRef.current = null;
+        elapsedRef.current = 0;
     };
 
     return (
@@ -71,13 +119,27 @@ export default function Portfolio({
                         <ProjectCard
                             key={featuredProject.id}
                             project={featuredProject}
+                            featured
+                            onMouseEnter={() => setPaused(true)}
+                            onMouseLeave={() => setPaused(false)}
                         />
                     )}
+                    {/* timer bar */}
+                    <div className={`bottom-0 left-0 w-full h-[3px] bg-white/20 z-30 pointer-events-none
+                                    transition-opacity duration-500
+                                    ${delay || paused ? 'opacity-0' : 'opacity-100'}`}>
+                        <div
+                            className='h-full bg-white'
+                            style={{width: `${progress * 100}%`}}
+                        />
+                    </div>
                 </div>
-                {/* description */}
+                {/* content */}
                 <div className='font-inter
                                 col-start-1 col-span-2 row-start-3 row-span-1
                                 flex flex-col gap-6 p-8'>
+
+                    {/* text details */}
                     <h1 className='font-semibold text-3xl text-white'>{featuredProject?.title}</h1>
                     <p className='text-xl text-white'>
                         {featuredProject?.description}
@@ -96,6 +158,7 @@ export default function Portfolio({
                             alt='arrow'
                             width={28}
                             height={28}
+                            draggable={false}
                         />
                     </a>
                 </div>
@@ -149,6 +212,7 @@ export default function Portfolio({
                             alt='palette icon'
                             width={32}
                             height={32}
+                            draggable={false}
                         />
                         UX/UI Designer Focus
                     </button>
@@ -167,6 +231,7 @@ export default function Portfolio({
                             alt='code icon'
                             width={32}
                             height={32}
+                            draggable={false}
                         />
                         Programmer Focus
                     </button>
@@ -179,6 +244,7 @@ export default function Portfolio({
                     width={632}
                     height={216}
                     className='size-full bottom-0'
+                    draggable={false}
                 />
             </div>
             
@@ -196,6 +262,7 @@ export default function Portfolio({
                         alt='arrow pointing down'
                         width={28}
                         height={28}
+                        draggable={false}
                     />
                 </a>
             </div>
