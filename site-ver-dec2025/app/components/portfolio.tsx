@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
+import { useTheme } from './theme-context';
 import { Project } from '@/lib/projectTypes';
 import ProjectCard from './projectcard';
 import Grid from './grid';
@@ -15,8 +16,6 @@ import '../../public/code-icon-grey.svg';
 import '../../public/link-arrow-white.svg';
 import '../../public/link-arrow-black.svg';
 import '../../public/guide-arrow-white.svg';
-import { start } from 'repl';
-import { request } from 'http';
 
 
 export default function Portfolio({
@@ -26,7 +25,6 @@ export default function Portfolio({
     className?: string; 
     projects: Project[];
  }) {
-
     // filter state
     const [filter, setFilter] = useState<'designer' | 'developer'>('designer');
 
@@ -144,23 +142,26 @@ export default function Portfolio({
                     <p className='text-xl text-white'>
                         {featuredProject?.description}
                     </p>
-                    <a className='font-medium text-xl text-[#1B1C1D]
-                                  flex flex-row gap-2 items-center
-                                  w-fit h-fit px-5 py-3 rounded-full
-                                  bg-white'
-                        target='_blank'
-                        href={featuredProject?.link}
-                        rel='noopener noreferrer'
-                    >    
-                        Learn More
-                        <Image
-                            src='/link-arrow-black.svg'
-                            alt='arrow'
-                            width={28}
-                            height={28}
-                            draggable={false}
-                        />
-                    </a>
+                    {featuredProject.link && (
+                        <a className='font-medium text-xl text-[#1B1C1D]
+                                    flex flex-row gap-2 items-center
+                                    w-fit h-fit px-5 py-3 rounded-full
+                                    bg-white'
+                            target='_blank'
+                            href={featuredProject?.link}
+                            rel='noopener noreferrer'
+                        >    
+                            Learn More
+                            <Image
+                                src='/link-arrow-black.svg'
+                                alt='arrow'
+                                width={28}
+                                height={28}
+                                draggable={false}
+                            />
+                        </a>
+                    )}
+                        
                 </div>
 
             {/* non-featured projects */}
@@ -247,14 +248,27 @@ export default function Portfolio({
                     draggable={false}
                 />
             </div>
+
+            {/* handwritten note */}
+            <div className='col-start-4 col-span-1 row-start-2 row-span-1'>
+                <Image
+                    src='/my-faves.svg'
+                    alt='my faves'
+                    width={304}
+                    height={165}
+                    className='size-full p-12'
+                    draggable={false}
+                />
+            </div>
             
             {/* jump to experience button */}
             <div className='col-start-3 col-span-1 row-start-3 row-span-1
-                            flex flex-col justify-end items-cente'>
+                            flex flex-col justify-end items-center'>
                 <a className='font-inter font-medium text-white
                               flex flex-col items-center gap-2
-                              p-8'
-                    href='#about'			  
+                              p-8
+                              animate-jump'
+                    href='#experience'			  
                 >
                     My Experience
                     <Image
