@@ -1,9 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --grid-line-colour: #88888840;
+  --white: #FFFFFF;
+  --off-white: #F0F1F4;
   --grey: #BEBEBE;
+  --grid-line-colour: #88888840;
+  --light-mode-grey: #888888;
+  --dark-mode-grey: #666666;
+  --dark-grey: #4D4D4D;
   --black: #292A2D;
+  --dark-black: #1B1C1D;
 
   /* other */
   --nav-height: 80px;
@@ -17,17 +23,19 @@
 }
 
 .theme-light {
-  --bg-colour: #F0F1F4;
-  --text-colour: #292A2D;
-  --alt-text-colour: #888888;
+  --bg-colour: var(--off-white);
+  --text-colour: var(--black);
+  --alt-text-colour: var(--light-mode-grey);
+
   background-color: var(--bg-colour);
   color: var(--text-colour);
 }
 
 .theme-dark {
-  --bg-colour: #1B1C1D;
-  --text-colour: #FFFFFF;
-  --alt-text-colour: #666666;
+  --bg-colour: var(--dark-black);
+  --text-colour: var(--white);
+  --alt-text-colour: var(--dark-mode-grey);
+
   background-color: var(--bg-colour);
   color: var(--text-colour);
 }
@@ -60,6 +68,9 @@ html {
 }
 
 body {
+  transition-property: color, var(--bg-colour);
+  transition-timing-function: ease-in-out;
+  transition-duration: 500ms;
   background: var(--bg-colour);
   color: var(--text-colour);
   font-family: Arial, Helvetica, sans-serif;
@@ -107,13 +118,4 @@ section {
   
   background-position: 0 0, 0 0;
   background-repeat: no-repeat;
-}
-
-/* navbar hover styling */
-.navbar-items a {
-
-}
-
-.navbar-links a {
-
 }

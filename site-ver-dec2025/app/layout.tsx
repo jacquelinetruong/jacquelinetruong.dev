@@ -3,7 +3,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 
-import ThemeProvider from './components/theme-provider';
+import { ThemeProvider } from './components/theme-context';
 
 const interSans = Inter({
   variable: '--font-inter-sans',
@@ -25,7 +25,7 @@ export default function RootLayout({
     <html lang='en'>
       <body className={`${interSans.variable} antialiased`}>
         <ThemeProvider>
-            {children}
+          {children}
         </ThemeProvider>
       </body>
     </html>
