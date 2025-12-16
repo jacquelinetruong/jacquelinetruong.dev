@@ -135,7 +135,7 @@ export default function ProjectCard({
 				</div>
 
 				{/* project link icon */}
-				{showIcon && (
+				{showIcon && project.link && (
 					<div className='text-sm text-nowrap
 									flex flex-col gap-1 
 									w-fit items-end

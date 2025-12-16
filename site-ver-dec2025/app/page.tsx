@@ -28,34 +28,40 @@ export default async function Home() {
       <>
         <Navbar />
 
-        <Grid>
-          <Hero 
-            projects={heroProjects} 
-            className='col-span-5 row-start-1'/>
-        </Grid>
-
-        <Grid>
-          <About 
-            projects={aboutProjects} 
-            experience={currentXP} 
-            className='col-span-5 row-start-1'/>
-        </Grid>
-
-        <section className='bg-[#1B1C1D]'>
+        <section id='home'>
           <Grid>
-            <Portfolio 
-              projects={portfolioProjects} 
-              className='col-span-5 row-start-1'/>
+            <Hero 
+              projects={heroProjects} 
+              className='col-span-5 row-start-1 row-span-4'/>
           </Grid>
         </section>
 
-        <Grid>
-          <ExperienceSection 
-            projects={experienceProjects} 
-            experience={experience} 
-            className='col-span-5 row-start-1'/>
-        </Grid>
+        <section id='about'>
+          <Grid>
+            <About 
+              projects={aboutProjects} 
+              experience={currentXP} 
+              className='col-span-5 row-start-1 row-span-4'/>
+          </Grid>
+        </section>
 
+        <section id='portfolio'>
+          <Grid>
+            <Portfolio 
+              projects={portfolioProjects} 
+              className='col-span-5 row-start-1 row-span-3'/>
+          </Grid>
+        </section>
+
+        <section id='experience'>
+          <Grid>
+            <ExperienceSection 
+              projects={experienceProjects} 
+              experience={experience} 
+              className='col-span-5 row-start- row-span-4'/>
+          </Grid>
+        </section>
+        
         <Grid>
           <Footer className='col-span-5 row-start-1'/>
         </Grid>

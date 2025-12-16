@@ -94,7 +94,7 @@ export default function About({
                 <div className='flex flex-col gap-8'>
                     {/* current work */}
                     <div className='flex flex-col gap-1'>
-                        <h4 className='font-medium text-xl text-[#888888]'>Currently</h4>
+                        <h4 className='font-medium text-xl text-(--alt-text-colour)'>Currently</h4>
                         
                         {/* if jobless :heartbreak: */}
                         {currentWork.length === 0 && (
@@ -121,7 +121,7 @@ export default function About({
 
                     {/* education */}
                     <div className='flex flex-col gap-1'>
-                        <h4 className='font-medium text-xl text-[#888888]'>Education</h4>
+                        <h4 className='font-medium text-xl text-(--alt-text-colour)'>Education</h4>
                         <p className='font-semibold text-xl
                                         flex flex-row gap-2 items-center'>
                             <Image 
@@ -147,7 +147,7 @@ export default function About({
                 <a className='font-medium text-2xl text-white
                                 flex flex-row gap-4 items-center
                                 w-fit h-fit px-6 py-4 rounded-full
-                                bg-[#292A2D]'
+                                bg-(--black)'
                     target='_blank' 
                     href='mailto:hello@jacquelinetruong.dev'
                 >
@@ -162,7 +162,7 @@ export default function About({
                 </a>
     
                 {/* quick intro text */}
-                <h1 className='font-semibold text-3xl text-right text-[#BEBEBE]'>
+                <h1 className='font-semibold text-3xl text-right text-(--grey)'>
                     Product designer first, software engineer second. Focused on crafting digital experiences and turning everyday ideas into art.
                 </h1>
             </div>
@@ -186,7 +186,8 @@ export default function About({
                             flex flex-col justify-end items-center'>
                 <a className='font-inter font-medium
                                 flex flex-col items-center gap-2
-                                p-8'
+                                p-8
+						        animate-jump'
                     href='#portfolio'			  
                 >
                     See Portfolio
@@ -201,7 +202,7 @@ export default function About({
             </div>
 
             {/* city */}
-            <div className='font-inter font-semibold text-3xl text-right text-[#BEBEBE]
+            <div className='font-inter font-semibold text-3xl text-right text-(--grey)
                             col-start-5 col-span-1 row-start-3 row-span-1
                             flex flex-col justify-end 
                             p-8'>

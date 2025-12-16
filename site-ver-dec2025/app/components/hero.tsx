@@ -103,7 +103,8 @@ export default function Hero({
 						flex flex-col justify-end items-center'>
 			<a className='font-inter font-medium
 						  flex flex-col items-center gap-2
-						  p-8'
+						  p-8
+						  animate-jump'
 				href='#about'			  
 			>
 				More About Me
