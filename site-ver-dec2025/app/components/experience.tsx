@@ -97,7 +97,7 @@ export default function ExperienceSection({
                     <div key={category} className='flex flex-col gap-1'>
 
                         {/* category heading */}
-                        <h4 className='font-medium text-[#888888] capitalize'>
+                        <h4 className='font-medium text-(--alt-text-colour) capitalize'>
                             {category}
                         </h4>
 
@@ -112,7 +112,7 @@ export default function ExperienceSection({
                                     w-fit h-fit
                                     ${activeExperience?.id === item.id
                                         ? 'font-semibold'
-                                        : 'text-[#888888] hover:text-[#4D4D4D]'}
+                                        : 'text-(--alt-text-colour) hover:text-(--dark-grey)'}
                                 `}
                             >
                                 <Image 
@@ -144,7 +144,7 @@ export default function ExperienceSection({
                         </h1>
 
                         {/* date range */}
-                        <h2 className='font-medium text-xl text-[#888888]
+                        <h2 className='font-medium text-xl text-(--alt-text-colour)
                                        flex flex-row gap-2'>
                             <Image 
                                 src='/detail-arrow-grey.svg'

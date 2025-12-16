@@ -64,7 +64,8 @@ export default function Hero({
 			<a className='font-medium text-2xl text-white
 						  flex flex-row gap-4 items-center
 						  w-fit h-fit px-6 py-4 rounded-full
-						  bg-[#292A2D]'
+						  bg-(--text-colour) hover:bg-(--dark-grey)
+                          transition-colors duration-300'
 				target='_blank' 
 				href='mailto:hello@jacquelinetruong.dev'
 			>

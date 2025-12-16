@@ -28,7 +28,7 @@ export default async function Home() {
       <>
         <Navbar />
 
-        <section id='home'>
+        <section id='home' className='section'>
           <Grid>
             <Hero 
               projects={heroProjects} 
@@ -36,7 +36,7 @@ export default async function Home() {
           </Grid>
         </section>
 
-        <section id='about'>
+        <section id='about' className='section'>
           <Grid>
             <About 
               projects={aboutProjects} 
@@ -45,7 +45,7 @@ export default async function Home() {
           </Grid>
         </section>
 
-        <section id='portfolio'>
+        <section id='portfolio' className='section'>
           <Grid>
             <Portfolio 
               projects={portfolioProjects} 
@@ -53,12 +53,12 @@ export default async function Home() {
           </Grid>
         </section>
 
-        <section id='experience'>
+        <section id='experience' className='section'>
           <Grid>
             <ExperienceSection 
               projects={experienceProjects} 
               experience={experience} 
-              className='col-span-5 row-start- row-span-4'/>
+              className='col-span-5 row-start-2 row-span-4'/>
           </Grid>
         </section>
         

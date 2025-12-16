@@ -20,10 +20,12 @@ export default function Footer({ className = '' }: { className?: string }) {
                             flex flex-col gap-6 justify-end items-center
                             p-8'>
                 <h1 className='font-semibold text-3xl'>Have a project idea? Let's make it happen.</h1>
-                <a className='font-medium text-xl text-white
+                <a className='font-medium text-xl text-(--bg-colour) hover:text-white
                               flex flex-row gap-2 items-center
                               w-fit h-fit px-5 py-3 rounded-full
-						      bg-[#292A2D]'>
+						      bg-(--text-colour) hover:bg-(--dark-grey)
+                              transition-colors duration-300
+                              cursor-pointer'>
                     Get Started
                     <Image
                         src='/link-arrow-white.svg'
@@ -49,10 +51,10 @@ export default function Footer({ className = '' }: { className?: string }) {
             </div>
 
             {/* real footer */}
-            <div className='font-inter font-medium text-lg text-[#888888]
+            <div className='font-inter font-medium text-lg text-(--alt-text-colour)
                             col-start-1 col-span-5 row-start-3 row-span-1
                             flex flex-col gap-16 p-8 pt-16 h-fit
-                            bg-[#1B1C1D] border-t-[#1B1C1D]'>
+                            bg-(--dark-black) border-t-(--dark-black)'>
                 {/* content */}
                 <div className='flex flex-row justify-between'>
                     {/* signature section */}
@@ -65,34 +67,35 @@ export default function Footer({ className = '' }: { className?: string }) {
                             className='w-full'
                             draggable={false}
                         />
-                        <h5 className='text-[#888888] text-right'>Design and development by {"\n"} Jacqueline Truong</h5>
+                        <h5 className='text-(--alt-text-colour) text-right'>Design and development by {"\n"} Jacqueline Truong</h5>
                     </div>
 
                     {/* navigation pages */}
                     <div className='flex flex-col gap-2'>
                         <h5 className='text-white'>Pages</h5>
-                        <a href='#home'>Home</a>
-                        <a href='#about'>About</a>
-                        <a href='#portfolio'>Portfolio</a>
-                        <a href='#experience'>Experience</a>
+                        <a className='transition-colors duration-300 hover:text-(--grey)' href='#home'>Home</a>
+                        <a className='transition-colors duration-300 hover:text-(--grey)' href='#about'>About</a>
+                        <a className='transition-colors duration-300 hover:text-(--grey)' href='#portfolio'>Portfolio</a>
+                        <a className='transition-colors duration-300 hover:text-(--grey)' href='#experience'>Experience</a>
                     </div>
 
                     {/* links */}
                     <div className='flex flex-col gap-2'>
                         <h5 className='text-white'>Find More</h5>
-                        <a href=''>Resume</a>
-                        <a target='_blank' href='https://www.linkedin.com/in/jacquellinetruong'>LinkedIn</a>
-                        <a target='_blank' href='https://github.com/jacquelinetruong'>GitHub</a>
+                        <a className='transition-colors duration-300 hover:text-(--grey)' href=''>Resume</a>
+                        <a className='transition-colors duration-300 hover:text-(--grey)' target='_blank' href='https://www.linkedin.com/in/jacquellinetruong'>LinkedIn</a>
+                        <a className='transition-colors duration-300 hover:text-(--grey)' target='_blank' href='https://github.com/jacquelinetruong'>GitHub</a>
                     </div>
 
                     {/* cta */}
                     <div className='flex flex-col justify-between'>
                         <div className='flex flex-col gap-4'>
                             <h5 className='text-white'>Like my work?</h5>
-                            <a className='font-medium text-xl text-[#1B1C1D]
+                            <a className='font-medium text-xl text-(--dark-black)
                                         flex flex-row gap-2 items-center
                                         w-fit h-fit px-5 py-3 rounded-full
-                                        bg-white'
+                                        bg-white hover:bg-(--grey)
+                                        transition-colors duration-300'
                                 target='_blank'
                                 href='mailto:hello@jacquelinetruong.dev'
                             >    
@@ -117,7 +120,7 @@ export default function Footer({ className = '' }: { className?: string }) {
                 </div>
                 
                 {/* copyright */}
-                <p className='text-[#888888]
+                <p className='text-(--alt-text-colour)
                               flex flex-row justify-center'>
                     All rights reserved. © 2025
                 </p>

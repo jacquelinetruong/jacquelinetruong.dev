@@ -147,7 +147,8 @@ export default function About({
                 <a className='font-medium text-2xl text-white
                                 flex flex-row gap-4 items-center
                                 w-fit h-fit px-6 py-4 rounded-full
-                                bg-(--black)'
+                                bg-(--black) hover:bg-(--dark-grey)
+                                transition-colors duration-300'
                     target='_blank' 
                     href='mailto:hello@jacquelinetruong.dev'
                 >

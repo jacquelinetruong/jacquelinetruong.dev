@@ -143,10 +143,11 @@ export default function Portfolio({
                         {featuredProject?.description}
                     </p>
                     {featuredProject.link && (
-                        <a className='font-medium text-xl text-[#1B1C1D]
+                        <a className='font-medium text-xl text-(--bg-colour) hover:text-black
                                     flex flex-row gap-2 items-center
                                     w-fit h-fit px-5 py-3 rounded-full
-                                    bg-white'
+                                    bg-white hover:bg-(--grey)
+                                    transition-colors duration-300'
                             target='_blank'
                             href={featuredProject?.link}
                             rel='noopener noreferrer'
@@ -205,8 +206,10 @@ export default function Portfolio({
                         className={`font-medium text-xl
                                     flex flex-row gap-2 items-center
                                     w-fit h-fit px-5 py-3 rounded-full
-                                    border-1
-                                    ${filter === 'designer' ? 'text-white' : 'text-[#666666]'}`}
+                                    border-1 bg-(--bg-colour)
+                                    transition-colors duration-300
+                                    hover:bg-(--grid-line-colour) hover:text-(--grey)
+                                    ${filter === 'designer' ? 'text-white hover:text-white' : 'text-(--dark-mode-grey)'}`}
                     >
                         <Image 
                             src={filter === 'designer' ? '/palette-icon.svg' : '/palette-icon-grey.svg'}
@@ -224,8 +227,10 @@ export default function Portfolio({
                         className={`font-medium text-xl
                                     flex flex-row gap-2 items-center
                                     w-fit h-fit px-5 py-3 rounded-full
-                                    border-1
-                                    ${filter === 'developer' ? 'text-white' : 'text-[#666666]'}`}
+                                    border-1 bg-(--bg-colour)
+                                    transition-colors duration-300
+                                    hover:bg-(--grid-line-colour) hover:text-(--grey)
+                                    ${filter === 'developer' ? 'text-white hover:text-white' : 'text-(--dark-mode-grey)'}`}
                     >
                         <Image 
                             src={filter === 'developer' ? '/code-icon.svg' : '/code-icon-grey.svg'}
