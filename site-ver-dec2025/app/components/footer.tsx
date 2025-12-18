@@ -3,6 +3,8 @@
 import Image from 'next/image';
 import Grid from './grid';
 
+import LinkArrow from './icons/link-arrow';
+
 import '../../public/link-arrow-white.svg';
 import '../../public/link-arrow-black.svg';
 import '../../public/jt-white.svg';
@@ -27,13 +29,7 @@ export default function Footer({ className = '' }: { className?: string }) {
                               transition-colors duration-300
                               cursor-pointer'>
                     Get Started
-                    <Image
-                        src='/link-arrow-white.svg'
-                        alt='arrow'
-                        width={28}
-                        height={28}
-                        draggable={false}
-                    />
+                    <LinkArrow className='size-[28px] text-white'/>
                 </a>
             </div>
 
@@ -100,13 +96,7 @@ export default function Footer({ className = '' }: { className?: string }) {
                                 href='mailto:hello@jacquelinetruong.dev'
                             >    
                                 Let's Connect
-                                <Image
-                                    src='/link-arrow-black.svg'
-                                    alt='arrow'
-                                    width={28}
-                                    height={28}
-                                    draggable={false}
-                                />
+                                <LinkArrow className='size-[28px] text-(--text-colour)'/>
                             </a>
                         </div>
                         <Image 

@@ -84,11 +84,11 @@ export default function Navbar() {
 
             {/* right side */}
             <div className='navbar-links flex flex-row gap-8'>
-                <a className='transition-colors duration-300 text-(--text-colour) hover:text-(--grey)'
+                <a className='transition-colors duration-300 text-(--text-colour) hover:text-(--light-mode-grey)'
                     target='_blank' href=''>Resume</a>
-                <a className='transition-colors duration-300 text-(--text-colour) hover:text-(--grey)'
+                <a className='transition-colors duration-300 text-(--text-colour) hover:text-(--light-mode-grey)'
                     target='_blank' href='https://www.linkedin.com/in/jacquellinetruong'>LinkedIn</a>
-                <a className='transition-colors duration-300 text-(--text-colour) hover:text-(--grey)'
+                <a className='transition-colors duration-300 text-(--text-colour) hover:text-(--light-mode-grey)'
                     target='_blank' href='https://github.com/jacquelinetruong'>GitHub</a>
             </div>
         </div>

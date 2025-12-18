@@ -1,13 +1,17 @@
 'use client';
 
+import { useState } from 'react';
+import { Reveal } from './reveal';
 import { Project } from '@/lib/projectTypes';
 import Image from 'next/image';
 import ProjectCard from './projectcard';
 import Grid from './grid';
 
+import GuideButton from './guide-button';
+import Coffee from './icons/coffee';
+
 import '../../public/coffee-icon-white.svg';
 import '../../public/jt-black.svg';
-import '../../public/guide-arrow-black.svg';
 
 
 export default function Hero({
@@ -17,114 +21,67 @@ export default function Hero({
 	className?: string; 
 	projects: Project[];
  }) {
-  return (                                            
-	<Grid className={className}>
-		{/* best projects :o */}
-		{/* project display #1 */}
-		<div className='col-start-2 col-span-1 row-start-1 row-span-1'>
-			{projects
-				.filter(p => p.sectionId === '1')
-				.map(project => (
-					<ProjectCard
-						key={project.id}
-						project={project}
-					/>
-				))}
-		</div>
-		{/* project display #2 */}
-		<div className='col-start-1 col-span-2 row-start-2 row-span-2'>
-			{projects
-				.filter(p => p.sectionId === '2')
-				.map(project => (
-					<ProjectCard
-						key={project.id}
-						project={project}
-					/>
-				))}
-		</div>
-		{/* project display #3 */}
-		<div className='col-start-4 col-span-1 row-start-3 row-span-1'>
-			{projects
-				.filter(p => p.sectionId === '3')
-				.map(project => (
-					<ProjectCard
-						key={project.id}
-						project={project}
-					/>
-				))}
-		</div>
+	const [allowStagger, setAllowStagger] = useState(true);
+  return (       
+	<Reveal 
+		onViewportEnter={() => {
+			setAllowStagger(true);
+		}}
+		onViewportLeave={() => {
+			setAllowStagger(false);
+		}}
+		delay={0.25}
+	>                                     
+		<Grid >
+			{/* best projects :o */}
+			{/* project display #1 */}
+			<div className='col-start-2 col-span-1 row-start-1 row-span-1'>
+				<Reveal delay={0.4}>
+					{projects
+						.filter(p => p.sectionId === '1')
+						.map(project => (
+							<ProjectCard
+								key={project.id}
+								project={project}
+							/>
+						))}
+				</Reveal>
+			</div>
+		
+			{/* project display #2 */}
+			<div className='col-start-1 col-span-2 row-start-2 row-span-2'>
+				<Reveal delay={0.6}>
+					{projects
+						.filter(p => p.sectionId === '2')
+						.map(project => (
+							<ProjectCard
+								key={project.id}
+								project={project}
+							/>
+						))}
+				</Reveal>
+			</div>
+		
+			{/* project display #3 */}
+			<div className='col-start-4 col-span-1 row-start-3 row-span-1'>
+				<Reveal delay={0.8}>
+					{projects
+						.filter(p => p.sectionId === '3')
+						.map(project => (
+							<ProjectCard
+								key={project.id}
+								project={project}
+							/>
+						))}
+				</Reveal>
+			</div>
 
-		{/* cta, intro section */}
-		<div className='font-inter
-						col-start-4 col-span-2 row-start-1 row-span-1
-						flex flex-col justify-between items-end 
-						p-8'>
-
-			{/* "say hi" button */}
-			<a className='font-medium text-2xl text-white
-						  flex flex-row gap-4 items-center
-						  w-fit h-fit px-6 py-4 rounded-full
-						  bg-(--text-colour) hover:bg-(--dark-grey)
-                          transition-colors duration-300'
-				target='_blank' 
-				href='mailto:hello@jacquelinetruong.dev'
-			>
-				<Image 
-					src='/coffee-icon-white.svg'
-					alt='coffee icon'
-					width={32}
-					height={32}
-					draggable={false}
-				/>
-				Say Hi!
-			</a>
-
-			{/* quick intro text */}
-			<h1 className='font-semibold text-3xl text-right'>
-				Product designer first, software engineer second. Focused on crafting digital experiences and turning everyday ideas into art.
-			</h1>
-		</div>
-
-		{/* big name */}
-		<div className='col-start-4 col-span-2 row-start-2 row-span-1
-						flex flex-col items-end
-						p-8'>
-			<Image 
-				src='/jt-black.svg'
-				alt='jacqueline truong'
-				width={736}
-				height={259.52}
-				className='size-full'
-				draggable={false}
-			/>
-		</div>
-
-		{/* jump to 'about' button */}
-		<div className='col-start-3 col-span-1 row-start-3 row-span-1
-						flex flex-col justify-end items-center'>
-			<a className='font-inter font-medium
-						  flex flex-col items-center gap-2
-						  p-8
-						  animate-jump'
-				href='#about'			  
-			>
-				More About Me
-				<Image
-					src='/guide-arrow-black.svg'
-					alt='arrow pointing down'
-					width={28}
-					height={28}
-					draggable={false}
-				/>
-			</a>
-		</div>
-
-		{/* city */}
-		<div className='font-inter font-semibold text-3xl text-right
-						col-start-5 col-span-1 row-start-3 row-span-1
-						p-8'>
-			<h2>Based in Toronto, CA.</h2>
-		</div>
-	</Grid>
+			{/* jump to 'about' button */}
+			<div className='col-start-3 col-span-1 row-start-3 row-span-1
+							flex flex-col justify-end items-center'>
+				<GuideButton href='#about' text='More About Me'/>
+			</div>
+		</Grid>
+	</Reveal>
   );
 };

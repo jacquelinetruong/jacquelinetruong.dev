@@ -7,6 +7,7 @@ import About from './components/about';
 import Portfolio from './components/portfolio';
 import ExperienceSection from './components/experience';
 import Footer from './components/footer';
+import NameStamp from './components/name-stamp';
 
 import Grid from './components/grid';
 
@@ -24,11 +25,14 @@ export default async function Home() {
   const experience = await getExperience();
   const currentXP = experience.filter(e => e.category === 'work' && e.current === true);
   
+
     return (
       <>
         <Navbar />
 
-        <section id='home' className='section'>
+        <NameStamp />
+
+        <section id='home' className='section' >
           <Grid>
             <Hero 
               projects={heroProjects} 
@@ -36,7 +40,7 @@ export default async function Home() {
           </Grid>
         </section>
 
-        <section id='about' className='section'>
+        <section id='about' className='section' >
           <Grid>
             <About 
               projects={aboutProjects} 
@@ -49,7 +53,7 @@ export default async function Home() {
           <Grid>
             <Portfolio 
               projects={portfolioProjects} 
-              className='col-span-5 row-start-1 row-span-3'/>
+              className='col-span-5 row-start-1 row-span-4'/>
           </Grid>
         </section>
 
