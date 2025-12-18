@@ -14,7 +14,9 @@
   /* other */
   --nav-height: 80px;
   --cell-height: calc((100vh - var(--nav-height)) / 3);
+  --two-cell-height: 2 * var(--cell-height);
   --cell-width: calc(100vw / 5);
+  --two-cell-width: 2* var(--cell-width);
   --content-space: calc(100vh - var(--nav-height));
 }
 

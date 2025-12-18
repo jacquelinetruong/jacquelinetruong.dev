@@ -2,10 +2,11 @@
 'use client';
 
 import { Project } from '@/lib/projectTypes';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 
-import '../../public/link-arrow-white.svg';
+import LinkArrow from './icons/link-arrow';
+
 import '../../public/caret-left-icon.svg';
 
 
@@ -28,7 +29,10 @@ export default function ProjectCard({
  }: ProjectCardProps) { 
 
 	// tags for each project
-	const allTags = [...(project.languages ?? []), ...(project.programs ?? [])];
+	// const allTags = [...(project.languages ?? []), ...(project.programs ?? [])];
+	const allTags = useMemo(() => {
+		return project.languages, project.programs;
+	}, [project.type]);
 
 	// for tag collapsing
 	const containerRef = useRef<HTMLDivElement>(null);
@@ -143,14 +147,7 @@ export default function ProjectCard({
 									group-hover:opacity-100 group-hover:translate-y-0
 									transition-all duration-100'>	
 						<p>View live site</p>
-						<Image 
-							src='/link-arrow-white.svg'
-							alt='link arrow icon'
-							width={40}
-							height={40}
-							className='h-full'
-							draggable={false}
-						/>
+						<LinkArrow className='size-[40px] text-(--white) group-transition-colors group:duration-300'/>
 					</div>
 				)}
 			</div>
