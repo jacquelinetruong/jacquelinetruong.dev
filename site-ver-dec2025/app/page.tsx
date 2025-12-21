@@ -13,62 +13,61 @@ import Grid from './components/grid';
 
 
 export default async function Home() {
-  
-  // get projects for each section
-  const projects = await getProjects();
-  const heroProjects = projects.filter(p => p.section === "hero");
-  const aboutProjects = projects.filter(p => p.section === "about");
-  const portfolioProjects = projects.filter(p => p.section === "portfolio");
-  const experienceProjects = projects.filter(p => p.section === "experience");
+	
+	// get projects for each section
+	const projects = await getProjects();
+	const heroProjects = projects.filter(p => p.section === "hero");
+	const aboutProjects = projects.filter(p => p.section === "about");
+	const portfolioProjects = projects.filter(p => p.section === "portfolio");
+	const experienceProjects = projects.filter(p => p.section === "experience");
 
-  // get experience data
-  const experience = await getExperience();
-  const currentXP = experience.filter(e => e.category === 'work' && e.current === true);
-  
+	// get experience data
+	const experience = await getExperience();
+	const currentXP = experience.filter(e => e.category === 'work' && e.current === true);
 
-    return (
-      <>
-        <Navbar />
+	return (
+		<>
+			<Navbar />
+		
+			<NameStamp />
+		
+			<section id='home' className='section' >
+				<Grid>
+					<Hero 
+						projects={heroProjects} 
+						className='col-span-5 row-start-1 row-span-4'/>
+				</Grid>
+			</section>
 
-        <NameStamp />
+			<section id='about' className='section' >
+				<Grid>
+					<About 
+						projects={aboutProjects} 
+						experience={currentXP} 
+						className='col-span-5 row-start-1 row-span-4'/>
+				</Grid>
+			</section>
 
-        <section id='home' className='section' >
-          <Grid>
-            <Hero 
-              projects={heroProjects} 
-              className='col-span-5 row-start-1 row-span-4'/>
-          </Grid>
-        </section>
+			<section id='portfolio' className='section'>
+				<Grid>
+					<Portfolio 
+						projects={portfolioProjects} 
+						className='col-span-5 row-start-1 row-span-4'/>
+				</Grid>
+			</section>
 
-        <section id='about' className='section' >
-          <Grid>
-            <About 
-              projects={aboutProjects} 
-              experience={currentXP} 
-              className='col-span-5 row-start-1 row-span-4'/>
-          </Grid>
-        </section>
-
-        <section id='portfolio' className='section'>
-          <Grid>
-            <Portfolio 
-              projects={portfolioProjects} 
-              className='col-span-5 row-start-1 row-span-4'/>
-          </Grid>
-        </section>
-
-        <section id='experience' className='section'>
-          <Grid>
-            <ExperienceSection 
-              projects={experienceProjects} 
-              experience={experience} 
-              className='col-span-5 row-start-2 row-span-4'/>
-          </Grid>
-        </section>
-        
-        <Grid>
-          <Footer className='col-span-5 row-start-1'/>
-        </Grid>
-      </>
-  );
+			<section id='experience' className='section'>
+				<Grid>
+					<ExperienceSection 
+						projects={experienceProjects} 
+						experience={experience} 
+						className='col-span-5 row-start-2 row-span-4'/>
+				</Grid>
+			</section>
+			
+			<Grid>
+				<Footer className='col-span-5 row-start-1'/>
+			</Grid>
+		</>
+	);
 }

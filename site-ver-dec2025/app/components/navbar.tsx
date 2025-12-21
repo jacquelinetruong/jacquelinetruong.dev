@@ -3,7 +3,7 @@
 import Image from 'next/image';
 
 import { useTheme } from './theme-context';
-import { useActiveSection } from './section';
+import { useActiveSection } from './active-theme';
 
 import '../../public/jt-logo-black.svg';
 import '../../public/jt-logo-white.svg';
@@ -22,7 +22,7 @@ export default function Navbar() {
     return (
         <div className='font-inter font-medium text-xl
                         sticky top-0
-                        p-4 z-100 
+                        px-8 py-4 z-100 
                         flex flex-row justify-between items-center'>
             {/* left side */}
             <div className='flex flex-row gap-16 items-center'>

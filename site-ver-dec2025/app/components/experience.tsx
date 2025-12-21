@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { Project } from '@/lib/projectTypes';
 import { Experience } from '@/lib/experienceTypes';
 
+import { SectionReveal } from './section-reveal';
 import { Reveal } from './reveal';
 import ProjectCard from './projectcard';
 import Grid from './grid';
@@ -52,7 +53,11 @@ export default function ExperienceSection({
     }, []);
 
     return (
-        <Reveal delay={1}>
+        <SectionReveal
+            fadeDistance={0}
+            fadeStart={0.4}
+            fadeEnd={0.7}
+        >
             <Grid className={className}>
                 {/* relevant projects */}
                 {/* project display #1 */}
@@ -95,38 +100,40 @@ export default function ExperienceSection({
                                 flex flex-col gap-8
                                 p-8'
                 >
-                    {Object.entries(xpCategorized).map(([category, items]) => (
+                    {Object.entries(xpCategorized).map(([category, items], i) => (
                         <div key={category} className='flex flex-col gap-1'>
 
                             {/* category heading */}
-                            <h4 className='font-medium text-(--alt-text-colour) capitalize'>
-                                {category}
-                            </h4>
+                            <Reveal delay={i*0.25}>
+                                <h4 className='font-medium text-(--alt-text-colour) capitalize'>{category}</h4>
+                            </Reveal>
 
                             {/* category items */}
                             {items.map(item => (
-                                <button
-                                    key={item.id}
-                                    onClick={() => setActiveExperience(item)}
-                                    className={`
-                                        font-medium
-                                        flex flex-row gap-2 items-center
-                                        w-fit h-fit
-                                        ${activeExperience?.id === item.id
-                                            ? 'font-semibold'
-                                            : 'text-(--alt-text-colour) hover:text-(--dark-grey)'}
-                                    `}
-                                >
-                                    <Image 
-                                        src={`${activeExperience?.id === item.id
-                                            ? '/detail-arrow-black.svg'
-                                            : '/detail-arrow-grey.svg'}`}
-                                        alt='arrow'
-                                        width={24}
-                                        height={24}
-                                    />
-                                    {item.menuTitle}
-                                </button>
+                                <Reveal delay={2*(i*0.25)}>
+                                    <button
+                                        key={item.id}
+                                        onClick={() => setActiveExperience(item)}
+                                        className={`
+                                            font-medium
+                                            flex flex-row gap-2 items-center
+                                            w-fit h-fit
+                                            ${activeExperience?.id === item.id
+                                                ? 'font-semibold'
+                                                : 'text-(--alt-text-colour) hover:text-(--dark-grey)'}
+                                        `}
+                                    >
+                                        <Image 
+                                            src={`${activeExperience?.id === item.id
+                                                ? '/detail-arrow-black.svg'
+                                                : '/detail-arrow-grey.svg'}`}
+                                            alt='arrow'
+                                            width={24}
+                                            height={24}
+                                        />
+                                        {item.menuTitle}
+                                    </button>
+                                </Reveal>
                             ))}
                         </div>
                     ))}
@@ -171,16 +178,18 @@ export default function ExperienceSection({
                 <div className='col-start-3 col-span-3 row-start-3 row-span-1
                                 flex flex-col justify-end
                                 p-8'>
-                    <Image 
-                        src='/experience.svg'
-                        alt='experience'
-                        width={856}
-                        height={216}
-                        className='w-full'
-                    />
+                    <Reveal delay={1.25}>
+                        <Image 
+                            src='/experience.svg'
+                            alt='experience'
+                            width={856}
+                            height={216}
+                            className='w-full'
+                        />
+                    </Reveal>
                 </div>
             </Grid>
-        </Reveal>
+        </SectionReveal>
     )
 }
 

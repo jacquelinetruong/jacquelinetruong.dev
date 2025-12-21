@@ -1,14 +1,14 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { Reveal } from './reveal';
 import { Project } from '@/lib/projectTypes';
-import Image from 'next/image';
 import ProjectCard from './projectcard';
 import Grid from './grid';
 
 import GuideButton from './guide-button';
-import Coffee from './icons/coffee';
+import { SectionReveal } from './section-reveal';
 
 import '../../public/coffee-icon-white.svg';
 import '../../public/jt-black.svg';
@@ -21,17 +21,12 @@ export default function Hero({
 	className?: string; 
 	projects: Project[];
  }) {
-	const [allowStagger, setAllowStagger] = useState(true);
   return (       
-	<Reveal 
-		onViewportEnter={() => {
-			setAllowStagger(true);
-		}}
-		onViewportLeave={() => {
-			setAllowStagger(false);
-		}}
-		delay={0.25}
-	>                                     
+	<SectionReveal
+		fadeDistance={0}
+		fadeStart={0}
+		fadeEnd={0.7}
+	>
 		<Grid >
 			{/* best projects :o */}
 			{/* project display #1 */}
@@ -82,6 +77,6 @@ export default function Hero({
 				<GuideButton href='#about' text='More About Me'/>
 			</div>
 		</Grid>
-	</Reveal>
+	</SectionReveal>
   );
 };

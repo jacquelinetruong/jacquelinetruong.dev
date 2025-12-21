@@ -7,30 +7,24 @@ type RevealProps = {
     children: ReactNode;
     delay?: number;
     className?: string;
-    onViewportEnter?: () => void;
-    onViewportLeave?: () => void;
 };
 
 export function Reveal({
     children,
     delay = 0,
     className = '',
-    onViewportEnter,
-    onViewportLeave,
 }: RevealProps) {
     return (
         <motion.div
-            className={`h-full w-full ${className}`}
+            className={`w-full h-full ${className}`}
             initial={{ opacity: 0, scale: 0.96 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: false, amount: 0.1 }}
+            viewport={{ once: false, amount: 0.2 }}
             transition={{
                 duration: 0.5,
                 delay,
                 ease: 'easeOut',
             }}
-            onViewportEnter={onViewportEnter}
-            onViewportLeave={onViewportLeave}
         >
             {children}
         </motion.div>

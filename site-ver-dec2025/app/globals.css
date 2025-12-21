@@ -67,6 +67,12 @@
 
 html {
   scroll-behavior: smooth;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  width: 0;
+  background-color: transparent;
 }
 
 body {
@@ -120,4 +126,19 @@ section {
   
   background-position: 0 0, 0 0;
   background-repeat: no-repeat;
+}
+
+/* For WebKit browsers (Chrome, Safari, Opera, new Edge) */
+.hide-scrollbar::-webkit-scrollbar {
+    display: none; /* or width: 0px; background: transparent; */
+}
+
+/* For Internet Explorer and Edge (legacy) */
+.hide-scrollbar {
+    -ms-overflow-style: none;
+}
+
+/* For Firefox */
+.hide-scrollbar {
+    scrollbar-width: none;
 }
