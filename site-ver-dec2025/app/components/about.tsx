@@ -7,6 +7,7 @@ import ProjectCard from './projectcard';
 import Image from 'next/image';
 import Grid from './grid';
 
+import { SectionReveal } from './section-reveal';
 import { Reveal } from './reveal';
 import GuideButton from './guide-button';
 
@@ -35,7 +36,11 @@ export default function About({
         );   
 
     return(
-        <Reveal delay={0.25}>
+        <SectionReveal
+            fadeDistance={0}
+            fadeStart={0.4}
+            fadeEnd={0.7}
+        >
             <Grid >
                 {/* projects display */}
                 {/* project display #1 */}
@@ -146,6 +151,6 @@ export default function About({
                     <GuideButton href='#portfolio' text='See Portfolio'/>
                 </div>
             </Grid>
-        </Reveal>
+        </SectionReveal>
     )
 }

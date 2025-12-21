@@ -1,40 +1,73 @@
 'use client';
 
 import React, { useRef, useEffect, useState, act } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
 import Image from 'next/image';
 
-import { useTheme } from './theme-context';
-import { useActiveSection } from './section';
+import { useActiveSection } from './active-theme';
+import { SectionReveal } from './section-reveal';
 import { Reveal } from './reveal';
 import Coffee from './icons/coffee';
 import Cat from './icons/cat';
 
 
 export default function NameStamp({ className = '--' }: { className?: string }) {
-	const { theme, setTheme } = useTheme();
+	const activeSection = useActiveSection();
+	const [opacity, setOpacity] = useState(1);
 
-	const activeSection = useActiveSection(setTheme, {
-        home: 'light',
-        about: 'light',
-        portfolio: 'dark',
-        experience: 'light',
+	const { scrollY } = useScroll();
+
+	// colour transition from hero -> about
+	const color = useTransform(scrollY, [0, 500], ['#292A2D', '#BEBEBE']);
+	const smoothOpacity = useSpring(opacity, { stiffness: 100, damping: 20 });
+
+	useEffect(() => {
+    const homeEl = document.getElementById('home');
+    const aboutEl = document.getElementById('about');
+    if (!homeEl || !aboutEl) return;
+
+    const startFade = homeEl.offsetTop;
+    const endFade = aboutEl.getBoundingClientRect().bottom + window.scrollY;
+    const span = endFade - startFade;
+    const fadeStartOffset = 0; 
+
+    const unsubscribe = scrollY.onChange((y) => {
+      let progress = (y - startFade) / span;
+      progress = Math.min(Math.max(progress, 0), 1);
+
+      let newOpacity;
+      if (progress < fadeStartOffset) {
+        newOpacity = 1;
+      } else {
+        newOpacity = 1 - (progress - fadeStartOffset) / (1 - fadeStartOffset);
+      }
+
+      setOpacity(newOpacity);
     });
 
+    return () => unsubscribe();
+  }, [scrollY]);
 
 	return (
-		<div className={`fixed top-0 left-0 w-full h-full pointer-events-none z-100 
-						${activeSection !== 'home' && activeSection !== 'about' ? 'hidden' : '--'}`}>
+		<motion.div
+			style={{ 
+				color,
+				opacity: smoothOpacity
+			}}
+		>
+		<div className={`fixed top-0 left-0 pointer-events-none
+						transition-opacity duration-400 ${activeSection === 'home' || activeSection === 'about' ? 'opacity-100 z-99' : 'opacity-0 z-0'}`}>
 			<div className={`font-inter group
-							grid grid-cols-5 grid-rows-3 h-full
+							grid grid-cols-5 grid-rows-3
 							translate-y-(--nav-height)
 							${activeSection === 'home' ? 'text-(--text-colour)' : 'text-(--grey)'}`}
 			>
 				
-				{/* Say Hi button */}
-				<div className='col-start-4 col-span-2 row-start-1 row-span-1 
-								flex flex-col justify-between items-end px-6 py-4
+				
+				<div className='col-start-4 col-span-2 row-start-1 row-span-1 w-(--two-cell-width) h-(--cell-height)
+								flex flex-col justify-between items-end p-8
 								pointer-events-auto'>
+					{/* "say hi" button */}
 					<Reveal delay={1.75} className='flex justify-end'>
 						<a
 							className='font-medium text-2xl text-white
@@ -57,9 +90,8 @@ export default function NameStamp({ className = '--' }: { className?: string }) 
 					</Reveal>
 				</div>
 
-				{/* Big name */}
-				<div className='col-start-4 col-span-2 row-start-2 row-span-1 
-								p-8
+				{/* big name */}
+				<div className='col-start-4 col-span-2 row-start-2 row-span-1 w-(--two-cell-width) h-(--cell-height)
 								relative'>
 					<Reveal delay={2}>
 						<div className=''>
@@ -81,9 +113,9 @@ export default function NameStamp({ className = '--' }: { className?: string }) 
 					</Reveal>
 				</div>
 
-				<div className='col-start-5 col-span-1 row-start-3 row-span-1
-								flex flex-col justify-end h-fit'>
-					{/* City */}
+				<div className='col-start-5 col-span-1 row-start-3 row-span-1 w-(--cell-width) h-(--cell-height)
+								flex flex-col justify-end p-8'>
+					{/* city */}
 					<Reveal delay={1.5}>
 						<h2 className='font-semibold text-3xl text-right
 										transition-colors duration-500'>
@@ -91,9 +123,12 @@ export default function NameStamp({ className = '--' }: { className?: string }) 
 						</h2>
 					</Reveal>
 			
-					<Cat className={`size-fit transition-colors duration-500 ${activeSection === 'home' ? 'text-(--text-colour)' : 'text-(--grey)'}`}/>
+					<Reveal delay={.75}>
+						<Cat className={`size-fit transition-colors duration-500 ${activeSection === 'home' ? 'text-(--text-colour)' : 'text-(--grey)'}`}/>
+					</Reveal>
 				</div>
 			</div>
 		</div>
+	</motion.div>
   	);
 }

@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
 
+import { SectionReveal } from './section-reveal';
 import { Reveal } from './reveal';
 import { Project } from '@/lib/projectTypes';
 import ProjectCard from './projectcard';
@@ -27,10 +27,6 @@ export default function Portfolio({
     className?: string; 
     projects: Project[];
  }) {
-    // animation
-    const [isInView, setIsInView] = useState(false);
-    const [allowStagger, setAllowStagger] = useState(true);
-
     // filter state
     const [filter, setFilter] = useState<'designer' | 'developer'>('designer');
 
@@ -120,19 +116,13 @@ export default function Portfolio({
     };
 
     return (
-        <Reveal 
-            onViewportEnter={() => {
-                setIsInView(true);
-                setAllowStagger(true);
-            }}
-            onViewportLeave={() => {
-                setIsInView(false);
-                setAllowStagger(false);
-            }}
-            delay={0.25}
+        <SectionReveal
+            fadeDistance={0}
+            fadeStart={0.4}
+            fadeEnd={0.7}
         >
             <section className='relative'>
-                <Grid className=''>
+                <Grid>
                     {/* featured project */}
                         {/* preview */}
                         <div className='col-start-1 col-span-2 row-start-1 row-span-2'>
@@ -164,15 +154,15 @@ export default function Portfolio({
                                         flex flex-col gap-6 p-8 group'>
 
                             {/* text details */}
-                            <h1 className='font-semibold text-3xl text-(--text-colour) group-transition-colours: group:duration-300'>{featuredProject?.title}</h1>
-                            <p className='text-xl text-(--text-colour) group-transition-colours: group:duration-300'>
+                            <h1 className='font-semibold text-3xl text-(--text-colour)'>{featuredProject?.title}</h1>
+                            <p className='text-xl text-(--text-colour)'>
                                 {featuredProject?.description}
                             </p>
                             {featuredProject?.link && (
                                 <a className='font-medium text-xl text-(--bg-colour)
-                                            flex flex-row gap-2 items-center group
+                                            flex flex-row gap-2 items-center
                                             w-fit h-fit px-5 py-3 rounded-full
-                                            bg-(--text-colour) group-hover:bg-(--grey)
+                                            bg-(--text-colour) hover:bg-(--grey)
                                             transition-colors duration-300'
                                     target='_blank'
                                     href={featuredProject?.link}
@@ -206,7 +196,7 @@ export default function Portfolio({
                                 className={`col-start-${pos.colStart} col-span-${pos.colSpan} row-start-${pos.rowStart} row-span-${pos.rowSpan}`}
                             >
                                 <Reveal 
-                                    delay={allowStagger ? i * 0.3 : 0}
+                                    delay={ (i + 0.25) * 0.25 }
                                 >
                                     <ProjectCard
                                         project={project}
@@ -231,7 +221,7 @@ export default function Portfolio({
                                             flex flex-row gap-2 items-center
                                             w-fit h-fit px-5 py-3 rounded-full
                                             border-1 bg-(--bg-colour)
-                                            transition-colors duration-500
+                                            transition-colors duration-300
                                             hover:bg-(--grid-line-colour) hover:text-(--grey)
                                             ${filter === 'designer' ? 'text-(--text-colour) hover:text-(--text-colour)' : 'text-(--dark-mode-grey)'}`}
                             >
@@ -250,7 +240,7 @@ export default function Portfolio({
                                             flex flex-row gap-2 items-center
                                             w-fit h-fit px-5 py-3 rounded-full
                                             border-1 bg-(--bg-colour)
-                                            transition-colors duration-500
+                                            transition-colors duration-300
                                             hover:bg-(--grid-line-colour) hover:text-(--grey)
                                             ${filter === 'developer' ? 'text-(--text-colour) hover:text-(--text-colour)' : 'text-(--dark-mode-grey)'}`}
                             >
@@ -264,18 +254,20 @@ export default function Portfolio({
                         </div>
 
                         {/* title */}
-                        <div className='relative w-[480px] h-[216px]'>
+                        <div className='size-full place-self-end px-8'>
                             <Image 
                                 src='/portfolio.svg'
                                 alt='section title: designer portfolio'
-                                fill
+                                width={632}
+                                height={216}
                                 className={`absolute transition-all ${filter === 'designer' ? 'opacity-100 duration-800' : 'opacity-0 translate-x-100 duration-300'}`}
                                 draggable={false}
                             />
                             <Image 
                                 src='projects.svg'
                                 alt='section title: developer projects'
-                                fill
+                                width={624}
+                                height={216}
                                 className={`absolute transition-all ${filter === 'developer' ? 'opacity-100 duration-800' : 'opacity-0 translate-x-100 duration-300'}`}
                                 draggable={false}
                             />
@@ -301,6 +293,6 @@ export default function Portfolio({
                     </div>
                 </Grid>
             </section>
-        </Reveal>
+        </SectionReveal>
     )
 }

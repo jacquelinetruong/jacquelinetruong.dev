@@ -5,6 +5,7 @@ import type { Theme } from './theme-context';
 
 type SectionThemeMap = Record<string, Theme>;
 
+// function that tracks the current active section
 export function useActiveSection(
 	setTheme?: (theme: Theme) => void,
 	sectionThemes?: SectionThemeMap
