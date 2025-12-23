@@ -97,23 +97,23 @@ export default function ExperienceSection({
                 </div>
 
                 {/* experience menu */}
-                <div className='font-inter text-xl
+                <div className='font-inter sm:text-sm md:text-base 2xl:text-lg
                                 col-start-1 col-span-1 row-start-1 row-span-2
                                 flex flex-col gap-8
                                 p-8'
                 >
                     {Object.entries(xpCategorized).map(([category, items], i) => (
 
-                        <div key={category} className='flex flex-col gap-1'>
+                        <div key={category} className='flex flex-col'>
 
                             {/* category heading */}
-                            <Reveal delay={i * 0.25}>
+                            <Reveal delay={i * 0.35}>
                                 <h4 className='font-medium text-(--alt-text-colour) capitalize'>{category}</h4>
                             </Reveal>
 
                             {/* category items */}
                             {items.map((item, j) => (
-                                <Reveal delay={i * 0.25 + j * 0.15}>
+                                <Reveal delay={i * 0.35 + j * 0.15}>
                                     <button
                                         key={item.id}
                                         onClick={() => setActiveExperience(item)}
@@ -121,6 +121,7 @@ export default function ExperienceSection({
                                             font-medium
                                             flex flex-row gap-2 items-center
                                             w-fit h-fit
+                                            transition-colors duration-300
                                             ${activeExperience?.id === item.id
                                                 ? 'font-semibold'
                                                 : 'text-(--alt-text-colour) hover:text-(--dark-grey)'}
@@ -145,21 +146,21 @@ export default function ExperienceSection({
                 {/* experience details */}
                 <div className='font-inter
                                 col-start-2 col-span-2 row-start-1 row-span-2
-                                flex flex-col gap-6
+                                flex flex-col gap-8
                                 p-8'>
                     {/* header */}
                     {activeExperience && (
                         <div className='flex flex-col gap-2'>
                             {/* position title */}
                             <Reveal delay={0.1}>
-                                <h1 className='font-semibold text-3xl text-nowrap'>
+                                <h2 className='font-semibold text-nowrap sm:text-xl md:text-2xl xl:text-3xl'>
                                     {activeExperience.position} @ {activeExperience.menuTitle}     {/* future: link to company site */}
-                                </h1>
+                                </h2>
                             </Reveal>
 
                             {/* date range */}
                             <Reveal delay={0.1}>
-                                <h2 className='font-medium text-xl text-(--alt-text-colour)
+                                <h3 className='font-medium text-(--alt-text-colour) sm:text-lg md:text-xl
                                             flex flex-row gap-2'>
                                     <Image 
                                         src='/detail-arrow-grey.svg'
@@ -168,26 +169,28 @@ export default function ExperienceSection({
                                         height={24}
                                     />
                                     {formatDateRange(activeExperience)}
-                                </h2>
+                                </h3>
                             </Reveal>
                         </div>
                     )}
                     
                     {/* experience description */}
-                    {activeExperience?.points.map((point, i) => (
-                        <li key={i} className='text-xl ml-6'>
+                    <div className='flex flex-col gap-4'>
+                        {activeExperience?.points.map((point, i) => (
                             <Reveal delay={0.25 + i * 0.4}>
-                                {point}
+                                <li key={i} className='ml-6 sm:text-sm md:text-base 2xl:text-lg'>
+                                    {point}
+                                </li>
                             </Reveal>
-                        </li>
-                    ))} 
+                        ))} 
+                    </div>
                 </div>
 
                 {/* big title */}
                 <div className='col-start-3 col-span-3 row-start-3 row-span-1
                                 flex flex-col justify-end
                                 p-8'>
-                    <Reveal delay={1.25}>
+                    <Reveal delay={0.25}>
                         <Image 
                             src='/experience.svg'
                             alt='experience'

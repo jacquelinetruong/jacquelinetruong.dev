@@ -90,15 +90,16 @@ export default function About({
                                 flex flex-col justify-between
                                 p-8'>
                     {/* message */}
-                    <div className='flex flex-col gap-6'>
+                    <div className='flex flex-col gap-4'>
                         <Reveal delay={0.15}>
-                            <h2 className='font-semibold text-3xl'>
+                            <h2 className='font-semibold sm:text-xl md:text-2xl'>
                                 Hey! Welcome to my portfolio site.
                             </h2>
                         </Reveal>
 
                         <Reveal delay={0.25}>
-                            <p className='text-xl'>
+                            <p className='sm:text-sm md:text-base 2xl:text-lg
+                                            sm:w-full 2xl:w-4/5'>
                                 I'm a newgrad designer who loves bringing ideas to life through clean, functional, high-impact products. Since I also code, I'm drawn to 
                                 creating designs that aren't just beautiful, but realistic, buildable, and considerate of engineering workflows. By speaking in both "design"
                                 and "dev" languages, I bridge the gap, crafting intuitive interactions, scalable UI, and shipping things that make a real difference.
@@ -106,29 +107,30 @@ export default function About({
                         </Reveal>
 
                         <Reveal delay={0.35}>
-                            <p className='text-xl'>
+                            <p className='sm:text-sm md:text-base 2xl:text-lg
+                                            sm:w-full 2xl:w-4/5'>
                                 When I'm not designing or coding, I'm probably making my third iced coffee of the day, or playing video games!
                             </p>
                         </Reveal>
                     </div>
 
                     {/* quick info */}
-                    <div className='flex flex-col gap-8'>
+                    <div className='flex flex-col gap-4'>
                         {/* current work */}
-                        <div className='flex flex-col gap-1'>
+                        <div className='flex flex-col'>
                             <Reveal delay={0.45}>
-                                <h4 className='font-medium text-xl text-(--alt-text-colour)'>Currently</h4>
+                                <h4 className='font-medium text-(--alt-text-colour) sm:text-sm md:text-base 2xl:text-lg'>Currently</h4>
                             </Reveal>
                             
                             {/* if jobless :heartbreak: */}
                             {currentWork.length === 0 && (
-                                <p className='text-xl'>Open to new opportunities</p>
+                                <p className='font-semibold sm:text-sm md:text-base 2xl:text-lg'>Open to new opportunities</p>
                             )}
 
                             {currentWork.map((role, i) => (
                                 <Reveal delay={(i + 2) * 0.25}>
                                     <p key={role.id}
-                                        className='font-semibold text-xl
+                                        className='font-semibold sm:text-sm md:text-base 2xl:text-lg
                                                 flex flex-row gap-2 items-center'
                                     >     
                                         <Image
@@ -146,13 +148,13 @@ export default function About({
                         </div>
 
                         {/* education */}
-                        <div className='flex flex-col gap-1'>
+                        <div className='flex flex-col'>
                             <Reveal delay={(currentWork.length + 1) * 0.25}>
-                                <h4 className='font-medium text-xl text-(--alt-text-colour)'>Education</h4>
+                                <h4 className='font-medium sm:text-sm md:text-base 2xl:text-lg text-(--alt-text-colour)'>Education</h4>
                             </Reveal>
 
                             <Reveal delay={(currentWork.length + 2) * 0.25}>
-                            <p className='font-semibold text-xl
+                            <p className='font-semibold sm:text-sm md:text-base 2xl:text-lg
                                             flex flex-row gap-2 items-start'>
                                 <Image 
                                     src='/detail-arrow-black.svg'

@@ -33,7 +33,7 @@ export default function Hero({
 			{/* best projects :o */}
 			{/* project display #1 */}
 			<div className='col-start-2 col-span-1 row-start-1 row-span-1'>
-				<Reveal delay={0.4}>
+				<Reveal delay={1}>
 					{projects
 						.filter(p => p.sectionId === '1')
 						.map(project => (
@@ -47,7 +47,7 @@ export default function Hero({
 		
 			{/* project display #2 */}
 			<div className='col-start-1 col-span-2 row-start-2 row-span-2'>
-				<Reveal delay={0.6}>
+				<Reveal delay={1.2}>
 					{projects
 						.filter(p => p.sectionId === '2')
 						.map(project => (
@@ -61,7 +61,7 @@ export default function Hero({
 		
 			{/* project display #3 */}
 			<div className='col-start-4 col-span-1 row-start-3 row-span-1'>
-				<Reveal delay={0.8}>
+				<Reveal delay={1.4}>
 					{projects
 						.filter(p => p.sectionId === '3')
 						.map(project => (
