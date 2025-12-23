@@ -1,4 +1,5 @@
 import GuideArrow from './icons/guide-arrow';
+import { Reveal } from './reveal';
 
 type GuideProps = {
     text?: string;
@@ -10,15 +11,17 @@ export default function GuideButton({
     href = '',
 }: GuideProps) {
     return (
-        <a className='font-inter font-medium text-(--text-colour)
-                        flex flex-col items-center gap-2
-                        p-8 size-fit
-                        animate-jump group'
-            href={href}			  
-        >
-            <p className='text-sm 2xl:text-base group-hover:text-(--light-mode-grey) transform-colors duration-300'>{text}</p>
-            <GuideArrow className='size-[24px] text-(--text-colour) group-hover:text-(--light-mode-grey) transition-colors duration-300'/>
-        </a>
+        <Reveal delay={5} className='flex flex-col justify-end items-center'>
+            <a className='font-inter font-medium text-(--text-colour)
+                            flex flex-col items-center gap-2
+                            p-8 size-fit
+                            animate-jump group'
+                href={href}			  
+            >
+                <p className='text-sm 2xl:text-base group-hover:text-(--light-mode-grey) transform-colors duration-300'>{text}</p>
+                <GuideArrow className='size-[24px] text-(--text-colour) group-hover:text-(--light-mode-grey) transition-colors duration-300'/>
+            </a>
+        </Reveal>
     );
 }
         

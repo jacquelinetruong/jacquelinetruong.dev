@@ -13,6 +13,22 @@ const nextConfig: NextConfig = {
             },
         ],
     },
+
+    async redirects() {
+        return [
+            {
+                source: '/resume',
+                destination: '/Resume%20-%20Jacqueline Truong%20-%20Dec2025.pdf',
+                permanent: true,
+            },
+
+            {
+                source: '/resume.pdf',
+                destination: '/Resume%20-%20Jacqueline Truong%20-%20Dec2025.pdf',
+                permanent: true,
+            },
+        ];
+    },
 };
 
 export default nextConfig;

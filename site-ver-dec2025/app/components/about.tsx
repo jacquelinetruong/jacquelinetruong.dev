@@ -171,8 +171,7 @@ export default function About({
                 </div>
                 
                 {/* jump to 'portfolio' button */}
-                <div className='col-start-3 col-span-1 row-start-3 row-span-1
-                                flex flex-col justify-end items-center'>
+                <div className='col-start-3 col-span-1 row-start-3 row-span-1'>
                     <GuideButton href='#portfolio' text='See Portfolio'/>
                 </div>
             </Grid>
