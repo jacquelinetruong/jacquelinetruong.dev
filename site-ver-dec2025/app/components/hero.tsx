@@ -16,9 +16,11 @@ import '../../public/jt-black.svg';
 
 export default function Hero({
 	className = '',
+	isLoading,
 	projects,
  }: { 
 	className?: string; 
+	isLoading: boolean;
 	projects: Project[];
  }) {
   return (       

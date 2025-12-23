@@ -1,7 +1,5 @@
 import React from 'react';
 
-import NameStamp from './name-stamp';
-
 export default function Grid({
 	children,
 	className = '',
