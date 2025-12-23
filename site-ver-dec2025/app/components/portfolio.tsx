@@ -208,10 +208,10 @@ export default function Portfolio({
                     {/* filters, title */}
                     <div className='font-inter
                                     col-start-4 col-span-2 row-start-1 row-span-1
-                                    flex flex-col items-end justify-between px-8'>
+                                    flex flex-col items-end justify-between'>
 
                         {/* filter buttons */}
-                        <div className='flex flex-row gap-4'>
+                        <div className='flex flex-row gap-4 px-8 pt-8 '>
                             {/* designer button */}
                             <button 
                                 onClick={() => setFilter('designer')}
@@ -283,8 +283,7 @@ export default function Portfolio({
                     </div>
                     
                     {/* jump to experience button */}
-                    <div className='col-start-3 col-span-1 row-start-3 row-span-1
-                                    flex flex-col justify-end items-center'>
+                    <div className='col-start-3 col-span-1 row-start-3 row-span-1'>
                         <GuideButton href='#experience' text='My Experience'/>
                     </div>
                 </Grid>

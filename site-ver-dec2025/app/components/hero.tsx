@@ -74,8 +74,7 @@ export default function Hero({
 			</div>
 
 			{/* jump to 'about' button */}
-			<div className='col-start-3 col-span-1 row-start-3 row-span-1
-							flex flex-col justify-end items-center'>
+			<div className='col-start-3 col-span-1 row-start-3 row-span-1'>
 				<GuideButton href='#about' text='More About Me'/>
 			</div>
 		</Grid>

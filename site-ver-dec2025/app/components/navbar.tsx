@@ -87,7 +87,7 @@ export default function Navbar({ isLoading }: { isLoading: boolean }) {
             {/* right side */}
             <div className='navbar-links flex flex-row gap-8'>
                 <a className='transition-colors duration-300 text-(--text-colour) hover:text-(--light-mode-grey)'
-                    target='_blank' href=''>Resume</a>
+                    target='_blank' href='/resume.pdf' rel='noopener noreferrer'>Resume</a>
                 <a className='transition-colors duration-300 text-(--text-colour) hover:text-(--light-mode-grey)'
                     target='_blank' href='https://www.linkedin.com/in/jacquellinetruong'>LinkedIn</a>
                 <a className='transition-colors duration-300 text-(--text-colour) hover:text-(--light-mode-grey)'

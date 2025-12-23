@@ -13,6 +13,16 @@ const interSans = Inter({
 export const metadata: Metadata = {
   title: "jacqueline truong's portfolio",
   description: "jacqueline truong's portfolio website",
+  icons: {
+    icon: [
+      { url: '/favicon-192x192.png', sizes: '192x192', type: 'image/png', },
+      { url: '/favicon-512x512.png', sizes: '512x512', type: 'image/png', },
+    ],
+    apple: [
+      { url: '/favicon-192x192.png', sizes: '192x192', type: 'image/png', },
+    ],
+    shortcut: '/favicon-192x192.png',
+  },
 };
 
 export default function RootLayout({
