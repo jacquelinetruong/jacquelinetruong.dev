@@ -29,10 +29,9 @@ export default function ProjectCard({
  }: ProjectCardProps) { 
 
 	// tags for each project
-	// const allTags = [...(project.languages ?? []), ...(project.programs ?? [])];
 	const allTags = useMemo(() => {
-		return project.languages, project.programs;
-	}, [project.type]);
+		return [...(project.languages ?? []), ...(project.programs ?? [])];
+	}, [project.languages, project.programs]);
 
 	// for tag collapsing
 	const containerRef = useRef<HTMLDivElement>(null);
