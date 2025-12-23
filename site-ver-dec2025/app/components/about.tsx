@@ -20,10 +20,12 @@ import '../../public/cat.svg';
 
 export default function About({
     className = '',
+    isLoading,
     projects,
     experience,
  }: { 
     className?: string; 
+    isLoading: boolean;
     projects: Project[];
     experience: Experience[];
  }) {
@@ -33,7 +35,7 @@ export default function About({
         .filter(e => e.startDate)
         .sort(
             (a, b) => new Date(b.startDate!).getTime() - new Date(a.startDate!).getTime()
-        );   
+        );
 
     return(
         <SectionReveal
@@ -48,10 +50,12 @@ export default function About({
                     {projects
                         .filter(p => p.sectionId === '1')
                         .map(project => (
-                            <ProjectCard
-                                key={project.id}
-                                project={project}
-                            />
+                            <Reveal delay={1.2}>
+                                <ProjectCard
+                                    key={project.id}
+                                    project={project}
+                                />
+                            </Reveal>
                         ))}
                 </div>
                 {/* project display #2 */}
@@ -59,10 +63,12 @@ export default function About({
                     {projects
                         .filter(p => p.sectionId === '2')
                         .map(project => (
-                            <ProjectCard
-                                key={project.id}
-                                project={project}
-                            />
+                            <Reveal delay={1.4}>
+                                <ProjectCard
+                                    key={project.id}
+                                    project={project}
+                                />
+                            </Reveal>
                         ))}
                 </div>
 
@@ -85,24 +91,34 @@ export default function About({
                                 p-8'>
                     {/* message */}
                     <div className='flex flex-col gap-6'>
-                        <h2 className='font-semibold text-3xl'>
-                            Hey! Welcome to my portfolio site.
-                        </h2>
-                        <p className='text-xl'>
-                            I'm a newgrad designer who loves bringing ideas to life through clean, functional, high-impact products. Since I also code, I'm drawn to 
-                            creating designs that aren't just beautiful, but realistic, buildable, and considerate of engineering workflows. By speaking in both "design"
-                            and "dev" languages, I bridge the gap, crafting intuitive interactions, scalable UI, and shipping things that make a real difference.
-                        </p>
-                        <p className='text-xl'>
-                            When I'm not designing or coding, I'm probably making my third iced coffee of the day, or playing video games!
-                        </p>
+                        <Reveal delay={0.15}>
+                            <h2 className='font-semibold text-3xl'>
+                                Hey! Welcome to my portfolio site.
+                            </h2>
+                        </Reveal>
+
+                        <Reveal delay={0.25}>
+                            <p className='text-xl'>
+                                I'm a newgrad designer who loves bringing ideas to life through clean, functional, high-impact products. Since I also code, I'm drawn to 
+                                creating designs that aren't just beautiful, but realistic, buildable, and considerate of engineering workflows. By speaking in both "design"
+                                and "dev" languages, I bridge the gap, crafting intuitive interactions, scalable UI, and shipping things that make a real difference.
+                            </p>
+                        </Reveal>
+
+                        <Reveal delay={0.35}>
+                            <p className='text-xl'>
+                                When I'm not designing or coding, I'm probably making my third iced coffee of the day, or playing video games!
+                            </p>
+                        </Reveal>
                     </div>
 
                     {/* quick info */}
                     <div className='flex flex-col gap-8'>
                         {/* current work */}
                         <div className='flex flex-col gap-1'>
-                            <h4 className='font-medium text-xl text-(--alt-text-colour)'>Currently</h4>
+                            <Reveal delay={0.45}>
+                                <h4 className='font-medium text-xl text-(--alt-text-colour)'>Currently</h4>
+                            </Reveal>
                             
                             {/* if jobless :heartbreak: */}
                             {currentWork.length === 0 && (
@@ -110,28 +126,34 @@ export default function About({
                             )}
 
                             {currentWork.map((role, i) => (
-                                <p key={role.id}
-                                    className='font-semibold text-xl
-                                            flex flex-row gap-2 items-center'
-                                >
-                                    <Image
-                                        src='/detail-arrow-black.svg'
-                                        alt='arrow'
-                                        width={24}
-                                        height={24}
-                                        draggable={false}
-                                    />
-                                    {role.position} @ {role.menuTitle}
-                                    {i < currentWork.length - 1 && ','}
-                                </p>
+                                <Reveal delay={(i + 2) * 0.25}>
+                                    <p key={role.id}
+                                        className='font-semibold text-xl
+                                                flex flex-row gap-2 items-center'
+                                    >     
+                                        <Image
+                                            src='/detail-arrow-black.svg'
+                                            alt='arrow'
+                                            width={24}
+                                            height={24}
+                                            draggable={false}
+                                        />
+                                        {role.position} @ {role.menuTitle}
+                                        {i < currentWork.length - 1 && ','}
+                                    </p>
+                                </Reveal>
                             ))}
                         </div>
 
                         {/* education */}
                         <div className='flex flex-col gap-1'>
-                            <h4 className='font-medium text-xl text-(--alt-text-colour)'>Education</h4>
+                            <Reveal delay={(currentWork.length + 1) * 0.25}>
+                                <h4 className='font-medium text-xl text-(--alt-text-colour)'>Education</h4>
+                            </Reveal>
+
+                            <Reveal delay={(currentWork.length + 2) * 0.25}>
                             <p className='font-semibold text-xl
-                                            flex flex-row gap-2 items-center'>
+                                            flex flex-row gap-2 items-start'>
                                 <Image 
                                     src='/detail-arrow-black.svg'
                                     alt='arrow'
@@ -141,6 +163,7 @@ export default function About({
                                 />
                                 BSc Computer Science @ Wilfrid Laurier University, 2025
                             </p>
+                            </Reveal>
                         </div>
                     </div>
                 </div>

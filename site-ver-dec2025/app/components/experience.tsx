@@ -17,10 +17,12 @@ import '../../public/experience.svg';
 
 export default function ExperienceSection({
     className = '',
+    isLoading,
     projects,
     experience,
  }: { 
     className?: string; 
+    isLoading: boolean;
     projects: Project[];
     experience: Experience[];
  }) {
@@ -101,16 +103,17 @@ export default function ExperienceSection({
                                 p-8'
                 >
                     {Object.entries(xpCategorized).map(([category, items], i) => (
+
                         <div key={category} className='flex flex-col gap-1'>
 
                             {/* category heading */}
-                            <Reveal delay={i*0.25}>
+                            <Reveal delay={i * 0.25}>
                                 <h4 className='font-medium text-(--alt-text-colour) capitalize'>{category}</h4>
                             </Reveal>
 
                             {/* category items */}
-                            {items.map(item => (
-                                <Reveal delay={2*(i*0.25)}>
+                            {items.map((item, j) => (
+                                <Reveal delay={i * 0.25 + j * 0.15}>
                                     <button
                                         key={item.id}
                                         onClick={() => setActiveExperience(item)}
@@ -148,28 +151,34 @@ export default function ExperienceSection({
                     {activeExperience && (
                         <div className='flex flex-col gap-2'>
                             {/* position title */}
-                            <h1 className='font-semibold text-3xl text-nowrap'>
-                                {activeExperience.position} @ {activeExperience.menuTitle}     {/* future: link to company site */}
-                            </h1>
+                            <Reveal delay={0.1}>
+                                <h1 className='font-semibold text-3xl text-nowrap'>
+                                    {activeExperience.position} @ {activeExperience.menuTitle}     {/* future: link to company site */}
+                                </h1>
+                            </Reveal>
 
                             {/* date range */}
-                            <h2 className='font-medium text-xl text-(--alt-text-colour)
-                                        flex flex-row gap-2'>
-                                <Image 
-                                    src='/detail-arrow-grey.svg'
-                                    alt='arrow'
-                                    width={24}
-                                    height={24}
-                                />
-                                {formatDateRange(activeExperience)}
-                            </h2>
+                            <Reveal delay={0.1}>
+                                <h2 className='font-medium text-xl text-(--alt-text-colour)
+                                            flex flex-row gap-2'>
+                                    <Image 
+                                        src='/detail-arrow-grey.svg'
+                                        alt='arrow'
+                                        width={24}
+                                        height={24}
+                                    />
+                                    {formatDateRange(activeExperience)}
+                                </h2>
+                            </Reveal>
                         </div>
                     )}
                     
                     {/* experience description */}
                     {activeExperience?.points.map((point, i) => (
                         <li key={i} className='text-xl ml-6'>
-                            {point}
+                            <Reveal delay={0.25 + i * 0.4}>
+                                {point}
+                            </Reveal>
                         </li>
                     ))} 
                 </div>

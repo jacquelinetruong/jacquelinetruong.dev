@@ -22,9 +22,11 @@ import '../../public/code-icon-grey.svg';
 
 export default function Portfolio({
     className = '',
+    isLoading,
     projects,
  }: { 
     className?: string; 
+    isLoading: boolean;
     projects: Project[];
  }) {
     // filter state
@@ -176,28 +178,24 @@ export default function Portfolio({
                         </div>
 
                     {/* non-featured projects */}
-                    {carouselProjects
-                        .slice(1) // not featured
-                        .map((project, i) => {
-                            // slot into grid layout
-                            const positions: {colStart: number; colSpan: number; rowStart: number; rowSpan: number}[] = [
-                                { colStart: 1, colSpan: 2, rowStart: 1, rowSpan: 2 },
-                                { colStart: 4, colSpan: 1, rowStart: 3, rowSpan: 1 },
-                                { colStart: 5, colSpan: 1, rowStart: 3, rowSpan: 1 },
-                                { colStart: 5, colSpan: 1, rowStart: 2, rowSpan: 1 },
-                            ];
+                    {carouselProjects.slice(1).map((project, i) => {
+                        // slot into grid layout
+                        const positions: { colStart: number; colSpan: number; rowStart: number; rowSpan: number }[] = [
+                            { colStart: 1, colSpan: 2, rowStart: 1, rowSpan: 2 },
+                            { colStart: 4, colSpan: 1, rowStart: 3, rowSpan: 1 },
+                            { colStart: 5, colSpan: 1, rowStart: 3, rowSpan: 1 },
+                            { colStart: 5, colSpan: 1, rowStart: 2, rowSpan: 1 },
+                        ];
 
-                            const pos = positions[i + 1];
-                            if (!pos) return null;
-                        
+                        const pos = positions[i + 1];
+                        if (!pos) return null;
+
                         return (
                             <div
-                                key={project.id}
+                                key={`${project.id}-${i}`}
                                 className={`col-start-${pos.colStart} col-span-${pos.colSpan} row-start-${pos.rowStart} row-span-${pos.rowSpan}`}
                             >
-                                <Reveal 
-                                    delay={ (i + 0.25) * 0.25 }
-                                >
+                                <Reveal delay={(i + 0.05) * 0.15}>
                                     <ProjectCard
                                         project={project}
                                         onClick={() => newFeaturedProject(project)}
@@ -210,7 +208,7 @@ export default function Portfolio({
                     {/* filters, title */}
                     <div className='font-inter
                                     col-start-4 col-span-2 row-start-1 row-span-1
-                                    flex flex-col items-end justify-between'>
+                                    flex flex-col items-end justify-between px-8'>
 
                         {/* filter buttons */}
                         <div className='flex flex-row gap-4'>
@@ -254,21 +252,19 @@ export default function Portfolio({
                         </div>
 
                         {/* title */}
-                        <div className='size-full place-self-end px-8'>
+                        <div className='relative size-full place-self-end'>
                             <Image 
                                 src='/portfolio.svg'
                                 alt='section title: designer portfolio'
-                                width={632}
-                                height={216}
-                                className={`absolute transition-all ${filter === 'designer' ? 'opacity-100 duration-800' : 'opacity-0 translate-x-100 duration-300'}`}
+                                fill
+                                className={`object-contain transition-all ${filter === 'designer' ? 'opacity-100 duration-800' : 'opacity-0 translate-x-100 duration-300'}`}
                                 draggable={false}
                             />
                             <Image 
-                                src='projects.svg'
+                                src='/projects.svg'
                                 alt='section title: developer projects'
-                                width={624}
-                                height={216}
-                                className={`absolute transition-all ${filter === 'developer' ? 'opacity-100 duration-800' : 'opacity-0 translate-x-100 duration-300'}`}
+                                fill
+                                className={`object-contain transition-all ${filter === 'developer' ? 'opacity-100 duration-800' : 'opacity-0 translate-x-100 duration-300'}`}
                                 draggable={false}
                             />
                         </div>

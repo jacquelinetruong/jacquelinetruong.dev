@@ -9,7 +9,7 @@ import '../../public/jt-logo-black.svg';
 import '../../public/jt-logo-white.svg';
 
 
-export default function Navbar() {
+export default function Navbar({ isLoading }: { isLoading: boolean }) {
     const { theme, setTheme } = useTheme();
 
     const activeSection = useActiveSection(setTheme, {
