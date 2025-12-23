@@ -17,7 +17,7 @@ export default function NameStamp({ className = '--' }: { className?: string }) 
 
 	const { scrollY } = useScroll();
 
-	// colour transition from hero -> about
+	// colour transition from fluid-h2 -> about
 	const color = useTransform(scrollY, [0, 500], ['#292A2D', '#BEBEBE']);
 	const smoothOpacity = useSpring(opacity, { stiffness: 100, damping: 20 });
 
@@ -55,24 +55,24 @@ export default function NameStamp({ className = '--' }: { className?: string }) 
 				opacity: smoothOpacity
 			}}
 		>
-		<div className={`fixed top-0 left-0 pointer-events-none
+		<div className={`fixed top-0 left-0 pointer-events-none 
 						transition-opacity duration-400 ${activeSection === 'home' || activeSection === 'about' ? 'opacity-100 z-99' : 'opacity-0 z-0'}`}>
 			<div className={`font-inter group
-							grid grid-cols-5 grid-rows-3
+							grid grid-cols-5 grid-rows-3 max-w-(--two-cell-width)
 							translate-y-(--nav-height)
 							${activeSection === 'home' ? 'text-(--text-colour)' : 'text-(--grey)'}`}
 			>
 				
 				
 				<div className='col-start-4 col-span-2 row-start-1 row-span-1 w-(--two-cell-width) h-(--cell-height)
-								flex flex-col justify-between items-end p-8
+								flex flex-col justify-between self-end p-8 bottom-0 right-0
 								pointer-events-auto'>
 					{/* "say hi" button */}
-					<Reveal delay={1.75} className='flex justify-end'>
+					<Reveal delay={2.75} className='flex justify-end'>
 						<a
-							className='font-medium text-2xl text-white
+							className='font-medium text-lg text-white
 										flex flex-row gap-4 items-center
-										w-fit h-fit px-6 py-4 rounded-full
+										w-fit h-fit px-5 py-3 rounded-full
 										bg-(--text-colour) hover:bg-(--dark-grey)
 										transition-colors duration-300'
 							target='_blank'
@@ -83,17 +83,19 @@ export default function NameStamp({ className = '--' }: { className?: string }) 
 						</a>
 					</Reveal>
 
-					<Reveal delay={1}>
-						<h1 className='font-semibold text-3xl text-right transition-colors duration-500'>
+					<Reveal delay={2.25} className='w-fit h-fit'>
+						<h2 className='justify-self-end font-semibold text-right
+										sm:text-lg md:text-xl 2xl:text-2xl 2xl:w-4/5 
+										transition-colors duration-500'>
 							Product designer first, software engineer second. Focused on crafting digital experiences and turning everyday ideas into art.
-						</h1>
+						</h2>
 					</Reveal>
 				</div>
 
 				{/* big name */}
 				<div className='col-start-4 col-span-2 row-start-2 row-span-1 w-(--two-cell-width) h-(--cell-height)
 								relative'>
-					<Reveal delay={2}>
+					<Reveal delay={0.5}>
 						<div className=''>
 							<Image
 								src='/jt-black.svg'
@@ -116,15 +118,16 @@ export default function NameStamp({ className = '--' }: { className?: string }) 
 				<div className='col-start-5 col-span-1 row-start-3 row-span-1 w-(--cell-width) h-(--cell-height)
 								flex flex-col justify-end p-8'>
 					{/* city */}
-					<Reveal delay={1.5}>
-						<h2 className='font-semibold text-3xl text-right
+					<Reveal delay={1.85}>
+						<h2 className='font-semibold text-right text-nowrap
+										sm:text-lg md:text-xl 2xl:text-2xl
 										transition-colors duration-500'>
 							Based in Toronto, CA.
 						</h2>
 					</Reveal>
 			
-					<Reveal delay={.75}>
-						<Cat className={`size-fit transition-colors duration-500 ${activeSection === 'home' ? 'text-(--text-colour)' : 'text-(--grey)'}`}/>
+					<Reveal delay={1.6}>
+						<Cat className={` size-fit transition-colors duration-500 ${activeSection === 'home' ? 'text-(--text-colour)' : 'text-(--grey)'}`}/>
 					</Reveal>
 				</div>
 			</div>

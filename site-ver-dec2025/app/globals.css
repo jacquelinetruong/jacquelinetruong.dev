@@ -13,11 +13,11 @@
 
   /* other */
   --nav-height: 80px;
-  --cell-height: calc((100vh - var(--nav-height)) / 3);
+  --cell-height: calc((100svh - var(--nav-height)) / 3);
   --two-cell-height: 2 * var(--cell-height);
-  --cell-width: calc(100vw / 5);
+  --cell-width: calc(100svw / 5);
   --two-cell-width: 2* var(--cell-width);
-  --content-space: calc(100vh - var(--nav-height));
+  --content-space: calc(100svh - var(--nav-height));
 }
 
 @theme inline {
@@ -40,6 +40,20 @@
 
   background-color: var(--bg-colour);
   color: var(--text-colour);
+}
+
+@layer base {
+  h1 {
+    @apply text-2xl md:text-4xl lg:text-6xl font-semibold;
+  }
+
+  h2 {
+    @apply text-xl md:text-3xl font-medium;
+  }
+
+  p {
+    @apply text-base md:text-lg;
+  }
 }
 
 @keyframes jump {
@@ -66,6 +80,7 @@
 }
 
 html {
+  font-size: 16px;
   scroll-behavior: smooth;
   overflow: scroll;
   overflow-x: hidden;
@@ -112,7 +127,7 @@ section {
       var(--grid-line-colour) 0,
       var(--grid-line-colour) 1px,
       transparent 1px,
-      transparent calc((100vw / 5))
+      transparent calc((100svw / 5))
     ),
 
     /* horizontal lines */
@@ -121,7 +136,7 @@ section {
       var(--grid-line-colour) 0,
       var(--grid-line-colour) 1px,
       transparent 1px,
-      transparent calc((100vh - var(--nav-height)) / 3)
+      transparent calc((100svh - var(--nav-height)) / 3)
     );
   
   background-position: 0 0, 0 0;

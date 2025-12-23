@@ -77,7 +77,7 @@ export default function ProjectCard({
 		<div onClick={handleClick}
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
-			className={`relative w-full h-full ${className} group overflow-hidden cursor-pointer`}
+			className={`relative w-full h-full ${className} group overflow-hidden cursor-pointer container-type-inline-size`}
 		>
 			{/* preview */}
 			<Image
@@ -107,7 +107,7 @@ export default function ProjectCard({
 					{allTags.length > 0 && (
 						<div 
 							ref={containerRef}
-							className='text-xs 
+							className='text-xs xl:text-sm
 							  		   flex flex-nowrap gap-2 justify-start items-center
 									   w-full'
 						>
@@ -135,18 +135,18 @@ export default function ProjectCard({
 						</div>
 					)}
 					{/* project title */}
-					{!featured && <h3 className='font-medium text-lg'>{project.title}</h3>}
+					{!featured && <h3 className='font-medium text-md truncate'>{project.title}</h3>}
 				</div>
 
 				{/* project link icon */}
 				{showIcon && project.link && (
-					<div className='text-sm text-nowrap
+					<div className='text-nowrap
 									flex flex-col gap-1 
 									w-fit items-end
 									opacity-0 translate-y-1
 									group-hover:opacity-100 group-hover:translate-y-0
 									transition-all duration-100'>	
-						<p>View live site</p>
+						<p className='text-xs xl:text-sm'>View live site</p>
 						<LinkArrow className='size-[40px] text-(--white) group-transition-colors group:duration-300'/>
 					</div>
 				)}
@@ -154,7 +154,7 @@ export default function ProjectCard({
 
 			{/* hover: hint message */}
 			{!showIcon && (
-				<span className='font-inter font-medium text-sm text-white
+				<span className='font-inter font-medium text-white
 									absolute inset-0 p-6
 									opacity-0 translate-y-1
 									group-hover:opacity-100 group-hover:translate-y-0
@@ -170,7 +170,7 @@ export default function ProjectCard({
 							height={14}
 							draggable={false}
 						/>
-						<p>Expand project</p>
+						<p className='text-xs xl:text-sm'>Expand project</p>
 					</div>
 				</span>
 			)}

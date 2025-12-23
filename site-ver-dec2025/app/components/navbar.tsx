@@ -20,10 +20,12 @@ export default function Navbar({ isLoading }: { isLoading: boolean }) {
     });
 
     return (
-        <div className='font-inter font-medium text-xl
+        <div className='font-inter font-medium text-header
                         sticky top-0
                         px-8 py-4 z-100 
-                        flex flex-row justify-between items-center'>
+                        flex flex-row justify-between items-center
+                        bg-gradient-to-t from-transparent via-(--bg-colour)/50 via-30% to-(--bg-colour) to-60%
+                        transition-colors duration-500'>
             {/* left side */}
             <div className='flex flex-row gap-16 items-center'>
 

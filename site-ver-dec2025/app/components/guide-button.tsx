@@ -16,8 +16,8 @@ export default function GuideButton({
                         animate-jump group'
             href={href}			  
         >
-            <p className='group-hover:text-(--light-mode-grey) transform-colors duration-300'>{text}</p>
-            <GuideArrow className='size-[28px] text-(--text-colour) group-hover:text-(--light-mode-grey) transition-colors duration-300'/>
+            <p className='text-sm 2xl:text-base group-hover:text-(--light-mode-grey) transform-colors duration-300'>{text}</p>
+            <GuideArrow className='size-[24px] text-(--text-colour) group-hover:text-(--light-mode-grey) transition-colors duration-300'/>
         </a>
     );
 }

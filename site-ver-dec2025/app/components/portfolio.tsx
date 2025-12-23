@@ -156,14 +156,14 @@ export default function Portfolio({
                                         flex flex-col gap-6 p-8 group'>
 
                             {/* text details */}
-                            <h1 className='font-semibold text-3xl text-(--text-colour)'>{featuredProject?.title}</h1>
-                            <p className='text-xl text-(--text-colour)'>
+                            <h2 className='font-semibold text-(--text-colour) sm:text-xl md:text-2xl'>{featuredProject?.title}</h2>
+                            <p className='text-(--text-colour) sm:text-sm md:text-base 2xl:text-lg'>
                                 {featuredProject?.description}
                             </p>
                             {featuredProject?.link && (
-                                <a className='font-medium text-xl text-(--bg-colour)
+                                <a className='font-medium text-(--bg-colour)
                                             flex flex-row gap-2 items-center
-                                            w-fit h-fit px-5 py-3 rounded-full
+                                            w-fit h-fit px-4 py-2 rounded-full
                                             bg-(--text-colour) hover:bg-(--grey)
                                             transition-colors duration-300'
                                     target='_blank'
@@ -215,9 +215,9 @@ export default function Portfolio({
                             {/* designer button */}
                             <button 
                                 onClick={() => setFilter('designer')}
-                                className={`font-medium text-xl
+                                className={`font-medium text-nowrap
                                             flex flex-row gap-2 items-center
-                                            w-fit h-fit px-5 py-3 rounded-full
+                                            w-fit h-fit px-4 py-2 rounded-full
                                             border-1 bg-(--bg-colour)
                                             transition-colors duration-300
                                             hover:bg-(--grid-line-colour) hover:text-(--grey)
@@ -234,9 +234,9 @@ export default function Portfolio({
                             {/* developer button */}
                             <button 
                                 onClick={() => setFilter('developer')}
-                                className={`font-medium text-xl
+                                className={`font-medium
                                             flex flex-row gap-2 items-center
-                                            w-fit h-fit px-5 py-3 rounded-full
+                                            w-fit h-fit px-4 py-2 rounded-full
                                             border-1 bg-(--bg-colour)
                                             transition-colors duration-300
                                             hover:bg-(--grid-line-colour) hover:text-(--grey)

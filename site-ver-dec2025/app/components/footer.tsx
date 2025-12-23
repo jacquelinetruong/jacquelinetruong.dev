@@ -19,19 +19,21 @@ export default function Footer({ className = '' }: { className?: string }) {
         <Grid className={className}>
             {/* cta */}
             <div className='font-inter
-                            col-start-2 col-span-3 row-start-1 row-span-1
-                            flex flex-col gap-6 justify-end items-center
-                            p-8'>
-                <h1 className='font-semibold text-3xl'>Have a project idea? Let's make it happen.</h1>
-                <a className='font-medium text-xl text-(--bg-colour) hover:text-white
-                              flex flex-row gap-2 items-center
-                              w-fit h-fit px-5 py-3 rounded-full
-						      bg-(--text-colour) hover:bg-(--dark-grey)
-                              transition-colors duration-300
-                              cursor-pointer'>
-                    Get Started
-                    <LinkArrow className='size-[28px] text-white'/>
-                </a>
+                            col-start-2 col-span-3 row-start-1 row-span-1 
+                            place-self-center p-8'>
+                <Reveal delay={0.25} className='flex flex-col gap-6 place-items-center'>
+                    <h1 className='font-semibold sm:text-xl md:text-2xl'>Have a project idea? Let's make it happen.</h1>
+                
+                    <a className='font-medium text-(--bg-colour) hover:text-white
+                                flex flex-row gap-2 items-center
+                                w-fit h-fit px-4 py-2 rounded-full
+                                bg-(--text-colour) hover:bg-(--dark-grey)
+                                transition-colors duration-300
+                                cursor-pointer'>
+                        Get Started
+                        <LinkArrow className='size-[28px] text-white'/>
+                    </a>
+                </Reveal>
             </div>
 
             {/* signature name */}
@@ -48,7 +50,7 @@ export default function Footer({ className = '' }: { className?: string }) {
             </div>
 
             {/* real footer */}
-            <div className='font-inter font-medium text-lg text-(--alt-text-colour)
+            <div className='font-inter font-medium text-(--alt-text-colour) sm:text-sm md:text-base 2xl:text-lg
                             col-start-1 col-span-5 row-start-3 row-span-1
                             flex flex-col gap-16 pt-16 pb-6 h-fit
                             bg-(--dark-black) border-t-(--dark-black)'>
@@ -99,9 +101,9 @@ export default function Footer({ className = '' }: { className?: string }) {
                     <div className='flex flex-col justify-between w-(--cell-width) pl-8 pr-8'>
                         <div className='flex flex-col gap-4'>
                             <h5 className='text-white'>Like my work?</h5>
-                            <a className='font-medium text-xl text-(--dark-black)
+                            <a className='font-medium text-(--dark-black)
                                         flex flex-row gap-2 items-center
-                                        w-fit h-fit px-5 py-3 rounded-full
+                                        w-fit h-fit px-4 py-2 rounded-full
                                         bg-white hover:bg-(--grey)
                                         transition-colors duration-300'
                                 target='_blank'
@@ -124,7 +126,7 @@ export default function Footer({ className = '' }: { className?: string }) {
                 
                 <Reveal delay={1}>
                 {/* copyright */}
-                <p className='text-(--alt-text-colour)
+                <p className='xs:text-sx sm:text-sm text-(--alt-text-colour)
                               flex flex-row justify-center'>
                     All rights reserved. © 2025
                 </p>
