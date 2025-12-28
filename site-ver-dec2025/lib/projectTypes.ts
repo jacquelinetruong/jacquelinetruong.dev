@@ -4,10 +4,13 @@ export type Project = {
     id: string;
     title: string;
     description: string;
+    points?: string[];
     languages: string[];
     programs: string[];
-    link: string;
-    image: string;
+    link?: string;
+    github?: string;
+    dribbble?: string;
+    images: string[];
     section: 'hero' | 'about' | 'portfolio' | 'experience';
     sectionId: '1' | '2' | '3' | '4';
     type: 'designer' | 'developer'

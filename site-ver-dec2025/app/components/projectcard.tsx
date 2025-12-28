@@ -17,6 +17,7 @@ type ProjectCardProps = {
 	featured?: boolean;
 	onMouseEnter?: () => void;
 	onMouseLeave?: () => void;
+	action?: React.ReactNode;
 };
 
 export default function ProjectCard({
@@ -26,6 +27,7 @@ export default function ProjectCard({
 	featured = false,
 	onMouseEnter,
 	onMouseLeave,
+	action,
  }: ProjectCardProps) { 
 
 	// tags for each project
@@ -61,7 +63,7 @@ export default function ProjectCard({
 
 	const hiddenCount = allTags.length - visibleCount;
 
-	const showIcon = featured || (!featured && project.section !== 'portfolio');
+	const showIcon = !featured && project.section !== 'portfolio';
 	
 	// only open external link if NOT a non-featured portfolio card
 	const handleClick = () => {
@@ -80,7 +82,7 @@ export default function ProjectCard({
 		>
 			{/* preview */}
 			<Image
-				src={project.image}
+				src={project.images[0]}
 				alt={project.title}
 				width={1142}
 				height={743}
@@ -137,7 +139,7 @@ export default function ProjectCard({
 					{!featured && <h3 className='font-medium text-md truncate'>{project.title}</h3>}
 				</div>
 
-				{/* project link icon */}
+				{/* project link icon (non-portfolio section project) */}
 				{showIcon && project.link && (
 					<div className='text-nowrap
 									flex flex-col gap-1 
@@ -152,7 +154,7 @@ export default function ProjectCard({
 			</div>
 
 			{/* hover: hint message */}
-			{!showIcon && (
+			{!showIcon && !featured && (
 				<span className='font-inter font-medium text-white
 									absolute inset-0 p-6
 									opacity-0 translate-y-1
@@ -169,9 +171,15 @@ export default function ProjectCard({
 							height={14}
 							draggable={false}
 						/>
-						<p className='text-xs xl:text-sm'>Expand project</p>
+						<p className='text-xs xl:text-sm'>Focus project</p>
 					</div>
 				</span>
+			)}
+
+			{featured && action && (
+				<div className='absolute bottom-4 right-4 z-20'>
+					{action}
+				</div>
 			)}
 		</div>
 	);

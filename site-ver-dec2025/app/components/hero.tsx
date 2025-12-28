@@ -10,7 +10,6 @@ import Grid from './grid';
 import GuideButton from './guide-button';
 import { SectionReveal } from './section-reveal';
 
-import '../../public/coffee-icon-white.svg';
 import '../../public/jt-black.svg';
 
 
