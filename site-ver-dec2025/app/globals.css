@@ -1,4 +1,4 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
   --white: #FFFFFF;
@@ -14,9 +14,9 @@
   /* other */
   --nav-height: 80px;
   --cell-height: calc((100svh - var(--nav-height)) / 3);
-  --two-cell-height: 2 * var(--cell-height);
+  --two-cell-height: calc(2 * var(--cell-height));
   --cell-width: calc(100svw / 5);
-  --two-cell-width: 2* var(--cell-width);
+  --two-cell-width: calc(2 * var(--cell-width));
   --content-space: calc(100svh - var(--nav-height));
 }
 
@@ -72,8 +72,34 @@
   92% {
     transform: translateY(0);
   }
-  
 }
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-slideIn {
+  animation: slideIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.25s ease-out forwards;
+}
+
 
 .animate-jump {
   animation: jump 5s ease-in-out infinite;

@@ -31,7 +31,7 @@ export default function Footer({ className = '' }: { className?: string }) {
                                 transition-colors duration-300
                                 cursor-pointer'>
                         Get Started
-                        <LinkArrow className='size-[28px] text-white'/>
+                        <LinkArrow className='size-[24px] text-white'/>
                     </a>
                 </Reveal>
             </div>
@@ -110,7 +110,7 @@ export default function Footer({ className = '' }: { className?: string }) {
                                 href='mailto:hello@jacquelinetruong.dev'
                             >    
                                 Let's Connect
-                                <LinkArrow className='size-[28px] text-(--text-colour)'/>
+                                <LinkArrow className='size-[24px] text-(--text-colour)'/>
                             </a>
                         </div>
                         <Image 

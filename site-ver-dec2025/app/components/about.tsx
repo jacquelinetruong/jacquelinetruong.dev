@@ -13,7 +13,6 @@ import GuideButton from './guide-button';
 
 import '../../public/me.jpg';
 import '../../public/detail-arrow-black.svg';
-import '../../public/coffee-icon-white.svg';
 import '../../public/jt-grey.svg';
 import '../../public/cat.svg';
 
