@@ -127,11 +127,9 @@ export default function About({
                             )}
 
                             {currentWork.map((role, i) => (
-                                <Reveal delay={(i + 2) * 0.25}>
-                                    <p key={role.id}
-                                        className='font-semibold sm:text-sm md:text-base 2xl:text-lg
-                                                flex flex-row gap-2 items-center'
-                                    >     
+                                <Reveal delay={(i + 2) * 0.25} key={role.id}>
+                                    <p className='font-semibold sm:text-sm md:text-base 2xl:text-lg
+                                                flex flex-row gap-2 items-center'>     
                                         <Image
                                             src='/detail-arrow-black.svg'
                                             alt='arrow'
