@@ -17,6 +17,7 @@
   --two-cell-height: calc(2 * var(--cell-height));
   --cell-width: calc(100svw / 5);
   --two-cell-width: calc(2 * var(--cell-width));
+  --three-cell-width: calc(3 * var(--cell-width));
   --content-space: calc(100svh - var(--nav-height));
 }
 

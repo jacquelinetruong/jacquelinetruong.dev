@@ -177,8 +177,8 @@ export default function ExperienceSection({
                     {/* experience description */}
                     <div className='flex flex-col gap-4'>
                         {activeExperience?.points.map((point, i) => (
-                            <Reveal delay={0.25 + i * 0.4}>
-                                <li key={i} className='ml-6 sm:text-sm md:text-base 2xl:text-lg'>
+                            <Reveal delay={0.25 + i * 0.4} key={i}>
+                                <li className='ml-6 sm:text-sm md:text-base 2xl:text-lg'>
                                     {point}
                                 </li>
                             </Reveal>

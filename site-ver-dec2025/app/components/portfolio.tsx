@@ -6,8 +6,10 @@ import { SectionReveal } from './section-reveal';
 import { Reveal } from './reveal';
 import { Project } from '@/lib/projectTypes';
 import ProjectCard from './projectcard';
+
 import Grid from './grid';
 import Image from 'next/image';
+import { AnimatePresence } from 'framer-motion';
 
 import GuideButton from './guide-button';
 import LinkArrow from './icons/link-arrow';
@@ -23,7 +25,7 @@ import '../../public/github-logo.svg';
 import '../../public/dribbble-logo.svg';
 import '../../public/caret-double-right-icon.svg';
 import '../../public/caret-left-icon.svg';
-import { AnimatePresence } from 'framer-motion';
+
 
 
 export default function Portfolio({
@@ -264,7 +266,7 @@ export default function Portfolio({
                     <Grid>
                         {/* featured project */}
                             {/* preview */}
-                            <div className='col-start-1 col-span-2 row-start-1 row-span-2'>
+                            <div className='col-start-1 col-span-2 row-start-1 row-span-2 z-100'>
                                 <Reveal delay={0.25}>
                                     {featuredProject && (
                                         <ProjectCard
@@ -283,10 +285,11 @@ export default function Portfolio({
                                                         e.stopPropagation(); 
                                                         openDetails();
                                                     }}
-                                                    className='font-inter font-medium text-sm group 
+                                                    className={`font-inter font-medium text-sm group 
                                                                 flex flex-col items-end gap-2 
                                                                 transition-opacity duration-300 cursor-pointer
-                                                                opacity-0 group-hover:opacity-100'
+                                                                opacity-0 group-hover:opacity-100
+                                                                ${isDetailsOpen && 'hidden'}`}
                                                 >
                                                     Expand details
                                                     <LinkArrow className='size-[40px] text-(--white) group-transition-colors group:duration-300'/>
@@ -309,7 +312,7 @@ export default function Portfolio({
                             {/* content */}
                             <div className='font-inter
                                             col-start-1 col-span-2 row-start-3 row-span-1
-                                            flex flex-col p-8 justify-between group'>
+                                            flex flex-col p-8 justify-between group z-100'>
 
                                 {/* text details */}
 
@@ -384,7 +387,7 @@ export default function Portfolio({
                             </div>
                             
                         {/* featured photo gallery */}
-                        <div className='col-start-3 col-span-1 row-start-1 row-span-2 px-2'>
+                        <div className='col-start-3 col-span-1 row-start-1 row-span-2 px-2 z-100'>
                             {featuredProject?.images.length > 1 && (
                                 <div className='flex flex-col gap-2 w-1/2 h-full'>
                                     {galleryImages.map((img, i) => {
@@ -528,25 +531,28 @@ export default function Portfolio({
                             </div>
                         )}
 
-                        {/* handwritten note */}
-                        <div className='col-start-4 col-span-1 row-start-2 row-span-1'>
-                            <Image
-                                src='/my-faves.svg'
-                                alt='my faves'
-                                width={304}
-                                height={165}
-                                className='size-full p-12'
-                                draggable={false}
-                            />
-                        </div>
-                
+                        {!isDetailsOpen && (
+                            <>
+                                {/* handwritten note */}
+                                <div className='col-start-4 col-span-1 row-start-2 row-span-1'>
+                                    <Image
+                                        src='/my-faves.svg'
+                                        alt='my faves'
+                                        width={304}
+                                        height={165}
+                                        className='size-full p-12'
+                                        draggable={false}
+                                    />
+                                </div>
                         
-                        {/* jump to experience button */}
-                        <div className={`col-start-3 col-span-1 row-start-3 row-span-1
-                                        transition-opacity duration-300
-                                        ${isDetailsOpen ? 'opacity-0' : 'opacity-100'}`}>
-                            <GuideButton href='#experience' text='My Experience'/>
-                        </div>
+                                {/* jump to experience button */}
+                                <div className={`col-start-3 col-span-1 row-start-3 row-span-1
+                                                transition-opacity duration-300
+                                                ${isDetailsOpen ? 'opacity-0' : 'opacity-100'}`}>
+                                    <GuideButton href='#experience' text='My Experience'/>
+                                </div>
+                            </>
+                        )}
                     </Grid>
                 </section>
             </SectionReveal>

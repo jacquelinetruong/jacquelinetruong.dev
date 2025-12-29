@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { createPortal } from 'react-dom';
 
 import type { Project } from '@/lib/projectTypes';
 import { Reveal } from './reveal';
@@ -44,31 +45,36 @@ export default function ProjectOverlay({
 	// scroll ref for project points
 	const pointsRef = useRef<HTMLDivElement | null>(null);
 	const [atBottom, setAtBottom] = useState(false);
+	const [atTop, setAtTop] = useState(true);
 
-	// check if at bottom of points container
+	// check if at top/bottom of points scroll container
 	useEffect(() => {
 		const el = pointsRef.current;
 
 		if (!el) return;
 
-		const onScroll = () => {
-			const threshold = 8;
+		const threshold = 8;
+
+		const onScroll = () => {	
+			const top = el.scrollTop <= threshold;
 			const bottom = el.scrollTop + el.clientHeight >= el.scrollHeight - threshold;
 
+			setAtTop(top);
 			setAtBottom(bottom);
 		};
 
 		el.addEventListener('scroll', onScroll);
 		onScroll();
 
-		return () => el.removeEventListener('sroll', onScroll);
+		return () => el.removeEventListener('scroll', onScroll);
 	}, []);
 
+
 	return (
-		<div className='fixed inset-0 z-500'>
+		<div className='fixed right-0 top-(--nav-height) w-(--two-cell-width) h-full pointer-events-none z-40'>
 			{/* unfocused backdrop  */}
 			<motion.div
-				className='absolute inset-0 z-500'
+				className='absolute right-(--two-cell-width) h-full z-30'
 				onClick={onClose}
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1 }}
@@ -78,9 +84,9 @@ export default function ProjectOverlay({
 
 			{/* side panel */}
 			<motion.aside
-				className='absolute right-0 top-(--nav-height) z-500
+				className='absolute right-0 top-0 pointer-events-auto
 							w-(--two-cell-width) h-full
-							bg-(--bg-colour) border border-(--grid-line-colour)'
+							bg-(--bg-colour) border border-(--grid-line-colour) z-40'
 				initial={{ x: '100%' }}
 				animate={{ x: 0 }}
 				exit={{ x: '100%' }}
@@ -110,16 +116,17 @@ export default function ProjectOverlay({
 						</div>
 
 						{/* full project description */}
+						{!!project.points?.length ? (
 						<div 
 							ref={pointsRef}
-							className='relative px-2 flex flex-col gap-4
+							className='relative px-2 flex flex-col gap-4 py-0
 										overflow-y-auto overscroll-none'>
 
 							{/* top gradient */}
-							<span className={`absolute w-full  p-6
+							<span className={`top-0 left-0 w-full p-6 
 												bg-gradient-to-t from-transparent via-(--bg-colour)/80 via-75% to-(--bg-colour)
-												transition-opacity duration-500
-												${!atBottom ? 'opacity-100' : 'opacity-0'}`}/>
+												transition-opacity duration-300
+												${atTop ? 'opacity-0 hidden' : 'opacity-100 sticky'}`}/>
 
 							{project.points?.map((point, i) => (
 								<Reveal delay={0.1 + i * 0.1} className='w-fit h-fit'>
@@ -132,29 +139,37 @@ export default function ProjectOverlay({
 
 							{/* bottom gradient */}
 							<span className={`absolute w-full left-0 bottom-0 p-6 
-												bg-gradient-to-b from-transparent via-(--bg-colour)/80 via-25% to-(--bg-colour)
-												transition-opacity duration-300
-												${atBottom ? 'opacity-0' : 'opacity-100'}`}/>
+													bg-gradient-to-b from-transparent via-(--bg-colour)/80 via-85% to-(--bg-colour)
+													transition-opacity duration-300
+													${atBottom ? 'opacity-0' : 'opacity-100'}`}/>
 						</div>
-
-						{/* read more prompt */}
-						{!!project.points?.length ? (
-							<span className={`absolute w-full left-0 bottom-0 p-6 
-											bg-gradient-to-b from-transparent via-(--bg-colour)/45 via-45% to-black/20 to-90%
-											point-events-none
-											flex flex-row justify-center align-center gap-1
-											transition-opacity duration-300
-											${atBottom ? 'opacity-0' : 'opacity-100'}`}>
-									<p className='translate-y-2 font-inter text-xs lg:text-sm'>Read more</p>
-									<GuideArrow className='size-[16px] lg:size-[18px] translate-y-2 '/>
-							</span>
-						): (
+						) : (
 							<div className='flex flex-col gap-6'>
 								<p className='px-2 text-(--light-mode-grey) sm:text-sm md:text-base 2xl:text-lg'>
 									Oops, this project's expanded details are unavailable. Check out the external links for more info.
 								</p>
 								<Cat className='text-(--grid-line-colour)'/>
 							</div>
+						)}
+
+						{/* read more prompt */}
+						{!!project.points?.length && (
+							<>
+								<span className={`absolute w-full left-0 bottom-0 p-6 
+												bg-gradient-to-b from-transparent via-black/45 via-45% to-black/20 to-95% 
+												point-events-none
+												flex flex-row justify-center align-center gap-1
+												transition-opacity duration-300
+												${atBottom ? 'opacity-0' : 'opacity-100'}`}>
+										<p className='translate-y-2 font-inter text-xs lg:text-sm'>Read more</p>
+										<GuideArrow className='size-[16px] lg:size-[18px] translate-y-2 '/>
+								</span>
+								{/* extra gradient to blend */}
+								<span className={`absolute w-full left-0 bottom-0 p-6 
+													bg-gradient-to-b from-transparent from-80% via-(--bg-colour)/50 via-90% to-(--bg-colour)
+													transition-opacity duration-300
+													${atBottom ? 'opacity-0' : 'opacity-100'}`}/>
+							</>
 						)}
 					</div>
 
