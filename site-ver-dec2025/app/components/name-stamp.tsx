@@ -17,7 +17,7 @@ export default function NameStamp({ className = '--' }: { className?: string }) 
 
 	const { scrollY } = useScroll();
 
-	// colour transition from fluid-h2 -> about
+	// colour transition from home -> about
 	const color = useTransform(scrollY, [0, 500], ['#292A2D', '#BEBEBE']);
 	const smoothOpacity = useSpring(opacity, { stiffness: 100, damping: 20 });
 
@@ -78,13 +78,13 @@ export default function NameStamp({ className = '--' }: { className?: string }) 
 							target='_blank'
 							href='mailto:hello@jacquelinetruong.dev'
 						>	
-							<Coffee className='size-[28px]'/>
+							<Coffee className='size-[24px]'/>
 							Say Hi!
 						</a>
 					</Reveal>
 
-					<Reveal delay={2.25} className='w-fit h-fit justify-self-end '>
-						<h2 className='font-semibold text-right
+					<Reveal delay={2.25} className='w-fit h-fit'>
+						<h2 className='font-semibold text-right place-self-end
 										sm:text-lg md:text-xl 2xl:text-2xl 2xl:w-4/5 
 										transition-colors duration-500'>
 							Product designer first, software engineer second. Focused on crafting digital experiences and turning everyday ideas into art.
@@ -116,10 +116,10 @@ export default function NameStamp({ className = '--' }: { className?: string }) 
 				</div>
 
 				<div className='col-start-5 col-span-1 row-start-3 row-span-1 w-(--cell-width) h-(--cell-height)
-								flex flex-col justify-end p-8'>
+								flex flex-col justify-between p-8'>
 					{/* city */}
 					<Reveal delay={1.85}>
-						<h2 className='font-semibold text-right text-nowrap
+						<h2 className='font-semibold text-right text-nowrap place-self-end
 										sm:text-lg md:text-xl 2xl:text-2xl
 										transition-colors duration-500'>
 							Based in Toronto, CA.
@@ -127,7 +127,7 @@ export default function NameStamp({ className = '--' }: { className?: string }) 
 					</Reveal>
 			
 					<Reveal delay={1.6}>
-						<Cat className={`size-fit transition-colors duration-500 ${activeSection === 'home' ? 'text-(--text-colour)' : 'text-(--grey)'}`}/>
+						<Cat className={`place-self-end size-fit transition-colors duration-500 ${activeSection === 'home' ? 'text-(--text-colour)' : 'text-(--grey)'}`}/>
 					</Reveal>
 				</div>
 			</div>

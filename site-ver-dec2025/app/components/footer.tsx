@@ -50,7 +50,7 @@ export default function Footer({ className = '' }: { className?: string }) {
             </div>
 
             {/* real footer */}
-            <div className='font-inter font-medium text-(--alt-text-colour) sm:text-sm md:text-base 2xl:text-lg
+            <div className='font-inter font-medium text-(--alt-text-colour) sm:text-sm md:text-base
                             col-start-1 col-span-5 row-start-3 row-span-1
                             flex flex-col gap-16 pt-16 pb-6 h-fit
                             bg-(--dark-black) border-t-(--dark-black)'>

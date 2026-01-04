@@ -118,13 +118,12 @@ export default function ExperienceSection({
                                         key={item.id}
                                         onClick={() => setActiveExperience(item)}
                                         className={`
-                                            font-medium
                                             flex flex-row gap-2 items-center
                                             w-fit h-fit
-                                            transition-colors duration-300
+                                            transition-all duration-300
                                             ${activeExperience?.id === item.id
                                                 ? 'font-semibold'
-                                                : 'text-(--alt-text-colour) hover:text-(--dark-grey)'}
+                                                : 'text-(--alt-text-colour) hover:font-semibold hover:text-(--dark-mode-grey)'}
                                         `}
                                     >
                                         <Image 
