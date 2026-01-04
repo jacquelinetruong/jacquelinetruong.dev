@@ -97,7 +97,7 @@ export default function ProjectOverlay({
 						{/* close button */}
 						<button
 							onClick={onClose}
-							className='w-fit h-fit p-2 rounded-2xl cursor-pointer
+							className='relative w-fit h-fit p-2 rounded-xl cursor-pointer group
 										hover:bg-(--grid-line-colour) transition-colors duration-200'
 						>
 							<Image 
@@ -106,6 +106,16 @@ export default function ProjectOverlay({
 								width={20}
 								height={20}
 							/>
+							{/* tooltip */}
+							<span className='absolute translate-y-4 -translate-x-2
+										w-fit h-fit px-3 py-2 rounded-xl 
+										flex flex-col items-start gap-0
+										bg-(--dark-black)/80 border border-(--dark-grey) shadow-lg backdrop-blur-sm
+										opacity-0 group-hover:opacity-100
+										transition-opacity duration-100'>
+								<p className='font-medium text-sm text-white '>Close</p>
+								<p className='text-sm text-(--grey) '>Esc</p>
+							</span>
 						</button>
 
 						{/* title */}
@@ -194,7 +204,7 @@ export default function ProjectOverlay({
 									width={16}
 									height={16}
 								/>
-								<p className='hidden md:block md:text-xs lg:text-sm font-medium text-nowrap text-(--light-mode-grey)'>Prev Project</p>
+								<p className='hidden md:block md:text-xs lg:text-sm font-medium text-nowrap text-(--light-mode-grey) pr-1'>Previous</p>
 							</button>
 							<button 
 								onClick={onNext}
@@ -202,7 +212,7 @@ export default function ProjectOverlay({
 											hover:bg-(--grid-line-colour) transition-colors duration-200
 											${!nextProject && 'hidden'}`}
 							>
-								<p className='hidden md:block md:text-xs lg:text-sm font-medium text-nowrap text-(--light-mode-grey)'>Next Project</p>
+								<p className='hidden md:block md:text-xs lg:text-sm font-medium text-nowrap text-(--light-mode-grey) pl-1'>Next</p>
 								<Image
 									src='/caret-right-icon.svg'
 									alt='previous project'

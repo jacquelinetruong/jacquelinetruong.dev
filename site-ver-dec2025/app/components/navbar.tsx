@@ -20,7 +20,7 @@ export default function Navbar({ isLoading }: { isLoading: boolean }) {
     });
 
     return (
-        <div className='font-inter font-medium text-header
+        <div className='font-inter font-medium xs:text-sm md:text-md
                         sticky top-0
                         px-8 py-4 z-1000 
                         flex flex-row justify-between items-center

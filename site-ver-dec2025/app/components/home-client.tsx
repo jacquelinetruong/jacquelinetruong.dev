@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 
 import Loader from './loader';
 import Navbar from './navbar';
+import Quickbar from './quickbar';
 import NameStamp from './name-stamp';
 import Hero from './hero';
 import About from './about';
@@ -50,6 +51,8 @@ export default function HomeClient({
 				<>
 					<Navbar isLoading={isLoading}/>
 					
+					<Quickbar isLoading={isLoading}/>
+
 					<NameStamp />
 					
 					<section id='home' className='section'>
