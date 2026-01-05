@@ -109,8 +109,10 @@
 html {
   font-size: 16px;
   scroll-behavior: smooth;
-  overflow: scroll;
+  overscroll-behavior: smooth;
+  overflow-y: scroll;
   overflow-x: hidden;
+  scroll-snap-type: y proximity;
 }
 ::-webkit-scrollbar {
   width: 0;
@@ -118,15 +120,19 @@ html {
 }
 
 body {
-  transition-property: color, var(--bg-colour);
-  transition-timing-function: ease-in-out;
-  transition-duration: 500ms;
+  margin: 0;
   background: var(--bg-colour);
   color: var(--text-colour);
   font-family: Arial, Helvetica, sans-serif;
+
+  transition-property: color, var(--bg-colour);
+  transition-timing-function: ease-in-out;
+  transition-duration: 500ms;
 }
 
 section {
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
   scroll-margin-top: var(--nav-height);
 }
 

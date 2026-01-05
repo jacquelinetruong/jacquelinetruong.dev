@@ -1,7 +1,6 @@
 'use client';
 
 import { Reveal } from './reveal';
-import { useTheme } from './theme-context';
 import { useActiveSection } from './active-theme';
 
 import Coffee from './icons/coffee';
@@ -17,7 +16,7 @@ export default function Quickbar({ isLoading }: { isLoading: boolean }) {
 
     return (
         <div className='fixed bottom-0 right-0 z-1000 pointer-events-auto
-                        w-fit h-fit m-4 z-1000
+                        w-fit h-fit m-4 2xl:m-6 z-1000
                         flex flex-row gap-1'>
             {/* coffee chat button */}
             <Reveal delay={1.25} className={`${activeSection === 'home' || activeSection === 'about' ? 'hidden' : ''}`}>
@@ -29,7 +28,8 @@ export default function Quickbar({ isLoading }: { isLoading: boolean }) {
                                     shadow-lg backdrop-blur-sm
                                     transition-all duration-200 hover:bg-(--black)/80 hover:border-(--dark-grey)'
                 >
-                    <Coffee className='size-[20px] text-(--grey) group-hover:text-(--white) transition-colors duration-200 -translate-y-1/12'/>
+                    <Coffee className='size-[20px] text-(--grey) group-hover:text-(--white) transition-colors duration-200
+                                        2xl:size-[24px]'/>
 
                     {/* tooltip */}
                     <span className='absolute -translate-y-10 -translate-x-1
@@ -51,7 +51,8 @@ export default function Quickbar({ isLoading }: { isLoading: boolean }) {
                                     shadow-lg backdrop-blur-sm
                                     transition-all duration-200 hover:bg-(--black)/80 hover:border-(--dark-grey)'
                 >
-                    <TopArrow className='size-[20px] text-(--grey) group-hover:text-white transition-colors duration-200'/>
+                    <TopArrow className='size-[20px] text-(--grey) group-hover:text-white transition-colors duration-200
+                                            2xl:size-[24px]'/>
 
                     {/* tooltip */}
                     <span className='absolute -translate-y-10 -translate-x-1

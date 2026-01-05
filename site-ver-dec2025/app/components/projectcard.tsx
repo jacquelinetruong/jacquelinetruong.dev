@@ -108,7 +108,7 @@ export default function ProjectCard({
 					{allTags.length > 0 && (
 						<div 
 							ref={containerRef}
-							className='text-xs 2xl:text-sm
+							className='text-[10px] 2xl:text-xs
 							  		   flex flex-nowrap gap-2 justify-start items-center
 									   w-full'
 						>

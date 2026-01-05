@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
 
 import Loader from './loader';
 import Navbar from './navbar';
@@ -35,7 +34,8 @@ export default function HomeClient({
 	currentXP,
 	experience,
 }: HomeClientProps) {
-		
+	
+	// loader
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
