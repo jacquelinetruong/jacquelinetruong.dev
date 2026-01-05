@@ -23,6 +23,8 @@ export default function ProjectOverlay({
 	onPrev,
 	onNext,
 	onClose,
+	imagesRef,
+	buttonsRef,
 }: {
 	project: Project;
 	prevProject: Project | null;
@@ -30,9 +32,11 @@ export default function ProjectOverlay({
 	onPrev: () => void;
 	onNext: () => void;
 	onClose: () => void;
+	imagesRef: React.RefObject<HTMLDivElement | null>;
+	buttonsRef: React.RefObject<HTMLDivElement | null>;
 }) {
 
-	// close modal
+	// close modal with esc key
     useEffect(() => {
 		const onKeyDown = (e: KeyboardEvent) => {
 			if (e.key === 'Escape') onClose();
@@ -41,6 +45,29 @@ export default function ProjectOverlay({
 		window.addEventListener('keydown', onKeyDown);
 		return () => window.removeEventListener('keydown', onKeyDown);
 	}, [onClose]);
+
+	// close modal if user clicks outside
+	const panelRef = useRef<HTMLDivElement | null>(null);
+
+	useEffect(() => {
+		const handlePointerDown = (e: PointerEvent) => {
+			const target =  e.target as Node;
+
+			// ignore clicks inside side panel
+			if (panelRef.current?.contains(target)) return;
+
+			// ignore clicks on project images
+			if (imagesRef.current?.contains(target)) return;
+
+			// ignore clicks on external buttons
+			if (buttonsRef?.current?.contains(target)) return;
+
+			onClose();
+		};
+
+		document.addEventListener('pointerdown', handlePointerDown);
+		return() => document.removeEventListener('pointerdown', handlePointerDown);
+	}, [onClose, imagesRef, buttonsRef]);
 
 	// scroll ref for project points
 	const pointsRef = useRef<HTMLDivElement | null>(null);
@@ -84,6 +111,7 @@ export default function ProjectOverlay({
 
 			{/* side panel */}
 			<motion.aside
+				ref={panelRef}
 				className='absolute right-0 top-0 pointer-events-auto
 							w-(--two-cell-width) h-full
 							bg-(--bg-colour) border border-(--grid-line-colour) z-40'

@@ -25,6 +25,7 @@ import '../../public/github-logo.svg';
 import '../../public/dribbble-logo.svg';
 import '../../public/caret-double-right-icon.svg';
 import '../../public/caret-left-icon.svg';
+import { image } from 'framer-motion/client';
 
 
 
@@ -108,11 +109,16 @@ export default function Portfolio({
             setFeaturedImageIndex(0);
         }, [featuredProject?.id]);
 
+        // photo rotation condition
+        const shouldRotate = featuredProject.images.length >= 5;
     
     // ------ FEATURED PROJECT EXPANDED DETAILS ------ //
         const [isDetailsOpen, setIsDetailsOpen] = useState(false);
         const openDetails = () => setIsDetailsOpen(true);
         const closeDetails = () => setIsDetailsOpen(false);
+
+        const imagesRef = useRef<HTMLDivElement | null>(null);
+        const buttonsRef = useRef<HTMLDivElement | null>(null);
 
         // lock scrolling when modal is open
         useEffect(() => {
@@ -266,7 +272,9 @@ export default function Portfolio({
                     <Grid>
                         {/* featured project */}
                             {/* preview */}
-                            <div className='col-start-1 col-span-2 row-start-1 row-span-2 z-100'>
+                            <div
+                                ref={imagesRef} 
+                                className='col-start-1 col-span-2 row-start-1 row-span-2 z-100'>
                                 <Reveal delay={0.25}>
                                     {featuredProject && (
                                         <ProjectCard
@@ -320,13 +328,15 @@ export default function Portfolio({
                                                 transition-opacity duration-300
                                                 ${isDetailsOpen ? 'opacity-0' : 'opacity-100'}`}>
                                     <h2 className='font-semibold text-wrap text-(--text-colour) sm:text-xl md:text-2xl'>{featuredProject?.title}</h2>
-                                    <p className='h-full text-wrap truncate text-(--text-colour) sm:text-sm md:text-base 2xl:text-lg'>
+                                    <p className='h-full text-wrap truncate text-(--text-colour) sm:text-sm md:text-base 2xl:text-md'>
                                         {featuredProject?.description}
                                     </p>
                                 </div>
 
                                 {/* external link buttons */}
-                                <div className='flex flex-row gap-4'>
+                                <div 
+                                    ref={buttonsRef}
+                                    className='flex flex-row gap-4'>
                                     {featuredProject?.link && (
                                         <a className='font-medium text-(--bg-colour)
                                                     flex flex-row gap-2 items-center
@@ -387,14 +397,20 @@ export default function Portfolio({
                             </div>
                             
                         {/* featured photo gallery */}
-                        <div className='col-start-3 col-span-1 row-start-1 row-span-2 px-2 z-100'>
+                        <div
+                            ref={imagesRef} 
+                            className='w-1/2 h-full col-start-3 col-span-1 row-start-1 row-span-2 pl-2 z-100'>
                             {featuredProject?.images.length > 1 && (
-                                <div className='flex flex-col gap-2 w-1/2 h-full'>
-                                    {galleryImages.map((img, i) => {
-                                        return (
+                                <div className='flex flex-col gap-2 w-full h-full'>
+                                    {shouldRotate ? (
+                                        // rotate if project has 5 or more images
+                                        galleryImages.map((img, i) => (
                                             <button
                                                 key={img}
-                                                onClick={() => setFeaturedImageIndex(prev => prev + i + 1)}
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    setFeaturedImageIndex(prev => prev + i + 1);
+                                                }}
                                                 className='relative w-full h-1/4 overflow-hidden cursor-pointer group isolate'
                                                 onMouseEnter={() => setIsHovering(true)}
                                                 onMouseLeave={() => setIsHovering(false)}
@@ -428,12 +444,57 @@ export default function Portfolio({
                                                     </span>
                                                 </Reveal>
                                             </button>
-                                        );
-                                    })}
+                                        ))
+                                    ) : (
+                                        // don't rotate if project has 2-4 images
+                                        featuredProject.images.map((img, i) => {
+                                            const imageIndex = i;
+                                            const isActive = featuredImageIndex === imageIndex;
+
+                                            return (
+                                                <button
+                                                    key={img}
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        setFeaturedImageIndex(imageIndex);
+                                                    }}
+                                                    className={`relative w-full h-1/4 overflow-hidden cursor-pointer group isolate
+                                                                ${isActive && 'ring-white xs:ring-1 sm:ring-2 xl:ring-4'}`}
+                                                    onMouseEnter={() => setIsHovering(true)}
+                                                    onMouseLeave={() => setIsHovering(false)}
+                                                    >
+                                                    {/* darken image until hovered */}
+                                                    <div className='absolute inset-0 z-10 bg-[#13131B] opacity-15 transition-opacity duration-300 group-hover:opacity-0 pointer-events-none'/>
+                                                    
+                                                    <Image
+                                                        src={img}
+                                                        alt={`${featuredProject.title} preview ${imageIndex + 1}`}
+                                                        width={1142}
+                                                        height={743}
+                                                        className='size-full object-cover
+                                                                    transition-transform duration-500 ease-out
+                                                                    group-hover:scale-110'
+                                                        draggable={false}
+                                                    />
+                                                    {/* hover caret */}
+                                                    <span className='absolute inset-0 p-2 flex
+                                                                    opacity-0 translate-y-1
+                                                                    group-hover:opacity-100 group-hover:translate-y-0
+                                                                    transition-all duration-200
+                                                                    bg-gradient-to-l from-transparent via-black/10 via-70%  to-black/30 to-90% point-events-none'>  
+                                                        <Image
+                                                            src='/caret-left-icon.svg'
+                                                            alt='caret left icon'
+                                                            width={14}
+                                                            height={14}
+                                                            draggable={false}
+                                                        />
+                                                    </span>
+                                                </button>
+                                    )}))}
                                 </div>
                             )}
                         </div>
-                        
 
                         {/* non-featured projects */}
                         {!isDetailsOpen &&
@@ -568,6 +629,8 @@ export default function Portfolio({
                         onPrev={getPrevProject}
                         onNext={getNextProject}
                         onClose={closeDetails}
+                        imagesRef={imagesRef}
+                        buttonsRef={buttonsRef}
                     />
                 )}
             </AnimatePresence>
