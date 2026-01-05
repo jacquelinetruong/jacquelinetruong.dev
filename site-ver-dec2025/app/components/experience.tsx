@@ -97,7 +97,7 @@ export default function ExperienceSection({
                 </div>
 
                 {/* experience menu */}
-                <div className='font-inter sm:text-sm md:text-base 2xl:text-lg
+                <div className='font-inter sm:text-xs md:text-sm 2xl:text-base
                                 col-start-1 col-span-1 row-start-1 row-span-2
                                 flex flex-col gap-8
                                 p-8'
@@ -120,7 +120,7 @@ export default function ExperienceSection({
                                         className={`
                                             flex flex-row gap-2 items-center
                                             w-fit h-fit
-                                            transition-all duration-300
+                                            transition-all duration-300 cursor-pointer
                                             ${activeExperience?.id === item.id
                                                 ? 'font-semibold'
                                                 : 'text-(--alt-text-colour) hover:font-semibold hover:text-(--dark-mode-grey)'}
@@ -146,43 +146,74 @@ export default function ExperienceSection({
                 <div className='font-inter
                                 col-start-2 col-span-2 row-start-1 row-span-2
                                 flex flex-col gap-8
-                                p-8'>
+                                p-8 bg-(--bg-colour)/50
+                                border border-r-0 border-b-0 border-l-(--grid-line-colour) border-t-(--grid-line-colour)'>
                     {/* header */}
-                    {activeExperience && (
-                        <div className='flex flex-col gap-2'>
-                            {/* position title */}
-                            <Reveal delay={0.1}>
-                                <h2 className='font-semibold text-nowrap sm:text-xl md:text-2xl xl:text-3xl'>
-                                    {activeExperience.position} @ {activeExperience.menuTitle}     {/* future: link to company site */}
-                                </h2>
-                            </Reveal>
+                    {activeExperience && activeExperience.category !== 'proficiencies' ? (
+                        <>
+                            {/* work and client experience */}
+                            <div className='flex flex-col gap-2'>
+                                {/* position title */}
+                                <Reveal delay={0.1}>
+                                    <h2 className='font-semibold text-nowrap sm:text-lg md:text-xl xl:text-2xl'>
+                                        {activeExperience.position} @ {activeExperience.menuTitle}     {/* future: link to company site */}
+                                    </h2>
+                                </Reveal>
 
-                            {/* date range */}
-                            <Reveal delay={0.1}>
-                                <h3 className='font-medium text-(--alt-text-colour) sm:text-lg md:text-xl
-                                            flex flex-row gap-2'>
-                                    <Image 
-                                        src='/detail-arrow-grey.svg'
-                                        alt='arrow'
-                                        width={24}
-                                        height={24}
-                                    />
-                                    {formatDateRange(activeExperience)}
-                                </h3>
-                            </Reveal>
-                        </div>
+                                {/* date range */}
+                                <Reveal delay={0.1}>
+                                    <h3 className='font-medium text-(--alt-text-colour) sm:text-md md:text-lg
+                                                flex flex-row gap-2'>
+                                        <Image 
+                                            src='/detail-arrow-grey.svg'
+                                            alt='arrow'
+                                            width={24}
+                                            height={24}
+                                        />
+                                        {formatDateRange(activeExperience)}
+                                    </h3>
+                                </Reveal>
+                            </div>
+
+                            {/* experience description */}
+                            <div
+                                key={activeExperience?.id} 
+                                className='flex flex-col gap-4'>
+                                {activeExperience?.points.map((point, i) => (
+                                    <Reveal delay={0.2 + i * 0.2} key={i}>
+                                        <li className='ml-6 sm:text-[10px] md:text-sm 2xl:text-base'>
+                                            {point}
+                                        </li>
+                                    </Reveal>
+                                ))} 
+                            </div>
+                        </>
+                    ):(
+                        <>
+                            {/* proficiencies */}
+                            <div className='flex flex-col gap-2'>
+                                {/* proficiency type */}
+                                <Reveal delay={0.1}>
+                                    <h2 className='font-semibold text-nowrap sm:text-lg md:text-xl xl:text-2xl'>
+                                        {activeExperience?.position}
+                                    </h2>
+                                </Reveal>
+                            </div>
+
+                            {/* list proficiencies */}
+                            <div 
+                                key={activeExperience?.id} 
+                                className='flex flex-col gap-2'>
+                                {activeExperience?.points.map((point, i) => (
+                                    <Reveal key={i} delay={i * 0.1} >
+                                        <li className='ml-6 sm:text-[10px] md:text-sm 2xl:text-base'>
+                                            {point}
+                                        </li>
+                                    </Reveal>
+                                ))} 
+                            </div>
+                        </>
                     )}
-                    
-                    {/* experience description */}
-                    <div className='flex flex-col gap-4'>
-                        {activeExperience?.points.map((point, i) => (
-                            <Reveal delay={0.25 + i * 0.4} key={i}>
-                                <li className='ml-6 sm:text-sm md:text-base 2xl:text-lg'>
-                                    {point}
-                                </li>
-                            </Reveal>
-                        ))} 
-                    </div>
                 </div>
 
                 {/* big title */}
