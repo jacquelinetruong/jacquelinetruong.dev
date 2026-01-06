@@ -25,6 +25,10 @@
   --font-inter: var(--font-inter-sans)
 }
 
+@theme {
+  --breakpoint-3xl: 120rem;
+}
+
 .theme-light {
   --bg-colour: var(--off-white);
   --text-colour: var(--black);

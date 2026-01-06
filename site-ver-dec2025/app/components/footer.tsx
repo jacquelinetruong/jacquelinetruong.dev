@@ -24,14 +24,14 @@ export default function Footer({ className = '' }: { className?: string }) {
                 <Reveal delay={0.25} className='flex flex-col gap-6 place-items-center'>
                     <h1 className='font-semibold sm:text-xl md:text-2xl'>Have a project idea? Let's make it happen.</h1>
                 
-                    <a className='font-medium text-(--bg-colour) hover:text-white
+                    <a className='font-medium text-base 3xl:text-lg text-(--bg-colour) hover:text-white
                                 flex flex-row gap-2 items-center
-                                w-fit h-fit px-4 py-2 rounded-full
+                                w-fit h-fit px-6 py-3 rounded-full 2xl:px-8 2xl:py-4
                                 bg-(--text-colour) hover:bg-(--dark-grey)
                                 transition-colors duration-300
                                 cursor-pointer'>
                         Get Started
-                        <LinkArrow className='size-[24px] text-white'/>
+                        <LinkArrow className='size-[20px] text-white'/>
                     </a>
                 </Reveal>
             </div>
@@ -101,9 +101,9 @@ export default function Footer({ className = '' }: { className?: string }) {
                     <div className='flex flex-col justify-between w-(--cell-width) pl-8 pr-8'>
                         <div className='flex flex-col gap-4'>
                             <h5 className='text-white'>Like my work?</h5>
-                            <a className='font-medium text-(--dark-black)
+                            <a className='font-medium text-base 3xl:text-lg text-(--dark-black)
                                         flex flex-row gap-2 items-center
-                                        w-fit h-fit px-4 py-2 rounded-full
+                                        w-fit h-fit px-6 py-3 rounded-full 2xl:px-8 2xl:py-4
                                         bg-white hover:bg-(--grey)
                                         transition-colors duration-300'
                                 target='_blank'

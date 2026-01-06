@@ -11,6 +11,7 @@ import { Reveal } from './reveal';
 import ProjectCard from './projectcard';
 import Grid from './grid';
 
+import Cat from './icons/cat';
 import '../../public/detail-arrow-black.svg';
 import '../../public/detail-arrow-grey.svg';
 import '../../public/experience.svg';
@@ -162,7 +163,7 @@ export default function ExperienceSection({
 
                                 {/* date range */}
                                 <Reveal delay={0.1}>
-                                    <h3 className='font-medium text-(--alt-text-colour) sm:text-md md:text-lg
+                                    <h3 className='font-medium text-(--alt-text-colour) sm:text-md
                                                 flex flex-row gap-2'>
                                         <Image 
                                             src='/detail-arrow-grey.svg'
@@ -181,7 +182,7 @@ export default function ExperienceSection({
                                 className='flex flex-col gap-4'>
                                 {activeExperience?.points.map((point, i) => (
                                     <Reveal delay={0.2 + i * 0.2} key={i}>
-                                        <li className='ml-6 sm:text-[10px] md:text-sm 2xl:text-base'>
+                                        <li className='ml-6 sm:text-[10px] md:text-sm 2xl:text-base 3xl:text-lg 3xl:w-4/5'>
                                             {point}
                                         </li>
                                     </Reveal>
@@ -228,6 +229,12 @@ export default function ExperienceSection({
                             height={216}
                             className='w-full'
                         />
+                    </Reveal>
+                </div>
+
+                <div className='col-start-1 row-start-3 row-span-1 p-2 3xl:p-8'>
+                    <Reveal delay={1.6}>
+                        <Cat className={`place-self-start size-full text-(--grid-line-colour)`}/>
                     </Reveal>
                 </div>
             </Grid>
