@@ -47,6 +47,6 @@ export async function getProjects(): Promise<Project[]> {
 
             section: page.properties.section.select?.name ?? 'designer',
             sectionId: page.properties.sectionId.select?.name ?? '1',
-            type: page.properties.type.select?.name ?? 'designer',
+            type: page.properties.type.multi_select?.map((t: any) => t.name) ?? 'design',
         }));
 }

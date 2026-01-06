@@ -70,9 +70,9 @@ export default function NameStamp({ className = '--' }: { className?: string }) 
 					{/* "say hi" button */}
 					<Reveal delay={2.75} className='flex justify-end'>
 						<a
-							className='font-medium text-lg text-white
+							className='font-medium text-base 3xl:text-lg text-white
 										flex flex-row gap-2 items-center
-										w-fit h-fit px-5 py-3 rounded-full
+										w-fit h-fit px-6 py-3 rounded-full 2xl:px-8 2xl:py-4
 										bg-(--text-colour) hover:bg-(--dark-grey)
 										transition-colors duration-300'
 							target='_blank'
@@ -94,24 +94,22 @@ export default function NameStamp({ className = '--' }: { className?: string }) 
 
 				{/* big name */}
 				<div className='col-start-4 col-span-2 row-start-2 row-span-1 w-(--two-cell-width) h-(--cell-height)
-								relative'>
+								relative p-8'>
 					<Reveal delay={0.5}>
-						<div className=''>
 							<Image
 								src='/jt-black.svg'
 								alt='jacqueline truong'
 								fill
-								className={`absolute inset-0 transition-opacity duration-500 ${activeSection === 'home' ? 'opacity-100' : 'opacity-0'}`}
+								className={`transition-opacity duration-500 ${activeSection === 'home' ? 'opacity-100' : 'opacity-0'}`}
 								draggable={false}
 							/>
 							<Image
 								src='/jt-grey.svg'
 								alt='jacqueline truong'
 								fill
-								className={`absolute inset-0 transition-opacity duration-500 ${activeSection === 'about' ? 'opacity-100' : 'opacity-0'}`}
+								className={`transition-opacity duration-500 ${activeSection === 'about' ? 'opacity-100' : 'opacity-0'}`}
 								draggable={false}
 							/>
-						</div>
 					</Reveal>
 				</div>
 
@@ -127,7 +125,7 @@ export default function NameStamp({ className = '--' }: { className?: string }) 
 					</Reveal>
 			
 					<Reveal delay={1.6}>
-						<Cat className={`place-self-end size-fit transition-colors duration-500 ${activeSection === 'home' ? 'text-(--text-colour)' : 'text-(--grey)'}`}/>
+						<Cat className={`place-self-end size-full xl:w-4/5 transition-colors duration-500 ${activeSection === 'home' ? 'text-(--text-colour)' : 'text-(--grey)'}`}/>
 					</Reveal>
 				</div>
 			</div>

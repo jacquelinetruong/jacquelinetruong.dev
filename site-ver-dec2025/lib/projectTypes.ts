@@ -13,5 +13,5 @@ export type Project = {
     images: string[];
     section: 'hero' | 'about' | 'portfolio' | 'experience';
     sectionId: '1' | '2' | '3' | '4';
-    type: 'designer' | 'developer'
+    type: 'design' | 'development'
 };

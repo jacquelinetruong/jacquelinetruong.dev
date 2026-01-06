@@ -157,7 +157,7 @@ export default function ProjectOverlay({
 						{!!project.points?.length ? (
 						<div 
 							ref={pointsRef}
-							className='relative px-2 flex flex-col gap-4 py-0
+							className='relative px-2 flex flex-col gap-4 3xl:gap-8 py-0
 										overflow-y-auto overscroll-none'>
 
 							{/* top gradient */}
@@ -168,7 +168,7 @@ export default function ProjectOverlay({
 
 							{project.points?.map((point, i) => (
 								<Reveal delay={0.1 + i * 0.1} className='w-fit h-fit'>
-									<p key={i} className={`sm:text-sm md:text-base 2xl:text-lg
+									<p key={i} className={`sm:text-[10px] md:text-sm 2xl:text-base 3xl:text-lg 3xl:w-4/5
 															${i === project.points?.length && 'pb-6'}`}>
 										{point}
 									</p>
