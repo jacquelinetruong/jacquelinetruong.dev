@@ -1,40 +1,33 @@
 'use client';
 
+import Image from 'next/image';
+
 import { Project } from '@/lib/projectTypes';
 import { Experience } from '@/lib/experienceTypes';
 
-import ProjectCard from './projectcard';
-import Image from 'next/image';
-import Grid from './grid';
+import ProjectCard from '@/app/components/projectcard';
+import Grid from '@/app/components/grid';
+import { SectionReveal } from '@/app/components/section-reveal';
+import { Reveal } from '@/app/components/reveal';
+import GuideButton from '@/app/components/guide-button';
 
-import { SectionReveal } from './section-reveal';
-import { Reveal } from './reveal';
-import GuideButton from './guide-button';
-
-import '../../public/me.jpg';
-import '../../public/detail-arrow-black.svg';
-import '../../public/jt-grey.svg';
-import '../../public/cat.svg';
+import '@/public/me.jpg';
+import '@/public/detail-arrow-black.svg';
+import '@/public/jt-grey.svg';
+import '@/public/cat.svg';
 
 
-export default function About({
+export default function AboutDesktop({
     className = '',
     isLoading,
     projects,
-    experience,
+    currentWork,
  }: { 
     className?: string; 
     isLoading: boolean;
     projects: Project[];
-    experience: Experience[];
+    currentWork: Experience[];
  }) {
-
-    // current work (already filtered) sorted by recency
-    const currentWork = [...experience]
-        .filter(e => e.startDate)
-        .sort(
-            (a, b) => new Date(b.startDate!).getTime() - new Date(a.startDate!).getTime()
-        );
 
     return(
         <SectionReveal
@@ -42,7 +35,7 @@ export default function About({
             fadeStart={0.4}
             fadeEnd={0.7}
         >
-            <Grid >
+            <Grid>
                 {/* projects display */}
                 {/* project display #1 */}
                 <div className='col-start-2 col-span-1 row-start-3 row-span-1'>

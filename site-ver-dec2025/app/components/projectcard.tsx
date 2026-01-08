@@ -7,11 +7,13 @@ import Image from 'next/image';
 
 import LinkArrow from './icons/link-arrow';
 
-import '../../public/caret-left-icon.svg';
+import '@/public/caret-left-icon.svg';
+import { useMediaQuery } from './media-query';
 
 
 type ProjectCardProps = {
 	project: Project;
+	isNext?: boolean;
 	className?: string;
 	onClick?: () => void;
 	featured?: boolean;
@@ -22,6 +24,7 @@ type ProjectCardProps = {
 
 export default function ProjectCard({
 	project,
+	isNext,
 	className = '',
 	onClick,
 	featured = false,
@@ -29,6 +32,9 @@ export default function ProjectCard({
 	onMouseLeave,
 	action,
  }: ProjectCardProps) { 
+
+	// ------ VIEWPORT DISPLAY ------ //
+	const isDesktop = useMediaQuery('(min-width: 1024px)');
 
 	// tags for each project
 	const allTags = useMemo(() => {
@@ -74,7 +80,7 @@ export default function ProjectCard({
 		onClick?.();
 	};
 	
-	return (
+	return isDesktop ? (
 		<div onClick={handleClick}
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
@@ -94,7 +100,7 @@ export default function ProjectCard({
 
 			{/* gradient for text readability */}
 			<div className={`absolute inset-0 bg-gradient-to-t from-black/95 from-10% via-black/70 via-30% to-transparent to-50% point-events-none
-							${featured ? '' : 'bg-[#13131B]/15 transition duration-300 group-hover:bg-transparent'}`}/>
+							${!featured && 'bg-[#13131B]/15 transition duration-300 group-hover:bg-transparent'}`}/>
 
 			{/* project details section */}
 			<div className='font-inter text-white
@@ -153,8 +159,8 @@ export default function ProjectCard({
 				)}
 			</div>
 
-			{/* hover: hint message */}
-			{!showIcon && !featured && (
+			{/* hover: show hint message (only show IFF portfolio project card, and NOT next project in overlay) */}
+			{!showIcon && !featured && !isNext && (
 				<span className='font-inter font-medium text-white
 									absolute inset-0 p-6
 									opacity-0 translate-y-1
@@ -176,11 +182,35 @@ export default function ProjectCard({
 				</span>
 			)}
 
+			{/* next project card in overlay */}
+			{isNext && (
+				<span className='font-inter font-medium text-white
+									absolute inset-0 p-6
+									opacity-100
+									transition-all duration-200
+									whitespace-nowrap
+									bg-gradient-to-t from-transparent via-black/20 via-70%  to-black/60 to-90% point-events-none'>					
+					<p className='text-xs xl:text-sm'>Next Project</p>
+				</span>
+			)}
+
+			{/* render any actions if I want */}
 			{featured && action && (
 				<div className='absolute bottom-4 right-4 z-20'>
 					{action}
 				</div>
 			)}
 		</div>
-	);
+	): (
+		<div className='relative w-full h-full aspect-1/1'>
+			{/* preview */}
+			<Image
+				src={project.images[0]}
+				alt={project.title}
+				fill
+				className='object-cover'
+				draggable={false}
+			/>	
+		</div>
+	)
 }
