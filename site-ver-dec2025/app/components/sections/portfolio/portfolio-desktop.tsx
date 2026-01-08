@@ -1,49 +1,53 @@
 'use client';
 
 import { useState, useEffect, useRef, useMemo } from 'react';
-
-import { SectionReveal } from './section-reveal';
-import { useActiveSection } from './active-theme';
-import { Reveal } from './reveal';
-import { Project } from '@/lib/projectTypes';
-import ProjectCard from './projectcard';
-
-import Grid from './grid';
 import Image from 'next/image';
 import { AnimatePresence } from 'framer-motion';
 
-import GuideButton from './guide-button';
-import LinkArrow from './icons/link-arrow';
-import ProjectOverlay from './projectoverlay';
+import { SectionReveal } from '@/app/components/section-reveal';
+import { Reveal } from '@/app/components/reveal';
+import ProjectOverlay from '@/app/components/projectoverlay';
+import { useActiveSection } from '@/app/components/active-theme';
+import Grid from '@/app/components/grid';
 
-import '../../public/works.svg';
-import '../../public/portfolio.svg';
-import '../../public/projects.svg';
-import '../../public/palette-icon.svg';
-import '../../public/palette-icon-grey.svg';
-import '../../public/code-icon.svg';
-import '../../public/code-icon-grey.svg';
-import '../../public/github-logo.svg';
-import '../../public/dribbble-logo.svg';
-import '../../public/caret-double-right-icon.svg';
-import '../../public/caret-left-icon.svg';
+import ProjectCard from '@/app/components/projectcard';
+import { Project } from '@/lib/projectTypes';
+
+import GuideButton from '@/app/components/guide-button';
+import LinkArrow from '@/app/components/icons/link-arrow';
+
+import '@/public/works.svg';
+import '@/public/portfolio.svg';
+import '@/public/projects.svg';
+import '@/public/palette-icon.svg';
+import '@/public/palette-icon-grey.svg';
+import '@/public/code-icon.svg';
+import '@/public/code-icon-grey.svg';
+import '@/public/github-logo.svg';
+import '@/public/dribbble-logo.svg';
+import '@/public/caret-left-icon.svg'
 
 
-
-export default function Portfolio({
-    className = '',
-    isLoading,
-    projects,
- }: { 
-    className?: string; 
+type PortfolioDesktopProps = {
     isLoading: boolean;
     projects: Project[];
- }) {
-    // ------ FILTER PROJECTS ------ //
-        // filter state
-        const [filter, setFilter] = useState<'all' | 'design' | 'development'>('all');
+    filter: 'all' | 'design' | 'development';
+    setFilter: (f: 'all' | 'design' | 'development') => void;
+    counts: {
+        design: number;
+        development: number;
+    }
+}
 
-        // projects filtered by type
+export default function PortfolioDesktop({
+    isLoading,
+    projects,
+    filter,
+    setFilter,
+    counts,
+}: PortfolioDesktopProps) {
+
+    // ------ FILTERED PROJECTS ------ //
         const filteredProjects = useMemo(() => {
             if (filter === 'all') return projects;
 
@@ -52,31 +56,17 @@ export default function Portfolio({
             );
         }, [projects, filter]);
 
-        // get counts of each project type
-        const counts = useMemo(() => {
-            let design = 0;
-            let development = 0;
-            projects.forEach(project => {
-                if (project.type?.includes('design')) design++;
-                if (project.type?.includes('development')) development++;
-            });
-            return {
-                design,
-                development,
-            };
-        }, [projects]);
-
-        // repopulate projects on filter change
-        useEffect(() => {
-            setCarouselProjects(filteredProjects);
-        }, [filter]);
-
-        // carousel state: order of filtered projects
+    // ------ PROJECT CAROUSEL ------ //
+    // carousel state: order of filtered projects
         const [carouselProjects, setCarouselProjects] = useState<Project[]>(filteredProjects);
 
         // first element is featured project by default
         const featuredProject = carouselProjects[0];
 
+        // repopulate projects on filter change
+        useEffect(() => {
+            setCarouselProjects(filteredProjects);
+        }, [filter]);
 
     // ------ UPDATE FEATURED PROJECT ------ //
         // update featured project if clicked
@@ -160,7 +150,6 @@ export default function Portfolio({
             };
         }, [isDetailsOpen]);
 
-        // next project in modal
         const nextProject = carouselProjects.length > 1
             ? carouselProjects[1]
             : null;
@@ -381,7 +370,7 @@ export default function Portfolio({
                                     {featuredProject?.github && (
                                         <a className='font-medium text-(--bg-colour)
                                                     flex flex-row gap-2 items-center
-                                                    w-fit h-fit px-6 py-3 rounded-full 2xl:px-8 2xl:py-4
+                                                    w-fit h-full px-5 py-3 rounded-full 2xl:px-8 2xl:py-4
                                                     bg-(--text-colour) hover:bg-(--grey)
                                                     transition-colors duration-300'
                                             target='_blank'
@@ -394,15 +383,13 @@ export default function Portfolio({
                                                 width={18}
                                                 height={18}
                                             />
-                                            GitHub
-                                            <LinkArrow className='size-[20px] text-(--bg-colour) group-transition-colors group:duration-300'/>
                                         </a>
                                     )}
 
                                     {featuredProject?.link && (
                                         <a className='font-medium text-(--bg-colour)
                                                     flex flex-row gap-2 items-center
-                                                    w-fit h-fit px-6 py-3 rounded-full 2xl:px-8 2xl:py-4
+                                                    w-fit h-full px-5 py-3 rounded-full 2xl:px-8 2xl:py-4
                                                     bg-(--text-colour) hover:bg-(--grey)
                                                     transition-colors duration-300'
                                             target='_blank'
@@ -415,8 +402,6 @@ export default function Portfolio({
                                                 width={18}
                                                 height={18}
                                             />
-                                            Dribbble
-                                            <LinkArrow className='size-[20px] text-(--bg-colour) group-transition-colors group:duration-300'/>
                                         </a>
                                     )}
                                 </div>
@@ -536,6 +521,9 @@ export default function Portfolio({
                                 const pos = positions[i + 1];
                                 if (!pos) return null;
 
+                                // project card prop
+                                const isNextProject = nextProject?.id === project.id;
+                                
                                 return (
                                     <div
                                         key={`${project.id}-${i}`}
@@ -670,3 +658,5 @@ export default function Portfolio({
         </>
     )
 }
+
+

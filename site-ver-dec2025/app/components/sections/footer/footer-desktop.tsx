@@ -1,22 +1,22 @@
 'use client';
 
 import Image from 'next/image';
-import Grid from './grid';
+import Grid from '@/app/components/grid';
 
-import LinkArrow from './icons/link-arrow';
-import { Reveal } from './reveal';
+import LinkArrow from '@/app/components/icons/link-arrow';
+import { Reveal } from '@/app/components/reveal';
 
-import '../../public/link-arrow-white.svg';
-import '../../public/link-arrow-black.svg';
-import '../../public/jt-white.svg';
-import '../../public/jt-logo-grey.svg';
-import '../../public/thats-all.svg';
-import '../../public/footer-jacqueline.svg';
+import '@/public/link-arrow-white.svg';
+import '@/public/link-arrow-black.svg';
+import '@/public/jt-white.svg';
+import '@/public/jt-logo-grey.svg';
+import '@/public/thats-all.svg';
+import '@/public/footer-jacqueline.svg';
 
 
-export default function Footer({ className = '' }: { className?: string }) {
+export default function FooterDesktop({ className = '' }: { className?: string }) {
     return (
-        <Grid className={className}>
+        <Grid>
             {/* cta */}
             <div className='font-inter
                             col-start-2 col-span-3 row-start-1 row-span-1 
@@ -52,14 +52,14 @@ export default function Footer({ className = '' }: { className?: string }) {
             {/* real footer */}
             <div className='font-inter font-medium text-(--alt-text-colour) sm:text-sm md:text-base
                             col-start-1 col-span-5 row-start-3 row-span-1
-                            flex flex-col gap-16 pt-16 pb-6 h-fit
+                            flex flex-col gap-16 pt-16 pb-6 h-full
                             bg-(--dark-black) border-t-(--dark-black)'>
                 {/* content */}
                 
                 <div className='flex flex-row justify-between'>
                     {/* name section */}
                     <Reveal delay={0.25}>
-                    <div className='flex flex-col gap-6 w-(--cell-width) pl-8 pr-8'>
+                    <div className='flex flex-col gap-4 w-(--cell-width) pl-8 pr-8'>
                         <Image 
                             src='/jt-white.svg'
                             alt='jacqueline truong'
@@ -68,7 +68,7 @@ export default function Footer({ className = '' }: { className?: string }) {
                             className='size-full'
                             draggable={false}
                         />
-                        <h5 className='text-(--alt-text-colour) text-right'>Design and development by {"\n"} Jacqueline Truong</h5>
+                        <h5 className='text-(--alt-text-colour) text-right leading-5'>© 2025 built & designed by jacqueline truong</h5>
                     </div>
                     </Reveal>
 
@@ -123,14 +123,6 @@ export default function Footer({ className = '' }: { className?: string }) {
                     </div>
                     </Reveal>
                 </div>
-                
-                <Reveal delay={1}>
-                {/* copyright */}
-                <p className='xs:text-sx sm:text-sm text-(--alt-text-colour)
-                              flex flex-row justify-center'>
-                    All rights reserved. © 2025
-                </p>
-                </Reveal>
             </div>
         </Grid>
     )

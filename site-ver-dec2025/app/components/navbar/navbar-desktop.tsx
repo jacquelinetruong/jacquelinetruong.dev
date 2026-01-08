@@ -1,23 +1,50 @@
 'use client';
 
 import Image from 'next/image';
+import { useLenis } from 'lenis/react';
 
-import { useTheme } from './theme-context';
-import { useActiveSection } from './active-theme';
+import { useTheme } from '../theme-context';
+import { useActiveSection } from '../active-theme';
 
-import '../../public/jt-logo-black.svg';
-import '../../public/jt-logo-white.svg';
+import '@/public/jt-logo-black.svg';
+import '@/public/jt-logo-white.svg';
 
 
-export default function Navbar({ isLoading }: { isLoading: boolean }) {
+export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
     const { theme, setTheme } = useTheme();
+    const lenis = useLenis();
 
+    // section themes
     const activeSection = useActiveSection(setTheme, {
         home: 'light',
         about: 'light',
         portfolio: 'dark',
         experience: 'light',
     });
+
+    // smooth scroll to section
+    const scrollToSection = (id: string) => (e: React.MouseEvent) => {
+        e.preventDefault();
+
+        const el = document.getElementById(id);
+        if (!el) return;
+
+        const navHeight = parseFloat(
+				getComputedStyle(document.documentElement).getPropertyValue('--nav-height')
+        ) || 0;
+
+        const y = el.getBoundingClientRect().top + (lenis?.scroll ?? window.scrollY) - navHeight;
+
+        if (lenis) {
+            lenis.scrollTo(y, {
+                duration: 0.8,
+                easing: t => 1 - Math.pow(1 - t, 3),
+            });
+        } else {
+            // default
+            window.scrollTo({top: y, behavior: 'smooth'});
+        }
+    };
 
     return (
         <div className='font-inter font-medium xs:text-sm md:text-md
@@ -54,32 +81,20 @@ export default function Navbar({ isLoading }: { isLoading: boolean }) {
 
                 {/* nav items */}
                 <div className='navbar-items flex flex-row gap-8'>
-                    <a className={`transition-colors duration-300 
-                        ${activeSection === 'home' ? 'text-(--text-colour)' : 'text-(--alt-text-colour) hover:text-(--dark-grey)'}
-                        ${activeSection === 'portfolio' && 'text-(--alt-text-colour) hover:text-(--grey)'}`}    // dark mode colours
-                        href='#home'
-                    >
-                        Home
-                    </a>
-                    <a className={`transition-colors duration-300 
-                        ${activeSection === 'about' ? 'text-(--text-colour)' : 'text-(--alt-text-colour) hover:text-(--dark-grey)'}
-                        ${activeSection === 'portfolio' && 'text-(--alt-text-colour) hover:text-(--grey)'}`}
-                        href='#about'
-                    >
-                        About
-                    </a>
-                    <a className={`transition-colors duration-300 ${activeSection === 'portfolio' ? 'text-(--text-colour) hover:text-(--grey)' : 'text-(--alt-text-colour) hover:text-(--dark-grey)'}`}
-                        href='#portfolio'
-                    >
-                        Portfolio
-                    </a>
-                    <a className={`transition-colors duration-300 
-                        ${activeSection === 'experience' ? 'text-(--text-colour)' : 'text-(--alt-text-colour) hover:text-(--dark-grey)'}
-                        ${activeSection === 'portfolio' && 'text-(--alt-text-colour) hover:text-(--grey)'}`}
-                        href='#experience'
-                    >
-                        Experience
-                    </a>
+                    {['home', 'about', 'portfolio', 'experience'].map((id) => (
+                        <a
+                        key={id}
+                        href={`#${id}`}
+                        onClick={scrollToSection(id)}
+                        className={`transition-colors duration-300 ${
+                            activeSection === id
+                            ? 'text-(--text-colour)'
+                            : 'text-(--alt-text-colour) hover:text-(--dark-grey)'
+                        } ${activeSection === 'portfolio' && id !== 'portfolio' ? 'text-(--alt-text-colour) hover:text-(--grey)' : ''}`}
+                        >
+                        {id.charAt(0).toUpperCase() + id.slice(1)}
+                        </a>
+                    ))}
                     {/* <a href='#daily'>Daily</a> */}           {/* future page, maybe */}
                 </div>
             </div>

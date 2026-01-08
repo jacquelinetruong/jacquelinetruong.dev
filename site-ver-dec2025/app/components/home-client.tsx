@@ -1,16 +1,17 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useMediaQuery } from './media-query';
 
 import Loader from './loader';
-import Navbar from './navbar';
+import Navbar from './navbar/navbar';
 import Quickbar from './quickbar';
 import NameStamp from './name-stamp';
-import Hero from './hero';
-import About from './about';
-import Portfolio from './portfolio';
-import ExperienceSection from './experience';
-import Footer from './footer';
+import Hero from './sections/hero/hero';
+import About from './sections/about/about';
+import Portfolio from './sections/portfolio/portfolio';
+import ExperienceSection from './sections/experience/experience';
+import Footer from './sections/footer/footer';
 import Grid from './grid';
 
 import type { Project } from '@/lib/projectTypes';
@@ -34,6 +35,9 @@ export default function HomeClient({
 	currentXP,
 	experience,
 }: HomeClientProps) {
+
+	// ------ VIEWPORT DISPLAY ------ //
+    const isDesktop = useMediaQuery('(min-width: 1024px)');
 	
 	// loader
 	const [isLoading, setIsLoading] = useState(true);
@@ -49,15 +53,21 @@ export default function HomeClient({
 
 			{!isLoading && (
 				<>
-					<Navbar isLoading={isLoading}/>
+					<Navbar 
+						isLoading={isLoading}
+						isDesktop={isDesktop}
+					/>
 					
-					<Quickbar isLoading={isLoading}/>
-
+					{isDesktop && (
+						<Quickbar isLoading={isLoading}/>
+					)}
+					
 					<NameStamp />
 					
 					<section id='home' className='section'>
 						<Grid>
 							<Hero
+								isDesktop={isDesktop}
 								isLoading={isLoading}
 								projects={heroProjects}
 								className='col-span-5 row-start-1 row-span-4'
@@ -68,6 +78,7 @@ export default function HomeClient({
 					<section id='about' className='section'>
 						<Grid>
 							<About
+								isDesktop={isDesktop}
 								isLoading={isLoading}
 								projects={aboutProjects}
 								experience={currentXP}
@@ -77,18 +88,28 @@ export default function HomeClient({
 					</section>
 
 					<section id='portfolio' className='section'>
-						<Grid>
+						{isDesktop ? (
+							<Grid>
+								<Portfolio
+									isDesktop={isDesktop}
+									isLoading={isLoading}
+									projects={portfolioProjects}
+									className='col-span-5 row-start-1 row-span-4'
+								/>
+							</Grid>
+						): (
 							<Portfolio
+								isDesktop={isDesktop}
 								isLoading={isLoading}
 								projects={portfolioProjects}
-								className='col-span-5 row-start-1 row-span-4'
 							/>
-						</Grid>
+						)}
 					</section>
 
 					<section id='experience' className='section'>
 						<Grid>
 							<ExperienceSection
+								isDesktop={isDesktop}
 								isLoading={isLoading}
 								projects={experienceProjects}
 								experience={experience}
@@ -97,9 +118,14 @@ export default function HomeClient({
 						</Grid>
 					</section>
 
-					<Grid>
-						<Footer className='col-span-5 row-start-1' />
-					</Grid>
+					<section id='contact' className='section'>
+						<Grid>
+							<Footer 
+								isDesktop={isDesktop}
+								className='col-span-5 row-start-1' 
+							/>
+						</Grid>
+					</section>
 				</>
 			)}
 		</>

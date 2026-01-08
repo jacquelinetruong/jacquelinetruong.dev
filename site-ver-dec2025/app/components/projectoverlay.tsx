@@ -222,7 +222,7 @@ export default function ProjectOverlay({
 										flex flex-row justify-between items-end p-7'>
 							<button 
 								onClick={onPrev}
-								className={`flex flex-row gap-1 px-2 py-1 rounded-2xl cursor-pointer
+								className={`flex flex-row gap-1 px-2 py-1 rounded-2xl cursor-pointer group
 											hover:bg-(--grid-line-colour) transition-colors duration-200
 											${!prevProject && 'hidden'}`}
 							>
@@ -232,15 +232,15 @@ export default function ProjectOverlay({
 									width={16}
 									height={16}
 								/>
-								<p className='hidden md:block md:text-xs lg:text-sm font-medium text-nowrap text-(--light-mode-grey) pr-1'>Previous</p>
+								<p className='transition-colors duration-200 hidden md:block md:text-xs lg:text-sm font-medium text-nowrap text-(--light-mode-grey) group-hover:text-(--grey) pr-1'>Previous</p>
 							</button>
 							<button 
 								onClick={onNext}
-								className={`flex flex-row gap-1 px-2 py-1 rounded-2xl cursor-pointer
+								className={`flex flex-row gap-1 px-2 py-1 rounded-2xl cursor-pointer group
 											hover:bg-(--grid-line-colour) transition-colors duration-200
 											${!nextProject && 'hidden'}`}
 							>
-								<p className='hidden md:block md:text-xs lg:text-sm font-medium text-nowrap text-(--light-mode-grey) pl-1'>Next</p>
+								<p className='transition-colors duration-200  hidden md:block md:text-xs lg:text-sm font-medium text-nowrap text-(--light-mode-grey) group-hover:text-(--grey) pl-1'>Next</p>
 								<Image
 									src='/caret-right-icon.svg'
 									alt='previous project'
@@ -254,6 +254,7 @@ export default function ProjectOverlay({
 							{nextProject && (
 								<ProjectCard
 									project={nextProject}
+									isNext
 									onClick={onNext}
 								/>
 							)}

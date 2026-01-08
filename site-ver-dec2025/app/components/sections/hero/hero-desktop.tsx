@@ -1,20 +1,18 @@
 'use client';
 
-import { motion } from 'framer-motion';
-import { useState } from 'react';
-import { Reveal } from './reveal';
+import { Reveal } from '../../reveal';
 import { Project } from '@/lib/projectTypes';
-import ProjectCard from './projectcard';
-import Grid from './grid';
+import ProjectCard from '../../projectcard';
+import Grid from '../../grid';
 
-import GuideButton from './guide-button';
-import { SectionReveal } from './section-reveal';
+import GuideButton from '../../guide-button';
+import { SectionReveal } from '../../section-reveal';
 
-import '../../public/jt-black.svg';
+import '@/public/jt-black.svg';
 
 
-export default function Hero({
-	className = '',
+export default function HeroDesktop({
+    className = '',
 	isLoading,
 	projects,
  }: { 
@@ -22,13 +20,14 @@ export default function Hero({
 	isLoading: boolean;
 	projects: Project[];
  }) {
-  return (       
-	<SectionReveal
+
+    return (
+        <SectionReveal
 		fadeDistance={0}
 		fadeStart={0}
 		fadeEnd={0.7}
 	>
-		<Grid >
+		<Grid>
 			{/* best projects :o */}
 			{/* project display #1 */}
 			<div className='col-start-2 col-span-1 row-start-1 row-span-1'>
@@ -78,5 +77,5 @@ export default function Hero({
 			</div>
 		</Grid>
 	</SectionReveal>
-  );
-};
+    )
+}

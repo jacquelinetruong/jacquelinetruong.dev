@@ -2,21 +2,22 @@
 
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
+import { formatDateRange } from './experience';
 
 import { Project } from '@/lib/projectTypes';
 import { Experience } from '@/lib/experienceTypes';
 
-import { SectionReveal } from './section-reveal';
-import { Reveal } from './reveal';
-import ProjectCard from './projectcard';
-import Grid from './grid';
+import { SectionReveal } from '@/app/components/section-reveal';
+import { Reveal } from '@/app/components/reveal';
+import ProjectCard from '@/app/components/projectcard';
+import Grid from '@/app/components/grid';
 
-import Cat from './icons/cat';
-import '../../public/detail-arrow-black.svg';
-import '../../public/detail-arrow-grey.svg';
-import '../../public/experience.svg';
+import Cat from '@/app/components/icons/cat';
+import '@/public/detail-arrow-black.svg';
+import '@/public/detail-arrow-grey.svg';
+import '@/public/experience.svg';
 
-export default function ExperienceSection({
+export default function ExperienceDesktop({
     className = '',
     isLoading,
     projects,
@@ -61,7 +62,7 @@ export default function ExperienceSection({
             fadeStart={0.4}
             fadeEnd={0.7}
         >
-            <Grid className={className}>
+            <Grid>
                 {/* relevant projects */}
                 {/* project display #1 */}
                 <div className='col-start-5 col-span-1 row-start-1 row-span-1'>
@@ -234,31 +235,10 @@ export default function ExperienceSection({
 
                 <div className='col-start-1 row-start-3 row-span-1 p-2 3xl:p-8'>
                     <Reveal delay={1.6}>
-                        <Cat className={`place-self-start size-full text-(--grid-line-colour)`}/>
+                        <Cat className={`place-self-start size-full text-(--light-mode-grey)/40`}/>
                     </Reveal>
                 </div>
             </Grid>
         </SectionReveal>
     )
-}
-
-// helper function for sorting experiences by date
-function formatDateRange(xp: Experience) {
-    if (!xp.startDate) return '';
-
-    const start = new Date(xp.startDate).toLocaleDateString('en-US', {
-        month: 'short',
-        year: 'numeric',
-    });
-
-    if (xp.current || !xp.endDate) {
-        return `${start} — Present`;
-    }
-
-    const end = new Date(xp.endDate).toLocaleDateString('en-US', {
-        month: 'short',
-        year: 'numeric',
-    });
-
-    return `${start} — ${end}`;
 }
