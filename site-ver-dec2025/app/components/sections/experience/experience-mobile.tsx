@@ -48,7 +48,7 @@ export default function ExperienceMobile({
         const visibleItems = xpCategorized[filter];
 
     // ------ ACTIVE ITEM ------ //
-        const [activeExperience, setActiveExperience] = useState<Experience | null>(null);
+        const [activeExperience, setActiveExperience] = useState<Experience | null>(visibleItems[0] ?? null);
 
         // set default active experience
         useEffect(() => {
@@ -57,7 +57,7 @@ export default function ExperienceMobile({
 
     return (
         <section className='relative font-inter'>
-            <Grid className='grid-auto-rows-auto'>
+            <Grid className=''>
                 {/* title and filters */}
                 <div className='col-start-1 col-span-3 row-start-1 row-span-1 
                                 w-full h-full px-4 py-6
@@ -68,17 +68,18 @@ export default function ExperienceMobile({
                             src='/experience.svg'
                             alt='my namestamp'
                             fill
+                            className='object-contain object-left'
                         />
                     </div>
 
                     {/* filter buttons */}
-                    <div className='font-inter text-xs
+                    <div className='font-inter text-xs sm:text-sm
                                     flex flex-row gap-2 w-full h-fit'>
                         {/* work button */}
                         <button 
                             onClick={() => setFilter('work')}
                             className={`flex flex-row gap-2 items-center cursor-pointer
-                                        w-fit h-fit px-6 py-3 rounded-full border
+                                        w-fit h-fit px-6 py-3 sm:px-7 sm:py-4 rounded-full border
                                         transition-colors duration-400
                                         ${filter === 'work' ? 'text-white border-(--black) bg-(--black)' : 'text-(--text-colour) border-(--grey) bg-(--off-white)'}`}
                         >
@@ -89,7 +90,7 @@ export default function ExperienceMobile({
                         <button 
                             onClick={() => setFilter('clients')}
                             className={`flex flex-row gap-1 items-center cursor-pointer
-                                        w-fit h-fit px-6 py-3 rounded-full border
+                                        w-fit h-fit px-6 py-3 sm:px-7 sm:py-4 rounded-full border
                                         transition-colors duration-400
                                         ${filter === 'clients' ? 'text-white border-(--black) bg-(--black)' : 'text-(--text-colour) border-(--grey) bg-(--off-white)'}`}
                         >
@@ -100,7 +101,7 @@ export default function ExperienceMobile({
                         <button 
                             onClick={() => setFilter('proficiencies')}
                             className={`flex flex-row gap-1 items-center cursor-pointer
-                                        w-fit h-fit px-6 py-3 rounded-full border
+                                        w-fit h-fit px-6 py-3 sm:px-7 sm:py-4 rounded-full border
                                         transition-colors duration-400
                                         ${filter === 'proficiencies' ? 'text-white border-(--black) bg-(--black)' : 'text-(--text-colour) border-(--grey) bg-(--off-white)'}`}
                         >
@@ -116,7 +117,6 @@ export default function ExperienceMobile({
                         <div className='w-fit h-fit'>
                             <Reveal key={item.id} delay={i * 0.15}>
                                 <button
-                                    key={item.id}
                                     onClick={() => setActiveExperience(item)}
                                     className={`
                                         flex flex-row gap-1 items-center 
@@ -131,9 +131,10 @@ export default function ExperienceMobile({
                                         src={`${activeExperience?.id === item.id
                                             ? '/detail-arrow-black.svg'
                                             : '/detail-arrow-grey.svg'}`}
-                                        alt='arrow'
+                                        alt=''
                                         width={16}
                                         height={16}
+                                        className='sm:size-5'
                                     />
                                     {item.menuTitle}
                                 </button>
@@ -143,16 +144,16 @@ export default function ExperienceMobile({
                 </div>
 
                 {/* active item details */}
-                <div className='col-start-1 col-span-3 row-start-3 row-span-2 flex flex-col gap-12 p-4'>
+                <div className='col-start-1 col-span-3 row-start-3 row-span-4 flex flex-col gap-12 p-4 bottom-0'>
                     {activeExperience && filter !== 'proficiencies' ? (
                         <div className='flex flex-col'>
                             {/* experience date */}
-                            <h3 className='flex flex-row gap-1 text-sm text-(--light-mode-grey)'>
+                            <h3 className='flex flex-row gap-1 text-sm sm:text-base text-(--light-mode-grey)'>
                                 {formatDateRange(activeExperience)}
                             </h3>
                             
                             {/* experience title */}
-                            <h2 className='text-xl text-(--black)'>{activeExperience?.position} <b className='font-semibold '>@{activeExperience?.menuTitle}</b></h2>
+                            <h2 className='text-xl sm:text-2xl text-(--black)'>{activeExperience?.position} <b className='font-semibold '>@{activeExperience?.menuTitle}</b></h2>
                         </div>
                     ) : (
                         <></>
@@ -161,9 +162,10 @@ export default function ExperienceMobile({
                     {/* points */}
                     <div
                         key={activeExperience?.id} 
-                        className={`flex flex-col ${filter === 'proficiencies' ? 'gap-2' : 'gap-4'}`}>
+                        className={`bottom-0 flex flex-col w-full sm:w-5/6
+                                    ${filter === 'proficiencies' ? 'gap-2' : 'gap-4'}`}>
                         {activeExperience?.points.map((point, i) => (
-                            <Reveal delay={i * 0.2} key={i}>
+                            <Reveal delay={i * 0.2} key={point}>
                                 <li className='ml-4 text-base text-(--black)'>
                                     {point}
                                 </li>

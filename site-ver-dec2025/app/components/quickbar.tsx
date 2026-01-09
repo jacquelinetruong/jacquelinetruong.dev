@@ -1,7 +1,7 @@
 'use client';
 
 import { Reveal } from './reveal';
-import { useActiveSection } from './active-theme';
+import { useActiveSection } from './active-section';
 
 import Coffee from './icons/coffee';
 import TopArrow from './icons/top-arrow';
@@ -57,8 +57,8 @@ export default function Quickbar({ isLoading }: { isLoading: boolean }) {
                     {/* tooltip */}
                     <span className='absolute -translate-y-10 -translate-x-1
                                 w-fit h-fit px-3 py-2 rounded-xl 
-                                bg-black/80 border border-(--dark-grey) shadow-lg backdrop-blur-sm
-                                opacity-0 group-hover:opacity-100 group-hover:bg-(--black)/80
+                                bg-black/90 border border-(--dark-grey) shadow-lg backdrop-blur-sm
+                                opacity-0 group-hover:opacity-100 group-hover:bg-(--dark-black)/90 group-hover:backdrop-blur-md
                                 transition-all duration-200'>
                         <p className='font-inter font-medium text-xs text-white whitespace-nowrap'>Back to top</p>
                     </span>

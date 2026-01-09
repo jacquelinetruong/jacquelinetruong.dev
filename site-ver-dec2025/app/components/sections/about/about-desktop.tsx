@@ -110,7 +110,7 @@ export default function AboutDesktop({
                     {/* quick info */}
                     <div className='flex flex-col gap-4'>
                         {/* current work */}
-                        <div className='flex flex-col'>
+                        <div className='flex flex-col gap-0.5'>
                             <Reveal delay={0.45}>
                                 <h4 className='font-medium text-(--alt-text-colour) sm:text-xs md:text-sm 2xl:text-base 3xl:text-lg'>Currently</h4>
                             </Reveal>
@@ -127,8 +127,8 @@ export default function AboutDesktop({
                                         <Image
                                             src='/detail-arrow-black.svg'
                                             alt='arrow'
-                                            width={24}
-                                            height={24}
+                                            width={20}
+                                            height={20}
                                             draggable={false}
                                         />
                                         {role.position} @ {role.menuTitle}
@@ -139,7 +139,7 @@ export default function AboutDesktop({
                         </div>
 
                         {/* education */}
-                        <div className='flex flex-col'>
+                        <div className='flex flex-col gap-0.5'>
                             <Reveal delay={(currentWork.length + 1) * 0.25}>
                                 <h4 className='font-medium sm:text-xs md:text-sm 2xl:text-base 3xl:text-lg text-(--alt-text-colour)'>Education</h4>
                             </Reveal>
@@ -150,8 +150,8 @@ export default function AboutDesktop({
                                 <Image 
                                     src='/detail-arrow-black.svg'
                                     alt='arrow'
-                                    width={24}
-                                    height={24}
+                                    width={20}
+                                    height={20}
                                     draggable={false}
                                 />
                                 BSc Computer Science @ Wilfrid Laurier University, 2025

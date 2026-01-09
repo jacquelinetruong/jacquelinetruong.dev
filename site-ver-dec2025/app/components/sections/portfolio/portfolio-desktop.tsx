@@ -7,7 +7,7 @@ import { AnimatePresence } from 'framer-motion';
 import { SectionReveal } from '@/app/components/section-reveal';
 import { Reveal } from '@/app/components/reveal';
 import ProjectOverlay from '@/app/components/projectoverlay';
-import { useActiveSection } from '@/app/components/active-theme';
+import { useActiveSection } from '@/app/components/active-section';
 import Grid from '@/app/components/grid';
 
 import ProjectCard from '@/app/components/projectcard';
@@ -353,11 +353,11 @@ export default function PortfolioDesktop({
                                     className='font-medium text-sm
                                                 flex flex-row gap-2'>
                                     {featuredProject?.link && (
-                                        <a className=' text-(--bg-colour)
-                                                    flex flex-row gap-2 items-center
-                                                    w-fit h-fit px-6 py-3 rounded-full 2xl:px-8 2xl:py-4
-                                                    bg-(--text-colour) hover:bg-(--grey)
-                                                    transition-colors duration-300'
+                                        <a className='text-(--bg-colour)
+                                                        flex flex-row gap-2 items-center
+                                                        w-fit h-fit px-6 py-3 rounded-full 2xl:px-8 2xl:py-4
+                                                        bg-(--text-colour) hover:bg-(--nice-grey)
+                                                        transition-colors duration-300'
                                             target='_blank'
                                             href={featuredProject?.link}
                                             rel='noopener noreferrer'
@@ -369,10 +369,10 @@ export default function PortfolioDesktop({
 
                                     {featuredProject?.github && (
                                         <a className='font-medium text-(--bg-colour)
-                                                    flex flex-row gap-2 items-center
-                                                    w-fit h-full px-5 py-3 rounded-full 2xl:px-8 2xl:py-4
-                                                    bg-(--text-colour) hover:bg-(--grey)
-                                                    transition-colors duration-300'
+                                                        flex flex-row gap-2 items-center
+                                                        w-fit h-full px-5 py-3 rounded-full 2xl:px-8 2xl:py-4
+                                                        bg-(--text-colour) hover:bg-(--nice-grey)
+                                                        transition-colors duration-300'
                                             target='_blank'
                                             href={featuredProject?.github}
                                             rel='noopener noreferrer'
@@ -386,14 +386,14 @@ export default function PortfolioDesktop({
                                         </a>
                                     )}
 
-                                    {featuredProject?.link && (
+                                    {featuredProject?.dribbble && (
                                         <a className='font-medium text-(--bg-colour)
-                                                    flex flex-row gap-2 items-center
-                                                    w-fit h-full px-5 py-3 rounded-full 2xl:px-8 2xl:py-4
-                                                    bg-(--text-colour) hover:bg-(--grey)
-                                                    transition-colors duration-300'
+                                                        flex flex-row gap-2 items-center
+                                                        w-fit h-full px-5 py-3 rounded-full 2xl:px-8 2xl:py-4
+                                                        bg-(--text-colour) hover:bg-(--nice-grey)
+                                                        transition-colors duration-300'
                                             target='_blank'
-                                            href={featuredProject?.link}
+                                            href={featuredProject?.dribbble}
                                             rel='noopener noreferrer'
                                         >    
                                             <Image
@@ -521,15 +521,12 @@ export default function PortfolioDesktop({
                                 const pos = positions[i + 1];
                                 if (!pos) return null;
 
-                                // project card prop
-                                const isNextProject = nextProject?.id === project.id;
-                                
                                 return (
                                     <div
                                         key={`${project.id}-${i}`}
                                         className={`col-start-${pos.colStart} col-span-${pos.colSpan} row-start-${pos.rowStart} row-span-${pos.rowSpan}`}
                                     >
-                                        <Reveal delay={(i + 0.05) * 0.15}>
+                                        <Reveal delay={(i + 0.05) * 0.15} animateTrigger={filter}>
                                             <ProjectCard
                                                 project={project}
                                                 onClick={() => newFeaturedProject(project)}
@@ -592,21 +589,21 @@ export default function PortfolioDesktop({
                                         src='/works.svg'
                                         alt='section title: design and development works'
                                         fill
-                                        className={`place-self-end size-full transition-all ${filter === 'all' ? 'opacity-100 duration-800 ' : 'opacity-0 translate-x-100 duration-300'}`}
+                                        className={`pr-8 object-contain object-right transition-all ${filter === 'all' ? 'opacity-100 duration-800 ' : 'opacity-0 translate-x-100 duration-300'}`}
                                         draggable={false}
                                     />
                                     <Image 
                                         src='/portfolio.svg'
                                         alt='section title: design portfolio'
                                         fill
-                                        className={`place-self-end size-full transition-all ${filter === 'design' ? 'opacity-100 duration-800 ' : 'opacity-0 translate-x-100 duration-300'}`}
+                                        className={`pr-8 object-contain object-right transition-all ${filter === 'design' ? 'opacity-100 duration-800 ' : 'opacity-0 translate-x-100 duration-300'}`}
                                         draggable={false}
                                     />
                                     <Image 
                                         src='/projects.svg'
                                         alt='section title: development projects'
                                         fill
-                                        className={`place-self-end size-full transition-all ${filter === 'development' ? 'opacity-100 duration-800' : 'opacity-0 translate-x-100 duration-300'}`}
+                                        className={`pr-8 object-contain object-right transition-all ${filter === 'development' ? 'opacity-100 duration-800' : 'opacity-0 translate-x-100 duration-300'}`}
                                         draggable={false}
                                     />
                                 </div>

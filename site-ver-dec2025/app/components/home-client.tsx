@@ -49,7 +49,10 @@ export default function HomeClient({
 
 	return (
 		<>
-			<Loader isLoading={isLoading} />
+			<Loader 
+				isLoading={isLoading} 
+				isDesktop={isDesktop}
+			/>
 
 			{!isLoading && (
 				<>
@@ -59,10 +62,11 @@ export default function HomeClient({
 					/>
 					
 					{isDesktop && (
-						<Quickbar isLoading={isLoading}/>
+						<>
+							<Quickbar isLoading={isLoading}/>
+							<NameStamp />
+						</>
 					)}
-					
-					<NameStamp />
 					
 					<section id='home' className='section'>
 						<Grid>
@@ -87,38 +91,77 @@ export default function HomeClient({
 						</Grid>
 					</section>
 
-					<section id='portfolio' className='section'>
-						{isDesktop ? (
-							<Grid>
-								<Portfolio
-									isDesktop={isDesktop}
-									isLoading={isLoading}
-									projects={portfolioProjects}
-									className='col-span-5 row-start-1 row-span-4'
-								/>
-							</Grid>
-						): (
-							<Portfolio
-								isDesktop={isDesktop}
-								isLoading={isLoading}
-								projects={portfolioProjects}
-							/>
-						)}
-					</section>
+					{isDesktop ? (
+						<>
+							{/* desktop: render portfolio section first */}
+							<section id='portfolio' className='section'>
+								{isDesktop ? (
+									<Grid>
+										<Portfolio
+											isDesktop={isDesktop}
+											isLoading={isLoading}
+											projects={portfolioProjects}
+											className='col-span-5 row-start-1 row-span-4'
+										/>
+									</Grid>
+								): (
+									<Portfolio
+										isDesktop={isDesktop}
+										isLoading={isLoading}
+										projects={portfolioProjects}
+									/>
+								)}
+							</section>
 
-					<section id='experience' className='section'>
-						<Grid>
-							<ExperienceSection
-								isDesktop={isDesktop}
-								isLoading={isLoading}
-								projects={experienceProjects}
-								experience={experience}
-								className='col-span-5 row-start-2 row-span-4'
-							/>
-						</Grid>
-					</section>
+							<section id='experience' className='section'>
+								<Grid>
+									<ExperienceSection
+										isDesktop={isDesktop}
+										isLoading={isLoading}
+										projects={experienceProjects}
+										experience={experience}
+										className='col-span-5 row-start-2 row-span-4'
+									/>
+								</Grid>
+							</section>
+						</>
+					) : (
+						<>
+							{/* mobile: render experience section first */}
+							<section id='experience' className='section'>
+								<Grid>
+									<ExperienceSection
+										isDesktop={isDesktop}
+										isLoading={isLoading}
+										projects={experienceProjects}
+										experience={experience}
+										className='col-span-5 row-start-2 row-span-4'
+									/>
+								</Grid>
+							</section> 
 
-					<section id='contact' className='section'>
+							<section id='portfolio' className='section'>
+								{isDesktop ? (
+									<Grid>
+										<Portfolio
+											isDesktop={isDesktop}
+											isLoading={isLoading}
+											projects={portfolioProjects}
+											className='col-span-5 row-start-1 row-span-4'
+										/>
+									</Grid>
+								): (
+									<Portfolio
+										isDesktop={isDesktop}
+										isLoading={isLoading}
+										projects={portfolioProjects}
+									/>
+								)}
+							</section>
+						</>
+					)}
+
+					<section id='contact' className='section relative'>
 						<Grid>
 							<Footer 
 								isDesktop={isDesktop}
