@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from './media-query';
 
-import Loader from './loader';
+import Loader from './loader/loader';
 import Navbar from './navbar/navbar';
 import Quickbar from './quickbar';
 import NameStamp from './name-stamp';
