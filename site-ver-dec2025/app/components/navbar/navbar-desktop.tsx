@@ -3,8 +3,8 @@
 import Image from 'next/image';
 import { useLenis } from 'lenis/react';
 
-import { useTheme } from '../theme-context';
-import { useActiveSection } from '../active-theme';
+import { useTheme } from '@/app/components/theme-context';
+import { useActiveSection } from '@/app/components/active-section';
 
 import '@/public/jt-logo-black.svg';
 import '@/public/jt-logo-white.svg';

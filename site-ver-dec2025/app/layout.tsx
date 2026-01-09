@@ -35,7 +35,10 @@ export default function RootLayout({
 
 	return (
 		<html lang='en'>
-			<body className={`${interSans.variable} antialiased`}>
+			<body 
+				className={`${interSans.variable} antialiased select-none`}
+				style = {{overflowX: 'hidden'}}
+			>
 				<ThemeProvider>
 					<ReactLenis 
 						root 

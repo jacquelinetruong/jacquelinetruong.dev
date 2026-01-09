@@ -4,9 +4,9 @@ import Image from 'next/image';
 
 import type { Experience } from '@/lib/experienceTypes';
 
+import { Reveal } from '@/app/components/reveal';
 import Grid from '@/app/components/grid';
 import Coffee from '../../icons/coffee';
-import LinkArrow from '../../icons/link-arrow';
 import '@/public/me.jpg';
 
 
@@ -32,7 +32,7 @@ export default function AboutMobile({
                             src='/me.jpg'
                             alt='me'
                             fill
-                            className='object-cover object-top scale-120'
+                            className='object-cover object-top sm:object-[25%_30%] sm:object-fit scale-120 sm:scale-100'
                         />
                     </div>
                 </div>
@@ -42,70 +42,82 @@ export default function AboutMobile({
                                 flex flex-col gap- px-4 pt-12 gap-12'>
                     <div className='flex flex-col gap-6'>
                         {/* header */}
-                        <h2 className='text-lg leading-[1.3] font-medium'>
-                            I'm a newgrad designer who loves bringing ideas to life through clean, functional, and high-impact products.
-                        </h2>
+                        <Reveal delay={0.2}>
+                            <h2 className='w-full text-lg leading-[1.3] sm:text-2xl sm:w-5/6 font-medium'>
+                                I'm a newgrad designer who loves bringing ideas to life through clean, functional, and high-impact products.
+                            </h2>
+                        </Reveal>
 
                         {/* description */}
-                        <h3 className='text-sm w-4/5'>
-                            My passion for design, code, and interaction bridge the gap towards intuitive experiences, scalable UI, and shipping things that make a real difference.
-                        </h3>
+                        <Reveal delay={0.3}>
+                            <h3 className='text-sm w-4/5 sm:text-base sm:w-4/6'>
+                                My passion for design, code, and interaction bridge the gap towards intuitive experiences, scalable UI, and shipping things that make a real difference.
+                            </h3>
+                        </Reveal>
                     </div>
 
-                    <div className='flex flex-col gap-6'>
-                        {/* current work */}
-                        <div className='flex flex-col'>
-                            <h4 className='text-sm text-(--light-mode-grey) font-medium'>Currently</h4>
+                    <div className='flex flex-col gap-6 w-full h-fit'>
+                        <Reveal delay={0.4}>
+                            {/* current work */}
+                            <div className='flex flex-col'>
+                                <h4 className='text-sm sm:text-base text-(--light-mode-grey) font-medium'>Currently</h4>
 
-                            {/* if jobless :heartbreak: */}
-                            {currentWork.length === 0 && (
-                                <p className='text-sm'>Open to new opportunities</p>
-                            )}
+                                {/* if jobless :heartbreak: */}
+                                {currentWork.length === 0 && (
+                                    <p className='text-sm sm:text-base'>Open to new opportunities</p>
+                                )}
 
-                            {currentWork.map((role, i) => (
-                                <p className='text-sm font-medium
-                                            flex flex-row gap-1 items-center'>     
+                                {currentWork.map((role, i) => (
+                                    <p className='text-sm sm:text-base font-medium
+                                                flex flex-row gap-1 items-center'>     
+                                        <Image
+                                            src='/detail-arrow-black.svg'
+                                            alt='arrow'
+                                            width={16}
+                                            height={16}
+                                            draggable={false}
+                                            className={`sm:size-5`}
+                                        />
+                                        {role.position} @ {role.menuTitle}
+                                        {i < currentWork.length - 1 && ','}
+                                    </p>
+                                ))}
+                            </div>
+                        </Reveal>
+
+                        <Reveal delay={0.5}>
+                            {/* education */}
+                            <div className='flex flex-col'>
+                                <h4 className='text-sm sm:text-base text-(--light-mode-grey) font-medium'>Education</h4>
+
+                                <p className='text-sm sm:text-base font-medium
+                                                flex flex-row gap-1 items-start'>     
                                     <Image
                                         src='/detail-arrow-black.svg'
                                         alt='arrow'
                                         width={16}
                                         height={16}
                                         draggable={false}
+                                        className={`sm:size-5`}
                                     />
-                                    {role.position} @ {role.menuTitle}
-                                    {i < currentWork.length - 1 && ','}
+                                    BSc Computer Science @ Wilfrid Laurier University, '25
                                 </p>
-                            ))}
-                        </div>
-
-                        {/* education */}
-                        <div className='flex flex-col'>
-                            <h4 className='text-sm text-(--light-mode-grey) font-medium'>Education</h4>
-
-                            <p className='text-sm font-medium
-                                            flex flex-row gap-1 items-start'>     
-                                <Image
-                                    src='/detail-arrow-black.svg'
-                                    alt='arrow'
-                                    width={16}
-                                    height={16}
-                                    draggable={false}
-                                />
-                                BSc Computer Science @ Wilfrid Laurier University, '25
-                            </p>
-                        </div>
+                            </div>
+                        </Reveal>
                     </div>
 
-                    <a 
-                        target='_blank'
-                        href='mailto:hello@jacquelinetruong.dev'
-                        className='flex flex-row gap-2 items-center place-self-end
-                                    w-fit h-fit px-5 py-4 rounded-full
-                                    bg-(--black) text-white text-xs'
-                    >
-                        <Coffee className='size-[20px]'/>
-                        Get in touch
-                    </a>
+                    <Reveal delay={0.6}>
+                        <a 
+                            target='_blank'
+                            href='mailto:hello@jacquelinetruong.dev'
+                            className='flex flex-row gap-2 items-center place-self-end
+                                        w-fit h-fit px-5 py-4 sm:px-6 sm:py-5 rounded-full
+                                        bg-(--black) text-white text-xs sm:text-base'
+                        >
+                            <Coffee className='size-[20px] sm:size-[22px]'/>
+                            Get in touch
+                        </a>
+                    </Reveal>
                 </div>
             </Grid>
         </section>

@@ -51,20 +51,34 @@ export default function ProjectCard({
 	useEffect(() => {
 		if (!containerRef.current || !measurerRef.current) return;
 
-		const containerWidth = containerRef.current.offsetWidth;
-		let used = 0;
-		let count = 0;
-		const temp = measurerRef.current; 		// temp element for measuring tag lengths
+		const measureTags = () => {
+			window.requestAnimationFrame(() => {
+				const containerWidth = containerRef.current!.clientWidth;
+				let used = 0;
+				let count = 0;
 
-		for (let tag of allTags) {
-			temp.textContent = tag;
-			const tagWidth = temp.offsetWidth + 24; 		// add padding offset to total width
+				const temp = measurerRef.current!;
+				temp.innerHTML = '';
 
-			if (used + tagWidth > containerWidth) break;
-			used += tagWidth;
-			count++;
-		}
-		setVisibleCount(count);
+				for (let tag of allTags) {
+					const span = document.createElement('span');
+					span.className = 'inline-block px-3 py-1 border border-white rounded-full text-nowrap text-[10px] 2xl:text-xs';
+					span.textContent = tag;
+					temp.appendChild(span);
+
+					const tagWidth = span.offsetWidth + 24;
+					if (used + tagWidth > containerWidth) break;
+					used += tagWidth;
+					count++;
+				}
+
+				setVisibleCount(count);
+			});
+		};
+
+		measureTags();
+		window.addEventListener('resize', measureTags);
+		return () => window.removeEventListener('resize', measureTags);
 	}, [allTags]);
 
 	const hiddenCount = allTags.length - visibleCount;
@@ -120,24 +134,22 @@ export default function ProjectCard({
 						>
 							{/* show tags that fit */}
 							{allTags.slice(0, visibleCount).map(tag => (
-								<span key={tag} className='text-nowrap
-														   px-3 py-1 border border-white rounded-full'>
+								<span key={tag} className='inline-block px-3 py-1 border border-white rounded-full text-nowrap text-[10px] 2xl:text-xs'>
 									{tag}
 								</span>
 							))}
 
 							{/* show number of tags that don't fit */}
-							{hiddenCount > 0 && (
-								<span className='text-nowrap
-												 px-3 p-1 border border-white rounded-full'>
-									+{hiddenCount}
+							{visibleCount < allTags.length && (
+								<span className='text-nowrap pointer-events-none px-3 py-1 border border-white rounded-full text-[10px] 2xl:text-xs'>
+									+{allTags.length - visibleCount}
 								</span>		
 							)}
 
 							{/* hidden element span */}
 							<span
 								ref={measurerRef}
-								className='absolute opacity-0 pointer-events-none px-3 py-1 border border-white rounded-full'>
+								className='absolute opacity-0 pointer-events-none px-3 py-1 border border-white rounded-full text-nowrap text-[10px] 2xl:text-xs'>
 							</span>
 						</div>
 					)}
@@ -202,7 +214,8 @@ export default function ProjectCard({
 			)}
 		</div>
 	): (
-		<div className='relative w-full h-full aspect-1/1'>
+		// mobile
+		<div className='relative h-full aspect-1/1 sm:aspect-3/2 md:aspect-2/1 xl:aspect-4/3'>
 			{/* preview */}
 			<Image
 				src={project.images[0]}

@@ -106,11 +106,14 @@ export default function ExperienceDesktop({
                 >
                     {Object.entries(xpCategorized).map(([category, items], i) => (
 
-                        <div key={category} className='flex flex-col'>
+                        <div key={category} className='flex flex-col gap-0.5'>
 
                             {/* category heading */}
                             <Reveal delay={i * 0.35}>
-                                <h4 className='font-medium text-(--alt-text-colour) capitalize'>{category}</h4>
+                                <h4 className={`capitalize transition-all duration-300
+                                                ${category === activeExperience?.category ? 'text-(--dark-mode-grey) font-semibold' : 'text-(--alt-text-colour) font-medium'}`}>
+                                    {category}
+                                </h4>
                             </Reveal>
 
                             {/* category items */}
@@ -133,8 +136,8 @@ export default function ExperienceDesktop({
                                                 ? '/detail-arrow-black.svg'
                                                 : '/detail-arrow-grey.svg'}`}
                                             alt='arrow'
-                                            width={24}
-                                            height={24}
+                                            width={22}
+                                            height={22}
                                         />
                                         {item.menuTitle}
                                     </button>
@@ -222,15 +225,16 @@ export default function ExperienceDesktop({
                 <div className='col-start-3 col-span-3 row-start-3 row-span-1
                                 flex flex-col justify-end
                                 p-8'>
-                    <Reveal delay={0.25}>
-                        <Image 
-                            src='/experience.svg'
-                            alt='experience'
-                            width={856}
-                            height={216}
-                            className='w-full'
-                        />
-                    </Reveal>
+                    <div className='w-full h-full relative'>
+                        <Reveal delay={0.25}>
+                            <Image 
+                                src='/experience.svg'
+                                alt='experience'
+                                fill
+                                className='object-contain object-right bottom-0'
+                            />
+                        </Reveal>
+                    </div>
                 </div>
 
                 <div className='col-start-1 row-start-3 row-span-1 p-2 3xl:p-8'>
