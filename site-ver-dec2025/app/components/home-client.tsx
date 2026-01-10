@@ -37,7 +37,7 @@ export default function HomeClient({
 }: HomeClientProps) {
 
 	// ------ VIEWPORT DISPLAY ------ //
-    const isDesktop = useMediaQuery('(min-width: 1024px)');
+    const isDesktop = useMediaQuery('(min-width: 1920px)');
 	
 	// loader
 	const [isLoading, setIsLoading] = useState(true);

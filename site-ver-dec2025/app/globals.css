@@ -1,5 +1,10 @@
 @import 'tailwindcss';
 
+@theme {
+  --breakpoint-xs: 30rem;
+  --breakpoint-3xl: 120rem;
+}
+
 :root {
   --white: #FFFFFF;
   --off-white: #F0F1F4;
@@ -27,7 +32,7 @@
   --grid-rows: 3;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1919px) {
   :root {
     background-color: var(--off-white);
 
@@ -62,7 +67,7 @@
   color: var(--text-colour);
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1920px) {
   .theme-dark {
   --bg-colour: var(--dark-black);
   --text-colour: var(--white);
@@ -99,7 +104,7 @@ html {
   background-color: transparent;
 }
 
-@media (max-width: 1023px) {
+@media (max-width: 1919px) {
   html {
     scroll-behavior: smooth;
     overflow-y: scroll;
@@ -164,7 +169,7 @@ section {
 }
 
 /* grid lines for mobile */
-@media (max-height: 1023px) {
+@media (max-height: 1919px) {
   .grid-lines {
   position: absolute;
   inset: 0;

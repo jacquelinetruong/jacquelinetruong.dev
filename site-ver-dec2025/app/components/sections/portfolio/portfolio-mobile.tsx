@@ -56,7 +56,7 @@ export default function PortfolioMobile({
                             src='/portfolio-light.svg'
                             alt='section title: my works'
                             fill
-                            className={`object-contain object-left`}
+                            className={`object-contain object-left pb-8`}
                             draggable={false}
                         />
                     </div>

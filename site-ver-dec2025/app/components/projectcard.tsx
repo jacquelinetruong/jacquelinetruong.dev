@@ -104,16 +104,15 @@ export default function ProjectCard({
 			<Image
 				src={project.images[0]}
 				alt={project.title}
-				width={1142}
-				height={743}
-				className='size-full object-cover
+				fill
+				className='object-cover object-center
 						   transition-transform duration-500 ease-out
 						   group-hover:scale-115'
 				draggable={false}
 			/>	
 
 			{/* gradient for text readability */}
-			<div className={`absolute inset-0 bg-gradient-to-t from-black/95 from-10% via-black/70 via-30% to-transparent to-50% point-events-none
+			<div className={`absolute inset-0 bg-gradient-to-t from-(--dark-black)/85 from-10% via-(--dark-black)/60 via-20% to-transparent to-35% point-events-none
 							${!featured && 'bg-[#13131B]/15 transition duration-300 group-hover:bg-transparent'}`}/>
 
 			{/* project details section */}
@@ -215,13 +214,13 @@ export default function ProjectCard({
 		</div>
 	): (
 		// mobile
-		<div className='relative h-full aspect-1/1 sm:aspect-3/2 md:aspect-2/1 xl:aspect-4/3'>
+		<div className='relative w-full h-full'>
 			{/* preview */}
 			<Image
 				src={project.images[0]}
 				alt={project.title}
 				fill
-				className='object-cover'
+				className='object-contain object-bottom sm:object-cover sm:object-center md:'
 				draggable={false}
 			/>	
 		</div>
