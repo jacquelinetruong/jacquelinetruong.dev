@@ -19,14 +19,16 @@ export default async function Page() {
 	const currentXP = experience.filter(e => e.category === 'work' && e.current === true);
 
 	return (
-		// give each section appropriate data
-		<HomeClient 
-			heroProjects={heroProjects}
-			aboutProjects={aboutProjects}
-			portfolioProjects={portfolioProjects}
-			experienceProjects={experienceProjects}
-			currentXP={currentXP}
-			experience={experience}
-		/>
+		<div className='pt-(--nav-height)'>
+			{/* give each section appropriate data */}
+			<HomeClient 
+				heroProjects={heroProjects}
+				aboutProjects={aboutProjects}
+				portfolioProjects={portfolioProjects}
+				experienceProjects={experienceProjects}
+				currentXP={currentXP}
+				experience={experience}
+			/>
+		</div>
 	);
 }

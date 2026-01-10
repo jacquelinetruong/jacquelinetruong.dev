@@ -121,7 +121,7 @@ export default function ProjectOverlay({
 				transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
 			>
 				<div className='h-[calc(100dvh - var(--nav-height))] flex flex-col justify-between'>
-					<div className='relative h-(--two-cell-height) font-inter flex flex-col py-8 px-6'>
+					<div className='relative h-(--two-cell-height) flex flex-col py-8 px-6'>
 						{/* close button */}
 						<button
 							onClick={onClose}
@@ -199,7 +199,7 @@ export default function ProjectOverlay({
 												flex flex-row justify-center align-center gap-1
 												transition-opacity duration-300
 												${atBottom ? 'opacity-0' : 'opacity-100'}`}>
-										<p className='translate-y-2 font-inter text-xs lg:text-sm'>Read more</p>
+										<p className='translate-y-2 text-xs lg:text-sm'>Read more</p>
 										<GuideArrow className='size-[16px] lg:size-[18px] translate-y-2 '/>
 								</span>
 								{/* extra gradient to blend */}
@@ -216,7 +216,7 @@ export default function ProjectOverlay({
 									flex flex-row justify-between'>
 
 						{/* prev/next buttons */}
-						<div className='font-inter text-sm 2xl:text-base
+						<div className='text-sm 2xl:text-base
 										w-(--cell-width) h-(--cell-height)
 										bottom-[calc(100vh - var(--cell-height))]
 										flex flex-row justify-between items-end p-7'>

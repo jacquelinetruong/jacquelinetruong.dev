@@ -12,7 +12,7 @@ export default function GuideButton({
 }: GuideProps) {
     return (
         <Reveal delay={5} className='flex flex-col justify-end items-center'>
-            <a className='font-inter font-medium text-(--text-colour)
+            <a className='font-medium text-(--text-colour)
                             flex flex-col items-center gap-2
                             p-8 size-fit
                             animate-jump group'

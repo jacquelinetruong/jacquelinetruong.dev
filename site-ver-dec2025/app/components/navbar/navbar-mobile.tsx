@@ -70,13 +70,13 @@ export default function NavbarMobile({ isLoading }: { isLoading: boolean }) {
 	}
 
 	return (
-		<div className=''>
+		<div>
 			{/* hamburger button */}
-			<div className='fixed top-0 right-0 z-100 p-4'>
+			<div className='fixed top-0 right-0 z-100 p-5'>
 				<Reveal delay={3}>
 					<button
 						onClick={toggleMenu}
-						className={`p-4 sm:p-6 rounded-full transition-colors duration-1000
+						className={`p-5 sm:p-6 rounded-full transition-colors duration-1000
 									${menuState === 'opening' || menuState === 'open' ? 'bg-(--black)' : 'bg-(--nice-grey)'}`}
 					>
 						<Image
@@ -93,7 +93,7 @@ export default function NavbarMobile({ isLoading }: { isLoading: boolean }) {
 
 			{/* overlay menu */}
 			{menuState !== 'closed' && (
-				<div className={`fixed w-full h-full z-40 pt-40 pb-16 bg-[#B7B5BB] font-inter
+				<div className={`fixed w-full h-full z-40 pt-40 pb-16 bg-[#B7B5BB]
 								flex flex-col items-center justify-between
 								${menuState === 'opening' ? 'animate-open' : ''}
 								${menuState === 'closing' ? 'animate-close': ''}`}
@@ -102,13 +102,13 @@ export default function NavbarMobile({ isLoading }: { isLoading: boolean }) {
 					<div className='overlay-content'>
 						{/* nav items */}
 						<div className='mb-20'>
-							<p className='px-4 pb-2 text-sm sm:text-base text-(--dark-grey)'>Navigation</p>
+							<p className='px-5 pb-2 text-(--dark-grey) text-sm | xs:text-base | sm:text-base |  '>Navigation</p>
 							{navLinks.map((id, i) => (
 								<button
 									key={id}
 									onClick={scrollToSection(id)}
 									className={`nav-button
-												w-full h-fit px-4 py-1.5
+												w-full h-fit px-5 py-1.5
 												text-4xl sm: text-5xl font-[450] text-left
 												transition-colors duration-300 place-self-end
 												${activeSection === id ? 'text-(--light-black)' : 'text-white'}`}
@@ -126,12 +126,12 @@ export default function NavbarMobile({ isLoading }: { isLoading: boolean }) {
 						</div>
 
 						{/* other links */}
-						<div className='flex flex-col w-full h-fit sm:text-lg text-white p-4'>
+						<div className='flex flex-col w-full h-fit sm:text-lg text-white p-5'>
 							<Reveal delay={0.7}>
-								<p className='pb-2 text-sm sm:text-base text-(--dark-grey)'>Find more</p>
+								<p className='pb-2 text-(--dark-grey) text-sm | xs:text-base | sm:text-base '>Find more</p>
 							</Reveal>
-							<div className='w-full h-fit
-											flex flex-row gap-4 justify-start'>
+							<div className='w-full h-fit xs:text-lg
+											flex flex-row gap-5 justify-start'>
 								<a
 									target='_blank'
 									href='/resume.pdf'
@@ -155,7 +155,7 @@ export default function NavbarMobile({ isLoading }: { isLoading: boolean }) {
 						</div>
 
 						{/* cat */}
-						<div className='w-full h-fit px-4'>
+						<div className='w-full h-fit px-5'>
 							<Reveal delay={1}>
 								<Cat className='w-4/6 sm:w-1/2 h-fit place-self-end text-(--nice-grey)'/>
 							</Reveal>

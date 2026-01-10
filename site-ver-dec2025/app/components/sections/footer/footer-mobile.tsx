@@ -30,7 +30,7 @@ export default function FooterMobile({ className = '' }:{ className?: string; })
             </div>
 
             {/* real footer */}
-            <div className='font-inter col-start-1 col-span-3 row-start-2 row-span-3 bg-(--dark-black) px-4 pt-12 pb-8
+            <div className='col-start-1 col-span-3 row-start-2 row-span-3 bg-(--dark-black) px-4 pt-12 pb-8
                             flex flex-col gap-20 h-full'>
                 <div className='flex flex-col gap-8'>
                     {/* cta */}
@@ -38,7 +38,7 @@ export default function FooterMobile({ className = '' }:{ className?: string; })
                         <div className='flex flex-col gap-4'>
                             <h2 className='text-xl sm:text-2xl leading-[1.3] text-white text-wrap'>Let's work together</h2>
 
-                            <a className='text-sm sm:text-base sm:font-medium text-(--black) bg-white
+                            <a className='text-sm | xs:text-base sm:font-medium text-(--black) bg-white
                                         flex flex-row gap-2 items-center
                                         w-fit h-fit px-6 py-3 sm:px-6 sm:py-4 rounded-full'
                                 target='_blank'
@@ -64,7 +64,7 @@ export default function FooterMobile({ className = '' }:{ className?: string; })
                     </div>
 
                     {/* social links */}
-                    <div className='font-regular text-white text-sm sm:text-base w-fit 
+                    <div className='font-regular text-white text-sm | xs:text-base w-fit 
                                     flex flex-row gap-4 sm:gap-6'>
                         <a href=''>Resume</a>
                         <a target='_blank' href='https://www.linkedin.com/in/jacquellinetruong'>LinkedIn</a>
@@ -76,7 +76,7 @@ export default function FooterMobile({ className = '' }:{ className?: string; })
                     {/* copyright */}
                     <div className='flex flex-col gap-2'>
                         <Reveal delay={1}>
-                            <p className='text-sm sm:text-base text-right text-(--light-mode-grey)'>Design and development by</p>
+                            <p className='text-sm | xs:text-base text-right text-(--light-mode-grey)'>Design and development by</p>
                             <div>
                                 <Image
                                     src='/footer-jacqueline-grey.svg'
@@ -88,7 +88,7 @@ export default function FooterMobile({ className = '' }:{ className?: string; })
                             </div>
                         </Reveal>
                     </div>
-                    <p className='text-sm sm:text-base text-right text-(--light-mode-grey)'>© 2025 jacqueline truong</p>
+                    <p className='text-sm | xs:text-base text-right text-(--light-mode-grey)'>© 2025 jacqueline truong</p>
                 </div>
             </div>
         </Grid>

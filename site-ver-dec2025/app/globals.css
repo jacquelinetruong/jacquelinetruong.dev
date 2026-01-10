@@ -1,11 +1,13 @@
 @import 'tailwindcss';
 
 @theme {
-  --breakpoint-xs: 30rem;
-  --breakpoint-3xl: 120rem;
+  --breakpoint-xs: 30rem; /* 480px (lil bigger than pro max) */
+  --breakpoint-3xl: 120rem; /* 1920px */
+  --breakpoint-ultrawide: 215rem; /* 3440px */
 }
 
 :root {
+  /* colours */
   --white: #FFFFFF;
   --off-white: #F0F1F4;
   --nice-grey: #D7D6DD;
@@ -18,7 +20,7 @@
   --black: #292A2D;
   --dark-black: #1B1C1D;
 
-  /* other */
+  /* dimension variables */
   --nav-height: 80px;
   --cell-height: calc((100svh - var(--nav-height)) / var(--grid-rows));
   --two-cell-height: calc(2 * var(--cell-height));
@@ -27,12 +29,13 @@
   --three-cell-width: calc(3 * var(--cell-width));
   --content-space: calc(100svh - var(--nav-height));
 
-  /* default grid (for desktop) */
-  --grid-columns: 5;
-  --grid-rows: 3;
+  /* responsiveness */
+    /* default grid (for desktop) */
+    --grid-columns: 5;
+    --grid-rows: 3;
 }
 
-@media (max-width: 1919px) {
+@media (max-width: 1023px) {
   :root {
     background-color: var(--off-white);
 
@@ -50,14 +53,6 @@
   }
 }
 
-@theme inline {
-  --font-inter: var(--font-inter-sans)
-}
-
-@theme {
-  --breakpoint-3xl: 120rem;
-}
-
 .theme-light {
   --bg-colour: var(--off-white);
   --text-colour: var(--black);
@@ -67,7 +62,8 @@
   color: var(--text-colour);
 }
 
-@media (min-width: 1920px) {
+/* no dark mode/theme changes on mobile */
+@media (min-width: 1024px) {
   .theme-dark {
   --bg-colour: var(--dark-black);
   --text-colour: var(--white);
@@ -104,7 +100,7 @@ html {
   background-color: transparent;
 }
 
-@media (max-width: 1919px) {
+@media (max-width: var(--mobile)) {
   html {
     scroll-behavior: smooth;
     overflow-y: scroll;
@@ -117,7 +113,7 @@ body {
   overflow-x: hidden;
   background: var(--bg-colour);
   color: var(--text-colour);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font), system-ui, sans-serif;
 
   transition-property: color, var(--bg-colour);
   transition-timing-function: ease-in-out;
@@ -169,7 +165,7 @@ section {
 }
 
 /* grid lines for mobile */
-@media (max-height: 1919px) {
+@media (max-height: 1023px) {
   .grid-lines {
   position: absolute;
   inset: 0;

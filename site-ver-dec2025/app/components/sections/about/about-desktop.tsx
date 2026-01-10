@@ -77,8 +77,7 @@ export default function AboutDesktop({
                 </div>
 
                 {/* about me content */}
-                <div className='font-inter
-                                col-start-2 col-span-2 row-start-1 row-span-2
+                <div className='col-start-2 col-span-2 row-start-1 row-span-2
                                 flex flex-col justify-between
                                 p-8 bg-(--bg-colour)/50
                                 border border-r-0 border-b-0 border-l-(--grid-line-colour) border-t-(--grid-line-colour)'>
