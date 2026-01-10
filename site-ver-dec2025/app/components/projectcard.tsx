@@ -116,7 +116,7 @@ export default function ProjectCard({
 							${!featured && 'bg-[#13131B]/15 transition duration-300 group-hover:bg-transparent'}`}/>
 
 			{/* project details section */}
-			<div className='font-inter text-white
+			<div className='text-white
 							flex flex-row justify-between items-end
 							absolute bottom-0 left-0 w-full p-6'>
 
@@ -172,7 +172,7 @@ export default function ProjectCard({
 
 			{/* hover: show hint message (only show IFF portfolio project card, and NOT next project in overlay) */}
 			{!showIcon && !featured && !isNext && (
-				<span className='font-inter font-medium text-white
+				<span className='font-medium text-white
 									absolute inset-0 p-6
 									opacity-0 translate-y-1
 									group-hover:opacity-100 group-hover:translate-y-0
@@ -195,7 +195,7 @@ export default function ProjectCard({
 
 			{/* next project card in overlay */}
 			{isNext && (
-				<span className='font-inter font-medium text-white
+				<span className='font-medium text-white
 									absolute inset-0 p-6
 									opacity-100
 									transition-all duration-200
@@ -220,7 +220,7 @@ export default function ProjectCard({
 				src={project.images[0]}
 				alt={project.title}
 				fill
-				className='object-contain object-bottom sm:object-cover sm:object-center md:'
+				className='object-contain object-bottom sm:object-cover sm:object-center'
 				draggable={false}
 			/>	
 		</div>

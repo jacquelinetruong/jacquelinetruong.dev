@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from './media-query';
+import { useLoading } from './loading-context';
 
 import Loader from './loader/loader';
 import Navbar from './navbar/navbar';
@@ -37,10 +38,10 @@ export default function HomeClient({
 }: HomeClientProps) {
 
 	// ------ VIEWPORT DISPLAY ------ //
-    const isDesktop = useMediaQuery('(min-width: 1920px)');
+    const isDesktop = useMediaQuery('(min-width: 1024px)');
 	
 	// loader
-	const [isLoading, setIsLoading] = useState(true);
+	const { isLoading, setIsLoading } = useLoading();
 
 	useEffect(() => {
 		const timeout = setTimeout(() => setIsLoading(false), 1600);
@@ -56,11 +57,6 @@ export default function HomeClient({
 
 			{!isLoading && (
 				<>
-					<Navbar 
-						isLoading={isLoading}
-						isDesktop={isDesktop}
-					/>
-					
 					{isDesktop && (
 						<>
 							<Quickbar isLoading={isLoading}/>

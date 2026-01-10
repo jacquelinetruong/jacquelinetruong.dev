@@ -56,7 +56,7 @@ export default function NameStamp({ className = '' }: { className?: string }) {
 		>
 			<div className={`fixed w-screen top-0 right-0 pointer-events-none 
 								transition-opacity duration-400 ${activeSection === 'home' || activeSection === 'about' ? 'opacity-100 z-99' : 'opacity-0 z-0'}`}>
-				<div className={`font-inter group
+				<div className={`group
 								grid grid-cols-5 grid-rows-3 w-screen
 								translate-y-(--nav-height)
 								${activeSection === 'home' ? 'text-(--text-colour)' : 'text-(--grey)'}`}

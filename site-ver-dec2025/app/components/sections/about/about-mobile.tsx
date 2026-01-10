@@ -21,7 +21,7 @@ export default function AboutMobile({
 }) {
 
     return (
-        <section className='relative font-inter'>
+        <section className='relative'>
             <Grid>
                 {/* me */}
                 <div className='col-start-1 col-span-3 row-start-1 row-span-2 -translate-y-(--cell-height)
@@ -43,14 +43,17 @@ export default function AboutMobile({
                     <div className='flex flex-col gap-6'>
                         {/* header */}
                         <Reveal delay={0.2}>
-                            <h2 className='w-full text-lg leading-[1.3] sm:text-2xl sm:w-5/6 font-medium'>
+                            <h2 className='w-full text-lg font-medium leading-[1.3] 
+                                            xs:text-xl 
+                                            sm:text-2xl sm:w-5/6'
+                            >
                                 I'm a newgrad designer who loves bringing ideas to life through clean, functional, and high-impact products.
                             </h2>
                         </Reveal>
 
                         {/* description */}
                         <Reveal delay={0.3}>
-                            <h3 className='text-sm w-4/5 sm:text-base sm:w-4/6'>
+                            <h3 className='text-sm w-4/5 | xs:text-base | sm:text-base sm:w-4/6'>
                                 My passion for design, code, and interaction bridge the gap towards intuitive experiences, scalable UI, and shipping things that make a real difference.
                             </h3>
                         </Reveal>
@@ -60,15 +63,15 @@ export default function AboutMobile({
                         <Reveal delay={0.4}>
                             {/* current work */}
                             <div className='flex flex-col'>
-                                <h4 className='text-sm sm:text-base text-(--light-mode-grey) font-medium'>Currently</h4>
+                                <h4 className='text-sm xs:text-base text-(--light-mode-grey) font-medium'>Currently</h4>
 
                                 {/* if jobless :heartbreak: */}
                                 {currentWork.length === 0 && (
-                                    <p className='text-sm sm:text-base'>Open to new opportunities</p>
+                                    <p className='text-sm xs:text-base'>Open to new opportunities</p>
                                 )}
 
                                 {currentWork.map((role, i) => (
-                                    <p className='text-sm sm:text-base font-medium
+                                    <p className='text-sm xs:text-base font-medium
                                                 flex flex-row gap-1 items-center'>     
                                         <Image
                                             src='/detail-arrow-black.svg'
@@ -88,10 +91,10 @@ export default function AboutMobile({
                         <Reveal delay={0.5}>
                             {/* education */}
                             <div className='flex flex-col'>
-                                <h4 className='text-sm sm:text-base text-(--light-mode-grey) font-medium'>Education</h4>
+                                <h4 className='text-sm xs:text-base text-(--light-mode-grey) font-medium'>Education</h4>
 
-                                <p className='text-sm sm:text-base font-medium
-                                                flex flex-row gap-1 items-start'>     
+                                <p className='text-sm xs:text-base font-medium
+                                                flex flex-row gap-1 items-center'>     
                                     <Image
                                         src='/detail-arrow-black.svg'
                                         alt='arrow'
@@ -111,10 +114,11 @@ export default function AboutMobile({
                             target='_blank'
                             href='mailto:hello@jacquelinetruong.dev'
                             className='flex flex-row gap-2 items-center place-self-end
-                                        w-fit h-fit px-5 py-4 sm:px-6 sm:py-5 rounded-full
-                                        bg-(--black) text-white text-xs sm:text-base'
+                                        w-fit h-fit bg-(--black) rounded-full
+                                        px-5 py-4 | sm:px-6 sm:py-5 | 
+                                        text-white text-xs | xs:text-sm | sm:text-base'
                         >
-                            <Coffee className='size-[20px] sm:size-[22px]'/>
+                            <Coffee className='size-[20px] sm:size-[24px]'/>
                             Get in touch
                         </a>
                     </Reveal>

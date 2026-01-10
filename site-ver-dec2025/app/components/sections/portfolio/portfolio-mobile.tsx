@@ -56,13 +56,13 @@ export default function PortfolioMobile({
                             src='/portfolio-light.svg'
                             alt='section title: my works'
                             fill
-                            className={`object-contain object-left pb-8`}
+                            className={`object-contain object-left pb-4 sm:pb-8`}
                             draggable={false}
                         />
                     </div>
 
                     {/* filter buttons */}
-                    <div className='font-inter text-xs sm:text-sm
+                    <div className='text-xs | xs:text-sm
                                     flex flex-row gap-2 w-full h-fit'>
                         {/* all button */}
                         <button 
@@ -115,14 +115,14 @@ export default function PortfolioMobile({
 
                             {/* content */}
                             <div className='col-start-1 col-span-3 row-start-3 row-span-2
-                                            font-inter flex flex-col gap-6 px-4 py-6
+                                            flex flex-col gap-6 px-4 py-6
                                             w-full h-full'
                             >
                                 {/* text content */}
                                     {/* title */}
-                                    <div className='flex flex-col gap-1 w-full'>
+                                    <div className='flex flex-col w-full xs:gap-1'>
                                         {/* project type tag */}
-                                        <p className='text-sm sm:text-base text-(--light-mode-grey) capitalize'>
+                                        <p className='text-sm | xs:text-base text-(--light-mode-grey) capitalize'>
                                             {[...(project.type ?? [])].join(' & ')}
                                         </p>
 
@@ -131,15 +131,15 @@ export default function PortfolioMobile({
                                     </div>
 
                                     {/* description */}
-                                    <p className='text-(--black) sm:w-7/8'>{project.description}</p>
+                                    <p className='text-sm | xs:text-base text-(--black) sm:w-7/8'>{project.description}</p>
 
                                     {/* languages, programs, tools, etc. used */}
-                                    <p className='text-sm sm:text-base sm:font-[650] text-(--black) font-medium'>
+                                    <p className='text-sm xs:text-base sm:font-[650] text-(--black) font-medium'>
                                         {[...(project.programs ?? []), ...(project.languages ?? [])].join(', ')}
                                     </p>
 
                                     {/* external links */}
-                                    <div className='text-sm sm:text-base flex flex-row gap-2'>
+                                    <div className='text-xs | xs:text-sm | sm:text-base flex flex-row gap-2'>
                                         {project?.link && (
                                             <a className='flex flex-row gap-2 items-center place-self-end
                                                             w-fit h-fit px-5 py-4 sm:px-6 rounded-full

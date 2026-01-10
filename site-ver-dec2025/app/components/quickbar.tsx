@@ -37,7 +37,7 @@ export default function Quickbar({ isLoading }: { isLoading: boolean }) {
                                 bg-black/80 border border-(--dark-grey) shadow-lg backdrop-blur-sm
                                 opacity-0 group-hover:opacity-100 group-hover:bg-(--black)/80
                                 transition-all duration-200'>
-                        <p className='font-inter font-medium text-xs text-white whitespace-nowrap'>Grab Coffee</p>
+                        <p className='font-medium text-xs text-white whitespace-nowrap'>Grab Coffee</p>
                     </span>
                 </a>
             </Reveal>
@@ -60,7 +60,7 @@ export default function Quickbar({ isLoading }: { isLoading: boolean }) {
                                 bg-black/90 border border-(--dark-grey) shadow-lg backdrop-blur-sm
                                 opacity-0 group-hover:opacity-100 group-hover:bg-(--dark-black)/90 group-hover:backdrop-blur-md
                                 transition-all duration-200'>
-                        <p className='font-inter font-medium text-xs text-white whitespace-nowrap'>Back to top</p>
+                        <p className='font-medium text-xs text-white whitespace-nowrap'>Back to top</p>
                     </span>
                 </a>
             </Reveal>

@@ -99,7 +99,7 @@ export default function ExperienceDesktop({
                 </div>
 
                 {/* experience menu */}
-                <div className='font-inter sm:text-xs md:text-sm 2xl:text-base
+                <div className='sm:text-xs md:text-sm 2xl:text-base
                                 col-start-1 col-span-1 row-start-1 row-span-2
                                 flex flex-col gap-8
                                 p-8'
@@ -148,8 +148,7 @@ export default function ExperienceDesktop({
                 </div>
 
                 {/* experience details */}
-                <div className='font-inter
-                                col-start-2 col-span-2 row-start-1 row-span-2
+                <div className='col-start-2 col-span-2 row-start-1 row-span-2
                                 flex flex-col gap-8
                                 p-8 bg-(--bg-colour)/50
                                 border border-r-0 border-b-0 border-l-(--grid-line-colour) border-t-(--grid-line-colour)'>

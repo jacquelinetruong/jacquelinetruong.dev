@@ -305,7 +305,7 @@ export default function PortfolioDesktop({
                                                         e.stopPropagation(); 
                                                         openDetails();
                                                     }}
-                                                    className={`font-inter font-medium text-sm group 
+                                                    className={`font-medium text-sm group 
                                                                 flex flex-col items-end gap-2 
                                                                 transition-opacity duration-300 cursor-pointer
                                                                 opacity-0 group-hover:opacity-100
@@ -332,8 +332,7 @@ export default function PortfolioDesktop({
                             </div>
                         
                             {/* content */}
-                            <div className='font-inter
-                                            col-start-1 col-span-2 row-start-3 row-span-1
+                            <div className='                                            col-start-1 col-span-2 row-start-3 row-span-1
                                             flex flex-col p-8 justify-between group z-100'>
 
                                 {/* text details */}
@@ -538,7 +537,7 @@ export default function PortfolioDesktop({
 
                         {/* filters, title */}
                         {!isDetailsOpen && (
-                            <div className='font-inter text-nowrap text-sm
+                            <div className='text-nowrap text-sm
                                             col-start-4 col-span-2 row-start-1 row-span-1 w-(--two-cell-width) h-(--cell-height)
                                             flex flex-col items-end justify-between relative'>
 

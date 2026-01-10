@@ -2,13 +2,15 @@ import './globals.css';
 
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-
 import { ThemeProvider } from './components/theme-context';
 import ReactLenis from 'lenis/react';
 import { LenisSnap } from './components/scroll-snap';
 
-const interSans = Inter({
-	variable: '--font-inter-sans',
+import Navbar from './components/navbar/navbar';
+import { LoadingProvider } from './components/loading-context';
+
+const font = Inter({
+	variable: '--font',
 	subsets: ['latin'],
 });
 
@@ -36,21 +38,25 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<body 
-				className={`${interSans.variable} antialiased select-none`}
+				className={`${font.variable} antialiased select-none`}
 				style = {{overflowX: 'hidden'}}
 			>
 				<ThemeProvider>
-					<ReactLenis 
-						root 
-						options={{ 
-							lerp: 0.1, 
-							wheelMultiplier: 1, 
-							smoothWheel: true,
-						}}
-					>
-							<LenisSnap/>
-							{children}
-					</ReactLenis>
+					<LoadingProvider>
+						<Navbar />
+						
+						<ReactLenis 
+							root 
+							options={{ 
+								lerp: 0.1, 
+								wheelMultiplier: 1, 
+								smoothWheel: true,
+							}}
+						>
+								<LenisSnap/>
+								{children}
+						</ReactLenis>
+					</LoadingProvider>
 				</ThemeProvider>
 			</body>
 		</html>

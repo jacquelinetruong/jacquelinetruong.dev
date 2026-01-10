@@ -18,8 +18,7 @@ export default function FooterDesktop({ className = '' }: { className?: string }
     return (
         <Grid>
             {/* cta */}
-            <div className='font-inter
-                            col-start-2 col-span-3 row-start-1 row-span-1 
+            <div className='col-start-2 col-span-3 row-start-1 row-span-1 
                             place-self-center p-8'>
                 <Reveal delay={0.25} className='flex flex-col gap-6 place-items-center'>
                     <h1 className='font-semibold sm:text-xl md:text-2xl'>Have a project idea? Let's make it happen.</h1>
@@ -50,7 +49,7 @@ export default function FooterDesktop({ className = '' }: { className?: string }
             </div>
 
             {/* real footer */}
-            <div className='font-inter font-medium text-(--alt-text-colour) sm:text-sm md:text-base
+            <div className='font-medium text-(--alt-text-colour) sm:text-sm md:text-base
                             col-start-1 col-span-5 row-start-3 row-span-1
                             flex flex-col gap-16 pt-16 pb-6 h-full
                             bg-(--dark-black) border-t-(--dark-black)'>
