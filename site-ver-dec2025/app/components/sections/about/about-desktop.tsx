@@ -65,13 +65,12 @@ export default function AboutDesktop({
                 </div>
 
                 {/* pic of me! */}
-                <div className='col-start-1 col-span-1 row-start-1 row-span-2'>
+                <div className='col-start-1 col-span-1 row-start-1 row-span-2 w-full h-full relative'>
                     <Image 
                         src='/me.jpg'
                         alt='pic of me'
-                        width={2000}
-                        height={2508}
-                        className='h-full object-cover pointer-events-none'
+                        fill
+                        className='object-cover object-center pointer-events-none'
                         draggable={false}
                     />
                 </div>
@@ -79,7 +78,7 @@ export default function AboutDesktop({
                 {/* about me content */}
                 <div className='col-start-2 col-span-2 row-start-1 row-span-2
                                 flex flex-col justify-between
-                                p-8 bg-(--bg-colour)/50
+                                p-8 | ultrawide:p-12 bg-(--bg-colour)/50
                                 border border-r-0 border-b-0 border-l-(--grid-line-colour) border-t-(--grid-line-colour)'>
                     {/* message */}
                     <div className='flex flex-col gap-4'>

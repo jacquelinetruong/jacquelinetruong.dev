@@ -102,7 +102,7 @@ export default function ExperienceDesktop({
                 <div className='sm:text-xs md:text-sm 2xl:text-base
                                 col-start-1 col-span-1 row-start-1 row-span-2
                                 flex flex-col gap-8
-                                p-8'
+                                p-8 | ultrawide:px-20'
                 >
                     {Object.entries(xpCategorized).map(([category, items], i) => (
 
@@ -149,8 +149,8 @@ export default function ExperienceDesktop({
 
                 {/* experience details */}
                 <div className='col-start-2 col-span-2 row-start-1 row-span-2
-                                flex flex-col gap-8
-                                p-8 bg-(--bg-colour)/50
+                                flex flex-col gap-8 bg-(--bg-colour)/50
+                                p-8 | ultrawide:p-12
                                 border border-r-0 border-b-0 border-l-(--grid-line-colour) border-t-(--grid-line-colour)'>
                     {/* header */}
                     {activeExperience && activeExperience.category !== 'proficiencies' ? (
@@ -223,7 +223,7 @@ export default function ExperienceDesktop({
                 {/* big title */}
                 <div className='col-start-3 col-span-3 row-start-3 row-span-1
                                 flex flex-col justify-end
-                                p-8'>
+                                p-8 | ultrawide:pr-20'>
                     <div className='w-full h-full relative'>
                         <Reveal delay={0.25}>
                             <Image 
@@ -236,7 +236,7 @@ export default function ExperienceDesktop({
                     </div>
                 </div>
 
-                <div className='col-start-1 row-start-3 row-span-1 p-2 3xl:p-8'>
+                <div className='col-start-1 row-start-3 row-span-1 p-2 | 3xl:p-8 | ultrawide:px-20'>
                     <Reveal delay={1.6}>
                         <Cat className={`place-self-start size-full text-(--light-mode-grey)/40`}/>
                     </Reveal>
