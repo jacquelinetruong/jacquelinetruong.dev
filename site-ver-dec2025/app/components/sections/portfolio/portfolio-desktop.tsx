@@ -121,7 +121,7 @@ export default function PortfolioDesktop({
         }, [featuredProject?.id]);
 
         // photo rotation condition
-        const shouldRotate = featuredProject?.images.length >= 5;
+        const shouldRotate = featuredProject?.images.length >= 6;
     
     // ------ FEATURED PROJECT EXPANDED DETAILS ------ //
         const [isDetailsOpen, setIsDetailsOpen] = useState(false);
@@ -332,8 +332,10 @@ export default function PortfolioDesktop({
                             </div>
                         
                             {/* content */}
-                            <div className='                                            col-start-1 col-span-2 row-start-3 row-span-1
-                                            flex flex-col p-8 justify-between group z-100'>
+                            <div className='col-start-1 col-span-2 row-start-3 row-span-1
+                                            flex flex-col justify-between group z-100
+                                            p-8 | ultrawide:px-20'
+                            >
 
                                 {/* text details */}
 
@@ -413,7 +415,7 @@ export default function PortfolioDesktop({
                             {featuredProject?.images.length > 1 && (
                                 <div className='flex flex-col gap-2 w-full h-full'>
                                     {shouldRotate ? (
-                                        // rotate if project has 5 or more images
+                                        // rotate if project has 6 or more images
                                         galleryImages.map((img, i) => (
                                             <button
                                                 key={img}
@@ -479,9 +481,8 @@ export default function PortfolioDesktop({
                                                     <Image
                                                         src={img}
                                                         alt={`${featuredProject.title} preview ${imageIndex + 1}`}
-                                                        width={1142}
-                                                        height={743}
-                                                        className='size-full object-cover
+                                                        fill
+                                                        className='object-cover object-center
                                                                     transition-transform duration-500 ease-out
                                                                     group-hover:scale-110'
                                                         draggable={false}
@@ -542,12 +543,12 @@ export default function PortfolioDesktop({
                                             flex flex-col items-end justify-between relative'>
 
                                 {/* filter buttons */}
-                                <div className='flex flex-row gap-2 px-8 pt-8'>
+                                <div className='flex flex-row gap-2 px-8 pt-8 | ultrawide:px-20'>
                                     {/* all button */}
                                     <button 
                                         onClick={() => setFilter('all')}
                                         className={`flex flex-row gap-2 items-center cursor-pointer
-                                                    w-fit h-fit px-6 py-3 rounded-full 2xl:px-8 2xl:py-4
+                                                    w-fit h-fit rounded-full px-6 py-3 | 2xl:px-8 2xl:py-4
                                                     border-1 bg-(--bg-colour)
                                                     transition-colors duration-400
                                                     ${filter === 'all' ? 'text-black bg-white hover:text-black' : 'hover:border-(--light-mode-grey) text-(--text-colour) hover:bg-(--grid-line-colour)'}`}
@@ -559,7 +560,7 @@ export default function PortfolioDesktop({
                                     <button 
                                         onClick={() => setFilter('design')}
                                         className={`flex flex-row gap-1 items-center cursor-pointer
-                                                    w-fit h-fit px-6 py-3 rounded-full 2xl:px-8 2xl:py-4
+                                                    w-fit h-fit rounded-full px-6 py-3 | 2xl:px-8 2xl:py-4
                                                     border-1 bg-(--bg-colour)
                                                     transition-colors duration-400
                                                     ${filter === 'design' ? 'text-black bg-white hover:text-black' : 'hover:border-(--light-mode-grey) text-(--text-colour) hover:bg-(--grid-line-colour)'}`}
@@ -572,7 +573,7 @@ export default function PortfolioDesktop({
                                     <button 
                                         onClick={() => setFilter('development')}
                                         className={`flex flex-row gap-1 items-center cursor-pointer
-                                                    w-fit h-fit px-6 py-3 rounded-full 2xl:px-8 2xl:py-4
+                                                    w-fit h-fit rounded-full px-6 py-3 | 2xl:px-8 2xl:py-4
                                                     border-1 bg-(--bg-colour)
                                                     transition-colors duration-400
                                                     ${filter === 'development' ? 'text-black bg-white hover:text-black' : 'hover:border-(--light-mode-grey) text-(--text-colour) hover:bg-(--grid-line-colour)'}`}
@@ -588,22 +589,26 @@ export default function PortfolioDesktop({
                                         src='/works.svg'
                                         alt='section title: design and development works'
                                         fill
-                                        className={`pr-8 object-contain object-right transition-all ${filter === 'all' ? 'opacity-100 duration-800 ' : 'opacity-0 translate-x-100 duration-300'}`}
+                                        className={`pr-8 | ultrawide:pr-20
+                                                    object-contain object-right transition-all 
+                                                    ${filter === 'all' ? 'opacity-100 duration-800 ' : 'opacity-0 translate-x-100 duration-300'}`}
                                         draggable={false}
                                     />
                                     <Image 
                                         src='/portfolio.svg'
                                         alt='section title: design portfolio'
                                         fill
-                                        className={`pr-8 object-contain object-right transition-all ${filter === 'design' ? 'opacity-100 duration-800 ' : 'opacity-0 translate-x-100 duration-300'}`}
-                                        draggable={false}
+                                        className={`pr-8 | ultrawide:pr-20
+                                                    object-contain object-right transition-all 
+                                                    ${filter === 'design' ? 'opacity-100 duration-800 ' : 'opacity-0 translate-x-100 duration-300'}`}                                        draggable={false}
                                     />
                                     <Image 
                                         src='/projects.svg'
                                         alt='section title: development projects'
                                         fill
-                                        className={`pr-8 object-contain object-right transition-all ${filter === 'development' ? 'opacity-100 duration-800' : 'opacity-0 translate-x-100 duration-300'}`}
-                                        draggable={false}
+                                        className={`pr-8 | ultrawide:pr-20
+                                                    object-contain object-right transition-all 
+                                                    ${filter === 'development' ? 'opacity-100 duration-800 ' : 'opacity-0 translate-x-100 duration-300'}`}                                        draggable={false}
                                     />
                                 </div>
                             </div>
@@ -612,13 +617,12 @@ export default function PortfolioDesktop({
                         {!isDetailsOpen && (
                             <>
                                 {/* handwritten note */}
-                                <div className='col-start-4 col-span-1 row-start-2 row-span-1'>
+                                <div className='col-start-4 col-span-1 row-start-2 row-span-1 w-full h-full relative'>
                                     <Image
                                         src='/my-faves.svg'
                                         alt='my faves'
-                                        width={304}
-                                        height={165}
-                                        className='size-full p-12'
+                                        fill
+                                        className='object-contain object-center lg:p-12 ultrawide:p-20'
                                         draggable={false}
                                     />
                                 </div>

@@ -61,34 +61,32 @@ export default function NameStamp({ className = '' }: { className?: string }) {
 								translate-y-(--nav-height)
 								${activeSection === 'home' ? 'text-(--text-colour)' : 'text-(--grey)'}`}
 				>
-					
-					
 					<div className='col-start-4 col-span-2 row-start-1 row-span-1 w-(--two-cell-width) h-(--cell-height)
-									flex flex-col justify-between self-end p-8 bottom-0 right-0
+									flex flex-col justify-between right-0 p-8 | ultrawide:px-20 
 									pointer-events-auto'>
-					{/* "say hi" button */}
-					<Reveal delay={2.75} className='flex justify-end'>
-						<a
-							className='font-medium text-base 3xl:text-lg text-white
-									flex flex-row gap-2 items-center
-									w-fit h-fit px-6 py-3 rounded-full 2xl:px-8 2xl:py-4
-									bg-(--text-colour) hover:bg-(--dark-grey)
-									transition-colors duration-300'
-							target='_blank'
-							href='mailto:hello@jacquelinetruong.dev'
-						>	
-							<Coffee className='size-[24px]'/>
-							Say Hi!
-						</a>
-					</Reveal>
+						{/* "say hi" button */}
+						<Reveal delay={2.75} className='flex justify-end'>
+							<a
+								className='font-medium text-base 3xl:text-lg text-white
+										flex flex-row gap-2 items-center
+										w-fit h-fit px-6 py-3 rounded-full 2xl:px-8 2xl:py-4
+										bg-(--text-colour) hover:bg-(--dark-grey)
+										transition-colors duration-300'
+								target='_blank'
+								href='mailto:hello@jacquelinetruong.dev'
+							>	
+								<Coffee className='size-[24px]'/>
+								Say Hi!
+							</a>
+						</Reveal>
 
-					<Reveal delay={2.25} className='w-fit h-fit'>
-						<h2 className='font-semibold text-right place-self-end
-										sm:text-lg md:text-xl 2xl:text-2xl 2xl:w-4/5 
-										transition-colors duration-500'>
-							Product designer first, software engineer second. Focused on crafting digital experiences and turning everyday ideas into art.
-						</h2>
-					</Reveal>
+						<Reveal delay={2.25} className='w-fit h-fit'>
+							<h2 className='font-semibold text-right place-self-end
+											sm:text-lg md:text-xl 2xl:text-2xl 2xl:w-4/5 
+											transition-colors duration-500'>
+								Product designer first, software engineer second. Focused on crafting digital experiences and turning everyday ideas into art.
+							</h2>
+						</Reveal>
 					</div>
 
 					{/* big name */}
@@ -98,21 +96,21 @@ export default function NameStamp({ className = '' }: { className?: string }) {
 								src='/jt-black.svg'
 								alt='jacqueline truong'
 								fill
-								className={`pr-8 object-contain object-right transition-opacity duration-500 ${activeSection === 'home' ? 'opacity-100' : 'opacity-0'}`}
+								className={`pr-8 | ultrawide:pr-20 object-contain object-right transition-opacity duration-500 ${activeSection === 'home' ? 'opacity-100' : 'opacity-0'}`}
 								draggable={false}
 							/>
 							<Image
 								src='/jt-grey.svg'
 								alt='jacqueline truong'
 								fill
-								className={`pr-8 object-contain object-right transition-opacity duration-500 ${activeSection === 'about' ? 'opacity-100' : 'opacity-0'}`}
+								className={`pr-8 | ultrawide:pr-20 object-contain object-right transition-opacity duration-500 ${activeSection === 'about' ? 'opacity-100' : 'opacity-0'}`}
 								draggable={false}
 							/>
 						</Reveal>
 					</div>
 
 					<div className='col-start-5 col-span-1 row-start-3 row-span-1 w-(--cell-width) h-(--cell-height)
-									flex flex-col justify-between p-8'>
+									flex flex-col justify-between p-8 | ultrawide:px-20 '>
 					{/* city */}
 					<Reveal delay={1.85}>
 						<h2 className='font-semibold text-right text-nowrap place-self-end

@@ -49,7 +49,7 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
     return (
         <div className='font-medium xs:text-sm md:text-md
                         fixed top-0 left-0 w-full
-                        px-8 py-4 z-1000 
+                        px-8 py-4 z-1000 | ultrawide:px-20
                         flex flex-row justify-between items-center
                         bg-gradient-to-t from-transparent via-(--bg-colour)/50 via-30% to-(--bg-colour) to-60%
                         transition-colors duration-500'>

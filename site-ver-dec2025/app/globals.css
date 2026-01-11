@@ -1,9 +1,10 @@
 @import 'tailwindcss';
 
+/* responsive breakpoints */
 @theme {
-  --breakpoint-xs: 30rem; /* 480px (lil bigger than pro max) */
+  --breakpoint-xs: 30rem; /* 480px*/
   --breakpoint-3xl: 120rem; /* 1920px */
-  --breakpoint-ultrawide: 215rem; /* 3440px */
+  --breakpoint-ultrawide: 160rem; /* 2560px */
 }
 
 :root {

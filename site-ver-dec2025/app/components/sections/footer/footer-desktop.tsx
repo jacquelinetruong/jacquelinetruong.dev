@@ -37,13 +37,12 @@ export default function FooterDesktop({ className = '' }: { className?: string }
 
             {/* signature name */}
             <div className='col-start-1 col-span-5 row-start-2 row-span-1
-                            flex flex-col justify-end'>
+                            w-full h-full relative | ultrawide:static'>
                     <Image 
                         src='/footer-jacqueline.svg'
                         alt='jacqueline'
-                        width={1920}
-                        height={260}
-                        className='w-full'
+                        fill
+                        className='object-contain object-bottom | ultrawide:object-center'
                         draggable={false}
                     />
             </div>
@@ -51,22 +50,24 @@ export default function FooterDesktop({ className = '' }: { className?: string }
             {/* real footer */}
             <div className='font-medium text-(--alt-text-colour) sm:text-sm md:text-base
                             col-start-1 col-span-5 row-start-3 row-span-1
-                            flex flex-col gap-16 pt-16 pb-6 h-full
+                            flex flex-col w-full h-full
+                            gap-16 pt-16 pb-6 ultrawide:pb-16
                             bg-(--dark-black) border-t-(--dark-black)'>
                 {/* content */}
                 
-                <div className='flex flex-row justify-between'>
+                <div className='flex flex-row justify-between w-full h-full'>
                     {/* name section */}
                     <Reveal delay={0.25}>
-                    <div className='flex flex-col gap-4 w-(--cell-width) pl-8 pr-8'>
-                        <Image 
-                            src='/jt-white.svg'
-                            alt='jacqueline truong'
-                            width={320}
-                            height={112.84}
-                            className='size-full'
-                            draggable={false}
-                        />
+                    <div className='flex flex-col gap-4 w-(--cell-width) h-full pl-8 pr-8 | ultrawide:px-20'>
+                        <div className='w-full h-full relative'>
+                            <Image 
+                                src='/jt-white.svg'
+                                alt='jacqueline truong'
+                                fill
+                                className='object-contain object-top-right'
+                                draggable={false}
+                            />
+                        </div>
                         <h5 className='text-(--alt-text-colour) text-right leading-5'>© 2025 built & designed by jacqueline truong</h5>
                     </div>
                     </Reveal>
@@ -76,7 +77,7 @@ export default function FooterDesktop({ className = '' }: { className?: string }
 
                     {/* navigation pages */}
                     <Reveal delay={0.5}>
-                    <div className='flex flex-col gap-2 w-(--cell-width) pl-8 pr-8'>
+                    <div className='flex flex-col gap-2 w-(--cell-width) pl-8 pr-8 | ultrawide:px-12'>
                         <h5 className='text-white'>Pages</h5>
                         <a className='w-fit transition-colors duration-300 hover:text-(--grey)' href='#home'>Home</a>
                         <a className='w-fit transition-colors duration-300 hover:text-(--grey)' href='#about'>About</a>
@@ -87,7 +88,7 @@ export default function FooterDesktop({ className = '' }: { className?: string }
 
                     {/* links */}
                     <Reveal delay={0.75}>
-                    <div className='flex flex-col gap-2 w-(--cell-width) pl-8 pr-8'>
+                    <div className='flex flex-col gap-2 w-(--cell-width) pl-8 pr-8 | ultrawide:px-12'>
                         <h5 className='text-white'>Find More</h5>
                         <a className='w-fit transition-colors duration-300 hover:text-(--grey)' href=''>Resume</a>
                         <a className='w-fit transition-colors duration-300 hover:text-(--grey)' target='_blank' href='https://www.linkedin.com/in/jacquellinetruong'>LinkedIn</a>
@@ -97,7 +98,7 @@ export default function FooterDesktop({ className = '' }: { className?: string }
 
                     {/* cta */}
                     <Reveal delay={1}>
-                    <div className='flex flex-col justify-between w-(--cell-width) pl-8 pr-8'>
+                    <div className='flex flex-col justify-between w-(--cell-width) h-full pl-8 pr-8 | ultrawide:px-20'>
                         <div className='flex flex-col gap-4'>
                             <h5 className='text-white'>Like my work?</h5>
                             <a className='font-medium text-base 3xl:text-lg text-(--dark-black)
@@ -112,13 +113,15 @@ export default function FooterDesktop({ className = '' }: { className?: string }
                                 <LinkArrow className='size-[24px] text-(--text-colour)'/>
                             </a>
                         </div>
-                        <Image 
-                            src='/thats-all.svg'
-                            alt='handwritten note'
-                            width={320}
-                            height={100.68}
-                            draggable={false}
-                        />
+                        <div className='w-full h-full relative'>
+                            <Image 
+                                src='/thats-all.svg'
+                                alt='handwritten note'
+                                fill
+                                draggable={false}
+                                className='object-contain object-left pt-2'
+                            />
+                        </div>
                     </div>
                     </Reveal>
                 </div>

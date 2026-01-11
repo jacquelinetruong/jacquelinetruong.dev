@@ -36,63 +36,78 @@ export default function ProjectCard({
 	// ------ VIEWPORT DISPLAY ------ //
 	const isDesktop = useMediaQuery('(min-width: 1024px)');
 
-	// tags for each project
-	const allTags = useMemo(() => {
-		return [...(project.languages ?? []), ...(project.programs ?? [])];
-	}, [project.languages, project.programs]);
+	// ------ DESKTOP ------ //
+		// tags for each project
+		const allTags = useMemo(() => {
+			return [...(project.languages ?? []), ...(project.programs ?? [])];
+		}, [project.languages, project.programs]);
 
-	// for tag collapsing
-	const containerRef = useRef<HTMLDivElement>(null);
-	const measurerRef = useRef<HTMLSpanElement>(null);
+		// for tag collapsing
+		const containerRef = useRef<HTMLDivElement>(null);
+		const measurerRef = useRef<HTMLSpanElement>(null);
 
-	const [visibleCount, setVisibleCount] = useState(allTags.length);
+		const [visibleCount, setVisibleCount] = useState(allTags.length);
 
-	// measure tag visibility
-	useEffect(() => {
-		if (!containerRef.current || !measurerRef.current) return;
+		// measure tag visibility
+		useEffect(() => {
+			if (!containerRef.current || !measurerRef.current) return;
 
-		const measureTags = () => {
-			window.requestAnimationFrame(() => {
-				const containerWidth = containerRef.current!.clientWidth;
-				let used = 0;
-				let count = 0;
+			const measureTags = () => {
+				window.requestAnimationFrame(() => {
+					const containerWidth = containerRef.current!.clientWidth;
+					let used = 0;
+					let count = 0;
 
-				const temp = measurerRef.current!;
-				temp.innerHTML = '';
+					const temp = measurerRef.current!;
+					temp.innerHTML = '';
 
-				for (let tag of allTags) {
-					const span = document.createElement('span');
-					span.className = 'inline-block px-3 py-1 border border-white rounded-full text-nowrap text-[10px] 2xl:text-xs';
-					span.textContent = tag;
-					temp.appendChild(span);
+					for (let tag of allTags) {
+						const span = document.createElement('span');
+						span.className = 'inline-block px-3 py-1 border border-white rounded-full text-nowrap text-[10px] 2xl:text-xs';
+						span.textContent = tag;
+						temp.appendChild(span);
 
-					const tagWidth = span.offsetWidth + 24;
-					if (used + tagWidth > containerWidth) break;
-					used += tagWidth;
-					count++;
-				}
+						const tagWidth = span.offsetWidth + 24;
+						if (used + tagWidth > containerWidth) break;
+						used += tagWidth;
+						count++;
+					}
 
-				setVisibleCount(count);
-			});
+					setVisibleCount(count);
+				});
+			};
+
+			measureTags();
+			window.addEventListener('resize', measureTags);
+			return () => window.removeEventListener('resize', measureTags);
+		}, [allTags]);
+
+		const hiddenCount = allTags.length - visibleCount;
+
+		const showIcon = !featured && project.section !== 'portfolio';
+		
+		// only open external link if NOT a non-featured portfolio card
+		const handleClick = () => {
+			if (showIcon && project.link) {
+				window.open(project.link, '_blank', 'noopener, noreferrer');
+				return;
+			}
+			onClick?.();
 		};
 
-		measureTags();
-		window.addEventListener('resize', measureTags);
-		return () => window.removeEventListener('resize', measureTags);
-	}, [allTags]);
-
-	const hiddenCount = allTags.length - visibleCount;
-
-	const showIcon = !featured && project.section !== 'portfolio';
 	
-	// only open external link if NOT a non-featured portfolio card
-	const handleClick = () => {
-		if (showIcon && project.link) {
-			window.open(project.link, '_blank', 'noopener, noreferrer');
-			return;
-		}
-		onClick?.();
-	};
+	// ------ MOBILE ------ //
+		const [activeIndex, setActiveIndex] = useState(0);
+		const scrollerRef = useRef<HTMLDivElement>(null);
+
+		// carousel indicator/progress bar
+		const handleScroll = () => {
+			const el = scrollerRef.current;
+			if (!el) return;
+
+			const index = Math.round(el.scrollLeft / el.clientWidth);
+			setActiveIndex(index);
+		};
 	
 	return isDesktop ? (
 		<div onClick={handleClick}
@@ -112,7 +127,7 @@ export default function ProjectCard({
 			/>	
 
 			{/* gradient for text readability */}
-			<div className={`absolute inset-0 bg-gradient-to-t from-(--dark-black)/85 from-10% via-(--dark-black)/60 via-20% to-transparent to-35% point-events-none
+			<div className={`absolute inset-0 bg-gradient-to-t from-(--dark-black)/70 from-5% via-(--dark-black)/55 via-16% to-transparent to-40% point-events-none
 							${!featured && 'bg-[#13131B]/15 transition duration-300 group-hover:bg-transparent'}`}/>
 
 			{/* project details section */}
@@ -214,15 +229,50 @@ export default function ProjectCard({
 		</div>
 	): (
 		// mobile
-		<div className='relative w-full h-full'>
-			{/* preview */}
-			<Image
-				src={project.images[0]}
-				alt={project.title}
-				fill
-				className='object-contain object-bottom sm:object-cover sm:object-center'
-				draggable={false}
-			/>	
+		<div className='relative w-full h-full overflow-hidden'>
+			<div className='relative w-full aspect-4/3'>
+			{/* horizontal scroll */}
+				<div
+					ref={scrollerRef}
+					onScroll={handleScroll}
+					className='flex flex-row gap-4 h-full
+								overflow-x-auto snap-x snap-mandatory touch-pan-x overscroll-x-contain
+								scrollbar-none scroll-smooth'
+				>
+					{/* project images */}
+					{project.images.map((img, i) => (		
+						<>
+							<div
+								key={i}
+								className='relative min-w-full h-full snap-center snap-always'
+							>
+								<Image
+									src={img}
+									alt={`${project.title} image ${i + 1}`}
+									fill
+									className='object-contain object-bottom sm:object-cover sm:object-center'
+									draggable={false}
+								/>
+							</div>
+
+							{/* progress bar */}
+							{project.images.length > 1 && (
+							<div className='absolute place-self-end w-full h-fit
+											items-center pointer-events-none'
+							>
+								<div className='w-full h-[6px] bg-(--nice-grey) relative overflow-hidden'>
+									<div
+										className='absolute inset-0 left-0 rounded-tr-full rounded-br-full bg-(--black) transition-all duration-300'
+										style={{ width: `${((activeIndex + 1) / project.images.length) * 100}%`, }}
+									/>
+								</div>
+							</div>
+							)}
+						</>
+					))}
+				</div>
+			</div>
 		</div>
+
 	)
 }

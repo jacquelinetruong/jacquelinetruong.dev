@@ -45,7 +45,7 @@ export function useActiveSection(
 			setActiveSection(prev => {
 				if (prev !== current) {
 					const nextTheme = sectionThemes?.[current];
-					if (setTheme && nextTheme) setTheme(nextTheme);
+					if (setTheme && nextTheme) {setTheme(nextTheme)};
 					return current;
 				}
 				return prev;
