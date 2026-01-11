@@ -7,6 +7,7 @@ import Grid from '../grid';
 
 import '@/public/jt-logo-black.svg';
 import '@/public/jt-logo-grey.svg';
+import '@/public/better.svg';
 
 type LoaderProps = {
 	isLoading: boolean;
@@ -21,10 +22,10 @@ export default function LoaderMobile({ isLoading, isDesktop }: LoaderProps) {
         <AnimatePresence>
             {(isLoading && !isDesktop) && (
                 <motion.div
-                    className='fixed inset-0 z-[9999] bg-white'
+                    className='fixed inset-0 z-[9999] bg-white pt-(--nav-height)'
                     initial={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 0.8, ease: 'easeInOut' }}
+                    transition={{ duration: 1.5, ease: 'easeInOut' }}
                     >
                     <Grid>
                         {[
@@ -86,7 +87,6 @@ export default function LoaderMobile({ isLoading, isDesktop }: LoaderProps) {
                             </div>
                         ))}
                     </Grid>
-
                 </motion.div>
             )}
         </AnimatePresence>

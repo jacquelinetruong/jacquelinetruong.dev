@@ -32,6 +32,16 @@ export default function HeroDesktop({
                     </Reveal>
                 </div>
 
+                {/* better on desktop message */}
+                <div className='col-start-3 col-span-1 row-start-1 row-span-1 relative'>
+                    <Image 
+                        src='/better.svg'
+                        alt='better on desktop!'
+                        fill
+                        className='object-contain object-bottom-right p-4 | xs:p-5 | sm:p-8 | md:px-12'
+                    />
+                </div>
+
                 {/* name and title */}
                 <div className='col-start-1 col-span-3 row-start-2 row-span-1 
                                 w-full h-full p-5
