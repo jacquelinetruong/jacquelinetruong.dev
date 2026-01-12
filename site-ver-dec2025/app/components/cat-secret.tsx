@@ -7,6 +7,7 @@ import Image from 'next/image';
 import CatDefault from '@/public/cat.svg';
 import CatAnnoyed from '@/public/cat-annoyed.svg';
 import CatConfused from '@/public/cat-confused.svg';
+import CatCry from '@/public/cat-cry.svg';
 import CatSleep from '@/public/cat-sleep.svg';
 import CatSus from '@/public/cat-sus.svg';
 import CatYawn from '@/public/cat-yawn.svg';
@@ -15,6 +16,7 @@ const cats = [
     CatDefault,
     CatAnnoyed,
     CatConfused,
+    CatCry,
     CatSleep,
     CatSus,
     CatYawn,
