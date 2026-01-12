@@ -61,7 +61,7 @@ export default function ExperienceMobile({
                                 w-full h-full px-5 py-6
                                 flex flex-col justify-between items-end'>
                     {/* title */}
-                    <div className='w-full h-full relative'>
+                    <div className='w-full aspect-4/1 relative'>
                         <Image
                             src='/experience.svg'
                             alt='my namestamp'

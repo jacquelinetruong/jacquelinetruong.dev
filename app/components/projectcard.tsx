@@ -257,7 +257,7 @@ export default function ProjectCard({
 									src={img}
 									alt={`${project.title} image ${i + 1}`}
 									fill
-									className='object-contain object-bottom sm:object-cover sm:object-center'
+									className='absolute object-contain object-bottom sm:object-cover sm:object-center'
 									draggable={false}
 								/>
 							</div>

@@ -47,7 +47,7 @@ export default function FooterMobile({ className = '' }:{ className?: string; })
                             </a>
                         </div>
 
-                        <div className='relative w-full sm:w-3/4 h-fit'>
+                        <div className='relative w-full sm:w-3/4 aspect-2/1'>
                             <Reveal delay={0.8}>
                                 <Image
                                     src='/thats-all.svg'
@@ -74,7 +74,7 @@ export default function FooterMobile({ className = '' }:{ className?: string; })
                     <div className='flex flex-col gap-2'>
                         <Reveal delay={1}>
                             <p className='text-sm | xs:text-base text-right text-(--light-mode-grey)'>Design and development by</p>
-                            <div>
+                            <div className='relative'>
                                 <Image
                                     src='/jt-dark-grey.svg'
                                     alt='Jacqueline Truong'

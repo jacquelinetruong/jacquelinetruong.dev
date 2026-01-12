@@ -45,7 +45,7 @@ export default function PortfolioMobile({
                 <div className='col-start-1 col-span-3 row-start-2 row-span-1 w-full h-full
                                 flex flex-col items-start justify-between px-4 py-6'>
                     {/* title */}
-                    <div className='w-full h-full relative'>                                        
+                    <div className='w-full aspect-4/1 relative'>                                        
                         <Image 
                             src='/portfolio-light.svg'
                             alt='section title: my works'
