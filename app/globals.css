@@ -45,7 +45,7 @@
     --grid-rows: 4;
       
     --cell-width: calc(100vw / var(--grid-columns));
-    --cell-height: calc(100vh / var(--grid-rows));
+    --cell-height: calc(var(--vh) / var(--grid-rows));
     --two-cell-width: calc(2 * var(--cell-width));
     --two-cell-height: calc(2 * var(--cell-height));
     --three-cell-width: calc(3 * var(--cell-width));
