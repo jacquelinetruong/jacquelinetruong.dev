@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from 'react';
-import Image from 'next/image';
 import { useLenis } from 'lenis/react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 import { Reveal } from '@/app/components/reveal';
 import { useActiveSection } from '@/app/components/active-section';
@@ -104,7 +105,8 @@ export default function NavbarMobile({ isLoading }: { isLoading: boolean }) {
 						<div className='mb-20'>
 							<p className='px-5 pb-2 text-(--dark-grey) text-sm | xs:text-base | sm:text-base |  '>Navigation</p>
 							{navLinks.map((id, i) => (
-								<button
+								<Link
+									href={`/#${id}`}
 									key={id}
 									onClick={scrollToSection(id)}
 									className={`nav-button
@@ -121,7 +123,7 @@ export default function NavbarMobile({ isLoading }: { isLoading: boolean }) {
 									{activeSection === id && (
 										' —' // lol it's a face!
 									)}
-								</button>
+								</Link>
 							))}
 						</div>
 

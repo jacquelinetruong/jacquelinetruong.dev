@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useLenis } from 'lenis/react';
 
 import { useTheme } from '@/app/components/theme-context';
@@ -57,7 +58,7 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
             <div className='flex flex-row items-center gap-12'>
 
                 {/* site logo */}
-                <a href='#home'
+                <Link href='/#home'
                     className='relative w-[43.58px] h-[30px] | xl:w-[58.11px] xl:h-[40px]'>
                     {/* black logo (light theme) */}
                     <Image
@@ -77,14 +78,14 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
                         className={`absolute transition-opacity duration-500 ease-in-out
                             ${activeSection === 'portfolio' ? 'opacity-100' : 'opacity-0'}`}
                     />
-                </a>
+                </Link>
 
                 {/* nav items */}
                 <div className='navbar-items flex flex-row gap-8'>
                     {['home', 'about', 'portfolio', 'experience'].map((id) => (
-                        <a
+                        <Link
                         key={id}
-                        href={`#${id}`}
+                        href={`/#${id}`}
                         onClick={scrollToSection(id)}
                         className={`transition-colors duration-300 ${
                             activeSection === id
@@ -93,7 +94,7 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
                         } ${activeSection === 'portfolio' && id !== 'portfolio' ? 'text-(--alt-text-colour) hover:text-(--grey)' : ''}`}
                         >
                         {id.charAt(0).toUpperCase() + id.slice(1)}
-                        </a>
+                        </Link>
                     ))}
                     {/* <a href='#daily'>Daily</a> */}           {/* future page, maybe */}
                 </div>

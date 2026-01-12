@@ -136,7 +136,7 @@ export default function ProjectCard({
 							absolute bottom-0 left-0 w-full p-6'>
 
 				{/* content */}
-				<div className='flex flex-col gap-1 w-full pr-6'>
+				<div className='flex flex-col gap-1 flex-grow min-w-0 pr-6'>
 
 					{/* tags */}
 					{allTags.length > 0 && (
@@ -182,9 +182,9 @@ export default function ProjectCard({
 
 				{/* project link icon (non-portfolio section project) */}
 				{showIcon && project.link && (
-					<div className='text-nowrap
-									flex flex-col gap-1 
-									w-fit items-end
+					<div className='lg:hidden 3xl:block
+									text-nowrap drop-shadow-md
+									flex flex-col gap-1 flex-shrink-0 items-end
 									opacity-0 translate-y-1
 									group-hover:opacity-100 group-hover:translate-y-0
 									transition-all duration-100'>	

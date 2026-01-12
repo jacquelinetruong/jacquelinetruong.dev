@@ -433,9 +433,8 @@ export default function PortfolioDesktop({
                                                     <Image
                                                         src={img}
                                                         alt={`${featuredProject.title} preview ${i + 2}`}
-                                                        width={1142}
-                                                        height={743}
-                                                        className='size-full object-cover
+                                                        fill
+                                                        className='object-cover object-center
                                                                     transition-transform duration-500 ease-out
                                                                     group-hover:scale-110'
                                                         draggable={false}

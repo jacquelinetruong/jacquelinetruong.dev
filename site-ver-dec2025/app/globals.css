@@ -101,7 +101,7 @@ html {
   background-color: transparent;
 }
 
-@media (max-width: var(--mobile)) {
+@media (max-width: 1023px) {
   html {
     scroll-behavior: smooth;
     overflow-y: scroll;
