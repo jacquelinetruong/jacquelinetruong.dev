@@ -10,9 +10,9 @@
 :root {
   /* colours */
   --white: #FFFFFF;
-  --off-white: #F0F1F4;
+  --off-white: #EAE9EE;
   --nice-grey: #D7D6DD;
-  --grey: #BEBEBE;
+  --grey: #C7C6CD;
   --grid-line-colour: #97969D20;
   --light-mode-grey: #97969D;
   --dark-mode-grey: #77767D;
@@ -22,7 +22,7 @@
   --dark-black: #1B1C1D;
 
   /* dimension variables */
-  --nav-height: 80px;
+  --nav-height: 72px;
   --cell-height: calc((100svh - var(--nav-height)) / var(--grid-rows));
   --two-cell-height: calc(2 * var(--cell-height));
   --cell-width: calc(100svw / var(--grid-columns));

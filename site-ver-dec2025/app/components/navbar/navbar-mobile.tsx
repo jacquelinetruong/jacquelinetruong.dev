@@ -7,7 +7,7 @@ import { useLenis } from 'lenis/react';
 import { Reveal } from '@/app/components/reveal';
 import { useActiveSection } from '@/app/components/active-section';
 
-import Cat from '@/app/components/icons/cat';
+import Cat from '@/app/components/icons/cat-icon';
 import '@/public/menu-black.svg';
 import '@/public/menu-white.svg';
 

@@ -148,14 +148,20 @@ export default function ProjectCard({
 						>
 							{/* show tags that fit */}
 							{allTags.slice(0, visibleCount).map(tag => (
-								<span key={tag} className='inline-block px-3 py-1 border border-white rounded-full text-nowrap text-[10px] 2xl:text-xs'>
+								<span key={tag} className='inline-block px-3 py-1 pointer-events-none
+															bg-(--black)/20 backdrop-blur-[1px] border border-white rounded-full 
+															text-nowrap text-[10px] 2xl:text-xs'
+								>
 									{tag}
 								</span>
 							))}
 
 							{/* show number of tags that don't fit */}
 							{visibleCount < allTags.length && (
-								<span className='text-nowrap pointer-events-none px-3 py-1 border border-white rounded-full text-[10px] 2xl:text-xs'>
+								<span className='inline-block px-3 py-1 pointer-events-none
+													bg-(--black)/20 backdrop-blur-[1px] border border-white rounded-full 
+													text-nowrap text-[10px] 2xl:text-xs'
+								>
 									+{allTags.length - visibleCount}
 								</span>		
 							)}
@@ -163,7 +169,10 @@ export default function ProjectCard({
 							{/* hidden element span */}
 							<span
 								ref={measurerRef}
-								className='absolute opacity-0 pointer-events-none px-3 py-1 border border-white rounded-full text-nowrap text-[10px] 2xl:text-xs'>
+								className='absolute opacity-0 px-3 py-1 pointer-events-none
+											bg-(--black)/20 backdrop-blur-[1px] border border-white rounded-full 
+											text-nowrap text-[10px] 2xl:text-xs'
+								>
 							</span>
 						</div>
 					)}

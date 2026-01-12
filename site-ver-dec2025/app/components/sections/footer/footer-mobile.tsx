@@ -6,7 +6,7 @@ import LinkArrow from '@/app/components/icons/link-arrow';
 import { Reveal } from '@/app/components/reveal';
 
 import '@/public/thats-all.svg';
-import '@/public/footer-jacqueline-grey.svg';
+import '@/public/jt-dark-grey.svg';
 
 
 export default function FooterMobile({ className = '' }:{ className?: string; }) {

@@ -10,7 +10,7 @@ import { Reveal } from './reveal';
 import ProjectCard from './projectcard';
 
 import GuideArrow from './icons/guide-arrow';
-import Cat from './icons/cat';
+import Cat from './icons/cat-icon';
 import '../../public/caret-double-right-icon.svg';
 import '../../public/caret-left-grey-icon.svg';
 import '../../public/caret-right-icon.svg';

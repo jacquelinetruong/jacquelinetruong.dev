@@ -12,7 +12,7 @@ import { Reveal } from '@/app/components/reveal';
 import ProjectCard from '@/app/components/projectcard';
 import Grid from '@/app/components/grid';
 
-import Cat from '@/app/components/icons/cat';
+import Cat from '@/app/components/icons/cat-icon';
 import '@/public/detail-arrow-black.svg';
 import '@/public/detail-arrow-grey.svg';
 import '@/public/experience.svg';

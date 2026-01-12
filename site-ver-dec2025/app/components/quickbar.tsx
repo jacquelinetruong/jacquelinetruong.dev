@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { Reveal } from './reveal';
 import { useActiveSection } from './active-section';
 
@@ -14,10 +15,46 @@ export default function Quickbar({ isLoading }: { isLoading: boolean }) {
 
     const activeSection = useActiveSection();
 
+    // dock before footer
+    function useFooterDock(offset = 0) {
+        const [dockY, setDockY] = useState(0);
+
+        useEffect(() => {
+            const footer = document.getElementById('contact');
+            if (!footer) return;
+
+            const onScroll = () => {
+                const footerRect = footer.getBoundingClientRect();
+                const viewportHeight = window.innerHeight;
+
+                // footer entering viewport
+                if (footerRect.top < viewportHeight) {
+                    const overlap = viewportHeight - footerRect.top;
+                    setDockY(Math.max(overlap + offset, 0));
+                } else {
+                    setDockY(0);
+                }
+            };
+
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+
+            return () => window.removeEventListener('scroll', onScroll);
+        }, [offset]);
+
+        return dockY;
+    }
+
+    const dockY = useFooterDock(-90);
+
     return (
-        <div className='fixed bottom-0 right-0 z-1000 pointer-events-auto 
-                        w-fit h-fit | m-4 | 2xl:m-6 | 3xl:mx-20 3xl:my-8 
-                        flex flex-row gap-1'>
+        <div className='fixed right-0 bottom-0 z-1000
+                        w-fit h-fit pointer-events-auto
+                        flex flex-row gap-1
+                        m-4 | 2xl:m-6 | 3xl:mx-20 3xl:my-8
+                        transition-transform duration-300 ease-out'
+            style={{ transform: `translateY(-${dockY}px)` }}
+        >
             {/* coffee chat button */}
             <Reveal delay={1.25} className={`${activeSection === 'home' || activeSection === 'about' ? 'hidden' : ''}`}>
                 <a href='mailto:hello@jacquelinetruong.dev'
