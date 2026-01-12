@@ -19,13 +19,13 @@ export default function HeroDesktop({
             <Grid>
                 {/* hey! */}
                 <div className='col-start-1 col-span-2 row-start-1 row-span-1 
-                                w-full h-full relative flex justify-end'>
+                                w-full h-full relative'>
                     <Reveal delay={2}>
                         <Image
                             src='/hey.svg'
                             alt='Hey, welcome to my portfolio site!'
                             fill
-                            className='p-5'
+                            className='p-5 object-contain object-left'
                         />
                     </Reveal>
                 </div>
@@ -44,7 +44,7 @@ export default function HeroDesktop({
                 <div className='col-start-1 col-span-3 row-start-2 row-span-1 
                                 w-full h-full p-5
                                 flex flex-col justify-between items-end'>
-                    <div className='w-full h-full relative'>
+                    <div className='w-full aspect-4/1 relative'>
                         <Reveal delay={0.1}>
                             <Image
                                 src='/jt-black.svg'
