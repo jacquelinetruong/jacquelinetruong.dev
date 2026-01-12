@@ -23,12 +23,12 @@
 
   /* dimension variables */
   --nav-height: 72px;
-  --cell-height: calc((100dvh - var(--nav-height)) / var(--grid-rows));
+  --cell-height: calc((100vh - var(--nav-height)) / var(--grid-rows));
   --two-cell-height: calc(2 * var(--cell-height));
-  --cell-width: calc(100dvw / var(--grid-columns));
+  --cell-width: calc(100vw / var(--grid-columns));
   --two-cell-width: calc(2 * var(--cell-width));
   --three-cell-width: calc(3 * var(--cell-width));
-  --content-space: calc(100dvh - var(--nav-height));
+  --content-space: calc(100vh - var(--nav-height));
 
   /* responsiveness */
     /* default grid (for desktop) */
@@ -44,13 +44,13 @@
     --grid-columns: 3;
     --grid-rows: 4;
       
-    --cell-width: calc(100dvw / var(--grid-columns));
-    --cell-height: calc(100dvh / var(--grid-rows));
+    --cell-width: calc(100vw / var(--grid-columns));
+    --cell-height: calc(100vh / var(--grid-rows));
     --two-cell-width: calc(2 * var(--cell-width));
     --two-cell-height: calc(2 * var(--cell-height));
     --three-cell-width: calc(3 * var(--cell-width));
     --three-cell-height: calc(3 * var(--cell-height));
-    --content-space: 100dvh;
+    --content-space: 100vh;
   }
 }
 
@@ -149,7 +149,7 @@ section {
       var(--grid-line-colour) 0,
       var(--grid-line-colour) 1px,
       transparent 1px,
-      transparent calc((100dvw / var(--grid-columns)))
+      transparent calc((100vw / var(--grid-columns)))
     ),
 
     /* horizontal lines */
@@ -179,7 +179,7 @@ section {
       var(--grid-line-colour) 0,
       var(--grid-line-colour) 1px,
       transparent 1px,
-      transparent calc((100dvw / var(--grid-columns)))
+      transparent calc((100vw / var(--grid-columns)))
     ),
 
     /* horizontal lines */
