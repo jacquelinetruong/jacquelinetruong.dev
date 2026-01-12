@@ -22,6 +22,7 @@
   --dark-black: #1B1C1D;
 
   /* dimension variables */
+  --vh: 100vh;
   --nav-height: 72px;
   --cell-height: calc((var(--vh) - var(--nav-height)) / var(--grid-rows));
   --two-cell-height: calc(2 * var(--cell-height));

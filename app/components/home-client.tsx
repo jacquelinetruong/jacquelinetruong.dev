@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import { useMediaQuery } from './media-query';
 import { useLoading } from './loading-context';
 
@@ -48,13 +48,18 @@ export default function HomeClient({
 	}, []);
 
 	// mobile scroll resizing (when ui collapses)
-	useEffect(() => {
+	useLayoutEffect(() => {
 		const setVh = () => {
 			document.documentElement.style.setProperty('--vh', `${window.innerHeight}px`);
 		};
 		setVh();
+		const timeout = setTimeout(setVh, 50);
+
 		window.addEventListener('resize', setVh);
-		return () => window.removeEventListener('resize', setVh);
+		return () => {
+			window.removeEventListener('resize', setVh);
+			clearTimeout(timeout);
+		};
 	}, []);
 
 	return (
