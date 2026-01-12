@@ -15,8 +15,9 @@ const font = Inter({
 });
 
 export const metadata: Metadata = {
-	title: "jacqueline truong's portfolio",
-	description: "jacqueline truong's portfolio website",
+	title: 'jacqueline truong | designer & developer',
+	description: 'a collection of my ideas — blending design, development, and thoughtful digital experiences.',
+
 	icons: {
 		icon: [
 			{ url: '/favicon-192x192.png', sizes: '192x192', type: 'image/png', },
@@ -27,6 +28,16 @@ export const metadata: Metadata = {
 		],
 		shortcut: '/favicon-192x192.png',
 	},
+
+	openGraph: {
+		title: 'jacqueline truong | designer & developer',
+		description: 'a collection of my ideas — blending design, development, and thoughtful digital experiences.',
+		url: 'https://jacquelinetruong.dev',
+		siteName: 'jacqueline truong | designer & developer',
+		images: { url: '/og-image.png' },
+		type: 'website',
+	},
+	
 };
 
 export default function RootLayout({
