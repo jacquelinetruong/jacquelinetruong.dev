@@ -94,13 +94,13 @@ export default function NavbarMobile({ isLoading }: { isLoading: boolean }) {
 
 			{/* overlay menu */}
 			{menuState !== 'closed' && (
-				<div className={`fixed w-full h-full z-40 pt-40 pb-16 bg-[#B7B5BB]
+				<div className={`fixed w-full h-full z-40 pt-40 pb-16  bg-[#B7B5BB]
 								flex flex-col items-center justify-between
 								${menuState === 'opening' ? 'animate-open' : ''}
 								${menuState === 'closing' ? 'animate-close': ''}`}
 					onAnimationEnd={handleAnimationEnd}
 				>
-					<div className='overlay-content'>
+					<div className='overlay-content place-self-start'>
 						{/* nav items */}
 						<div className='mb-20'>
 							<p className='px-5 pb-2 text-(--dark-grey) text-sm | xs:text-base | sm:text-base |  '>Navigation</p>
@@ -109,7 +109,7 @@ export default function NavbarMobile({ isLoading }: { isLoading: boolean }) {
 									href={`/#${id}`}
 									key={id}
 									onClick={scrollToSection(id)}
-									className={`nav-button
+									className={`nav-button block
 												w-full h-fit px-5 py-1.5
 												text-4xl sm: text-5xl font-[450] text-left
 												transition-colors duration-300 place-self-end
