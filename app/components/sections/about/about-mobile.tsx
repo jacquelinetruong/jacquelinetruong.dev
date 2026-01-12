@@ -6,8 +6,7 @@ import type { Experience } from '@/lib/experienceTypes';
 
 import { Reveal } from '@/app/components/reveal';
 import Grid from '@/app/components/grid';
-import Coffee from '../../icons/coffee';
-import '@/public/me.jpg';
+import Coffee from '@/app/components/icons/coffee';
 
 
 export default function AboutMobile({

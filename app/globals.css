@@ -23,12 +23,12 @@
 
   /* dimension variables */
   --nav-height: 72px;
-  --cell-height: calc((100vh - var(--nav-height)) / var(--grid-rows));
+  --cell-height: calc((var(--vh) - var(--nav-height)) / var(--grid-rows));
   --two-cell-height: calc(2 * var(--cell-height));
   --cell-width: calc(100vw / var(--grid-columns));
   --two-cell-width: calc(2 * var(--cell-width));
   --three-cell-width: calc(3 * var(--cell-width));
-  --content-space: calc(100vh - var(--nav-height));
+  --content-space: calc(var(--vh) - var(--nav-height));
 
   /* responsiveness */
     /* default grid (for desktop) */
@@ -50,7 +50,7 @@
     --two-cell-height: calc(2 * var(--cell-height));
     --three-cell-width: calc(3 * var(--cell-width));
     --three-cell-height: calc(3 * var(--cell-height));
-    --content-space: 100vh;
+    --content-space: var(--vh);
   }
 }
 

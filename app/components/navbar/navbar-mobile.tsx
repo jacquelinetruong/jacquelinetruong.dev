@@ -9,8 +9,6 @@ import { Reveal } from '@/app/components/reveal';
 import { useActiveSection } from '@/app/components/active-section';
 
 import Cat from '@/app/components/icons/cat-icon';
-import '@/public/menu-black.svg';
-import '@/public/menu-white.svg';
 
 
 export default function NavbarMobile({ isLoading }: { isLoading: boolean }) {

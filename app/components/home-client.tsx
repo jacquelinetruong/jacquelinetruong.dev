@@ -5,7 +5,6 @@ import { useMediaQuery } from './media-query';
 import { useLoading } from './loading-context';
 
 import Loader from './loader/loader';
-import Navbar from './navbar/navbar';
 import Quickbar from './quickbar';
 import NameStamp from './name-stamp';
 import Hero from './sections/hero/hero';
@@ -46,6 +45,16 @@ export default function HomeClient({
 	useEffect(() => {
 		const timeout = setTimeout(() => setIsLoading(false), 1600);
 		return () => clearTimeout(timeout);
+	}, []);
+
+	// mobile scroll resizing (when ui collapses)
+	useEffect(() => {
+		const setVh = () => {
+			document.documentElement.style.setProperty('--vh', `${window.innerHeight}px`);
+		};
+		setVh();
+		window.addEventListener('resize', setVh);
+		return () => window.removeEventListener('resize', setVh);
 	}, []);
 
 	return (

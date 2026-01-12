@@ -5,8 +5,6 @@ import Grid from '@/app/components/grid';
 import { Reveal } from '@/app/components/reveal';
 
 import Coffee from '@/app/components/icons/coffee';
-import '@/public/hey.svg';
-import '@/public/jt-black.svg';
 
 
 export default function HeroDesktop({

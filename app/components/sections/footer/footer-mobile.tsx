@@ -5,9 +5,6 @@ import Grid from '@/app/components/grid';
 import LinkArrow from '@/app/components/icons/link-arrow';
 import { Reveal } from '@/app/components/reveal';
 
-import '@/public/thats-all.svg';
-import '@/public/jt-dark-grey.svg';
-
 
 export default function FooterMobile({ className = '' }:{ className?: string; }) {
     return (
@@ -79,7 +76,7 @@ export default function FooterMobile({ className = '' }:{ className?: string; })
                             <p className='text-sm | xs:text-base text-right text-(--light-mode-grey)'>Design and development by</p>
                             <div>
                                 <Image
-                                    src='/footer-jacqueline-grey.svg'
+                                    src='/jt-dark-grey.svg'
                                     alt='Jacqueline Truong'
                                     width={343}
                                     height={120.95}

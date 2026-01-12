@@ -7,9 +7,6 @@ import { useActiveSection } from './active-section';
 import Coffee from './icons/coffee';
 import TopArrow from './icons/top-arrow';
 
-import '../../public/jt-logo-black.svg';
-import '../../public/jt-logo-white.svg';
-
 
 export default function Quickbar({ isLoading }: { isLoading: boolean }) {
 

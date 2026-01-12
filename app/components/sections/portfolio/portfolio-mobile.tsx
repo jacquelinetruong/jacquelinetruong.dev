@@ -9,12 +9,6 @@ import Grid from '@/app/components/grid';
 
 import LinkArrow from '@/app/components/icons/link-arrow';
 
-import '@/public/works.svg';
-import '@/public/portfolio-light.svg';
-import '@/public/projects.svg';
-import '@/public/github-logo.svg';
-import '@/public/dribbble-logo.svg';
-
 
 type PortfolioMobileProps = {
     isLoading: boolean;

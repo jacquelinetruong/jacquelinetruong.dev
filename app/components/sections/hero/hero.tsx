@@ -1,7 +1,6 @@
 'use client';
 
 import { Project } from '@/lib/projectTypes';
-import { useMediaQuery } from '@/app/components/media-query';
 
 import HeroDesktop from './hero-desktop';
 import HeroMobile from './hero-mobile';

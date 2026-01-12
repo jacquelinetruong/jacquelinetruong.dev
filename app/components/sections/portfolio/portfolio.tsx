@@ -2,7 +2,6 @@
 
 import { useState, useMemo } from 'react';
 import { Project } from '@/lib/projectTypes';
-import { useMediaQuery } from '@/app/components/media-query';
 
 import PortfolioDesktop from './portfolio-desktop';
 import PortfolioMobile from './portfolio-mobile';

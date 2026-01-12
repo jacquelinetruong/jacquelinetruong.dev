@@ -16,17 +16,6 @@ import { Project } from '@/lib/projectTypes';
 import GuideButton from '@/app/components/guide-button';
 import LinkArrow from '@/app/components/icons/link-arrow';
 
-import '@/public/works.svg';
-import '@/public/portfolio.svg';
-import '@/public/projects.svg';
-import '@/public/palette-icon.svg';
-import '@/public/palette-icon-grey.svg';
-import '@/public/code-icon.svg';
-import '@/public/code-icon-grey.svg';
-import '@/public/github-logo.svg';
-import '@/public/dribbble-logo.svg';
-import '@/public/caret-left-icon.svg'
-
 
 type PortfolioDesktopProps = {
     isLoading: boolean;

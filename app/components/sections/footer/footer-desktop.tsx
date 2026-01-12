@@ -6,13 +6,6 @@ import Grid from '@/app/components/grid';
 import LinkArrow from '@/app/components/icons/link-arrow';
 import { Reveal } from '@/app/components/reveal';
 import Cat from '@/app/components/icons/cat-icon';
-
-import '@/public/link-arrow-white.svg';
-import '@/public/link-arrow-black.svg';
-import '@/public/jt-white.svg';
-import '@/public/jt-logo-grey.svg';
-import '@/public/thx4visiting.svg';
-import '@/public/jt-dark-grey.svg';
 import CatSecret from '../../cat-secret';
 
 

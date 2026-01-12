@@ -6,8 +6,6 @@ import { useState, useRef, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 
 import LinkArrow from './icons/link-arrow';
-
-import '@/public/caret-left-icon.svg';
 import { useMediaQuery } from './media-query';
 
 

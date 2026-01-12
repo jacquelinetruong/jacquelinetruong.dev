@@ -5,8 +5,6 @@ import Image from 'next/image';
 
 import Grid from '../grid';
 
-import '@/public/jt-logo-black.svg';
-import '@/public/jt-logo-grey.svg';
 
 type LoaderProps = {
 	isLoading: boolean;

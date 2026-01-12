@@ -1,11 +1,7 @@
 'use client';
 
-import Image from 'next/image';
-
 import { Project } from '@/lib/projectTypes';
 import { Experience } from '@/lib/experienceTypes';
-
-import { useMediaQuery } from '../../media-query';
 
 import AboutDesktop from './about-desktop';
 import AboutMobile from './about-mobile';

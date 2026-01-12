@@ -2,7 +2,6 @@
 
 import type { Project } from '@/lib/projectTypes';
 import type { Experience } from '@/lib/experienceTypes';
-import { useMediaQuery } from '@/app/components/media-query';
 
 import ExperienceDesktop from './experience-desktop';
 import ExperienceMobile from './experience-mobile';

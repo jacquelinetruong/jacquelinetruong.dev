@@ -5,9 +5,6 @@ import Image from 'next/image';
 
 import Grid from '../grid';
 
-import '@/public/jt-logo-black.svg';
-import '@/public/jt-logo-grey.svg';
-import '@/public/better.svg';
 
 type LoaderProps = {
 	isLoading: boolean;
@@ -25,23 +22,19 @@ export default function LoaderMobile({ isLoading, isDesktop }: LoaderProps) {
                     className='fixed inset-0 z-[9999] bg-white pt-(--nav-height)'
                     initial={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 1.5, ease: 'easeInOut' }}
+                    transition={{ duration: 2, ease: 'easeInOut' }}
                     >
                     <Grid>
                         {[
-                            // LEFT → RIGHT (row 2)
-                            { row: 2, col: 1, delay: STEP * 0 },
-                            { row: 2, col: 2, delay: STEP * 1 },
-                            { row: 2, col: 3, delay: STEP * 2 }, // GOAL
 
                             // TOP → DOWN (col 3)
                             { row: 1, col: 3, delay: STEP * 1 },
-                            { row: 2, col: 3, delay: STEP * 2 }, // GOAL (duplicate on purpose)
+                            { row: 2, col: 3, delay: STEP * 2 },
 
                             // BOTTOM → UP (col 3)
                             { row: 4, col: 3, delay: STEP * 0 },
                             { row: 3, col: 3, delay: STEP * 1 },
-                            { row: 2, col: 3, delay: STEP * 2 }, // GOAL (duplicate on purpose)
+                            { row: 2, col: 3, delay: STEP * 2 },
                         ].map((cell, i) => (
                             <div
                                 key={i}
@@ -70,9 +63,9 @@ export default function LoaderMobile({ isLoading, isDesktop }: LoaderProps) {
                                 <motion.div
                                     className='absolute size-full'
                                     initial={{ opacity: 0 }}
-                                    animate={{ opacity: [0, 0.6, 0] }}
+                                    animate={{ opacity: [0, 0.8, 0] }}
                                     transition={{
-                                    duration: 1.6,
+                                    duration: 1.8,
                                     delay: cell.delay + 0.2,
                                     repeat: 0,
                                     }}

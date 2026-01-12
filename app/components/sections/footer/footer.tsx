@@ -1,5 +1,3 @@
-import { useMediaQuery } from '../../media-query';
-
 import FooterDesktop from './footer-desktop';
 import FooterMobile from './footer-mobile';
 

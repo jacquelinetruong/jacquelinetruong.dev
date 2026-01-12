@@ -8,8 +8,6 @@ import Grid from '../../grid';
 import GuideButton from '../../guide-button';
 import { SectionReveal } from '../../section-reveal';
 
-import '@/public/jt-black.svg';
-
 
 export default function HeroDesktop({
     className = '',

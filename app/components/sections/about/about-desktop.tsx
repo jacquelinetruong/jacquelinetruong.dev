@@ -11,11 +11,6 @@ import { SectionReveal } from '@/app/components/section-reveal';
 import { Reveal } from '@/app/components/reveal';
 import GuideButton from '@/app/components/guide-button';
 
-import '@/public/me.jpg';
-import '@/public/detail-arrow-black.svg';
-import '@/public/jt-grey.svg';
-import '@/public/cat.svg';
-
 
 export default function AboutDesktop({
     className = '',

@@ -7,9 +7,6 @@ import { useLenis } from 'lenis/react';
 import { useTheme } from '@/app/components/theme-context';
 import { useActiveSection } from '@/app/components/active-section';
 
-import '@/public/jt-logo-black.svg';
-import '@/public/jt-logo-white.svg';
-
 
 export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
     const { theme, setTheme } = useTheme();

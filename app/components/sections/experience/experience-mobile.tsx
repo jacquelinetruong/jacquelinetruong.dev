@@ -9,8 +9,6 @@ import type { Experience } from '@/lib/experienceTypes';
 import { Reveal } from '@/app/components/reveal';
 import Grid from '@/app/components/grid';
 
-import '@/public/experience.svg';
-
 
 export default function ExperienceMobile({
     className = '',

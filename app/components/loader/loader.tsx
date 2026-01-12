@@ -1,6 +1,5 @@
 'use client';
 
-import { Island_Moments } from 'next/font/google';
 import LoaderDesktop from './loader-desktop';
 import LoaderMobile from './loader-mobile';
 
