@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { Reveal } from './reveal';
 import { useActiveSection } from './active-section';
+import Link from 'next/link';
 
 import Coffee from './icons/coffee';
 import TopArrow from './icons/top-arrow';
@@ -56,7 +57,7 @@ export default function Quickbar({ isLoading }: { isLoading: boolean }) {
             <Reveal delay={1.25} className={`${activeSection === 'home' || activeSection === 'about' ? 'hidden' : ''}`}>
                 <a href='mailto:hello@jacquelinetruong.dev'
                     target='_blank'
-                    className='flex flex-row gap-1 items-center justify-center group 
+                    className='flex flex-row gap-1 items-center justify-center group cursor-pointer
                                     rounded-full px-2 py-2 | 2xl:px-3 2xl:py-2.5 | ultrawide:px-4 ultrawide:py-3.5
                                     bg-black/80 border border-(--dark-grey) 
                                     shadow-lg backdrop-blur-sm
@@ -78,8 +79,11 @@ export default function Quickbar({ isLoading }: { isLoading: boolean }) {
 
             {/* jump back to top button */}
             <Reveal delay={1.25} className={`${activeSection === 'home' && 'hidden'}`}>
-                <a href='#home'
-                    className='flex flex-row gap-1 items-center justify-center group 
+                <button
+                    onClick={() => {
+                        document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
+                    }}
+                    className='flex flex-row gap-1 items-center justify-center group cursor-pointer
                                     rounded-full px-2 py-2 | 2xl:px-3 2xl:py-2.5 | ultrawide:px-4 ultrawide:py-3.5
                                     bg-black/80 border border-(--dark-grey) 
                                     shadow-lg backdrop-blur-sm
@@ -96,7 +100,7 @@ export default function Quickbar({ isLoading }: { isLoading: boolean }) {
                                 transition-all duration-200'>
                         <p className='font-medium text-xs text-white whitespace-nowrap'>Back to top</p>
                     </span>
-                </a>
+                </button>
             </Reveal>
         </div>
     );
