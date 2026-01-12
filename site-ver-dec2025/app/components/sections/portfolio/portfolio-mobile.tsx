@@ -107,7 +107,7 @@ export default function PortfolioMobile({
                     <div className='w-full h-full col-start-1 col-span-3 row-span-4'>
                         <Reveal delay={i * 0.1} key={`${project.id}-${filter}`}>
                             {/* preview */}
-                            <div className='col-start-1 col-span-3 row-start-1 row-span-2 w-full'>
+                            <div className='col-start-1 col-span-3 row-start-1 row-span-2'>
                                 <ProjectCard
                                     project={project}
                                 />

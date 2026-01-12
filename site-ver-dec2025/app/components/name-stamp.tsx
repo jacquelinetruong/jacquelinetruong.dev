@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { useActiveSection } from './active-section';
 import { Reveal } from './reveal';
 import Coffee from './icons/coffee';
-import Cat from './icons/cat';
+import Cat from './icons/cat-icon';
 
 
 export default function NameStamp({ className = '' }: { className?: string }) {

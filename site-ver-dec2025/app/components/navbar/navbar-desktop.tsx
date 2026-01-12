@@ -48,24 +48,24 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
 
     return (
         <div className='font-medium xs:text-sm md:text-md
-                        fixed top-0 left-0 w-full
+                        fixed top-0 left-0 w-full h-(--nav-height)
                         px-8 py-4 z-1000 | ultrawide:px-20
                         flex flex-row justify-between items-center
                         bg-gradient-to-t from-transparent via-(--bg-colour)/50 via-30% to-(--bg-colour) to-60%
                         transition-colors duration-500'>
             {/* left side */}
-            <div className='flex flex-row gap-16 items-center'>
+            <div className='flex flex-row items-center gap-12'>
 
                 {/* site logo */}
                 <a href='#home'
-                    className='relative w-[72.64px] h-[50px]'>
+                    className='relative w-[43.58px] h-[30px] | xl:w-[58.11px] xl:h-[40px]'>
                     {/* black logo (light theme) */}
                     <Image
                         src='/jt-logo-black.svg'
                         alt='site logo'
                         fill
                         draggable={false}
-                        className={`absolute inset-0 transition-opacity duration-500 ease-in-out
+                        className={`absolute transition-opacity duration-500 ease-in-out
                             ${activeSection !== 'portfolio' ? 'opacity-100' : 'opacity-0'}`}
                     />
                     {/* white logo (dark theme) */}
@@ -74,7 +74,7 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
                         alt='site logo'
                         fill
                         draggable={false}
-                        className={`absolute inset-0 transition-opacity duration-500 ease-in-out
+                        className={`absolute transition-opacity duration-500 ease-in-out
                             ${activeSection === 'portfolio' ? 'opacity-100' : 'opacity-0'}`}
                     />
                 </a>
