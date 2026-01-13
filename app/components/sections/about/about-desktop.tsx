@@ -31,34 +31,6 @@ export default function AboutDesktop({
             fadeEnd={0.7}
         >
             <Grid>
-                {/* projects display */}
-                {/* project display #1 */}
-                <div className='col-start-2 col-span-1 row-start-3 row-span-1'>
-                    {projects
-                        .filter(p => p.sectionId === '1')
-                        .map(project => (
-                            <Reveal delay={1.2}>
-                                <ProjectCard
-                                    key={project.id}
-                                    project={project}
-                                />
-                            </Reveal>
-                        ))}
-                </div>
-                {/* project display #2 */}
-                <div className='col-start-4 col-span-1 row-start-3 row-span-1'>
-                    {projects
-                        .filter(p => p.sectionId === '2')
-                        .map(project => (
-                            <Reveal delay={1.4}>
-                                <ProjectCard
-                                    key={project.id}
-                                    project={project}
-                                />
-                            </Reveal>
-                        ))}
-                </div>
-
                 {/* pic of me! */}
                 <div className='col-start-1 col-span-1 row-start-1 row-span-2 w-full h-full relative'>
                     <Image 

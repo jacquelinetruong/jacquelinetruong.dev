@@ -1,0 +1,1 @@
+export const notionImage = (url: string) => `/api/notion-image?url=${encodeURIComponent(url)}`;

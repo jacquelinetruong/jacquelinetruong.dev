@@ -12,11 +12,15 @@ export default function Portfolio({
     isDesktop,
     isLoading,
     projects,
+    featuredHeroProject,
+    onProjectSelect,
  }: { 
     className?: string;
     isDesktop: boolean;
     isLoading: boolean;
     projects: Project[];
+    featuredHeroProject: Project | null;
+    onProjectSelect?: (project: Project | null) => void;
  }) {
 
     // ------ FILTER STATE ------ //
@@ -41,9 +45,11 @@ export default function Portfolio({
         <PortfolioDesktop
             isLoading={isLoading}
             projects={projects}
+            featuredHeroProject={featuredHeroProject}
             filter={filter}
             setFilter={setFilter}
             counts={counts}
+            onProjectSelect={onProjectSelect}
         />
     ): (
         // mobile view

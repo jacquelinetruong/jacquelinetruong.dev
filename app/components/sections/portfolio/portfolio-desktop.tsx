@@ -20,20 +20,24 @@ import LinkArrow from '@/app/components/icons/link-arrow';
 type PortfolioDesktopProps = {
     isLoading: boolean;
     projects: Project[];
+    featuredHeroProject: Project | null;
     filter: 'all' | 'design' | 'development';
     setFilter: (f: 'all' | 'design' | 'development') => void;
     counts: {
         design: number;
         development: number;
     }
+    onProjectSelect?: (project: Project | null) => void;
 }
 
 export default function PortfolioDesktop({
     isLoading,
     projects,
+    featuredHeroProject,
     filter,
     setFilter,
     counts,
+    onProjectSelect,
 }: PortfolioDesktopProps) {
 
     // ------ FILTERED PROJECTS ------ //
@@ -46,20 +50,39 @@ export default function PortfolioDesktop({
         }, [projects, filter]);
 
     // ------ PROJECT CAROUSEL ------ //
-    // carousel state: order of filtered projects
+        // update project order so hero project is first
+        const tempCarousel = useMemo(() => {
+            if (!featuredHeroProject) return filteredProjects;
+
+            const i = filteredProjects.findIndex(p => p.id === featuredHeroProject.id);
+            if (i === -1) return filteredProjects;
+
+            return [...filteredProjects.slice(i), ...filteredProjects.slice(0, i)];
+        }, [filteredProjects, featuredHeroProject]);
+
+        // carousel state: order of filtered projects
         const [carouselProjects, setCarouselProjects] = useState<Project[]>(filteredProjects);
 
-        // first element is featured project by default
-        const featuredProject = carouselProjects[0];
+        // first carousel project is featured by default
+        const featuredProject = featuredHeroProject ?? carouselProjects[0] ?? null;
+        
+        // rotate carousel when hero item clicked
+        useEffect(() => {
+            if (!featuredHeroProject) return;
+
+            setCarouselProjects(tempCarousel)
+        }, [featuredHeroProject, tempCarousel]);
 
         // repopulate projects on filter change
         useEffect(() => {
             setCarouselProjects(filteredProjects);
-        }, [filter]);
+        }, [filter, filteredProjects]);
 
-    // ------ UPDATE FEATURED PROJECT ------ //
+    // ------ UPDATE FEATURED PROJECT (ONLY WITHIN PORTFOLIO) ------ //
         // update featured project if clicked
         const newFeaturedProject = (clickedProject: Project) => {
+            onProjectSelect?.(clickedProject);
+
             setCarouselProjects(prev => {
                 const i = prev.findIndex(p => p.id === clickedProject.id);
                 if (i === -1) return prev;
@@ -67,6 +90,7 @@ export default function PortfolioDesktop({
                 // rotate array to make clicked project = first element
                 return [...prev.slice(i), ...prev.slice(0, i)];
             });
+
             // reset timer + progress
             setProgress(0);
             startTimeRef.current = null;
@@ -110,7 +134,7 @@ export default function PortfolioDesktop({
         }, [featuredProject?.id]);
 
         // photo rotation condition
-        const shouldRotate = featuredProject?.images.length >= 6;
+        const shouldRotate = !!featuredProject && featuredProject.images.length >= 6;
     
     // ------ FEATURED PROJECT EXPANDED DETAILS ------ //
         const [isDetailsOpen, setIsDetailsOpen] = useState(false);
@@ -401,7 +425,7 @@ export default function PortfolioDesktop({
                         <div
                             ref={imagesRef} 
                             className='w-1/2 h-full col-start-3 col-span-1 row-start-1 row-span-2 pl-2 z-100'>
-                            {featuredProject?.images.length > 1 && (
+                            {!!featuredProject && featuredProject?.images.length > 1 && (
                                 <div className='flex flex-col gap-2 w-full h-full'>
                                     {shouldRotate ? (
                                         // rotate if project has 6 or more images
@@ -446,7 +470,7 @@ export default function PortfolioDesktop({
                                             </button>
                                         ))
                                     ) : (
-                                        // don't rotate if project has 2-4 images
+                                        // don't rotate if project has 2-5 images
                                         featuredProject.images.map((img, i) => {
                                             const imageIndex = i;
                                             const isActive = featuredImageIndex === imageIndex;

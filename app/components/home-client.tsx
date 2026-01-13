@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { useMediaQuery } from './media-query';
 import { useLoading } from './loading-context';
 
@@ -62,6 +62,17 @@ export default function HomeClient({
 		};
 	}, []);
 
+	// hero--portfolio project card interaction
+	const [featuredProject, setFeaturedProject] = useState<Project | null>(null);
+
+	// hero project card click -> set as featured in portfolio
+	const handleHeroClick = (project: Project) => {
+		setFeaturedProject(project);
+
+		const portfolio = document.getElementById('portfolio');
+		portfolio?.scrollIntoView({ behavior: 'smooth' });
+	};
+
 	return (
 		<>
 			<Loader 
@@ -85,6 +96,7 @@ export default function HomeClient({
 								isLoading={isLoading}
 								projects={heroProjects}
 								className='col-span-5 row-start-1 row-span-4'
+								onProjectClick={handleHeroClick}
 							/>
 						</Grid>
 					</section>
@@ -112,6 +124,8 @@ export default function HomeClient({
 											isLoading={isLoading}
 											projects={portfolioProjects}
 											className='col-span-5 row-start-1 row-span-4'
+											featuredHeroProject={featuredProject}
+											onProjectSelect={setFeaturedProject}
 										/>
 									</Grid>
 								): (
@@ -119,6 +133,8 @@ export default function HomeClient({
 										isDesktop={isDesktop}
 										isLoading={isLoading}
 										projects={portfolioProjects}
+										featuredHeroProject={featuredProject}
+										onProjectSelect={setFeaturedProject}
 									/>
 								)}
 							</section>
@@ -158,6 +174,7 @@ export default function HomeClient({
 											isLoading={isLoading}
 											projects={portfolioProjects}
 											className='col-span-5 row-start-1 row-span-4'
+											featuredHeroProject={featuredProject}
 										/>
 									</Grid>
 								): (
@@ -165,6 +182,7 @@ export default function HomeClient({
 										isDesktop={isDesktop}
 										isLoading={isLoading}
 										projects={portfolioProjects}
+										featuredHeroProject={featuredProject}
 									/>
 								)}
 							</section>

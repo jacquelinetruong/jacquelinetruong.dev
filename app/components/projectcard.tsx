@@ -5,6 +5,8 @@ import { Project } from '@/lib/projectTypes';
 import { useState, useRef, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 
+import { notionImage } from '@/lib/notionImage';
+
 import LinkArrow from './icons/link-arrow';
 import { useMediaQuery } from './media-query';
 
@@ -80,16 +82,11 @@ export default function ProjectCard({
 			return () => window.removeEventListener('resize', measureTags);
 		}, [allTags]);
 
-		const hiddenCount = allTags.length - visibleCount;
-
+		// show prompt if NOT portfolio card
 		const showIcon = !featured && project.section !== 'portfolio';
 		
-		// only open external link if NOT a non-featured portfolio card
+		// only open external link if featured portfolio card
 		const handleClick = () => {
-			if (showIcon && project.link) {
-				window.open(project.link, '_blank', 'noopener, noreferrer');
-				return;
-			}
 			onClick?.();
 		};
 
@@ -115,18 +112,19 @@ export default function ProjectCard({
 		>
 			{/* preview */}
 			<Image
-				src={project.images[0]}
+				src={notionImage(project.images[0])}
 				alt={project.title}
 				fill
 				className='object-cover object-center
 						   transition-transform duration-500 ease-out
 						   group-hover:scale-115'
 				draggable={false}
+				unoptimized
 			/>	
 
 			{/* gradient for text readability */}
 			<div className={`absolute inset-0 bg-gradient-to-t from-(--dark-black)/70 from-5% via-(--dark-black)/55 via-16% to-transparent to-40% point-events-none
-							${!featured && 'bg-[#13131B]/15 transition duration-300 group-hover:bg-transparent'}`}/>
+							${!featured && 'bg-[#13131B]/15 transition duration-300 group-hover:bg-[#13131B]/40'}`}/>
 
 			{/* project details section */}
 			<div className='text-white
@@ -177,20 +175,17 @@ export default function ProjectCard({
 					{/* project title */}
 					{!featured && <h3 className='font-medium text-md truncate'>{project.title}</h3>}
 				</div>
+			</div>
 
-				{/* project link icon (non-portfolio section project) */}
-				{showIcon && project.link && (
-					<div className='lg:hidden 3xl:block
-									text-nowrap drop-shadow-md
-									flex flex-col gap-1 flex-shrink-0 items-end
-									opacity-0 translate-y-1
-									group-hover:opacity-100 group-hover:translate-y-0
+			{/* hover message (non-portfolio section project) */}
+				{showIcon && (
+					<div className='absolute inset-0 place-self-center
+									text-white font-medium text-nowrap drop-shadow-md
+									opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0
 									transition-all duration-100'>	
-						<p className='text-xs xl:text-sm'>View live site</p>
-						<LinkArrow className='size-[40px] text-(--white) group-transition-colors group:duration-300'/>
+						<p className='text-xs xl:text-sm'>Scroll to Project</p>
 					</div>
 				)}
-			</div>
 
 			{/* hover: show hint message (only show IFF portfolio project card, and NOT next project in overlay) */}
 			{!showIcon && !featured && !isNext && (
@@ -248,19 +243,18 @@ export default function ProjectCard({
 				>
 					{/* project images */}
 					{project.images.map((img, i) => (		
-						<>
-							<div
-								key={i}
-								className='relative min-w-full h-full snap-center snap-always'
+						<div
+							key={i}
+							className='relative min-w-full h-full snap-center snap-always'
 							>
 								<Image
-									src={img}
+									src={notionImage(img)}
 									alt={`${project.title} image ${i + 1}`}
 									fill
 									className='absolute object-contain object-bottom sm:object-cover sm:object-center'
 									draggable={false}
+									unoptimized
 								/>
-							</div>
 
 							{/* progress bar */}
 							{project.images.length > 1 && (
@@ -275,7 +269,7 @@ export default function ProjectCard({
 								</div>
 							</div>
 							)}
-						</>
+						</div>
 					))}
 				</div>
 			</div>

@@ -11,17 +11,20 @@ export default function Hero({
 	isDesktop,
 	isLoading,
 	projects,
+	onProjectClick,
 }: { 
 	className?: string; 
 	isDesktop: boolean;
 	isLoading: boolean;
 	projects: Project[];
+	onProjectClick?: (project: Project) => void;
 }) {
 
 	return isDesktop ? (       
 		<HeroDesktop
 			isLoading={isLoading}
 			projects={projects}
+			onProjectClick={onProjectClick}
 		/>
 	) : (
 		<HeroMobile

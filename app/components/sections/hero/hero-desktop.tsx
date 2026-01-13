@@ -5,6 +5,8 @@ import { Project } from '@/lib/projectTypes';
 import ProjectCard from '../../projectcard';
 import Grid from '../../grid';
 
+import { notionImage } from '@/lib/notionImage';
+
 import GuideButton from '../../guide-button';
 import { SectionReveal } from '../../section-reveal';
 
@@ -13,10 +15,12 @@ export default function HeroDesktop({
     className = '',
 	isLoading,
 	projects,
+	onProjectClick,
  }: { 
 	className?: string; 
 	isLoading: boolean;
 	projects: Project[];
+	onProjectClick?: (project: Project) => void;
  }) {
 
     return (
@@ -36,6 +40,7 @@ export default function HeroDesktop({
 								<ProjectCard
 									key={project.id}
 									project={project}
+									onClick={() => onProjectClick?.(project)}
 								/>
 							))}
 					</Reveal>
@@ -50,6 +55,7 @@ export default function HeroDesktop({
 								<ProjectCard
 									key={project.id}
 									project={project}
+									onClick={() => onProjectClick?.(project)}
 								/>
 							))}
 					</Reveal>
@@ -64,6 +70,7 @@ export default function HeroDesktop({
 								<ProjectCard
 									key={project.id}
 									project={project}
+									onClick={() => onProjectClick?.(project)}
 								/>
 							))}
 					</Reveal>

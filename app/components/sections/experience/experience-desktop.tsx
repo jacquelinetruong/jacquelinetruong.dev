@@ -61,41 +61,6 @@ export default function ExperienceDesktop({
             fadeEnd={0.7}
         >
             <Grid>
-                {/* relevant projects */}
-                {/* project display #1 */}
-                <div className='col-start-5 col-span-1 row-start-1 row-span-1'>
-                    {projects
-                        .filter(p => p.section === 'hero' && p.sectionId === '1')
-                        .map(project => (
-                            <ProjectCard
-                                key={project.id}
-                                project={project}
-                            />
-                        ))}            
-                </div>
-                {/* project display #2 */}
-                <div className='col-start-4 col-span-1 row-start-2 row-span-1'>
-                    {projects
-                        .filter(p => p.section === 'hero' && p.sectionId === '2')
-                        .map(project => (
-                            <ProjectCard
-                                key={project.id}
-                                project={project}
-                            />
-                        ))} 
-                </div>
-                {/* project display #2 */}
-                <div className='col-start-2 col-span-1 row-start-3 row-span-1'>
-                    {projects
-                        .filter(p => p.section === 'hero' && p.sectionId === '3')
-                        .map(project => (
-                            <ProjectCard
-                                key={project.id}
-                                project={project}
-                            />
-                        ))} 
-                </div>
-
                 {/* experience menu */}
                 <div className='sm:text-xs md:text-sm 2xl:text-base
                                 col-start-1 col-span-1 row-start-1 row-span-2
@@ -107,7 +72,7 @@ export default function ExperienceDesktop({
                         <div key={category} className='flex flex-col gap-0.5'>
 
                             {/* category heading */}
-                            <Reveal delay={i * 0.35}>
+                            <Reveal key={`${category}-heading`} delay={i * 0.35}>
                                 <h4 className={`capitalize transition-all duration-300
                                                 ${category === activeExperience?.category ? 'text-(--dark-mode-grey) font-semibold' : 'text-(--alt-text-colour) font-medium'}`}>
                                     {category}
@@ -116,9 +81,8 @@ export default function ExperienceDesktop({
 
                             {/* category items */}
                             {items.map((item, j) => (
-                                <Reveal delay={i * 0.35 + j * 0.15}>
+                                <Reveal key={item.id} delay={i * 0.35 + j * 0.15}>
                                     <button
-                                        key={item.id}
                                         onClick={() => setActiveExperience(item)}
                                         className={`
                                             flex flex-row gap-2 items-center
@@ -182,7 +146,7 @@ export default function ExperienceDesktop({
                                 key={activeExperience?.id} 
                                 className='flex flex-col gap-4'>
                                 {activeExperience?.points.map((point, i) => (
-                                    <Reveal delay={0.2 + i * 0.2} key={i}>
+                                    <Reveal key={`${activeExperience.id}-point-${i}`} delay={0.2 + i * 0.2}>
                                         <li className='ml-6 sm:text-[10px] md:text-sm 2xl:text-base 3xl:text-lg 3xl:w-4/5'>
                                             {point}
                                         </li>
@@ -207,7 +171,7 @@ export default function ExperienceDesktop({
                                 key={activeExperience?.id} 
                                 className='flex flex-col gap-2'>
                                 {activeExperience?.points.map((point, i) => (
-                                    <Reveal key={i} delay={i * 0.1} >
+                                    <Reveal key={`${activeExperience.id}-point-${i}`} delay={i * 0.1} >
                                         <li className='ml-6 sm:text-[10px] md:text-sm 2xl:text-base'>
                                             {point}
                                         </li>
