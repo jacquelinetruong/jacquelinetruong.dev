@@ -221,25 +221,12 @@ export default function ProjectCard({
 
 			{/* hover: focus project prompt (only show IFF portfolio project card, and NOT next project in overlay) */}
 			{activeSection === 'portfolio' && !featured && !isNext && (
-				<span className='font-medium text-white
-									absolute inset-0 p-6
-									opacity-0 translate-y-1
-									group-hover:opacity-100 group-hover:translate-y-0
-									transition-all duration-200
-									whitespace-nowrap
-									bg-gradient-to-t from-transparent via-black/15 via-70%  to-black/50 to-90% point-events-none'>
-					
-					<div className='flex flex-row gap-1'>
-						<Image
-							src='/caret-left-icon.svg'
-							alt='caret left icon'
-							width={14}
-							height={14}
-							draggable={false}
-						/>
-						<p className='text-xs xl:text-sm'>Focus project</p>
-					</div>
-				</span>
+				<div className='absolute inset-0 place-self-center
+								text-white font-medium text-nowrap drop-shadow-md
+								opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0
+								transition-all duration-100'>	
+					<p className='text-xs xl:text-sm'>Focus Project</p>
+				</div>
 			)}
 
 			{/* show IFF next project card in overlay */}
