@@ -11,20 +11,17 @@ export default function ExperienceSection({
     className = '',
     isDesktop,
     isLoading,
-    projects,
     experience,
 }: {
     className?: string; 
     isDesktop: boolean;
     isLoading: boolean;
-    projects: Project[];
     experience: Experience[];
 }) {
 
     return isDesktop ? ( 
         <ExperienceDesktop
             isLoading={isLoading}
-            projects={projects}
             experience={experience}
         />
     ) : (

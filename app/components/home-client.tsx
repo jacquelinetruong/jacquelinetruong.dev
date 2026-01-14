@@ -20,18 +20,14 @@ import type { Experience } from '@/lib/experienceTypes';
 
 type HomeClientProps = {
 	heroProjects: Project[];
-	aboutProjects: Project[];
 	portfolioProjects: Project[];
-	experienceProjects: Project[];
 	currentXP: Experience[];
 	experience: Experience[];
 };
 
 export default function HomeClient({
 	heroProjects,
-	aboutProjects,
 	portfolioProjects,
-	experienceProjects,
 	currentXP,
 	experience,
 }: HomeClientProps) {
@@ -106,7 +102,6 @@ export default function HomeClient({
 							<About
 								isDesktop={isDesktop}
 								isLoading={isLoading}
-								projects={aboutProjects}
 								experience={currentXP}
 								className='col-span-5 row-start-1 row-span-4'
 							/>
@@ -144,7 +139,6 @@ export default function HomeClient({
 									<ExperienceSection
 										isDesktop={isDesktop}
 										isLoading={isLoading}
-										projects={experienceProjects}
 										experience={experience}
 										className='col-span-5 row-start-2 row-span-4'
 									/>
@@ -159,7 +153,6 @@ export default function HomeClient({
 									<ExperienceSection
 										isDesktop={isDesktop}
 										isLoading={isLoading}
-										projects={experienceProjects}
 										experience={experience}
 										className='col-span-5 row-start-2 row-span-4'
 									/>

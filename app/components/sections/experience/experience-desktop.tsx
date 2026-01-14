@@ -18,12 +18,10 @@ import Cat from '@/app/components/icons/cat-icon';
 export default function ExperienceDesktop({
     className = '',
     isLoading,
-    projects,
     experience,
  }: { 
     className?: string; 
     isLoading: boolean;
-    projects: Project[];
     experience: Experience[];
  }) {
 
@@ -193,6 +191,7 @@ export default function ExperienceDesktop({
                                 alt='experience'
                                 fill
                                 className='object-contain object-right bottom-0'
+                                draggable={false}
                             />
                         </Reveal>
                     </div>

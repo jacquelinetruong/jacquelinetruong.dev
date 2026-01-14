@@ -72,7 +72,7 @@ export default function NavbarMobile({ isLoading }: { isLoading: boolean }) {
 		<div>
 			{/* hamburger button */}
 			<div className='fixed top-0 right-0 z-100 p-5'>
-				<Reveal delay={3}>
+				<Reveal delay={6}>
 					<button
 						onClick={toggleMenu}
 						className={`p-5 sm:p-6 rounded-full transition-colors duration-1000
@@ -92,7 +92,7 @@ export default function NavbarMobile({ isLoading }: { isLoading: boolean }) {
 
 			{/* overlay menu */}
 			{menuState !== 'closed' && (
-				<div className={`fixed w-full h-full z-40 pt-40 pb-16  bg-[#B7B5BB]
+				<div className={`fixed w-full h-full z-40 pt-40 pb-16  bg-(--grey)
 								flex flex-col items-center justify-between
 								${menuState === 'opening' ? 'animate-open' : ''}
 								${menuState === 'closing' ? 'animate-close': ''}`}
@@ -101,7 +101,7 @@ export default function NavbarMobile({ isLoading }: { isLoading: boolean }) {
 					<div className='overlay-content place-self-start'>
 						{/* nav items */}
 						<div className='mb-20'>
-							<p className='px-5 pb-2 text-(--dark-grey) text-sm | xs:text-base | sm:text-base |  '>Navigation</p>
+							<p className='px-5 pb-2 text-(--dark-grey) font-medium text-sm | xs:text-base | sm:text-md'>Navigation</p>
 							{navLinks.map((id, i) => (
 								<Link
 									href={`/#${id}`}
@@ -128,7 +128,7 @@ export default function NavbarMobile({ isLoading }: { isLoading: boolean }) {
 						{/* other links */}
 						<div className='flex flex-col w-full h-fit sm:text-lg text-white p-5'>
 							<Reveal delay={0.7}>
-								<p className='pb-2 text-(--dark-grey) text-sm | xs:text-base | sm:text-base '>Find more</p>
+								<p className='pb-2 text-(--dark-grey) font-medium text-sm | xs:text-base | sm:text-md '>Find more</p>
 							</Reveal>
 							<div className='w-full h-fit xs:text-lg
 											flex flex-row gap-5 justify-start'>
@@ -137,30 +137,31 @@ export default function NavbarMobile({ isLoading }: { isLoading: boolean }) {
 									href='/resume.pdf'
 									rel='noopener noreferrer'
 								>
-									<Reveal delay={0.85}>Resume</Reveal>
+									<Reveal delay={0.8}>Resume</Reveal>
 								</a>
 								<a
 									target='_blank'
 									href='https://www.linkedin.com/in/jacquellinetruong'
 								>
-									<Reveal delay={1.05}>LinkedIn</Reveal>
+									<Reveal delay={0.9}>LinkedIn</Reveal>
 								</a>
 								<a
 									target='_blank'
 									href='https://github.com/jacquelinetruong'
 								>
-									<Reveal delay={1.3}>Github</Reveal>
+									<Reveal delay={1}>Github</Reveal>
 								</a>
 							</div>
 						</div>
 
-						{/* cat */}
-						<div className='w-full h-fit px-5'>
+						
+					</div>
+					{/* cat */}
+						<div className='w-full h-fit px-5 place-self-end'>
 							<Reveal delay={1}>
-								<Cat className='w-4/6 sm:w-1/2 h-fit place-self-end text-(--nice-grey)'/>
+								<Cat className='w-4/6 sm:w-1/2 h-fit place-self-end text-(--off-white)'/>
 							</Reveal>
 						</div>
-					</div>
 				</div>
 			)}
 		</div>

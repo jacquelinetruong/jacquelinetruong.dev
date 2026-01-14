@@ -7,7 +7,7 @@ import { Reveal } from '@/app/components/reveal';
 import Coffee from '@/app/components/icons/coffee';
 
 
-export default function HeroDesktop({
+export default function HeroMobile({
     className = '',
     isLoading,
  }: { 
@@ -20,7 +20,7 @@ export default function HeroDesktop({
                 {/* hey! */}
                 <div className='col-start-1 col-span-2 row-start-1 row-span-1 
                                 w-full h-full relative'>
-                    <Reveal delay={2}>
+                    <Reveal delay={3.5}>
                         <Image
                             src='/hey.svg'
                             alt='Hey, welcome to my portfolio site!'
@@ -32,20 +32,22 @@ export default function HeroDesktop({
 
                 {/* better on desktop message */}
                 <div className='col-start-3 col-span-1 row-start-1 row-span-1 relative'>
-                    <Image 
-                        src='/better.svg'
-                        alt='better on desktop!'
-                        fill
-                        className='object-contain object-bottom-right p-4 | xs:p-5 | sm:p-8 | md:px-12'
-                    />
+                    <Reveal delay={1.3}>
+                        <Image 
+                            src='/better.svg'
+                            alt='better on desktop!'
+                            fill
+                            className='object-contain object-bottom-right p-4 | xs:p-5 | sm:p-8 | md:px-12'
+                        />
+                    </Reveal>
                 </div>
 
                 {/* name and title */}
                 <div className='col-start-1 col-span-3 row-start-2 row-span-1 
                                 w-full h-full p-5
                                 flex flex-col justify-between items-end'>
-                    <div className='w-full aspect-4/1 relative'>
-                        <Reveal delay={0.1}>
+                    <div className='w-full aspect-5/2 relative'>
+                        <Reveal delay={0.25}>
                             <Image
                                 src='/jt-black.svg'
                                 alt='my namestamp'
@@ -67,7 +69,7 @@ export default function HeroDesktop({
                                 gap-2 | sm:gap-6'
                 >
                         <div className='w-full h-fit'>
-                            <Reveal delay={0.6}>
+                            <Reveal delay={1.5}>
                                 <h2 className='text-sm font-medium text-right place-self-end
                                                 xs:text-base
                                                 sm:text-xl sm:w-7/8 sm:leading-[1.3]'
@@ -78,7 +80,7 @@ export default function HeroDesktop({
                         </div>
 
                         <div className='w-full h-fit'>
-                            <Reveal delay={0.7}>
+                            <Reveal delay={1.7}>
                                 <h2 className='text-sm font-medium text-right text-(--light-mode-grey)  place-self-end
                                                 xs:text-base | sm:text-xl'>
                                     Based in Toronto, CA.
@@ -87,7 +89,7 @@ export default function HeroDesktop({
                         </div>
 
                         <div className='w-full h-fit'>
-                            <Reveal delay={1}>
+                            <Reveal delay={1.9}>
                                 <a 
                                     target='_blank'
                                     href='mailto:hello@jacquelinetruong.dev'

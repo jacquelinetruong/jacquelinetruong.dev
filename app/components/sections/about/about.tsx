@@ -11,13 +11,11 @@ export default function About({
     className = '',
     isDesktop,
     isLoading,
-    projects,
     experience,
  }: { 
     className?: string; 
     isDesktop: boolean;
     isLoading: boolean;
-    projects: Project[];
     experience: Experience[];
  }) {
 
@@ -31,7 +29,6 @@ export default function About({
     return isDesktop ? (
         <AboutDesktop
             isLoading={isLoading}
-            projects={projects}
             currentWork={currentWork}
         />
     ): (

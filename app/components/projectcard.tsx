@@ -5,9 +5,9 @@ import { Project } from '@/lib/projectTypes';
 import { useState, useRef, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 
+import { useActiveSection } from './active-section';
+import GalleryImage from '@/app/components/gallery-image';
 import { notionImage } from '@/lib/notionImage';
-
-import LinkArrow from './icons/link-arrow';
 import { useMediaQuery } from './media-query';
 
 
@@ -39,8 +39,8 @@ export default function ProjectCard({
 	// ------ DESKTOP ------ //
 		// tags for each project
 		const allTags = useMemo(() => {
-			return [...(project.languages ?? []), ...(project.programs ?? [])];
-		}, [project.languages, project.programs]);
+			return [...(project.category ?? []), ...(project.programs ?? []), ...(project.languages ?? [])];
+		}, [project.category, project.programs, project.languages]);
 
 		// for tag collapsing
 		const containerRef = useRef<HTMLDivElement>(null);
@@ -63,7 +63,7 @@ export default function ProjectCard({
 
 					for (let tag of allTags) {
 						const span = document.createElement('span');
-						span.className = 'inline-block px-3 py-1 border border-white rounded-full text-nowrap text-[10px] 2xl:text-xs';
+						span.className = 'inline-block px-3 py-1 border border-white rounded-full text-nowrap font-medium text-[10px] 2xl:text-xs';
 						span.textContent = tag;
 						temp.appendChild(span);
 
@@ -82,18 +82,21 @@ export default function ProjectCard({
 			return () => window.removeEventListener('resize', measureTags);
 		}, [allTags]);
 
-		// show prompt if NOT portfolio card
-		const showIcon = !featured && project.section !== 'portfolio';
-		
+		// for hover prompts/messages
+		const isHeroProject = project.hero === true;
+		const activeSection = useActiveSection();
+
 		// only open external link if featured portfolio card
 		const handleClick = () => {
 			onClick?.();
 		};
-
 	
 	// ------ MOBILE ------ //
 		const [activeIndex, setActiveIndex] = useState(0);
 		const scrollerRef = useRef<HTMLDivElement>(null);
+		const scrollbarWidth = 50; // percent
+		const scrollRatio = project.images.length > 1 ? activeIndex / (project.images.length - 1) : 0;
+		const translateX = scrollRatio * 100;
 
 		// carousel indicator/progress bar
 		const handleScroll = () => {
@@ -119,6 +122,7 @@ export default function ProjectCard({
 						   transition-transform duration-500 ease-out
 						   group-hover:scale-115'
 				draggable={false}
+				priority={project.hero}
 				unoptimized
 			/>	
 
@@ -138,7 +142,7 @@ export default function ProjectCard({
 					{allTags.length > 0 && (
 						<div 
 							ref={containerRef}
-							className='text-[10px] 2xl:text-xs
+							className='font-medium text-[10px] 2xl:text-xs
 							  		   flex flex-nowrap gap-2 justify-start items-center
 									   w-full'
 						>
@@ -177,18 +181,18 @@ export default function ProjectCard({
 				</div>
 			</div>
 
-			{/* hover message (non-portfolio section project) */}
-				{showIcon && (
-					<div className='absolute inset-0 place-self-center
-									text-white font-medium text-nowrap drop-shadow-md
-									opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0
-									transition-all duration-100'>	
-						<p className='text-xs xl:text-sm'>Scroll to Project</p>
-					</div>
-				)}
+			{/* hover: scroll to project (hero project) */}
+			{isHeroProject && activeSection === 'home' && (
+				<div className='absolute inset-0 place-self-center
+								text-white font-medium text-nowrap drop-shadow-md
+								opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0
+								transition-all duration-100'>	
+					<p className='text-xs xl:text-sm'>Scroll to Project</p>
+				</div>
+			)}
 
-			{/* hover: show hint message (only show IFF portfolio project card, and NOT next project in overlay) */}
-			{!showIcon && !featured && !isNext && (
+			{/* hover: focus project prompt (only show IFF portfolio project card, and NOT next project in overlay) */}
+			{activeSection === 'portfolio' && !featured && !isNext && (
 				<span className='font-medium text-white
 									absolute inset-0 p-6
 									opacity-0 translate-y-1
@@ -210,7 +214,7 @@ export default function ProjectCard({
 				</span>
 			)}
 
-			{/* next project card in overlay */}
+			{/* show IFF next project card in overlay */}
 			{isNext && (
 				<span className='font-medium text-white
 									absolute inset-0 p-6
@@ -247,31 +251,29 @@ export default function ProjectCard({
 							key={i}
 							className='relative min-w-full h-full snap-center snap-always'
 							>
-								<Image
+								<GalleryImage
 									src={notionImage(img)}
 									alt={`${project.title} image ${i + 1}`}
-									fill
 									className='absolute object-contain object-bottom sm:object-cover sm:object-center'
-									draggable={false}
-									unoptimized
+									onHoverStart={onMouseEnter}
+                                    onHoverEnd={onMouseLeave}
 								/>
-
-							{/* progress bar */}
-							{project.images.length > 1 && (
-							<div className='absolute place-self-end w-full h-fit
-											items-center pointer-events-none'
-							>
-								<div className='w-full h-[6px] bg-(--nice-grey) relative overflow-hidden'>
-									<div
-										className='absolute inset-0 left-0 rounded-tr-full rounded-br-full bg-(--black) transition-all duration-300'
-										style={{ width: `${((activeIndex + 1) / project.images.length) * 100}%`, }}
-									/>
-								</div>
-							</div>
-							)}
 						</div>
 					))}
 				</div>
+
+				{/* progress bar */}
+				{project.images.length > 1 && (
+					<div className='w-full h-[6px] bg-(--nice-grey) relative overflow-hidden'>
+						<div
+							className='absolute h-full rounded-full bg-(--black) transition-transform duration-300'
+							style={{ 
+								width: `${scrollbarWidth}%`,
+								transform: `translateX(${translateX}%)`
+							}}
+						/>
+					</div>
+				)}
 			</div>
 		</div>
 

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect, useRef, useMemo } from 'react';
+import GalleryImage from '@/app/components/gallery-image';
 import Image from 'next/image';
 import { AnimatePresence } from 'framer-motion';
 
@@ -44,57 +45,49 @@ export default function PortfolioDesktop({
         const filteredProjects = useMemo(() => {
             if (filter === 'all') return projects;
 
-            return projects.filter(project => 
-                project.type?.includes(filter)
-            );
+            return projects.filter(project => project.type?.includes(filter));
         }, [projects, filter]);
 
-    // ------ PROJECT CAROUSEL ------ //
-        // update project order so hero project is first
-        const tempCarousel = useMemo(() => {
-            if (!featuredHeroProject) return filteredProjects;
+    // ------ CAROUSEL STATE ------ //
+        const [carouselProjects, setCarouselProjects] = useState<Project[]>([]);
 
-            const i = filteredProjects.findIndex(p => p.id === featuredHeroProject.id);
-            if (i === -1) return filteredProjects;
+        // on initial load: put hero project first if it exists
+        useEffect(() => {
+            if (filteredProjects.length === 0) return;
 
-            return [...filteredProjects.slice(i), ...filteredProjects.slice(0, i)];
+            if (featuredHeroProject) {
+                const i = filteredProjects.findIndex(p => p.id === featuredHeroProject.id);
+                if (i !== -1) {
+                    setCarouselProjects([
+                        ...filteredProjects.slice(i),
+                        ...filteredProjects.slice(0, i),
+                    ]);
+                    return;
+                }
+            }
+            setCarouselProjects(filteredProjects);
         }, [filteredProjects, featuredHeroProject]);
 
-        // carousel state: order of filtered projects
-        const [carouselProjects, setCarouselProjects] = useState<Project[]>(filteredProjects);
+        // first project in carousel is always the featured project
+        const featuredProject = carouselProjects[0] ?? null;
 
-        // first carousel project is featured by default
-        const featuredProject = featuredHeroProject ?? carouselProjects[0] ?? null;
-        
-        // rotate carousel when hero item clicked
-        useEffect(() => {
-            if (!featuredHeroProject) return;
-
-            setCarouselProjects(tempCarousel)
-        }, [featuredHeroProject, tempCarousel]);
-
-        // repopulate projects on filter change
-        useEffect(() => {
-            setCarouselProjects(filteredProjects);
-        }, [filter, filteredProjects]);
-
-    // ------ UPDATE FEATURED PROJECT (ONLY WITHIN PORTFOLIO) ------ //
-        // update featured project if clicked
+    // ------ HANDLE CLICKING A PROJECT ------ // 
         const newFeaturedProject = (clickedProject: Project) => {
             onProjectSelect?.(clickedProject);
-
-            setCarouselProjects(prev => {
-                const i = prev.findIndex(p => p.id === clickedProject.id);
-                if (i === -1) return prev;
-
-                // rotate array to make clicked project = first element
-                return [...prev.slice(i), ...prev.slice(0, i)];
-            });
 
             // reset timer + progress
             setProgress(0);
             startTimeRef.current = null;
             elapsedRef.current = 0;
+            rotateRef.current = false;
+
+            setCarouselProjects(prev => {
+                const i = prev.findIndex(p => p.id === clickedProject.id);
+                if (i === -1) return prev;
+
+                // rotate array so clicked project becomes first
+                return [...prev.slice(i), ...prev.slice(0, i)];
+            });
         };
     
     // ------ FEATURED PROJECT PHOTO GALLERY ------ //
@@ -106,6 +99,7 @@ export default function PortfolioDesktop({
 
         // index images
         const getImageAt = (images: string[], index: number) => {
+            if (!images || images.length === 0) return null;
             const len = images.length;
             return images[((index % len) + len) % len];
         };
@@ -125,15 +119,19 @@ export default function PortfolioDesktop({
 
             return Array.from({ length: count }, (_, i) =>
                 getImageAt(imgs, featuredImageIndex + i + 1)
-            );
+            ).filter((img): img is string => Boolean(img));
         }, [featuredProject, featuredImageIndex]);
 
-        // reset photo gallery on project change
-        useEffect(() => {
-            setFeaturedImageIndex(0);
-        }, [featuredProject?.id]);
+        // derived featured project
+        const derivedFeaturedProject = useMemo(() => {
+            if (!featuredProject || !featuredImage) return featuredProject;
+            return {
+                ...featuredProject,
+                images: [featuredImage],
+            };
+        }, [featuredProject, featuredImage]);
 
-        // photo rotation condition
+        // featured project photos rotation condition
         const shouldRotate = !!featuredProject && featuredProject.images.length >= 6;
     
     // ------ FEATURED PROJECT EXPANDED DETAILS ------ //
@@ -187,7 +185,7 @@ export default function PortfolioDesktop({
         };
 
 
-    // ------ FEATURED PROJECT TIMER ------ //
+    // ------ TIMER ROTATION ------
         const activeSection = useActiveSection();
         const DURATION = 10000;
         const TRANSITION_DELAY = 8000;
@@ -197,18 +195,16 @@ export default function PortfolioDesktop({
         const [isHovering, setIsHovering] = useState(false);
         const isBlocked = paused || delay || isHovering || activeSection !== 'portfolio';
 
-        const frameRef = useRef<number | null>(null);
         const startTimeRef = useRef<number | null>(null);
-        const elapsedRef = useRef(0);
+        const elapsedRef = useRef(0); 
+        const frameRef = useRef<number | null>(null);
+        const rotateRef = useRef(false);
 
-        
         // progress timer
         useEffect(() => {
             if (isBlocked) {
-                if (frameRef.current) {
-                    cancelAnimationFrame(frameRef.current);
-                    frameRef.current = null;
-                }
+                if (frameRef.current) cancelAnimationFrame(frameRef.current);
+                frameRef.current = null;
                 return;
             }
 
@@ -217,10 +213,7 @@ export default function PortfolioDesktop({
             const tick = (now: number) => {
                 const elapsed = now - start;
 
-                setProgress(prev => {
-                    const next = prev + elapsed / DURATION;
-                    return next >= 1 ? 1 : next;
-                });
+                setProgress(prev => Math.min(prev + elapsed / DURATION, 1));
 
                 start = now;
                 frameRef.current = requestAnimationFrame(tick);
@@ -229,61 +222,67 @@ export default function PortfolioDesktop({
             frameRef.current = requestAnimationFrame(tick);
 
             return () => {
-                if (frameRef.current) {
-                    cancelAnimationFrame(frameRef.current);
-                    frameRef.current = null;
-                }
+                if (frameRef.current) cancelAnimationFrame(frameRef.current);
+                frameRef.current = null;
             };
-        }, [isBlocked, featuredProject?.id]);
+        }, [isBlocked, carouselProjects[0]?.id]);
 
-        // rotate projects after timer is up
+        // rotate carousel when timer completes
         useEffect(() => {
             if (paused || delay) return;
             if (progress < 1) return;
+            if (rotateRef.current) return;
+
+            rotateRef.current = true;
 
             setCarouselProjects(prev => {
+                if (prev.length <= 1) return prev;
                 const [first, ...rest] = prev;
                 return [...rest, first];
             });
+
+            setProgress(0);
+            rotateRef.current = false;
         }, [progress, paused, delay]);
 
-            // ------ TIMER DELAY ------ //
-                const delayTimeoutRef = useRef<number | null>(null);
-                const startDelay = (ms: number) => {
-                    setDelay(true);
+        // reset rotation flag whenever featured project changes
+        useEffect(() => {
+            rotateRef.current = false;
+        }, [carouselProjects[0]?.id]);
 
-                    if (delayTimeoutRef.current) {
-                        clearTimeout(delayTimeoutRef.current);
-                    }
-                    
-                    delayTimeoutRef.current = window.setTimeout(() => {
-                        setDelay(false);
-                        delayTimeoutRef.current = null;
-                    }, ms);
-                };
+        // ------ TIMER DELAY HELPER ------
+        const delayTimeoutRef = useRef<number | null>(null);
+        const startDelay = (ms: number) => {
+            setDelay(true);
+            if (delayTimeoutRef.current) clearTimeout(delayTimeoutRef.current);
 
-                // delay on project switch
-                useEffect(() => {
-                    setProgress(0);
-                    startDelay(TRANSITION_DELAY);
-                }, [featuredProject?.id]);
+            delayTimeoutRef.current = window.setTimeout(() => {
+                setDelay(false);
+                delayTimeoutRef.current = null;
+            }, ms);
+        };
 
-                // detect onPause
-                const pausedRef = useRef(false);
-                useEffect(() => {
-                    if (paused || isHovering) {
-                        pausedRef.current = true;
-                    }
-                }, [paused, isHovering]);
+        // trigger delay whenever featured project changes
+        useEffect(() => {
+            setProgress(0);
+            startTimeRef.current = null;
+            elapsedRef.current = 0;
+            startDelay(TRANSITION_DELAY);
+        }, [carouselProjects[0]?.id]);
 
-                // add delay after pausing
-                const UNPAUSE_DELAY = 4000;
-                useEffect(() => {
-                    if (!paused && !isHovering && pausedRef.current) {
-                        startDelay(UNPAUSE_DELAY);
-                        pausedRef.current = false;
-                    }
-                }, [paused, isHovering]);
+        // handle pausing & unpausing
+        const pausedRef = useRef(false);
+        useEffect(() => {
+            if (paused || isHovering) pausedRef.current = true;
+        }, [paused, isHovering]);
+
+        const UNPAUSE_DELAY = 4000;
+        useEffect(() => {
+            if (!paused && !isHovering && pausedRef.current) {
+                startDelay(UNPAUSE_DELAY);
+                pausedRef.current = false;
+            }
+        }, [paused, isHovering]);
 
 
     return (
@@ -304,10 +303,7 @@ export default function PortfolioDesktop({
                                     {featuredProject && (
                                         <ProjectCard
                                             key={featuredProject.id}
-                                            project={{
-                                                ...featuredProject,
-                                                images: featuredImage ? [featuredImage] : []
-                                            }}
+                                            project={derivedFeaturedProject}
                                             featured
                                             onMouseEnter={() => setIsHovering(true)}
                                             onMouseLeave={() => setIsHovering(false)}
@@ -440,17 +436,16 @@ export default function PortfolioDesktop({
                                                 onMouseEnter={() => setIsHovering(true)}
                                                 onMouseLeave={() => setIsHovering(false)}
                                             >
-                                                <Reveal delay={(i * 0.05) * 0.15}>
                                                     {/* darken image until hovered */}
                                                     <div className='absolute inset-0 z-10 bg-[#13131B] opacity-15 transition-opacity duration-300 group-hover:opacity-0 pointer-events-none'/>
-                                                    <Image
+                                                    <GalleryImage
                                                         src={img}
                                                         alt={`${featuredProject.title} preview ${i + 2}`}
-                                                        fill
+                                                        onHoverStart={() => setIsHovering(true)}
+                                                        onHoverEnd={() => setIsHovering(false)}
                                                         className='object-cover object-center
                                                                     transition-transform duration-500 ease-out
                                                                     group-hover:scale-110'
-                                                        draggable={false}
                                                     />
                                                     {/* hover caret */}
                                                     <span className='absolute inset-0 p-2 flex
@@ -466,7 +461,6 @@ export default function PortfolioDesktop({
                                                             draggable={false}
                                                         />
                                                     </span>
-                                                </Reveal>
                                             </button>
                                         ))
                                     ) : (
@@ -490,14 +484,14 @@ export default function PortfolioDesktop({
                                                     {/* darken image until hovered */}
                                                     <div className='absolute inset-0 z-10 bg-[#13131B] opacity-15 transition-opacity duration-300 group-hover:opacity-0 pointer-events-none'/>
                                                     
-                                                    <Image
+                                                    <GalleryImage
                                                         src={img}
                                                         alt={`${featuredProject.title} preview ${imageIndex + 1}`}
-                                                        fill
+                                                        onHoverStart={() => setIsHovering(true)}
+                                                        onHoverEnd={() => setIsHovering(false)}
                                                         className='object-cover object-center
                                                                     transition-transform duration-500 ease-out
                                                                     group-hover:scale-110'
-                                                        draggable={false}
                                                     />
                                                     {/* hover caret */}
                                                     <span className='absolute inset-0 p-2 flex

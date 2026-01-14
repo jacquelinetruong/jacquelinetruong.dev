@@ -15,12 +15,10 @@ import GuideButton from '@/app/components/guide-button';
 export default function AboutDesktop({
     className = '',
     isLoading,
-    projects,
     currentWork,
  }: { 
     className?: string; 
     isLoading: boolean;
-    projects: Project[];
     currentWork: Experience[];
  }) {
 

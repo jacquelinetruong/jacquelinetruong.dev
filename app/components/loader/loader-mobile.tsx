@@ -22,7 +22,7 @@ export default function LoaderMobile({ isLoading, isDesktop }: LoaderProps) {
                     className='fixed inset-0 z-[9999] bg-white pt-(--nav-height)'
                     initial={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    transition={{ duration: 2, ease: 'easeInOut' }}
+                    transition={{ duration: 3, ease: 'easeInOut' }}
                     >
                     <Grid>
                         {[
@@ -63,7 +63,7 @@ export default function LoaderMobile({ isLoading, isDesktop }: LoaderProps) {
                                 <motion.div
                                     className='absolute size-full'
                                     initial={{ opacity: 0 }}
-                                    animate={{ opacity: [0, 0.8, 0] }}
+                                    animate={{ opacity: [0, 0.6, 0] }}
                                     transition={{
                                     duration: 1.8,
                                     delay: cell.delay + 0.2,

@@ -13,6 +13,16 @@ const nextConfig: NextConfig = {
                 port: '',
                 pathname: '/**',
             },
+            {
+                protocol: 'https',
+                hostname: 'www.notion.so',
+                pathname: '/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'images.notionusercontent.com',
+                pathname: '/**',
+            },
         ],
     },
 

@@ -10,9 +10,9 @@ export async function getProjects(): Promise<Project[]> {
     const response = await notion.databases.query({
         database_id: databaseId,
         filter: {
-            property: 'section',
-            select: {
-                does_not_equal: 'not used', // filter out projects not used on site
+            property: 'exclude',
+            checkbox: {
+                does_not_equal: true, // filter out projects not used on site
             }
         }
     });
@@ -21,7 +21,20 @@ export async function getProjects(): Promise<Project[]> {
         .filter((page): page is any => 'properties' in page)
         .map((page): Project => ({
             id: page.id,
+
+            hero: page.properties.hero?.checkbox ?? false,
+            sectionId: page.properties.sectionId.select?.name ?? '1',
+
             title: page.properties.title.title[0]?.plain_text ?? '',
+            type: page.properties.type.multi_select?.map((t: any) => t.name) ?? 'design',
+
+            images:
+                page.properties.images.files?.map((file: any) => {
+                    if (file.type === 'file') return file.file.url;
+                    if (file.type === 'external') return file.external.url;
+                    return '';
+                }).filter(Boolean) ?? [],
+
             description: page.properties.description.rich_text[0]?.plain_text ?? '',
             points: 
                 page.properties.points.rich_text
@@ -33,20 +46,10 @@ export async function getProjects(): Promise<Project[]> {
 
             languages: page.properties.languages.multi_select?.map((l: any) => l.name) ?? [],
             programs: page.properties.programs.multi_select?.map((p: any) => p.name) ?? [],
+            category: page.properties.category.multi_select?.map((c: any) => c.name) ?? [],
 
             link: page.properties.link?.url ?? '',
             github: page.properties.github?.url ?? '',
             dribbble: page.properties.dribbble?.url ?? '',
-
-            images:
-                page.properties.images.files?.map((file: any) => {
-                    if (file.type === 'file') return file.file.url;
-                    if (file.type === 'external') return file.external.url;
-                    return '';
-                }).filter(Boolean) ?? [],
-
-            section: page.properties.section.select?.name ?? 'designer',
-            sectionId: page.properties.sectionId.select?.name ?? '1',
-            type: page.properties.type.multi_select?.map((t: any) => t.name) ?? 'design',
         }));
 }

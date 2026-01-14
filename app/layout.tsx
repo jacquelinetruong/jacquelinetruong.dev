@@ -1,5 +1,6 @@
 import './globals.css';
 
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { ThemeProvider } from './components/theme-context';
@@ -52,6 +53,8 @@ export default function RootLayout({
 				className={`${font.variable} antialiased select-none`}
 				style = {{overflowX: 'hidden'}}
 			>
+				<SpeedInsights />
+				
 				<ThemeProvider>
 					<LoadingProvider>
 						<Navbar />

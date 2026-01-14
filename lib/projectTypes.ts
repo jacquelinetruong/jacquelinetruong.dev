@@ -2,16 +2,21 @@
 
 export type Project = {
     id: string;
+
+    hero: boolean;
+    sectionId: '1' | '2' | '3';
+
+    type: 'design' | 'development';
     title: string;
+    images: string[];
+
     description: string;
     points?: string[];
     languages: string[];
     programs: string[];
+    category: string[];
+
     link?: string;
     github?: string;
     dribbble?: string;
-    images: string[];
-    section: 'hero' | 'about' | 'portfolio' | 'experience';
-    sectionId: '1' | '2' | '3' | '4';
-    type: 'design' | 'development'
 };
