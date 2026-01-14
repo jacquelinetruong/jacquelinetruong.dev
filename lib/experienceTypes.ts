@@ -2,6 +2,7 @@
 
 export type Experience = {
     id: string;
+    order: number;
     category: 'work' | 'clients' | 'proficiencies';
     menuTitle: string;
     position: string;

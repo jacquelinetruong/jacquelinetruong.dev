@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import GalleryImage from '@/app/components/gallery-image';
 import Image from 'next/image';
-import { AnimatePresence } from 'framer-motion';
+import { AnimatePresence, useForceUpdate } from 'framer-motion';
 
 import { SectionReveal } from '@/app/components/section-reveal';
 import { Reveal } from '@/app/components/reveal';
@@ -208,14 +208,17 @@ export default function PortfolioDesktop({
                 return;
             }
 
-            let start = performance.now();
+            let last = performance.now();
 
             const tick = (now: number) => {
-                const elapsed = now - start;
+                const delta = now - last;
+                last = now;
 
-                setProgress(prev => Math.min(prev + elapsed / DURATION, 1));
+                setProgress(prev => {
+                    const next = prev + delta / DURATION;
+                    return next >= 1 ? 1 : next;
+                });
 
-                start = now;
                 frameRef.current = requestAnimationFrame(tick);
             };
 
@@ -284,6 +287,22 @@ export default function PortfolioDesktop({
             }
         }, [paused, isHovering]);
 
+        // pause timer if user not at portfolio section
+        useEffect(() => {
+            if (activeSection !== 'portfolio') {
+                if (frameRef.current) {
+                    cancelAnimationFrame(frameRef.current);
+                    frameRef.current = null;
+                }
+            }
+        }, [activeSection]);
+
+        // add delay on portfolio section re-enter
+        useEffect(() => {
+            if (activeSection === 'portfolio') {
+                startDelay(TRANSITION_DELAY);
+            }
+        }, [activeSection]);
 
     return (
         <>
@@ -351,8 +370,8 @@ export default function PortfolioDesktop({
                                 <div className={`flex flex-col gap-2 h-full
                                                 transition-opacity duration-300
                                                 ${isDetailsOpen ? 'opacity-0' : 'opacity-100'}`}>
-                                    <h2 className='font-semibold text-wrap text-(--text-colour) sm:text-xl md:text-2xl'>{featuredProject?.title}</h2>
-                                    <p className='h-full text-wrap truncate text-(--text-colour) sm:text-sm md:text-base 2xl:text-md'>
+                                    <h2 className='font-semibold text-wrap text-(--text-colour) sm:text-lg md:text-xl'>{featuredProject?.title}</h2>
+                                    <p className='h-full text-wrap truncate text-(--text-colour) sm:text-sm 2xl:text-base'>
                                         {featuredProject?.description}
                                     </p>
                                 </div>
@@ -360,12 +379,12 @@ export default function PortfolioDesktop({
                                 {/* external link buttons */}
                                 <div 
                                     ref={buttonsRef}
-                                    className='font-medium text-sm
+                                    className='font-medium text-xs 2xl:text-sm
                                                 flex flex-row gap-2'>
                                     {featuredProject?.link && (
                                         <a className='text-(--bg-colour)
                                                         flex flex-row gap-2 items-center
-                                                        w-fit h-fit px-6 py-3 rounded-full 2xl:px-8 2xl:py-4
+                                                        w-fit h-fit px-4 py-2.5 rounded-full 2xl:px-6 2xl:py-3.5 3xl:px-8 3xl:py-4
                                                         bg-(--text-colour) hover:bg-(--nice-grey)
                                                         transition-colors duration-300'
                                             target='_blank'
@@ -373,14 +392,14 @@ export default function PortfolioDesktop({
                                             rel='noopener noreferrer'
                                         >    
                                             Live Site
-                                            <LinkArrow className='size-[20px] text-(--bg-colour) group-transition-colors group:duration-300'/>
+                                            <LinkArrow className='size-[16px] 2xl:size-[20px] text-(--bg-colour) group-transition-colors group:duration-300'/>
                                         </a>
                                     )}
 
                                     {featuredProject?.github && (
                                         <a className='font-medium text-(--bg-colour)
                                                         flex flex-row gap-2 items-center
-                                                        w-fit h-full px-5 py-3 rounded-full 2xl:px-8 2xl:py-4
+                                                        w-fit h-full px-4 py-2.5 rounded-full 2xl:px-8 2xl:py-4
                                                         bg-(--text-colour) hover:bg-(--nice-grey)
                                                         transition-colors duration-300'
                                             target='_blank'
@@ -399,7 +418,7 @@ export default function PortfolioDesktop({
                                     {featuredProject?.dribbble && (
                                         <a className='font-medium text-(--bg-colour)
                                                         flex flex-row gap-2 items-center
-                                                        w-fit h-full px-5 py-3 rounded-full 2xl:px-8 2xl:py-4
+                                                        w-fit h-full px-4 py-2.5 rounded-full 2xl:px-8 2xl:py-4
                                                         bg-(--text-colour) hover:bg-(--nice-grey)
                                                         transition-colors duration-300'
                                             target='_blank'

@@ -41,7 +41,7 @@ export default function LoaderDesktop({ isLoading, isDesktop }: LoaderProps) {
                                             repeat: 0,
                                         }}
                                     >
-                                        <Image src='/jt-logo-black.svg' alt='my site logo in black' fill draggable={false} className='object-contain object-center p-4'/>
+                                        <Image src='/jt-logo-black.svg' alt='my site logo in black' fill draggable={false} className='object-contain object-center px-8 | ultrawide:px-20'/>
                                     </motion.div>
 
                                     {/* grey logo */}
@@ -55,7 +55,7 @@ export default function LoaderDesktop({ isLoading, isDesktop }: LoaderProps) {
                                             repeat: 0,
                                         }}
                                     >
-                                        <Image src='/jt-logo-grey.svg' alt='my site logo in grey' fill draggable={false} className='object-contain object-center p-4'/>
+                                        <Image src='/jt-logo-grey.svg' alt='my site logo in grey' fill draggable={false} className='object-contain object-center px-8 | ultrawide:px-20'/>
                                     </motion.div>
                                 </div>
                             ))}

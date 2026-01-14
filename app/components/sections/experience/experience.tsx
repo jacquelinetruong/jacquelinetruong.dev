@@ -1,6 +1,5 @@
 'use client';
 
-import type { Project } from '@/lib/projectTypes';
 import type { Experience } from '@/lib/experienceTypes';
 
 import ExperienceDesktop from './experience-desktop';
@@ -41,6 +40,12 @@ export function formatDateRange(xp: Experience) {
         year: 'numeric',
     });
 
+    // client projects: show only month + year
+    if (xp.category === 'clients') {
+        return start;
+    }
+
+    // current roles
     if (xp.current || !xp.endDate) {
         return `${start} — Present`;
     }

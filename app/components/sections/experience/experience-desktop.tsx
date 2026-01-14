@@ -60,7 +60,7 @@ export default function ExperienceDesktop({
         >
             <Grid>
                 {/* experience menu */}
-                <div className='sm:text-xs md:text-sm 2xl:text-base
+                <div className='sm:text-xs 2xl:text-sm 3xl:text-base
                                 col-start-1 col-span-1 row-start-1 row-span-2
                                 flex flex-col gap-8
                                 p-8 | ultrawide:px-20'
@@ -83,8 +83,8 @@ export default function ExperienceDesktop({
                                     <button
                                         onClick={() => setActiveExperience(item)}
                                         className={`
-                                            flex flex-row gap-2 items-center
-                                            w-fit h-fit
+                                            flex flex-row gap-1 2xl:gap-2 items-start
+                                            w-fit h-fit text-left
                                             transition-all duration-300 cursor-pointer
                                             ${activeExperience?.id === item.id
                                                 ? 'font-semibold'
@@ -96,8 +96,8 @@ export default function ExperienceDesktop({
                                                 ? '/detail-arrow-black.svg'
                                                 : '/detail-arrow-grey.svg'}`}
                                             alt='arrow'
-                                            width={22}
-                                            height={22}
+                                            width={16}
+                                            height={16}
                                         />
                                         {item.menuTitle}
                                     </button>
@@ -159,7 +159,7 @@ export default function ExperienceDesktop({
                                 {/* proficiency type */}
                                 <Reveal delay={0.1}>
                                     <h2 className='font-semibold text-nowrap sm:text-lg md:text-xl xl:text-2xl'>
-                                        {activeExperience?.position}
+                                        {activeExperience?.menuTitle}
                                     </h2>
                                 </Reveal>
                             </div>

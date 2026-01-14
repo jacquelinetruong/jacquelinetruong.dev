@@ -8,12 +8,20 @@ export async function getExperience(): Promise<Experience[]> {
 
     const response = await notion.databases.query({
         database_id: databaseId,
+        sorts: [
+            {
+                // order of proficiencies
+                property: 'order',
+                direction: 'ascending',
+            },
+        ],
     });
 
     return response.results
         .filter((page): page is any => 'properties' in page)
         .map((page): Experience => ({
             id: page.id,
+            order: page.properties.order.number ?? 0,
             category: page.properties.category.select?.name ?? 'work',
             menuTitle: 
                 page.properties.menuTitle.title

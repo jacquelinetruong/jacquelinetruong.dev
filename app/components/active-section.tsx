@@ -21,14 +21,8 @@ export function useActiveSection(
 		);
 
 		if (!sections.length) return;
-
-		const getNavHeight = () =>
-			parseFloat(
-				getComputedStyle(document.documentElement).getPropertyValue('--nav-height')
-			) || 0;
 		
 		const updateActiveSection = (scrollY: number) => {
-			const navHeight = getNavHeight();
 			const viewportMiddle = scrollY + window.innerHeight / 2;
 
 			let current = sections[0].id;
@@ -36,7 +30,7 @@ export function useActiveSection(
 			for (let i = sections.length - 1; i >= 0; i--) {
 				const section = sections[i];
 				const sectionTop = section.offsetTop;
-				if (viewportMiddle >= sectionTop) {
+				if (viewportMiddle > sectionTop) {
 					current = section.id;
 					break;
 				}
@@ -72,7 +66,7 @@ export function useActiveSection(
 		updateActiveSection(window.scrollY);
 
 		return() => window.removeEventListener('scroll', onScroll);
-	}, [activeSection, setTheme, sectionThemes]);
+	}, [activeSection, setTheme, sectionThemes, lenis]);
 
 	return activeSection;
 }
