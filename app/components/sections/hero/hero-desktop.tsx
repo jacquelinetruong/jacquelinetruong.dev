@@ -78,7 +78,7 @@ export default function HeroDesktop({
 
 				{/* jump to 'about' button */}
 				<div className='col-start-3 col-span-1 row-start-3 row-span-1'>
-					<GuideButton href='#about' text='More About Me'/>
+					<GuideButton id='about' text='More About Me'/>
 				</div>
 			</Grid>
 		</SectionReveal>

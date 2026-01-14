@@ -126,7 +126,7 @@ export default function AboutDesktop({
                 
                 {/* jump to 'portfolio' button */}
                 <div className='col-start-3 col-span-1 row-start-3 row-span-1'>
-                    <GuideButton href='#portfolio' text='See Portfolio'/>
+                    <GuideButton id='portfolio' text='See Portfolio'/>
                 </div>
             </Grid>
         </SectionReveal>

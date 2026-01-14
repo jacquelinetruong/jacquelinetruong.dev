@@ -637,7 +637,7 @@ export default function PortfolioDesktop({
                                 <div className={`col-start-3 col-span-1 row-start-3 row-span-1
                                                 transition-opacity duration-300
                                                 ${isDetailsOpen ? 'opacity-0' : 'opacity-100'}`}>
-                                    <GuideButton href='#experience' text='My Experience'/>
+                                    <GuideButton id='experience' text='My Experience'/>
                                 </div>
                             </>
                         )}
