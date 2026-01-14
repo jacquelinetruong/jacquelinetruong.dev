@@ -2,8 +2,8 @@ import HomeClient from './components/home-client';
 import { getProjects } from '@/lib/getProjects';
 import { getExperience } from '@/lib/getExperience';
 
-import type { Project } from '@/lib/projectTypes';
-import type { Experience } from '@/lib/experienceTypes';
+// disable RSC caching; force fresh notion query 
+export const dynamic = 'force-dynamic';
 
 export default async function Page() {
 	

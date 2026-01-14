@@ -2,9 +2,12 @@
 
 import { notion } from './notion';
 import type { Project } from './projectTypes';
-
+import { unstable_noStore } from 'next/cache';
 
 export async function getProjects(): Promise<Project[]> {
+    // do not cache ever
+    unstable_noStore();
+
     const databaseId = process.env.NOTION_DB_PROJECTS_ID!;
 
     const response = await notion.databases.query({

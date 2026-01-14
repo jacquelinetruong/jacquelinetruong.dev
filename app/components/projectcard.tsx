@@ -92,21 +92,49 @@ export default function ProjectCard({
 		};
 	
 	// ------ MOBILE ------ //
-		const [activeIndex, setActiveIndex] = useState(0);
+		// ------ MOBILE STATE ------
 		const scrollerRef = useRef<HTMLDivElement>(null);
-		const scrollbarWidth = 50; // percent
-		const scrollRatio = project.images.length > 1 ? activeIndex / (project.images.length - 1) : 0;
-		const translateX = scrollRatio * 100;
+		const indicatorRef = useRef<HTMLDivElement>(null);
 
-		// carousel indicator/progress bar
+		const [showScrollbar, setShowScrollbar] = useState(false);
+		const [scrollTimer, setScrollTimer] = useState<NodeJS.Timeout | null>(null);
+
+		// calculate how much to move scrollbar given # project images
 		const handleScroll = () => {
-			const el = scrollerRef.current;
-			if (!el) return;
+			const scroller = scrollerRef.current;
+			const indicator = indicatorRef.current;
+			if (!scroller || !indicator) return;
 
-			const index = Math.round(el.scrollLeft / el.clientWidth);
-			setActiveIndex(index);
+			const containerWidth = scroller.clientWidth;
+			const scrollWidth = scroller.scrollWidth;
+			const scrollLeft = scroller.scrollLeft;
+			const numImages = project.images.length;
+
+			const progress = scrollLeft / (scrollWidth - containerWidth);
+
+			const indicatorWidth = containerWidth / numImages;
+
+			const maxTranslate = containerWidth - indicatorWidth;
+
+			indicator.style.width = `${indicatorWidth}px`;
+			indicator.style.transform = `translateX(${progress * maxTranslate}px)`;
+
+			// show scrollbar
+			setShowScrollbar(true);
+
+			// hide after 1.2s inactivity
+			if (scrollTimer) clearTimeout(scrollTimer);
+			const timer = setTimeout(() => setShowScrollbar(false), 1200);
+			setScrollTimer(timer);
 		};
-	
+
+		// reset timer after inactivity
+		useEffect(() => {
+			return () => {
+				if (scrollTimer) clearTimeout(scrollTimer);
+			};
+		}, [scrollTimer]);
+
 	return isDesktop ? (
 		<div onClick={handleClick}
 			onMouseEnter={onMouseEnter}
@@ -249,7 +277,7 @@ export default function ProjectCard({
 					{project.images.map((img, i) => (		
 						<div
 							key={i}
-							className='relative min-w-full h-full snap-center snap-always'
+							className='relative min-w-full h-full snap-center snap-always bg-(--bg-colour)'
 							>
 								<GalleryImage
 									src={notionImage(img)}
@@ -258,22 +286,22 @@ export default function ProjectCard({
 									onHoverStart={onMouseEnter}
                                     onHoverEnd={onMouseLeave}
 								/>
+								{/* gradient for scrollbar visibility */}
+								<div className={`absolute inset-0 mx-2 bg-gradient-to-t from-(--dark-black)/30 from-5% via-(--dark-black)/15 via-16% to-transparent to-40% point-events-auto`}/>
 						</div>
 					))}
+					{/* progress bar */}
+					{project.images.length > 1 && (
+						<div className={`absolute bottom-6 left-0 w-full h-[6px] overflow-hidden transition-opacity duration-500
+										${showScrollbar ? 'opacity-100' : 'opacity-0'}`}
+						>
+							<div
+								ref={indicatorRef}
+								className='drop-shadow-lg h-full rounded-full bg-white/70 transition-transform duration-100 ease-out'
+							/>
+						</div>
+					)}
 				</div>
-
-				{/* progress bar */}
-				{project.images.length > 1 && (
-					<div className='w-full h-[6px] bg-(--nice-grey) relative overflow-hidden'>
-						<div
-							className='absolute h-full rounded-full bg-(--black) transition-transform duration-300'
-							style={{ 
-								width: `${scrollbarWidth}%`,
-								transform: `translateX(${translateX}%)`
-							}}
-						/>
-					</div>
-				)}
 			</div>
 		</div>
 
