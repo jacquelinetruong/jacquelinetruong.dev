@@ -209,6 +209,17 @@ section {
     scrollbar-width: none;
 }
 
+/* hide apple mobile horizontal scrollbar */
+.scroller {
+  -webkit-overflow-scrolling: touch;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.scroller::-webkit-scrollbar {
+  display: none;
+}
+
 /* ------ ANIMATIONS ------ */
 /* guide button animation */
 @keyframes jump {
