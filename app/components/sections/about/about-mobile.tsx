@@ -66,7 +66,17 @@ export default function AboutMobile({
 
                                 {/* if jobless :heartbreak: */}
                                 {currentWork.length === 0 && (
-                                    <p className='text-sm xs:text-base'>Open to new opportunities</p>
+                                    <>
+                                        <Image
+                                                src='/detail-arrow-black.svg'
+                                                alt='arrow'
+                                                width={16}
+                                                height={16}
+                                                draggable={false}
+                                                className={`sm:size-5`}
+                                            />
+                                        <p className='text-sm xs:text-base'>Open to new opportunities</p>
+                                    </>
                                 )}
 
                                 {currentWork.map((role, i) => (

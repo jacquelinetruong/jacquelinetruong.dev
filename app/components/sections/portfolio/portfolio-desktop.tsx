@@ -142,6 +142,8 @@ export default function PortfolioDesktop({
         const imagesRef = useRef<HTMLDivElement | null>(null);
         const buttonsRef = useRef<HTMLDivElement | null>(null);
 
+        const activeSection = useActiveSection();
+
         // lock scrolling when modal is open
         useEffect(() => {
             const html = document.documentElement;
@@ -183,10 +185,13 @@ export default function PortfolioDesktop({
                 return [last, ...prev.slice(0, -1)];
             });
         };
-
+    
+        // close overlay if user scrolls away (even though scrolling is supposed to lock......... ^^)
+        useEffect(() => {
+            if (activeSection !== 'portfolio') setIsDetailsOpen(false);
+        }, [activeSection]);
 
     // ------ TIMER ROTATION ------
-        const activeSection = useActiveSection();
         const DURATION = 10000;
         const TRANSITION_DELAY = 8000;
         const paused = isDetailsOpen;

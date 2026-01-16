@@ -93,7 +93,7 @@ export default function FooterDesktop({ className = '' }: { className?: string }
                                     draggable={false}
                                 />
                             </div>
-                            <h5 className='text-(--alt-text-colour) text-right leading-5'>© 2025 built & designed by jacqueline truong</h5>
+                            <h5 className='text-(--alt-text-colour) text-right leading-5'>© 2026 built & designed by jacqueline truong</h5>
                         </Reveal>
                     </div>
                 

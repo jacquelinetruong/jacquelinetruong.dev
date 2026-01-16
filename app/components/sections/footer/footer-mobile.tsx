@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Grid from '@/app/components/grid';
 import LinkArrow from '@/app/components/icons/link-arrow';
 import { Reveal } from '@/app/components/reveal';
+import CatSecret from '../../cat-secret';
 
 
 export default function FooterMobile({ className = '' }:{ className?: string; }) {
@@ -28,7 +29,7 @@ export default function FooterMobile({ className = '' }:{ className?: string; })
 
             {/* real footer */}
             <div className='col-start-1 col-span-3 row-start-2 row-span-3 bg-(--dark-black) px-4 pt-12 pb-8
-                            flex flex-col gap-20 h-full'>
+                            flex flex-col gap-12 h-full'>
                 <div className='flex flex-col gap-8'>
                     {/* cta */}
                     <div className='flex flex-row gap-4'>
@@ -50,11 +51,11 @@ export default function FooterMobile({ className = '' }:{ className?: string; })
                         <div className='relative w-full sm:w-3/4 aspect-2/1'>
                             <Reveal delay={0.8}>
                                 <Image
-                                    src='/thats-all.svg'
+                                    src='/thx4visiting.svg'
                                     alt='Thanks for visiting!'
                                     width={179}
                                     height={56.32}
-                                    className='size-full'
+                                    className='size-full p-4'
                                 />
                             </Reveal>
                         </div>
@@ -63,29 +64,31 @@ export default function FooterMobile({ className = '' }:{ className?: string; })
                     {/* social links */}
                     <div className='font-regular text-white text-sm | xs:text-base w-fit 
                                     flex flex-row gap-4 sm:gap-6'>
-                        <a href=''>Resume</a>
+                        <a target='_blank' href='/resume.pdf'>Resume</a>
                         <a target='_blank' href='https://www.linkedin.com/in/jacquellinetruong'>LinkedIn</a>
                         <a target='_blank' href='https://github.com/jacquelinetruong'>GitHub</a>
+                        <a target='_blank' href='https://www.behance.net/jacqueltruong'>Behance</a>
                     </div>
                 </div>
 
-                <div className='flex flex-col gap-8'>
-                    {/* copyright */}
-                    <div className='flex flex-col gap-2'>
-                        <Reveal delay={1}>
-                            <p className='text-sm | xs:text-base text-right text-(--light-mode-grey)'>Design and development by</p>
-                            <div className='relative'>
-                                <Image
-                                    src='/jt-dark-grey.svg'
-                                    alt='Jacqueline Truong'
-                                    width={343}
-                                    height={120.95}
-                                    className='size-full'
-                                />
-                            </div>
-                        </Reveal>
+                <div className='w-full h-full flex flex-col gap-8'>
+                    {/* easter egg */}
+                    <div className='w-full h-full p-4'>
+                        <CatSecret />
                     </div>
-                    <p className='text-sm | xs:text-base text-right text-(--light-mode-grey)'>© 2025 jacqueline truong</p>
+
+                    {/* copyright */}
+                    <Reveal delay={1}>
+                        <div className='w-full h-full relative'>
+                            <Image
+                                src='/jt-dark-grey.svg'
+                                alt='Jacqueline Truong'
+                                fill
+                                className='object-contain object-bottom-right'
+                            />
+                        </div>
+                    </Reveal>
+                    <p className='text-sm | xs:text-base text-right text-(--light-mode-grey)'>© 2026 built & designed by jacqueline truong</p>
                 </div>
             </div>
         </Grid>

@@ -22,6 +22,8 @@ export default function AboutDesktop({
     currentWork: Experience[];
  }) {
 
+    const smiley = ':)';
+
     return(
         <SectionReveal
             fadeDistance={0}
@@ -49,7 +51,7 @@ export default function AboutDesktop({
                     <div className='flex flex-col gap-4'>
                         <Reveal delay={0.15}>
                             <h2 className='font-semibold sm:text-lg md:text-xl xl:text-2xl'>
-                                Hey! Welcome to my portfolio site.
+                                Hey, glad you're here!
                             </h2>
                         </Reveal>
 
@@ -79,8 +81,17 @@ export default function AboutDesktop({
                             </Reveal>
                             
                             {/* if jobless :heartbreak: */}
-                            {currentWork.length === 0 && (
-                                <p className='font-semibold sm:text-xs md:text-sm 2xl:text-base 3xl:text-lg'>Open to new opportunities</p>
+                            {currentWork.length === 0 && ( 
+                                <Reveal delay={0.25} className='flex flex-row gap-2 items-center'>
+                                    <Image
+                                        src='/detail-arrow-black.svg'
+                                        alt='arrow'
+                                        width={20}
+                                        height={20}
+                                        draggable={false}
+                                    />
+                                    <p className='font-semibold sm:text-xs md:text-sm 2xl:text-base 3xl:text-lg'>Open to new opportunities {`${smiley}`}</p>
+                                </Reveal>
                             )}
 
                             {currentWork.map((role, i) => (
