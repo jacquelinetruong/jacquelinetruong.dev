@@ -55,6 +55,7 @@ export default function RootLayout({
 				style = {{overflowX: 'hidden'}}
 			>
 				<SpeedInsights />
+				<Analytics />
 				
 				<ThemeProvider>
 					<LoadingProvider>
