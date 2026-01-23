@@ -43,22 +43,22 @@ export default function Portfolio({
    
     return isDesktop ? (
         // desktop view 
-        // <PortfolioDesktop
-        //     isLoading={isLoading}
-        //     projects={projects}
-        //     featuredHeroProject={featuredHeroProject}
-        //     filter={filter}
-        //     setFilter={setFilter}
-        //     counts={counts}
-        //     onProjectSelect={onProjectSelect}
-        // />
-        <PortfolioNew 
+        <PortfolioDesktop
             isLoading={isLoading}
             projects={projects}
+            featuredHeroProject={featuredHeroProject}
             filter={filter}
             setFilter={setFilter}
             counts={counts}
+            onProjectSelect={onProjectSelect}
         />
+        // <PortfolioNew 
+        //     isLoading={isLoading}
+        //     projects={projects}
+        //     filter={filter}
+        //     setFilter={setFilter}
+        //     counts={counts}
+        // />
     ): (
         // mobile view
         <PortfolioMobile
