@@ -3,6 +3,9 @@
 export type Project = {
     id: string;
 
+    casestudy: boolean;
+    slug: string;
+    
     hero: boolean;
     sectionId: '1' | '2' | '3';
 

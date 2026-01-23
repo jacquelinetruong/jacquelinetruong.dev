@@ -151,7 +151,7 @@ export default function PortfolioMobile({
                                                             w-fit h-fit sm:h-full px-4 sm:px-5 py-3 rounded-full
                                                             bg-(--nice-grey)'
                                                 target='_blank'
-                                                href={project?.link}
+                                                href={project?.github}
                                                 rel='noopener noreferrer'
                                             >    
                                                 <Image
@@ -168,7 +168,7 @@ export default function PortfolioMobile({
                                                             w-fit h-fit sm:h-full px-4 sm:px-5 py-3 rounded-full
                                                             bg-(--nice-grey)'
                                                 target='_blank'
-                                                href={project?.link}
+                                                href={project?.dribbble}
                                                 rel='noopener noreferrer'
                                             >    
                                                 <Image

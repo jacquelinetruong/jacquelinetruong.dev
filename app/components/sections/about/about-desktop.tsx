@@ -56,8 +56,7 @@ export default function AboutDesktop({
                         </Reveal>
 
                         <Reveal delay={0.25}>
-                            <p className='sm:text-[10px] md:text-sm 2xl:text-base 2xl:w-9/10 3xl:text-lg 3xl:w-4/5
-                                            w-full 3xl:w-4/5'>
+                            <p className='w-full sm:text-[10px] md:text-sm 2xl:text-base 3xl:text-lg 3xl:w-4/5'>
                                 I'm a newgrad designer who loves bringing ideas to life through clean, functional, high-impact products. Since I also code, I'm drawn to 
                                 creating designs that aren't just beautiful, but realistic, buildable, and considerate of engineering workflows. By speaking in both "design"
                                 and "dev" languages, I bridge the gap, crafting intuitive interactions, scalable UI, and shipping things that make a real difference.

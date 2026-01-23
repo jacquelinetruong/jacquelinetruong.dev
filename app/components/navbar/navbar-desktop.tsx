@@ -48,8 +48,8 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
         <div className='font-medium xs:text-sm md:text-md
                         fixed top-0 left-0 w-full h-(--nav-height)
                         px-8 py-4 z-1000 | ultrawide:px-20
-                        flex flex-row justify-between items-center
-                        bg-gradient-to-t from-transparent via-(--bg-colour)/50 via-30% to-(--bg-colour) to-60%
+                        flex flex-row justify-between items-center backdrop-blur-sm
+                        bg-gradient-to-t from-transparent via-(--bg-colour)/65 via-20% to-(--bg-colour)/95 to-35% 
                         transition-colors duration-500'>
             {/* left side */}
             <div className='flex flex-row items-center gap-12'>

@@ -82,7 +82,7 @@ export default function NameStamp({ className = '' }: { className?: string }) {
 
 						<Reveal delay={2.25} className='w-fit h-fit'>
 							<h2 className='font-semibold text-right place-self-end
-											sm:text-lg md:text-xl 2xl:text-2xl 2xl:w-4/5 
+											sm:text-lg md:text-xl 2xl:text-2xl ultrawide:w-4/5
 											transition-colors duration-500'>
 								Product designer first, software engineer second. Focused on crafting digital experiences and turning everyday ideas into art.
 							</h2>

@@ -1,10 +1,18 @@
 'use client';
 
 import Image from 'next/image';
+import { useEffect } from 'react';
+import { useTheme } from './components/theme-context';
 import { useRouter } from 'next/navigation';
 import Cat from '@/app/components/icons/cat-icon';
 
 export default function NotFound() {
+    // ensure always light mode
+    const { setTheme } = useTheme();
+    useEffect(() => {
+        setTheme('light');
+    }, [setTheme]);
+
     const router = useRouter();
 
     return (
@@ -31,7 +39,7 @@ export default function NotFound() {
                                 className='font-medium text-base 3xl:text-lg text-white
                                         flex flex-row gap-2 items-center
                                         w-fit h-fit px-6 py-3.5 rounded-full 2xl:px-8 2xl:py-4 
-                                        bg-(--text-colour) hover:bg-(--dark-grey)
+                                        bg-(--black) hover:bg-(--dark-grey)
                                         transition-colors duration-300'
                             >	
                                 Back to home

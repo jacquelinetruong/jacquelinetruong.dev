@@ -17,7 +17,7 @@
   --light-mode-grey: #97969D;
   --dark-mode-grey: #77767D;
   --dark-grey: #57565D;
-  --light-black: #38393C;
+  --light-black: #48494C;
   --black: #292A2D;
   --dark-black: #1B1C1D;
 
@@ -25,6 +25,7 @@
   --vh: 100vh;
   --nav-height: 72px;
   --cell-height: calc((var(--vh) - var(--nav-height)) / var(--grid-rows));
+  --half-cell-height: calc(var(--cell-height) / 2);
   --two-cell-height: calc(2 * var(--cell-height));
   --cell-width: calc(100vw / var(--grid-columns));
   --two-cell-width: calc(2 * var(--cell-width));

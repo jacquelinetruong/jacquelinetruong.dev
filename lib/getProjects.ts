@@ -25,6 +25,12 @@ export async function getProjects(): Promise<Project[]> {
         .map((page): Project => ({
             id: page.id,
 
+            casestudy: page.properties.casestudy?.checkbox ?? false,
+            slug: page.properties.title.title[0]?.plain_text
+                .toLowerCase()
+                .replace(/\s+/g, '-')
+                .replace(/[^a-z0-9-]/g, '') ?? page.id,
+
             hero: page.properties.hero?.checkbox ?? false,
             sectionId: page.properties.sectionId.select?.name ?? '1',
 

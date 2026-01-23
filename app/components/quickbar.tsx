@@ -3,13 +3,18 @@
 import { useEffect, useState } from 'react';
 import { Reveal } from './reveal';
 import { useActiveSection } from './active-section';
-import Link from 'next/link';
 
 import Coffee from './icons/coffee';
 import TopArrow from './icons/top-arrow';
 
 
-export default function Quickbar({ isLoading }: { isLoading: boolean }) {
+export default function Quickbar({ 
+    isLoading,
+    isProjectPage = false,
+}: { 
+    isLoading: boolean;
+    isProjectPage?: boolean; 
+}) {
 
     const activeSection = useActiveSection();
 
@@ -45,6 +50,8 @@ export default function Quickbar({ isLoading }: { isLoading: boolean }) {
 
     const dockY = useFooterDock(-90);
 
+    const notTop = useGetNotTop(120);
+
     return (
         <div className='fixed right-0 bottom-0 z-1000
                         w-fit h-fit pointer-events-auto
@@ -54,7 +61,7 @@ export default function Quickbar({ isLoading }: { isLoading: boolean }) {
             style={{ transform: `translateY(-${dockY}px)` }}
         >
             {/* coffee chat button */}
-            <Reveal delay={1.25} className={`${activeSection === 'home' || activeSection === 'about' ? 'hidden' : ''}`}>
+            <Reveal delay={1.25} className={`${activeSection === 'home' || activeSection === 'about' || !isProjectPage || !notTop ? 'hidden' : ''}`}>
                 <a href='mailto:hello@jacquelinetruong.dev'
                     target='_blank'
                     className='flex flex-row gap-1 items-center justify-center group cursor-pointer
@@ -78,10 +85,11 @@ export default function Quickbar({ isLoading }: { isLoading: boolean }) {
             </Reveal>
 
             {/* jump back to top button */}
-            <Reveal delay={1.25} className={`${activeSection === 'home' && 'hidden'}`}>
+            <Reveal delay={1.25} className={`${activeSection === 'home' || !notTop ? 'hidden' : ''}`}>
                 <button
-                    onClick={() => {
-                        document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
+                    onClick={() => {isProjectPage 
+                        ? document.getElementById('top')?.scrollIntoView({ behavior: 'smooth' })
+                        : document.getElementById('home')?.scrollIntoView({ behavior: 'smooth' });
                     }}
                     className='flex flex-row gap-1 items-center justify-center group cursor-pointer
                                     rounded-full px-2 py-2 | 2xl:px-3 2xl:py-2.5 | ultrawide:px-4 ultrawide:py-3.5
@@ -104,4 +112,27 @@ export default function Quickbar({ isLoading }: { isLoading: boolean }) {
             </Reveal>
         </div>
     );
+}
+
+// hook to check if user scrolled away from top
+function useGetNotTop(threshold = 120) {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => {
+      const topSection = document.getElementById('project-hero');
+      if (!topSection) return;
+
+      // scroll position relative to top of hero section
+      const topY = topSection.getBoundingClientRect().top;
+      setScrolled(topY < -threshold);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll(); // initialize
+
+    return () => window.removeEventListener('scroll', onScroll);
+  }, [threshold]);
+
+  return scrolled;
 }

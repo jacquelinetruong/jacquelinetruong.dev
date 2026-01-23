@@ -5,6 +5,7 @@ import { Project } from '@/lib/projectTypes';
 
 import PortfolioDesktop from './portfolio-desktop';
 import PortfolioMobile from './portfolio-mobile';
+import PortfolioNew from './portfolio-new';
 
 
 export default function Portfolio({
@@ -42,14 +43,21 @@ export default function Portfolio({
    
     return isDesktop ? (
         // desktop view 
-        <PortfolioDesktop
+        // <PortfolioDesktop
+        //     isLoading={isLoading}
+        //     projects={projects}
+        //     featuredHeroProject={featuredHeroProject}
+        //     filter={filter}
+        //     setFilter={setFilter}
+        //     counts={counts}
+        //     onProjectSelect={onProjectSelect}
+        // />
+        <PortfolioNew 
             isLoading={isLoading}
             projects={projects}
-            featuredHeroProject={featuredHeroProject}
             filter={filter}
             setFilter={setFilter}
             counts={counts}
-            onProjectSelect={onProjectSelect}
         />
     ): (
         // mobile view
