@@ -36,7 +36,7 @@ export default function NotFound() {
                         <div className='relative z-50 pointer-events-auto'>
                             <button
                                 onClick={() => router.push('/')}
-                                className='font-medium text-base 3xl:text-lg text-white
+                                className='font-medium text-base 3xl:text-lg text-white cursor-pointer
                                         flex flex-row gap-2 items-center
                                         w-fit h-fit px-6 py-3.5 rounded-full 2xl:px-8 2xl:py-4 
                                         bg-(--black) hover:bg-(--dark-grey)
