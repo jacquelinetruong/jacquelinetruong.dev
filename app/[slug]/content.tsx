@@ -2,21 +2,19 @@
 
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import Image from 'next/image';
 import GalleryImage from '@/app/components/gallery-image';
 import RenderBlock from '@/app/components/render-block';
 import { Reveal } from '../components/reveal';
 import Grid from '@/app/components/grid';
 import { useTheme } from '@/app/components/theme-context';
-import { useActiveSection } from '../components/active-section';
 import type { Blocks } from '@/lib/blocksTypes';
 import type { Project } from '@/lib/projectTypes';
 
 import { useMediaQuery } from '../components/media-query';
 import Quickbar from '../components/quickbar';
 import Footer from '../components/sections/footer/footer';
-import Coffee from '../components/icons/coffee';
 
 
 type ProjectContentProps = {
@@ -250,13 +248,26 @@ export default function ProjectContent({ project, blocks }: ProjectContentProps)
 					</div>
 				</section>
 
+				{/* sign off */}
 				<div className='flex flex-col gap-2 translate-x-(--cell-width) w-(--three-cell-width) h-fit px-8 py-(--nav-height) 3xl:px-32'>
-					<p className='3xl:place-self-center 3xl:w-5/6 ultrawide:w-4/6 text-base font-semibold'>Have questions? Let's talk!</p>
-					<p className='3xl:place-self-center 3xl:w-5/6 ultrawide:w-4/6 text-base font-[450]'>💌 hello@jacquelinetruong.dev</p>
+					<p className='3xl:place-self-center 3xl:w-5/6 ultrawide:w-4/6 text-base font-semibold'>Have any questions? Let's talk!</p>
+					<a
+						href='mailto:hello@jacquelinetruong.dev'
+						target='_blank' 
+						className='3xl:place-self-center 3xl:w-5/6 ultrawide:w-4/6 text-base font-[450]'
+					>
+						💌 hello@jacquelinetruong.dev
+					</a>
 				</div>
 			
+				{/* footer */}
 				<section id='contact' className='section'>
-					<Footer isDesktop={isDesktop}/>
+					<Grid>
+						<Footer 
+							isDesktop={isDesktop}
+							className='col-span-5 row-start-1' 
+						/>
+					</Grid>
 				</section>
 		</section>
 	) : (

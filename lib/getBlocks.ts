@@ -51,6 +51,12 @@ export async function getBlocks(projectId: string): Promise<Blocks[]> {
                     if (file.type === 'external') return file.external.url;
                     return '';
                 }).filter(Boolean) ?? [],
-
+            alt: 
+                page.properties.altText?.rich_text
+                    .map((t: any) => t.plain_text)
+                    .join('')
+                    .split('\n')
+                    .map((p: string) => p.replace(/^-\s*/, '').trim())
+                    .filter(Boolean) ?? [],
         }));
 }
