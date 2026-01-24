@@ -70,6 +70,8 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 							src={block.images[0]} 
 							alt={block.alt[0]} 
 							fill
+							draggable={false}
+							unoptimized
 							className='object-contain object-center' 
 						/>
 					</div>
@@ -86,6 +88,8 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 							src={block.images[0]} 
 							alt={block.alt[0]} 
 							fill
+							draggable={false}
+							unoptimized
 							className='object-contain object-center' 
 						/>
 					</div>
@@ -112,6 +116,8 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 								src={image} 
 								alt={block.alt[i]} 
 								fill
+								draggable={false}
+								unoptimized
 								className='object-cover object-center' 
 							/>
 						</div>

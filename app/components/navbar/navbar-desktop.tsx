@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useLenis } from 'lenis/react';
 
 import { useTheme } from '@/app/components/theme-context';
@@ -20,8 +21,15 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
         experience: 'light',
     });
 
+    // reroute if needed
+    const pathname = usePathname();
+    const isHome = pathname === '/';
+
     // smooth scroll to section
     const scrollToSection = (id: string) => (e: React.MouseEvent) => {
+        // reroute if on project or 404 page
+        if (!isHome) return;
+
         e.preventDefault();
 
         const el = document.getElementById(id);

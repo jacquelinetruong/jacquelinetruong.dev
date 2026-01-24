@@ -2,7 +2,8 @@
 
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useMemo, useState, Fragment } from 'react';
+import { Label, Listbox, ListboxButton, ListboxOption, ListboxOptions, Transition } from '@headlessui/react'
 import Image from 'next/image';
 import GalleryImage from '@/app/components/gallery-image';
 import RenderBlock from '@/app/components/render-block';
@@ -15,14 +16,16 @@ import type { Project } from '@/lib/projectTypes';
 import { useMediaQuery } from '../components/media-query';
 import Quickbar from '../components/quickbar';
 import Footer from '../components/sections/footer/footer';
+import Link from 'next/link';
 
 
 type ProjectContentProps = {
-	project: Project;
+	currentProject: Project;
 	blocks: Blocks[];
+	projects: Project[];
 };
 
-export default function ProjectContent({ project, blocks }: ProjectContentProps) {
+export default function ProjectContent({ currentProject, blocks, projects }: ProjectContentProps) {
 	// ------ VIEWPORT DISPLAY ------ //
     const isDesktop = useMediaQuery('(min-width: 1024px)');
 	
@@ -31,6 +34,49 @@ export default function ProjectContent({ project, blocks }: ProjectContentProps)
 	useEffect(() => {
 		setTheme('light');
 	}, [setTheme]);
+
+	// ------ FILTERS ------ //
+	const [type, setType] = useState<'all' | 'design' | 'development'>('all');
+	const [caseStudyOnly, setCaseStudyOnly] = useState(false);
+
+	// ------ MENU GROUPING ------
+	const menuGroups = useMemo(() => {
+		let filtered = [...projects];
+
+		// apply type filter first (Design / Development)
+		if (type !== 'all') {
+			filtered = filtered.filter(p => p.type?.includes(type));
+		}
+
+		// apply case study filter
+		if (caseStudyOnly) {
+			filtered = filtered.filter(p => p.casestudy);
+		}
+
+		// determine group name
+		let groupName = 'All Projects';
+		if (caseStudyOnly) groupName = 'Case Studies';
+		else if (type !== 'all') groupName = type.charAt(0).toUpperCase() + type.slice(1);
+
+		return [
+			{
+			name: groupName,
+			projects: filtered,
+			},
+		];
+	}, [projects, type, caseStudyOnly]);
+
+	// for filter reset button
+	const hasFilters = type !== 'all' || caseStudyOnly;
+
+	// active project
+	const [activeProject, setActiveProject] = useState<Project | null>(null);
+
+	// set default active project
+	useEffect(() => {
+		setActiveProject(currentProject);
+	}, [currentProject]);
+
 
 	return isDesktop ? (
 		<section id='top' className='relative pt-(--nav-height) text-(--text-colour)'>
@@ -53,12 +99,12 @@ export default function ProjectContent({ project, blocks }: ProjectContentProps)
 											height={28} 
 											draggable={false}
 										/>
-										<h1 className='font-semibold lg:text-3xl 2xl:text-4xl'>{project.title}</h1>
+										<h1 className='font-semibold lg:text-3xl 2xl:text-4xl'>{currentProject.title}</h1>
 									</div>
 								</Reveal>
 
 								{/* case study label */}
-								{project.casestudy && (
+								{currentProject.casestudy && (
 									<Reveal delay={0}>
 									<span className='w-fit h-fit pointer-events-none px-2.5 py-1 2xl:px-3.5 2xl:py-1.5 3xl:py-2
 														border border-(--text-colour) rounded-full 
@@ -70,14 +116,14 @@ export default function ProjectContent({ project, blocks }: ProjectContentProps)
 							</div>
 
 							{/* tags */}
-							<div className='flex flex-row justify-between w-full h-fit'>
+							<div className='flex flex-row w-full h-fit'>
 								{/* role */}
 								<div className='w-(--cell-width) h-full px-4 pb-4 2xl:px-8 2xl:pb-8 ultrawide:px-20 ultrawide:pb-20'>
 									<Reveal delay={0.5} className='flex flex-col gap-1'>
 									<h4 className='text-[10px] 2xl:text-xs text-(--light-mode-grey) font-medium'>
 										ROLE
 									</h4>
-									<p className='capitalize text-sm 2xl:text-base 3xl:text-lg font-medium w-full'>{[...(project.type ?? [])].join(' & ')}</p>
+									<p className='capitalize text-sm 2xl:text-base 3xl:text-lg font-medium w-full'>{[...(currentProject.type ?? [])].join(' & ')}</p>
 									</Reveal>
 								</div>
 
@@ -87,18 +133,18 @@ export default function ProjectContent({ project, blocks }: ProjectContentProps)
 									<h4 className='text-[10px] 2xl:text-xs text-(--light-mode-grey) font-medium'>
 										TOOLS & FRAMEWORKS
 									</h4>
-									<p className='capitalize text-sm 2xl:text-base 3xl:text-lg font-medium w-full'>{[...(project.programs ?? [])].join(', ')}</p>
+									<p className='capitalize text-sm 2xl:text-base 3xl:text-lg font-medium w-full'>{[...(currentProject.programs ?? [])].join(', ')}</p>
 									</Reveal>
 								</div>
 
 								{/* languages */}
-								{project.languages.length > 0 && (
+								{currentProject.languages.length > 0 && (
 									<div className='w-(--cell-width) h-full px-4 pb-4 2xl:px-8 2xl:pb-8 ultrawide:px-20 ultrawide:pb-20'>
 										<Reveal delay={0.8} className='flex flex-col gap-1'>
 										<h4 className='text-[10px] 2xl:text-xs text-(--light-mode-grey) font-medium'>
 											LANGUAGES
 										</h4>
-										<p className='capitalize text-sm 2xl:text-base 3xl:text-lg font-medium w-full'>{[...(project.languages ?? [])].join(', ')}</p>
+										<p className='capitalize text-sm 2xl:text-base 3xl:text-lg font-medium w-full'>{[...(currentProject.languages ?? [])].join(', ')}</p>
 										</Reveal>
 								</div>
 								)}
@@ -109,8 +155,8 @@ export default function ProjectContent({ project, blocks }: ProjectContentProps)
 						<div className='col-start-2 col-span-3 row-start-2 row-span-3 w-(--three-cell-width) h-(--three-cell-height)'>
 							<Reveal delay={0.25}>
 								<GalleryImage
-									src={project.images[0]}
-									alt={`${project.title} Preview`}
+									src={currentProject.images[0]}
+									alt={`${currentProject.title} Preview`}
 									className='object-cover object-center'
 								/>
 							</Reveal>
@@ -119,10 +165,10 @@ export default function ProjectContent({ project, blocks }: ProjectContentProps)
 						{/* project links */}
 						<div className='col-start-5 col-span-1 row-start-2 row-span-1
 											flex flex-col gap-2 p-4 ultrawide:p-8'>
-							{project?.link && (
+							{currentProject?.link && (
 								<a 
 									target='_blank'
-									href={project?.link}
+									href={currentProject?.link}
 									rel='noopener noreferrer'
 									className='w-fit h-fit'
 								>
@@ -147,10 +193,10 @@ export default function ProjectContent({ project, blocks }: ProjectContentProps)
 									</Reveal>
 								</a>
 							)}
-							{project?.github && (
+							{currentProject?.github && (
 								<a 
 									target='_blank'
-									href={project?.link}
+									href={currentProject?.link}
 									rel='noopener noreferrer'
 									className='w-fit h-fit'
 								>
@@ -175,10 +221,10 @@ export default function ProjectContent({ project, blocks }: ProjectContentProps)
 									</Reveal>
 								</a>
 							)}
-							{project?.dribbble && (
+							{currentProject?.dribbble && (
 								<a 
 									target='_blank'
-									href={project?.link}
+									href={currentProject?.link}
 									rel='noopener noreferrer'
 									className='w-fit h-fit'
 								>
@@ -228,6 +274,142 @@ export default function ProjectContent({ project, blocks }: ProjectContentProps)
 									</span>
 								</Reveal>
 							</a>
+						</div>
+
+						{/* menu */}
+						<div className='col-start-1 col-span-1 row-start-1 row-span-2 p-8 | ultrawide:px-20'>
+							<div className='sm:text-xs 2xl:text-sm 3xl:text-base
+											flex flex-col gap-8 px-6 py-8
+											border border-(--nice-grey) bg-(--white)/60 rounded-xl'>
+								<div className='flex flex-col gap-4'>
+									<div className='flex flex-row justify-between relative'>
+										<p className='w-fit h-fit ml-1 text-[10px] 2xl:text-xs text-(--alt-text-colour) font-medium'>FILTERS</p>
+										{/* clear filters button */}
+										<button
+											type='button'
+											disabled={!hasFilters}
+											onClick={() => {
+												setType('all');
+												setCaseStudyOnly(false);
+											}}
+											className={`absolute right-0 top-0 w-fit h-fit
+														transition-all duration-300
+														text-xs text-nowrap
+														${hasFilters ? 'text-(--text-colour) hover:text-(--dark-grey) font-semibold cursor-pointer' : 'text-(--grey) font-medium'}`}
+											>
+											Clear filters
+										</button>
+									</div>
+									{/* filter controls */}
+									<div className='flex flex-col gap-3 ultrawide:px-20'>
+										<div className='flex flex-row gap-2'>
+											{/* project type filter */}
+											<Listbox value={type} onChange={setType}>
+												<div className='relative w-4/6 h-fit flex flex-col'>
+													<Label className='ml-1 text-xs ultrawide:text-sm text-(--alt-text-colour) font-medium'>Project Type</Label>
+													<ListboxButton className='relative mt-1 py-2 pl-4 pr-10 cursor-pointer 
+																				rounded-2xl border border-(--dark-mode-grey) bg-(--white) hover:bg-(--white)/25
+																				text-xs text-left text-(--text-colour) font-medium
+																				shadow-xs transition-colors duration-300'
+													>
+														<span className='block truncate'>{type.charAt(0).toUpperCase() + type.slice(1)}</span>
+														<span className='absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none'>
+														<Image 
+															src='/caret-down.svg'
+															alt=''
+															width={12}
+															height={12}
+														/>
+														</span>
+													</ListboxButton>
+
+													<ListboxOptions 
+														transition
+														className='absolute top-full mt-2 py-1 w-full h-fit overflow-auto shadow-md z-10
+																	bg-(--white) text-(--text-colour) rounded-xl
+																	ring-1 ring-(--nice-grey) ring-opacity-5 focus:outline-none'>
+														{['all', 'design', 'development'].map((option) => (
+															<ListboxOption
+																key={option}
+																className={({ active }) =>
+																	`relative cursor-pointer select-none py-2 px-4 text-xs ${
+																	active ? 'bg-(--nice-grey)/35 text-(--text-colour)' : ''
+																	} transition-colors duration-300`
+																}
+																value={option as 'all' | 'design' | 'development'}
+																>
+																{({ selected }) => (
+																	<>
+																	<span className={`transition-colors duration-300 block truncate ${selected ? 'font-semibold' : 'font-[450] text-(--dark-mode-grey) hover:text-(--text-colour)'}`}>
+																		{option === 'all' ? 'All Types' : option.charAt(0).toUpperCase() + option.slice(1)}
+																	</span>
+																	</>
+																)}
+															</ListboxOption>
+														))}
+													</ListboxOptions>
+												</div>
+											</Listbox>
+										</div>
+
+										{/* case study filter */}
+										<button
+											type='button'
+											onClick={() => setCaseStudyOnly(prev => !prev)}
+											className={`w-fit h-fit px-2.5 py-1.5 rounded-full cursor-pointer
+														flex flex-row gap-2 items-center
+														text-xs border transition-colors duration-300
+														${caseStudyOnly
+															? 'font-semibold text-(--dark-grey) bg-(--white)/75 border-(--grey)'
+															: 'font-medium text-(--light-mode-grey) hover:text-(--dark-grey) hover:bg-(--white)/50 border-(--grey)'}
+											`}
+										>
+											<Image 
+												src={caseStudyOnly ? 'check.svg' : 'plus.svg'}
+												alt=''
+												width={10}
+												height={10}
+											/>
+											Case Studies
+										</button>	
+									</div>
+								</div>
+
+								{/* filtered projects */}
+								{menuGroups.map((group) => (
+									<div key={group.name} className='flex flex-col gap-1 2xl:gap-1.5'>
+										<h4 className='mb-1 text-xs ultrawide:text-sm text-(--alt-text-colour) font-medium transition-all duration-300'>
+											PROJECTS
+										</h4>
+
+										{group.projects.map((project, i) => (
+											<Reveal key={project.id} delay={i * 0.15}>
+												<Link
+													href={`/${project.slug}`}
+													className={`flex flex-row gap-1 2xl:gap-2 items-start
+																w-fit h-fit text-left
+																transition-all duration-300
+																cursor-pointer
+																${currentProject?.id === project.id
+																? 'font-semibold'
+																: 'text-(--alt-text-colour) hover:font-semibold hover:text-(--dark-mode-grey)'}
+													`}
+												>
+													<Image
+														src={currentProject?.id === project.id ? '/detail-arrow-black.svg' : '/detail-arrow-grey.svg'}
+														alt='arrow'
+														width={16}
+														height={16}
+													/>
+													<span className='flex flex-col'>
+														<span>{project.title}</span>
+													</span>
+												</Link>
+											</Reveal>
+										))}
+									</div>
+								))}
+							</div>
 						</div>
 					</Grid>
 				</section>

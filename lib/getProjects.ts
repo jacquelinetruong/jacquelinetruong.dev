@@ -26,8 +26,8 @@ export async function getProjects(): Promise<Project[]> {
             id: page.id,
 
             casestudy: page.properties.casestudy?.checkbox ?? false,
-            slug: page.properties.title.title[0]?.plain_text
-                .toLowerCase()
+            slug: page.properties.slug.rich_text?.[0]?.text.content
+                ?.toLowerCase()
                 .replace(/\s+/g, '-')
                 .replace(/[^a-z0-9-]/g, '') ?? page.id,
 

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useLenis } from 'lenis/react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 import { Reveal } from '@/app/components/reveal';
 import { useActiveSection } from '@/app/components/active-section';
@@ -42,8 +43,15 @@ export default function NavbarMobile({ isLoading }: { isLoading: boolean }) {
 		};
 	};
 
+	// reroute if needed
+    const pathname = usePathname();
+    const isHome = pathname === '/';
+
 	// smooth scroll to section
 	const scrollToSection = (id: string) => (e?: React.MouseEvent) => {
+		// reroute if on project or 404 page
+        if (!isHome) return;
+		
 		e?.preventDefault();
 
 		const el = document.getElementById(id);
