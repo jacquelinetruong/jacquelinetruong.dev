@@ -2,7 +2,7 @@
 'use client';
 
 import { Project } from '@/lib/projectTypes';
-import { useState, useRef, useEffect, useMemo } from 'react';
+import { useState, useRef, useEffect, useMemo, memo } from 'react';
 import Image from 'next/image';
 
 import { useActiveSection } from './active-section';
@@ -22,7 +22,7 @@ type ProjectCardProps = {
 	action?: React.ReactNode;
 };
 
-export default function ProjectCard({
+function ProjectCard({
 	project,
 	isNext,
 	className = '',
@@ -150,7 +150,8 @@ export default function ProjectCard({
 						   transition-transform duration-500 ease-out
 						   group-hover:scale-115'
 				draggable={false}
-				priority={project.hero}
+				priority={project.hero || featured}
+				loading={project.hero || featured ? 'eager' : 'lazy'}
 				unoptimized
 			/>	
 
@@ -271,7 +272,8 @@ export default function ProjectCard({
 									alt={`${project.title} image ${i + 1}`}
 									className='absolute object-contain object-bottom sm:object-cover sm:object-center'
 									onHoverStart={onMouseEnter}
-                                    onHoverEnd={onMouseLeave}
+									onHoverEnd={onMouseLeave}
+									priority={i === 0}
 								/>
 								{/* gradient for scrollbar visibility */}
 								<div className={`absolute inset-0 mx-2 bg-gradient-to-t from-(--dark-black)/30 from-5% via-(--dark-black)/15 via-16% to-transparent to-40% point-events-auto`}/>
@@ -294,3 +296,5 @@ export default function ProjectCard({
 
 	)
 }
+
+export default memo(ProjectCard);

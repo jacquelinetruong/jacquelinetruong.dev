@@ -98,8 +98,8 @@ export default function PortfolioMobile({
 
                 {/* project cards */}
                 {filteredProjects.map((project, i) => (
-                    <div className='w-full h-full col-start-1 col-span-3 row-span-4'>
-                        <Reveal delay={i * 0.1} key={`${project.id}-${filter}`}>
+                    <div key={`${project.id}-${filter}`} className='w-full h-full col-start-1 col-span-3 row-span-4'>
+                        <Reveal delay={i * 0.1}>
                             {/* preview */}
                             <div className='col-start-1 col-span-3 row-start-1 row-span-2'>
                                 <ProjectCard

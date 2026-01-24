@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import GalleryImage from '@/app/components/gallery-image';
 import Image from 'next/image';
-import { AnimatePresence, useForceUpdate } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 
 import { SectionReveal } from '@/app/components/section-reveal';
 import { Reveal } from '@/app/components/reveal';
@@ -470,6 +470,7 @@ export default function PortfolioDesktop({
                                                         className='object-cover object-center
                                                                     transition-transform duration-500 ease-out
                                                                     group-hover:scale-110'
+                                                        priority={i === 0}
                                                     />
                                                     {/* hover caret */}
                                                     <span className='absolute inset-0 p-2 flex
@@ -516,6 +517,7 @@ export default function PortfolioDesktop({
                                                         className='object-cover object-center
                                                                     transition-transform duration-500 ease-out
                                                                     group-hover:scale-110'
+                                                        priority={isActive}
                                                     />
                                                     {/* hover caret */}
                                                     <span className='absolute inset-0 p-2 flex
