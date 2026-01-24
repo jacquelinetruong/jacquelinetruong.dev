@@ -1,5 +1,7 @@
 // types according to notion experience db
 
+import type { RichTextItem } from './richText';
+
 export type Experience = {
     id: string;
     order: number;
@@ -9,5 +11,5 @@ export type Experience = {
     startDate: string | null;
     endDate: string | null;
     current: boolean; 
-    points: string[];
+    points: RichTextItem[][]; // Array of rich text items per point
 }

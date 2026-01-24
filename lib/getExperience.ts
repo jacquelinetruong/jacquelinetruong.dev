@@ -31,12 +31,55 @@ export async function getExperience(): Promise<Experience[]> {
             startDate: page.properties.startDate.date?.start ?? null,
             endDate: page.properties.endDate.date?.start ?? null,
             current: page.properties.current.checkbox ?? false,
-            points: 
-                page.properties.points.rich_text
-                    .map((t: any) => t.plain_text)
-                    .join('')
-                    .split('\n')
-                    .map((p: string) => p.replace(/^-\s*/, '').trim())
-                    .filter(Boolean) ?? [],
+            points: (() => {
+                const richText = page.properties.points.rich_text ?? [];
+                if (richText.length === 0) return [];
+                
+                // split text by newlines, group items by paragraph
+                const paragraphs: any[][] = [];
+                let currentParagraph: any[] = [];
+                let isFirstParagraph = true;
+                const stripLeadingDash = (text: string) =>text.replace(/^-\s*/, '');
+                
+                
+                for (const item of richText) {
+                    const text = item.plain_text;
+                    const lines = text.split('\n');
+                    
+                    // current paragraph
+                    if (lines[0]) {
+                        let firstLine = lines[0];
+                        // clean extra leading or trailing characters
+                        if (isFirstParagraph) {
+                            firstLine = stripLeadingDash(firstLine);
+                        }
+                        if (firstLine) {
+                            currentParagraph.push({ ...item, plain_text: firstLine });
+                        }
+                    }
+                    
+                    // new paragraph
+                    for (let i = 1; i < lines.length; i++) {
+                        if (currentParagraph.length > 0) {
+                            paragraphs.push(currentParagraph);
+                            currentParagraph = [];
+                        }
+                        if (lines[i]) {
+                            // clean extra leading or trailing characters
+                            const cleaned = stripLeadingDash(lines[i]);
+                            if (cleaned) {
+                                currentParagraph.push({ ...item, plain_text: cleaned });
+                            }
+                        }
+                    }
+                }
+                
+                // last paragraph
+                if (currentParagraph.length > 0) {
+                    paragraphs.push(currentParagraph);
+                }
+                
+                return paragraphs.filter(p => p.length > 0);
+            })() ?? [],
         }));
 }

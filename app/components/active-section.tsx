@@ -38,12 +38,17 @@ export function useActiveSection(
 
 			setActiveSection(prev => {
 				if (prev !== current) {
-					const nextTheme = sectionThemes?.[current];
-					if (setTheme && nextTheme) {setTheme(nextTheme)};
-					return current;
+				  const nextTheme = sectionThemes?.[current];
+				  if (setTheme && nextTheme) {
+					
+					// defer theme updates until after render
+					setTimeout(() => setTheme(nextTheme), 0);
+				  }
+				  return current;
 				}
 				return prev;
-			});
+			  });
+			  
 		};
 
 		// if using lenis scroll (desktop)

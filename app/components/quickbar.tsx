@@ -120,7 +120,8 @@ function useGetNotTop(threshold = 120) {
 
   useEffect(() => {
     const onScroll = () => {
-      const topSection = document.getElementById('project-hero');
+      // check if on home or project page
+      const topSection = document.getElementById('project-hero') || document.getElementById('home');
       if (!topSection) return;
 
       // scroll position relative to top of hero section

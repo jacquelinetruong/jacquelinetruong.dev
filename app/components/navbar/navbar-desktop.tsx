@@ -91,7 +91,7 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
                         <Link
                         key={id}
                         href={`/#${id}`}
-                        onClick={scrollToSection(id)}
+                        onClick={isHome ? scrollToSection(id) : undefined}
                         className={`transition-colors duration-300 ${
                             activeSection === id
                             ? 'text-(--text-colour)'

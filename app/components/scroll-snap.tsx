@@ -3,75 +3,84 @@
 import { usePathname } from 'next/navigation'
 import { useLenis } from 'lenis/react'
 import { useEffect, useRef } from 'react'
-import { useMediaQuery } from './media-query';
+import { useMediaQuery } from './media-query'
 
-
-// makes lenis smooth scroll also snap to sections on desktop
+// makes lenis smooth scroll and snap to sections on desktop
 export function LenisSnap() {
-	// define pages/sections that lenis should snap to
 	const pathname = usePathname()
 	const SNAP_ROUTES = ['/', '/about', '/portfolio', '/experience', '/contact']
 	const shouldSnap = SNAP_ROUTES.includes(pathname)
 
-	// ------ VIEWPORT DISPLAY ------ //
-	const isDesktop = useMediaQuery('(min-width: 1024px)');
-				
-	const lenis = useLenis();
-	const timeoutId = useRef<number | null>(null);
+	const isDesktop = useMediaQuery('(min-width: 1024px)')
+	const lenis = useLenis()
+
+	const timeoutId = useRef<number | null>(null)
+	const didHandleHash = useRef(false)
 
 	// get nav height for offset
 	const getNavHeight = () =>
 		parseFloat(
-				getComputedStyle(document.documentElement).getPropertyValue('--nav-height')
-		) || 0;
+			getComputedStyle(document.documentElement)
+				.getPropertyValue('--nav-height')
+		) || 0
 
-	// allow scroll, but snap when close to section
+	// snap logic
 	useEffect(() => {
-		if (!lenis || !isDesktop) return;
-
-		// don't use lenis snap if on a project page
-		if (!shouldSnap) return;
+		if (!lenis || !isDesktop || !shouldSnap) return
 
 		const getSnapPoints = () => {
-			const navHeight = getNavHeight();
+			const navHeight = getNavHeight()
 
-			return Array.from(document.querySelectorAll<HTMLElement>('.section'))
-					.map(section =>
-							section.getBoundingClientRect().top + lenis.scroll - navHeight
-			);
-		};
+			return Array.from(
+				document.querySelectorAll<HTMLElement>('.section')
+			).map(
+				section =>
+					section.getBoundingClientRect().top +
+					lenis.scroll -
+					navHeight
+			)
+		}
 
-		let snapPoints = getSnapPoints();
+		let snapPoints = getSnapPoints()
 
 		const onScroll = () => {
 			if (timeoutId.current) window.clearTimeout(timeoutId.current)
 
 			timeoutId.current = window.setTimeout(() => {
-				snapPoints = getSnapPoints();
+				// don’t snap while lenis is still scrolling (prevents nav hijack)
+				if (lenis.velocity !== 0) return
 
-				const current = lenis.scroll;
+				snapPoints = getSnapPoints()
+
+				const current = lenis.scroll
 				const nearest = snapPoints.reduce((prev, curr) =>
-					Math.abs(curr - current) < Math.abs(prev - current) ? curr : prev
-				);
+					Math.abs(curr - current) < Math.abs(prev - current)
+						? curr
+						: prev
+				)
 
-				// Prevent micro-snapping
-				if (Math.abs(nearest - current) < 20) return
+				const distance = Math.abs(nearest - current)
 
-				lenis.scrollTo(nearest, {
-					duration: 0.6,
-					easing: t => 1 - Math.pow(1 - t, 3),
-				});
-			}, 120);
-		};
+				// snap only when in range
+				if (distance > 3 && distance < 150) {
+					lenis.scrollTo(nearest, {
+						duration: 0.6,
+						easing: t => 1 - Math.pow(1 - t, 3),
+					})
+				}
+			}, 100)
+		}
 
-		lenis.on('scroll', onScroll);
-		window.addEventListener('resize', () => (snapPoints = getSnapPoints()));
+		lenis.on('scroll', onScroll)
+		window.addEventListener('resize', () => {
+			snapPoints = getSnapPoints()
+		})
 
 		return () => {
-			lenis.off('scroll', onScroll);
-			if (timeoutId.current) window.clearTimeout(timeoutId.current);
+			lenis.off('scroll', onScroll)
+			if (timeoutId.current) window.clearTimeout(timeoutId.current)
 		}
-	}, [lenis, isDesktop, shouldSnap]);
+	}, [lenis, isDesktop, shouldSnap])
 
-	return null;
+	return null
 }

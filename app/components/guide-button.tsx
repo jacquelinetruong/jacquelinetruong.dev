@@ -21,8 +21,8 @@ export default function GuideButton({
                             p-8 size-fit
                             animate-jump group'			  
             >
-                <p className='text-sm 2xl:text-base group-hover:text-(--light-mode-grey) transform-colors duration-300'>{text}</p>
-                <GuideArrow className='size-[24px] text-(--text-colour) group-hover:text-(--light-mode-grey) transition-colors duration-300'/>
+                <p className='text-sm ultrawide:text-base group-hover:text-(--light-mode-grey) transform-colors duration-300'>{text}</p>
+                <GuideArrow className='size-[20px] text-(--text-colour) group-hover:text-(--light-mode-grey) transition-colors duration-300'/>
             </button>
         </Reveal>
     );
