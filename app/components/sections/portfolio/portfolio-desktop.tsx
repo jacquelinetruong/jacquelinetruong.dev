@@ -3,19 +3,20 @@
 import { useState, useEffect, useRef, useMemo } from 'react';
 import GalleryImage from '@/app/components/gallery-image';
 import Image from 'next/image';
-import { AnimatePresence } from 'framer-motion';
 
 import { SectionReveal } from '@/app/components/section-reveal';
 import { Reveal } from '@/app/components/reveal';
-import ProjectOverlay from '@/app/components/projectoverlay';
 import { useActiveSection } from '@/app/components/active-section';
 import Grid from '@/app/components/grid';
 
 import ProjectCard from '@/app/components/projectcard';
 import { Project } from '@/lib/projectTypes';
+import { notionImage } from '@/lib/notionImage';
 
 import GuideButton from '@/app/components/guide-button';
 import LinkArrow from '@/app/components/icons/link-arrow';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 
 type PortfolioDesktopProps = {
@@ -91,6 +92,9 @@ export default function PortfolioDesktop({
         };
     
     // ------ FEATURED PROJECT PHOTO GALLERY ------ //
+        // open project page onClick
+        const router = useRouter();
+
         // update featured project image gallery
         const [featuredImageIndex, setFeaturedImageIndex] = useState(0);
         useEffect(() => {
@@ -134,71 +138,73 @@ export default function PortfolioDesktop({
         // featured project photos rotation condition
         const shouldRotate = !!featuredProject && featuredProject.images.length >= 6;
     
-    // ------ FEATURED PROJECT EXPANDED DETAILS ------ //
-        const [isDetailsOpen, setIsDetailsOpen] = useState(false);
-        const openDetails = () => setIsDetailsOpen(true);
-        const closeDetails = () => setIsDetailsOpen(false);
+    // ARCHIVED
+    // // ------ FEATURED PROJECT EXPANDED DETAILS ------ //
+    //     const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+    //     const openDetails = () => setIsDetailsOpen(true);
+    //     const closeDetails = () => setIsDetailsOpen(false);
 
-        const imagesRef = useRef<HTMLDivElement | null>(null);
-        const buttonsRef = useRef<HTMLDivElement | null>(null);
+    //     const imagesRef = useRef<HTMLDivElement | null>(null);
+    //     const buttonsRef = useRef<HTMLDivElement | null>(null);
 
-        const activeSection = useActiveSection();
+            const activeSection = useActiveSection();
 
-        // lock scrolling when modal is open
-        useEffect(() => {
-            const html = document.documentElement;
-            const body = document.body;
+    //     // lock scrolling when modal is open
+    //     useEffect(() => {
+    //         const html = document.documentElement;
+    //         const body = document.body;
 
-            if (isDetailsOpen) {
-                html.style.overflow = 'hidden';
-                body.style.overflow = 'hidden';
-            } else {
-                html.style.overflow = '';
-                body.style.overflow = '';
-            }
+    //         if (isDetailsOpen) {
+    //             html.style.overflow = 'hidden';
+    //             body.style.overflow = 'hidden';
+    //         } else {
+    //             html.style.overflow = '';
+    //             body.style.overflow = '';
+    //         }
         
-            return () => {
-                body.style.overflow = '';
-                html.style.overflow = '';
-            };
-        }, [isDetailsOpen]);
+    //         return () => {
+    //             body.style.overflow = '';
+    //             html.style.overflow = '';
+    //         };
+    //     }, [isDetailsOpen]);
 
-        const nextProject = carouselProjects.length > 1
-            ? carouselProjects[1]
-            : null;
+    //     const nextProject = carouselProjects.length > 1
+    //         ? carouselProjects[1]
+    //         : null;
 
-        const getNextProject = () => {
-            setCarouselProjects(prev => {
-                const [first, ...rest] = prev;
-                return [...rest, first];
-            });
-        };
+    //     const getNextProject = () => {
+    //         setCarouselProjects(prev => {
+    //             const [first, ...rest] = prev;
+    //             return [...rest, first];
+    //         });
+    //     };
 
-        // prev project in modal
-        const prevProject = carouselProjects.length > 1 
-            ? carouselProjects[carouselProjects.length - 1] 
-            : null;
+    //     // prev project in modal
+    //     const prevProject = carouselProjects.length > 1 
+    //         ? carouselProjects[carouselProjects.length - 1] 
+    //         : null;
 
-        const getPrevProject = () => {
-            setCarouselProjects(prev => {
-                const last = prev[prev.length - 1];
-                return [last, ...prev.slice(0, -1)];
-            });
-        };
+    //     const getPrevProject = () => {
+    //         setCarouselProjects(prev => {
+    //             const last = prev[prev.length - 1];
+    //             return [last, ...prev.slice(0, -1)];
+    //         });
+    //     };
     
-        // close overlay if user scrolls away (even though scrolling is supposed to lock......... ^^)
-        useEffect(() => {
-            if (activeSection !== 'portfolio') setIsDetailsOpen(false);
-        }, [activeSection]);
+    //     // close overlay if user scrolls away (even though scrolling is supposed to lock......... ^^)
+    //     useEffect(() => {
+    //         if (activeSection !== 'portfolio') setIsDetailsOpen(false);
+    //     }, [activeSection]);
 
     // ------ TIMER ROTATION ------
         const DURATION = 10000;
         const TRANSITION_DELAY = 8000;
-        const paused = isDetailsOpen;
+        // const paused = isDetailsOpen;
         const [progress, setProgress] = useState(0);
         const [delay, setDelay] = useState(true);
         const [isHovering, setIsHovering] = useState(false);
-        const isBlocked = paused || delay || isHovering || activeSection !== 'portfolio';
+        // const isBlocked = paused || delay || isHovering || activeSection !== 'portfolio';
+        const isBlocked = delay || isHovering || activeSection !== 'portfolio';
 
         const startTimeRef = useRef<number | null>(null);
         const elapsedRef = useRef(0); 
@@ -237,7 +243,8 @@ export default function PortfolioDesktop({
 
         // rotate carousel when timer completes
         useEffect(() => {
-            if (paused || delay) return;
+            // if (paused || delay) return;
+            if (delay) return;
             if (progress < 1) return;
             if (rotateRef.current) return;
 
@@ -251,7 +258,8 @@ export default function PortfolioDesktop({
 
             setProgress(0);
             rotateRef.current = false;
-        }, [progress, paused, delay]);
+        // }, [progress, paused, delay]);
+        }, [progress, delay]);
 
         // reset rotation flag whenever featured project changes
         useEffect(() => {
@@ -281,16 +289,20 @@ export default function PortfolioDesktop({
         // handle pausing & unpausing
         const pausedRef = useRef(false);
         useEffect(() => {
-            if (paused || isHovering) pausedRef.current = true;
-        }, [paused, isHovering]);
+            // if (paused || isHovering) pausedRef.current = true;
+            if (isHovering) pausedRef.current = true;
+        // }, [paused, isHovering]);
+        }, [isHovering]);
 
         const UNPAUSE_DELAY = 4000;
         useEffect(() => {
-            if (!paused && !isHovering && pausedRef.current) {
+            // if (!paused && !isHovering && pausedRef.current) {
+            if (!isHovering && pausedRef.current) {
                 startDelay(UNPAUSE_DELAY);
                 pausedRef.current = false;
             }
-        }, [paused, isHovering]);
+        // }, [paused, isHovering]);
+        }, [isHovering]);
 
         // pause timer if user not at portfolio section
         useEffect(() => {
@@ -309,6 +321,41 @@ export default function PortfolioDesktop({
             }
         }, [activeSection]);
 
+    // ------ PRELOAD NEXT CAROUSEL PROJECTS ------ //
+        // preload gallery images for next 2-3 carousel projects
+        useEffect(() => {
+            if (carouselProjects.length <= 1) return;
+
+            // get next 2-3 projects (excluding current featured)
+            const nextProjects = carouselProjects.slice(1, 4);
+            const preloadLinks: HTMLLinkElement[] = [];
+
+            nextProjects.forEach((project) => {
+                if (project.images && project.images.length > 0) {
+                    // preload all gallery images for each project
+                    project.images.forEach((imageUrl) => {
+                        const preloadUrl = notionImage(imageUrl);
+                        const link = document.createElement('link');
+                        link.rel = 'preload';
+                        link.as = 'image';
+                        link.href = preloadUrl;
+                        link.crossOrigin = 'anonymous';
+                        document.head.appendChild(link);
+                        preloadLinks.push(link);
+                    });
+                }
+            });
+
+            // cleanup: remove preload links
+            return () => {
+                preloadLinks.forEach(link => {
+                    if (link.parentNode) {
+                        link.parentNode.removeChild(link);
+                    }
+                });
+            };
+        }, [carouselProjects]);
+
     return (
         <>
             <SectionReveal
@@ -320,29 +367,32 @@ export default function PortfolioDesktop({
                     <Grid>
                         {/* featured project */}
                             {/* preview */}
-                            <div
-                                ref={imagesRef} 
+                            <Link
+                                // ref={imagesRef} 
+                                href={`/${featuredProject?.slug}`}
                                 className='col-start-1 col-span-2 row-start-1 row-span-2 z-100'>
                                 <Reveal delay={0.25}>
                                     {featuredProject && (
                                         <ProjectCard
-                                            key={featuredProject.id}
+                                            key={featuredProject?.id}
                                             project={derivedFeaturedProject}
                                             featured
                                             onMouseEnter={() => setIsHovering(true)}
                                             onMouseLeave={() => setIsHovering(false)}
-                                            onClick={openDetails}
+                                            // onClick={openDetails}
+                                            onClick={() => {
+                                                router.push(`/${featuredProject?.slug}`);
+                                            }}
                                             action={
                                                 <button
                                                     onClick={(e) => {
-                                                        e.stopPropagation(); 
-                                                        openDetails();
+                                                        e.stopPropagation();
+                                                        // openDetails();
                                                     }}
                                                     className={`font-medium text-sm group 
                                                                 flex flex-col items-end gap-2 
                                                                 transition-opacity duration-300 cursor-pointer
-                                                                opacity-0 group-hover:opacity-100
-                                                                ${isDetailsOpen && 'hidden'}`}
+                                                                opacity-0 group-hover:opacity-100`} // ${isDetailsOpen && 'hidden'}
                                                 >
                                                     Expand details
                                                     <LinkArrow className='size-[40px] text-(--white) group-transition-colors group:duration-300'/>
@@ -362,7 +412,7 @@ export default function PortfolioDesktop({
                                         </div>
                                     )}
                                 </Reveal>
-                            </div>
+                            </Link>
                         
                             {/* content */}
                             <div className='col-start-1 col-span-2 row-start-3 row-span-1
@@ -373,17 +423,17 @@ export default function PortfolioDesktop({
                                 {/* text details */}
 
                                 <div className={`flex flex-col gap-2 h-full
-                                                transition-opacity duration-300
-                                                ${isDetailsOpen ? 'opacity-0' : 'opacity-100'}`}>
+                                                transition-opacity duration-300`} // ${isDetailsOpen ? 'opacity-0' : 'opacity-100'}
+                                > 
                                     <h2 className='font-semibold text-wrap text-(--text-colour) sm:text-lg md:text-xl'>{featuredProject?.title}</h2>
-                                    <p className='h-full text-wrap truncate text-(--text-colour) sm:text-sm 2xl:text-base'>
+                                    <p className='h-full text-wrap truncate text-(--text-colour) sm:text-sm ultrawide:text-base'>
                                         {featuredProject?.description}
                                     </p>
                                 </div>
 
                                 {/* external link buttons */}
                                 <div 
-                                    ref={buttonsRef}
+                                    // ref={buttonsRef}
                                     className='font-medium text-xs 2xl:text-sm
                                                 flex flex-row gap-2'>
                                     {featuredProject?.link && (
@@ -443,7 +493,7 @@ export default function PortfolioDesktop({
                             
                         {/* featured photo gallery */}
                         <div
-                            ref={imagesRef} 
+                            // ref={imagesRef} 
                             className='w-1/2 h-full col-start-3 col-span-1 row-start-1 row-span-2 pl-2 z-100'>
                             {!!featuredProject && featuredProject?.images.length > 1 && (
                                 <div className='flex flex-col gap-2 w-full h-full'>
@@ -540,8 +590,8 @@ export default function PortfolioDesktop({
                         </div>
 
                         {/* non-featured projects */}
-                        {!isDetailsOpen &&
-                            (carouselProjects.slice(1).map((project, i) => {
+                        {/* {!isDetailsOpen && */}
+                            {carouselProjects.slice(1).map((project, i) => {
                                 // slot into grid layout
                                 const positions: { colStart: number; colSpan: number; rowStart: number; rowSpan: number }[] = [
                                     { colStart: 1, colSpan: 2, rowStart: 1, rowSpan: 2 },
@@ -566,10 +616,10 @@ export default function PortfolioDesktop({
                                         </Reveal>
                                     </div>
                                 );
-                        }))}
+                        })}
 
                         {/* filters, title */}
-                        {!isDetailsOpen && (
+                        {/* {!isDetailsOpen && */}
                             <div className='text-nowrap text-sm
                                             col-start-4 col-span-2 row-start-1 row-span-1 w-(--two-cell-width) h-(--cell-height)
                                             flex flex-col items-end justify-between relative'>
@@ -632,7 +682,8 @@ export default function PortfolioDesktop({
                                         fill
                                         className={`pr-8 | ultrawide:pr-20
                                                     object-contain object-right transition-all 
-                                                    ${filter === 'design' ? 'opacity-100 duration-800 ' : 'opacity-0 translate-x-100 duration-300'}`}                                        draggable={false}
+                                                    ${filter === 'design' ? 'opacity-100 duration-800 ' : 'opacity-0 translate-x-100 duration-300'}`} 
+                                        draggable={false}
                                     />
                                     <Image 
                                         src='/projects.svg'
@@ -640,13 +691,14 @@ export default function PortfolioDesktop({
                                         fill
                                         className={`pr-8 | ultrawide:pr-20
                                                     object-contain object-right transition-all 
-                                                    ${filter === 'development' ? 'opacity-100 duration-800 ' : 'opacity-0 translate-x-100 duration-300'}`}                                        draggable={false}
+                                                    ${filter === 'development' ? 'opacity-100 duration-800 ' : 'opacity-0 translate-x-100 duration-300'}`}
+                                        draggable={false}
                                     />
                                 </div>
                             </div>
-                        )}
+                        {/* )} */}
 
-                        {!isDetailsOpen && (
+                        {/* {!isDetailsOpen && */}
                             <>
                                 {/* handwritten note */}
                                 <div className='col-start-4 col-span-1 row-start-2 row-span-1 w-full h-full relative'>
@@ -661,18 +713,18 @@ export default function PortfolioDesktop({
                         
                                 {/* jump to experience button */}
                                 <div className={`col-start-3 col-span-1 row-start-3 row-span-1
-                                                transition-opacity duration-300
-                                                ${isDetailsOpen ? 'opacity-0' : 'opacity-100'}`}>
+                                                transition-opacity duration-300`} // ${isDetailsOpen ? 'opacity-0' : 'opacity-100'}
+                                >
                                     <GuideButton id='experience' text='My Experience'/>
                                 </div>
                             </>
-                        )}
+                        {/* )} */}
                     </Grid>
                 </section>
             </SectionReveal>
 
-            {/* featured project expand details modal */}
-            <AnimatePresence>
+            {/* ARCHIVED: featured project expand details modal */}
+            {/* <AnimatePresence>
                 {isDetailsOpen && featuredProject && (
                     <ProjectOverlay 
                         key={featuredProject.id}
@@ -686,7 +738,7 @@ export default function PortfolioDesktop({
                         buttonsRef={buttonsRef}
                     />
                 )}
-            </AnimatePresence>
+            </AnimatePresence> */}
         </>
     )
 }

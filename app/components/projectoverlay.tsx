@@ -1,3 +1,5 @@
+// ARCHIVED: reformatted portfolio section, removed this component
+
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';

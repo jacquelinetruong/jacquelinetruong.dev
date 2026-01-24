@@ -39,8 +39,8 @@ function ProjectCard({
 	// ------ DESKTOP ------ //
 		// tags for each project
 		const allTags = useMemo(() => {
-			return [...(project.category ?? []), ...(project.programs ?? []), ...(project.languages ?? [])];
-		}, [project.category, project.programs, project.languages]);
+			return [...(project.category ?? []), ...(project.programs ?? [])];
+		}, [project.category, project.programs]);
 
 		// for tag collapsing
 		const containerRef = useRef<HTMLDivElement>(null);
@@ -230,8 +230,9 @@ function ProjectCard({
 				</div>
 			)}
 
-			{/* show IFF next project card in overlay */}
-			{isNext && (
+
+			{/* ARCHIVED: show IFF next project card in overlay */}
+			{/* {isNext && (
 				<span className='font-medium text-white
 									absolute inset-0 p-6
 									opacity-100
@@ -240,7 +241,7 @@ function ProjectCard({
 									bg-gradient-to-t from-transparent via-black/20 via-70%  to-black/60 to-90% point-events-none'>					
 					<p className='text-xs xl:text-sm'>Next Project</p>
 				</span>
-			)}
+			)} */}
 
 			{/* render any actions if I want */}
 			{featured && action && (
