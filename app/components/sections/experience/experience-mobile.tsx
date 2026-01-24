@@ -8,6 +8,7 @@ import type { Experience } from '@/lib/experienceTypes';
 
 import { Reveal } from '@/app/components/reveal';
 import Grid from '@/app/components/grid';
+import { renderRichText } from '@/lib/richText';
 
 
 export default function ExperienceMobile({
@@ -163,10 +164,10 @@ export default function ExperienceMobile({
                         key={activeExperience?.id} 
                         className={`bottom-0 flex flex-col w-full sm:w-5/6
                                     ${filter === 'proficiencies' ? 'gap-2' : 'gap-4'}`}>
-                        {activeExperience?.points.map((point, i) => (
-                            <Reveal delay={i * 0.2} key={point}>
+                        {activeExperience?.points?.map((point, i) => (
+                            <Reveal delay={i * 0.2} key={i}>
                                 <li className='ml-4 text-sm xs:text-base text-(--black)'>
-                                    {point}
+                                    {point ? renderRichText(point) : null}
                                 </li>
                             </Reveal>
                         ))}

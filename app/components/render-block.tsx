@@ -2,6 +2,7 @@
 // auto-generates project pages based on notion blocks.
 
 import { Blocks } from '@/lib/blocksTypes';
+import { renderRichText } from '@/lib/richText';
 import Image from 'next/image';
 
 
@@ -16,12 +17,12 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 			return (
 				<section className='w-full h-fit flex flex-col gap-6 pt-12 2xl:pt-16'>
 					<div className='flex flex-col gap-1'>
-						{block.label && <h4 className='text-sm text-(--light-mode-grey) font-medium'>{block.label}</h4>}
-						{block.heading && <h2 className='font-semibold text-xl 2xl:text-2xl'>{block.heading}</h2>}
+						{block.label && block.label.length > 0 && <h4 className='text-sm text-(--light-mode-grey) font-medium'>{renderRichText(block.label)}</h4>}
+						{block.heading && block.heading.length > 0 && <h2 className='font-semibold text-xl 2xl:text-2xl'>{renderRichText(block.heading)}</h2>}
 					</div>
 
 					{block?.text.map((text, i) => (
-						<p key={i} className='text-base'>{text}</p>
+						<p key={i} className='text-base'>{renderRichText(text)}</p>
 					))} 
 				</section>
 			);
@@ -31,10 +32,10 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 		case 'text':
 			return (
 				<section className='w-full h-fit flex flex-col gap-2 pt-4 2xl:pb-2'>
-					{block.heading && <h3 className='font-semibold text-md 2xl:text-lg'>{block.heading}</h3>}
+					{block.heading && block.heading.length > 0 && <h3 className='font-semibold text-md 2xl:text-lg'>{renderRichText(block.heading)}</h3>}
 
 					{block?.text.map((text, i) => (
-						<p key={i} className='text-base'>{text}</p>
+						<p key={i} className='text-base'>{renderRichText(text)}</p>
 					))} 
 				</section>
 			);
@@ -44,11 +45,11 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 		case 'list':
 			return (
 				<section className='w-full h-fit flex flex-col gap-2 pt-4 2xl:pb-2'>
-					{block.heading && <h3 className='font-semibold text-md 2xl:text-lg'>{block.heading}</h3>}
+					{block.heading && block.heading.length > 0 && <h3 className='font-semibold text-md 2xl:text-lg'>{renderRichText(block.heading)}</h3>}
 
 					<div className='ml-6'>
 						{block?.text.map((item, i) => (
-							<li key={i} className='text-base'>{item}</li>
+							<li key={i} className='text-base'>{renderRichText(item)}</li>
 						))} 
 					</div>
 				</section>
@@ -60,9 +61,9 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 			return (
 				<section className='w-full h-fit flex flex-row justify-between pt-8 2xl:pt-12 2xl:pb-2'>
 					<div className='w-1/2 h-fit flex flex-col gap-2'>
-						{block.heading && <h3 className='font-semibold text-md 2xl:text-lg mr-8'>{block.heading}</h3>}
+						{block.heading && block.heading.length > 0 && <h3 className='font-semibold text-md 2xl:text-lg mr-8'>{renderRichText(block.heading)}</h3>}
 						{block.text.map((p, i) => (
-							<p key={i} className='text-base mr-8'>{p}</p>
+							<p key={i} className='text-base mr-8'>{renderRichText(p)}</p>
 						))}
 					</div>
 					<div className='w-1/2 aspect-4/3 relative'>
@@ -94,9 +95,9 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 						/>
 					</div>
 					<div className='w-1/2 h-fit flex flex-col gap-2'>
-						{block.heading && <h3 className='font-semibold text-md 2xl:text-lg ml-8'>{block.heading}</h3>}
+						{block.heading && block.heading.length > 0 && <h3 className='font-semibold text-md 2xl:text-lg ml-8'>{renderRichText(block.heading)}</h3>}
 						{block.text.map((p, i) => (
-							<p key={i} className='text-base ml-8'>{p}</p>
+							<p key={i} className='text-base ml-8'>{renderRichText(p)}</p>
 						))}
 					</div>
 				</section>

@@ -6,10 +6,10 @@ import { formatDateRange } from './experience';
 
 import { Project } from '@/lib/projectTypes';
 import { Experience } from '@/lib/experienceTypes';
+import { renderRichText } from '@/lib/richText';
 
 import { SectionReveal } from '@/app/components/section-reveal';
 import { Reveal } from '@/app/components/reveal';
-import ProjectCard from '@/app/components/projectcard';
 import Grid from '@/app/components/grid';
 
 import Cat from '@/app/components/icons/cat-icon';
@@ -143,10 +143,10 @@ export default function ExperienceDesktop({
                             <div
                                 key={activeExperience?.id} 
                                 className='flex flex-col gap-4'>
-                                {activeExperience?.points.map((point, i) => (
+                                {activeExperience?.points?.map((point, i) => (
                                     <Reveal key={`${activeExperience.id}-point-${i}`} delay={0.2 + i * 0.2}>
                                         <li className='ml-6 sm:text-[10px] md:text-sm 2xl:text-base 3xl:text-lg 3xl:w-4/5'>
-                                            {point}
+                                            {point ? renderRichText(point) : null}
                                         </li>
                                     </Reveal>
                                 ))} 
@@ -168,10 +168,10 @@ export default function ExperienceDesktop({
                             <div 
                                 key={activeExperience?.id} 
                                 className='flex flex-col gap-2'>
-                                {activeExperience?.points.map((point, i) => (
+                                {activeExperience?.points?.map((point, i) => (
                                     <Reveal key={`${activeExperience.id}-point-${i}`} delay={i * 0.1} >
                                         <li className='ml-6 sm:text-[10px] md:text-sm 2xl:text-base'>
-                                            {point}
+                                            {point ? renderRichText(point) : null}
                                         </li>
                                     </Reveal>
                                 ))} 
