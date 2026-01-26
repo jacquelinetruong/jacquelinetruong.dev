@@ -82,13 +82,10 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 						{block.images.length > 0 && (
 							<>
 								<div className='aspect-4/3 relative'>
-									<Image 
+									<GalleryImage 
 										src={block.images[0]} 
 										alt={block.alt[0]} 
-										fill
-										draggable={false}
-										unoptimized
-										className='object-cover object-center' 
+										className='object-contain object-top' 
 									/>
 								</div>
 								<p className='text-base text-(--text-colour) w-full h-full'>{block.caption[0]}</p>
@@ -107,13 +104,10 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 						{block.images.length > 0 && (
 							<>
 								<div className='aspect-4/3 relative'>
-									<Image 
+									<GalleryImage 
 										src={block.images[0]} 
 										alt={block.alt[0]} 
-										fill
-										draggable={false}
-										unoptimized
-										className='object-cover object-center' 
+										className='object-contain object-top' 
 									/>
 								</div>
 								<p className='text-base text-(--text-colour) w-full h-full'>{block.caption[0]}</p>
@@ -139,13 +133,10 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 						<>
 							<div className='w-full aspect-4/3 relative mx-2'>
 								{block.images.length > 0 && (
-									<Image 
+									<GalleryImage 
 										key={i}
 										src={image} 
 										alt={block.alt[i]} 
-										fill
-										draggable={false}
-										unoptimized
 										className='object-cover object-center' 
 									/>
 								)}
