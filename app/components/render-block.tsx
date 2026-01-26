@@ -78,46 +78,19 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 							<p key={i} className='text-base mr-8'>{renderRichText(p)}</p>
 						))}
 					</div>
-					<div className='w-1/2 h-full flex flex-col'>
+					<div className='w-1/2 h-full relative'>
 						{block.images.length > 0 && (
 							<>
-								<div className='aspect-4/3 relative'>
+								<div className='aspect-4/3 relative bg-(--nice-grey)/40'>
 									<GalleryImage 
 										src={block.images[0]} 
 										alt={block.alt[0]} 
-										className='object-contain object-top' 
+										className='object-contain object-center' 
 									/>
 								</div>
-								<p className='text-base text-(--text-colour) w-full h-full'>{block.caption[0]}</p>
+								<p className='p-1 text-wrap italic text-base text-(--text-colour) w-full h-full'>{block.caption[0]}</p>
 							</>
 						)}
-					</div>
-				</section>
-			);
-		
-
-		// ------ (RIGHT) TEXT + IMAGE BLOCK ------ //
-		case 'right-text-image':
-			return (
-				<section className='w-full h-fit flex flex-row justify-between pt-8 2xl:pt-12 2xl:pb-2'>
-					<div className='w-1/2 h-full flex flex-col'>
-						{block.images.length > 0 && (
-							<>
-								<div className='aspect-4/3 relative'>
-									<GalleryImage 
-										src={block.images[0]} 
-										alt={block.alt[0]} 
-										className='object-contain object-top' 
-									/>
-								</div>
-								<p className='text-base text-(--text-colour) w-full h-full'>{block.caption[0]}</p>
-							</>
-						)}
-					</div>
-					<div className='w-1/2 h-fit flex flex-col gap-2'>
-						{block.text.map((p, i) => (
-							<p key={i} className='text-base ml-8'>{renderRichText(p)}</p>
-						))}
 					</div>
 				</section>
 			);
@@ -131,7 +104,7 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 				<section className='w-full h-full flex flex-row justify-between justify-center pt-6 2xl:pt-10 2xl:pb-2'>
 					{block.images.map((image, i) => (
 						<>
-							<div className='w-full aspect-4/3 relative mx-2'>
+							<div className='w-full aspect-4/3 relative mx-2 bg-(--nice-grey)/40'>
 								{block.images.length > 0 && (
 									<GalleryImage 
 										key={i}
@@ -141,7 +114,7 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 									/>
 								)}
 							</div>
-							<p className='text-base'>{block.caption[i]}</p>
+							<p className='p-1 text-wrap italic text-base text-(--text-colour) w-full h-full'>{block.caption[i]}</p>
 						</>
 					))}
 				</section>
