@@ -23,13 +23,13 @@ export function renderRichText(richText: RichTextItem[]): React.ReactNode {
 
 		// translate Notion rich text to html
 		if (item.annotations?.bold) {
-			content = <strong key={`bold-${index}`}>{content}</strong>;
+			content = <strong key={`bold-${index}`} className='font-semibold'>{content}</strong>;
 		}
 		if (item.annotations?.italic) {
 			content = <em key={`italic-${index}`}>{content}</em>;
 		}
 		if (item.annotations?.code) {
-			content = <code key={`code-${index}`} className="bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm">{content}</code>;
+			content = <code key={`code-${index}`} className='bg-gray-100 dark:bg-gray-800 px-1 py-0.5 rounded text-sm'>{content}</code>;
 		}
 		if (item.annotations?.strikethrough) {
 			content = <s key={`strike-${index}`}>{content}</s>;
@@ -44,9 +44,9 @@ export function renderRichText(richText: RichTextItem[]): React.ReactNode {
 				<a
 					key={`link-${index}`}
 					href={item.href}
-					target="_blank"
-					rel="noopener noreferrer"
-					className="text-blue-600 dark:text-blue-400 hover:underline"
+					target='_blank'
+					rel='noopener noreferrer'
+					className='text-indigo-400 font-semibold hover:text-indigo-500 hover:underline transition-all duration-200'
 				>
 					{content}
 				</a>

@@ -178,7 +178,7 @@ export default function ProjectContent({ currentProject, blocks, projects }: Pro
 																	transition-colours duration-300'
 									>    
 										<Image
-											src='/popup-icon.svg'
+											src='/popup-icon-white.svg'
 											alt='See Live Site'
 											width={20}
 											height={20}
@@ -206,7 +206,7 @@ export default function ProjectContent({ currentProject, blocks, projects }: Pro
 																	transition-colours duration-300'
 									>    
 										<Image
-											src='/github-logo.svg'
+											src='/github-logo-black.svg'
 											alt='See GitHub Repo'
 											width={20}
 											height={20}
@@ -234,7 +234,7 @@ export default function ProjectContent({ currentProject, blocks, projects }: Pro
 																	transition-colours duration-300'
 									>    
 										<Image
-											src='/dribbble-logo.svg'
+											src='/dribbble-logo-black.svg'
 											alt='See Dribbble Post'
 											width={20}
 											height={20}
@@ -436,7 +436,7 @@ export default function ProjectContent({ currentProject, blocks, projects }: Pro
 					<a
 						href='mailto:hello@jacquelinetruong.dev'
 						target='_blank' 
-						className='3xl:place-self-center 3xl:w-5/6 ultrawide:w-4/6 text-base font-[450]'
+						className='w-fit h-fit text-base font-[450] hover:text-indigo-400 transition-colors duration-300'
 					>
 						💌 hello@jacquelinetruong.dev
 					</a>

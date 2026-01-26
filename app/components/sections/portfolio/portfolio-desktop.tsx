@@ -367,9 +367,8 @@ export default function PortfolioDesktop({
                     <Grid>
                         {/* featured project */}
                             {/* preview */}
-                            <Link
+                            <div
                                 // ref={imagesRef} 
-                                href={`/${featuredProject?.slug}`}
                                 className='col-start-1 col-span-2 row-start-1 row-span-2 z-100'>
                                 <Reveal delay={0.25}>
                                     {featuredProject && (
@@ -377,27 +376,7 @@ export default function PortfolioDesktop({
                                             key={featuredProject?.id}
                                             project={derivedFeaturedProject}
                                             featured
-                                            onMouseEnter={() => setIsHovering(true)}
-                                            onMouseLeave={() => setIsHovering(false)}
                                             // onClick={openDetails}
-                                            onClick={() => {
-                                                router.push(`/${featuredProject?.slug}`);
-                                            }}
-                                            action={
-                                                <button
-                                                    onClick={(e) => {
-                                                        e.stopPropagation();
-                                                        // openDetails();
-                                                    }}
-                                                    className={`font-medium text-sm group 
-                                                                flex flex-col items-end gap-2 
-                                                                transition-opacity duration-300 cursor-pointer
-                                                                opacity-0 group-hover:opacity-100`} // ${isDetailsOpen && 'hidden'}
-                                                >
-                                                    Expand details
-                                                    <LinkArrow className='size-[40px] text-(--white) group-transition-colors group:duration-300'/>
-                                                </button>
-                                            }
                                         />
                                     )}
                                     {/* timer bar */}
@@ -412,7 +391,7 @@ export default function PortfolioDesktop({
                                         </div>
                                     )}
                                 </Reveal>
-                            </Link>
+                            </div>
                         
                             {/* content */}
                             <div className='col-start-1 col-span-2 row-start-3 row-span-1
@@ -435,35 +414,37 @@ export default function PortfolioDesktop({
                                 <div 
                                     // ref={buttonsRef}
                                     className='font-medium text-xs 2xl:text-sm
-                                                flex flex-row gap-2'>
+                                               w-full h-fit flex flex-row gap-2 justify-end'>
                                     {featuredProject?.link && (
-                                        <a className='text-(--bg-colour)
-                                                        flex flex-row gap-2 items-center
-                                                        w-fit h-fit px-4 py-2.5 rounded-full 2xl:px-6 2xl:py-3.5 3xl:px-8 3xl:py-4
-                                                        bg-(--text-colour) hover:bg-(--nice-grey)
-                                                        transition-colors duration-300'
+                                        <a className='flex flex-row gap-2 items-center cursor-pointer group
+                                                        w-fit h-full px-3 py-2.5 2xl:px-4 2xl:py-3.5 rounded-full
+                                                        bg-(--black) hover:bg-(--light-black)/85
+                                                        transition-colours duration-300'
                                             target='_blank'
                                             href={featuredProject?.link}
                                             rel='noopener noreferrer'
                                         >    
-                                            Live Site
-                                            <LinkArrow className='size-[16px] 2xl:size-[20px] text-(--bg-colour) group-transition-colors group:duration-300'/>
+                                            <Image
+                                                src='/popup-icon-white.svg'
+                                                alt='See Live Site'
+                                                width={20}
+                                                height={20}
+                                            />
                                         </a>
                                     )}
 
                                     {featuredProject?.github && (
-                                        <a className='font-medium text-(--bg-colour)
-                                                        flex flex-row gap-2 items-center
-                                                        w-fit h-full px-4 py-2.5 rounded-full 2xl:px-8 2xl:py-4
-                                                        bg-(--text-colour) hover:bg-(--nice-grey)
-                                                        transition-colors duration-300'
+                                        <a className='flex flex-row gap-2 items-center cursor-pointer group
+                                                        w-fit h-full px-3 py-2.5 2xl:px-4 2xl:py-3.5 rounded-full
+                                                        bg-(--black) hover:bg-(--light-black)/85
+                                                        transition-colours duration-300'
                                             target='_blank'
                                             href={featuredProject?.github}
                                             rel='noopener noreferrer'
                                         >    
                                             <Image
-                                                src='/github-logo.svg'
-                                                alt='github logo'
+                                                src='/github-logo-white.svg'
+                                                alt='See GitHub Repo'
                                                 width={18}
                                                 height={18}
                                             />
@@ -471,23 +452,32 @@ export default function PortfolioDesktop({
                                     )}
 
                                     {featuredProject?.dribbble && (
-                                        <a className='font-medium text-(--bg-colour)
-                                                        flex flex-row gap-2 items-center
-                                                        w-fit h-full px-4 py-2.5 rounded-full 2xl:px-8 2xl:py-4
-                                                        bg-(--text-colour) hover:bg-(--nice-grey)
-                                                        transition-colors duration-300'
+                                        <a className='flex flex-row gap-2 items-center cursor-pointer group
+                                                        w-fit h-full px-3 py-2.5 2xl:px-4 2xl:py-3.5 rounded-full
+                                                        bg-(--black) hover:bg-(--light-black)/85
+                                                        transition-colours duration-300'
                                             target='_blank'
                                             href={featuredProject?.dribbble}
                                             rel='noopener noreferrer'
                                         >    
                                             <Image
-                                                src='/dribbble-logo.svg'
-                                                alt='dribbble logo'
-                                                width={18}
-                                                height={18}
+                                                src='/dribbble-logo-white.svg'
+                                                alt='See Dribbble Post'
+                                                width={20}
+                                                height={20}
                                             />
                                         </a>
                                     )}
+                                    <a className='text-(--bg-colour)
+                                                    flex flex-row gap-2 items-center
+                                                    w-fit h-fit px-4 py-2.5 rounded-full 2xl:px-6 2xl:py-3.5 3xl:px-8 3xl:py-4
+                                                    bg-(--white) hover:bg-(--white)/85
+                                                    transition-colors duration-300'
+                                        href={`/${featuredProject?.slug}`}
+                                    >    
+                                        View Project
+                                        <LinkArrow className='size-[16px] 2xl:size-[20px] text-(--bg-colour) group-transition-colors group:duration-300'/>
+                                    </a>
                                 </div>
                             </div>
                             

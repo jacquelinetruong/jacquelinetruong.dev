@@ -15,7 +15,6 @@ export function LenisSnap() {
 	const lenis = useLenis()
 
 	const timeoutId = useRef<number | null>(null)
-	const didHandleHash = useRef(false)
 
 	// get nav height for offset
 	const getNavHeight = () =>
@@ -35,9 +34,7 @@ export function LenisSnap() {
 				document.querySelectorAll<HTMLElement>('.section')
 			).map(
 				section =>
-					section.getBoundingClientRect().top +
-					lenis.scroll -
-					navHeight
+					section.getBoundingClientRect().top + lenis.scroll - navHeight
 			)
 		}
 
@@ -62,14 +59,15 @@ export function LenisSnap() {
 				const distance = Math.abs(nearest - current)
 
 				// snap only when in range
-				if (distance > 3 && distance < 150) {
-					lenis.scrollTo(nearest, {
-						duration: 0.6,
-						easing: t => 1 - Math.pow(1 - t, 3),
-					})
-				}
-			}, 100)
-		}
+				if (distance < 20) return;
+
+				lenis.scrollTo(nearest, {
+					duration: 0.6,
+					easing: t => 1 - Math.pow(1 - t, 3),
+				});
+			}, 120);
+		
+		};
 
 		lenis.on('scroll', onScroll)
 		window.addEventListener('resize', () => {

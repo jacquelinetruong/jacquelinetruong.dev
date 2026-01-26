@@ -139,16 +139,16 @@ function ProjectCard({
 		<div onClick={handleClick}
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
-			className={`relative w-full h-full ${className} group overflow-hidden cursor-pointer container-type-inline-size`}
+			className={`relative w-full h-full ${className} group overflow-hidden container-type-inline-size ${featured ? 'cursor-default' : 'cursor-pointer'}`}
 		>
 			{/* preview */}
 			<Image
 				src={notionImage(project.images[0])}
 				alt={project.title}
 				fill
-				className='object-cover object-center
+				className={`object-cover object-center
 						   transition-transform duration-500 ease-out
-						   group-hover:scale-115'
+						   ${featured ? '' : 'group-hover:scale-115'}`}
 				draggable={false}
 				priority={project.hero || featured}
 				loading={project.hero || featured ? 'eager' : 'lazy'}
