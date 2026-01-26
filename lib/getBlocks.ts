@@ -95,5 +95,12 @@ export async function getBlocks(projectId: string): Promise<Blocks[]> {
                     .split('\n')
                     .map((p: string) => p.replace(/^-\s*/, '').trim())
                     .filter(Boolean) ?? [],
+            caption:
+                page.properties.caption?.rich_text
+                    .map((t: any) => t.plain_text)
+                    .join('')
+                    .split('\n')
+                    .map((p: string) => p.replace(/^-\s*/, '').trim())
+                    .filter(Boolean) ?? [],
         }));
 }

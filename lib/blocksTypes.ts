@@ -6,10 +6,11 @@ export type Blocks = {
     id: string;
     section: string;
     order: number;
-    block: 'section-header' | 'text' | 'list' | 'left-text-image' | 'right-text-image' | 'image-1' | 'image-2' | 'image-3' | 'divider';
+    block: 'section-title' | 'heading' | 'subheading' | 'text' | 'list' | 'left-text-image' | 'right-text-image' | 'image-1' | 'image-2' | 'image-3' | 'carousel' | 'divider';
     label: RichTextItem[];
     heading: RichTextItem[];
-    text: RichTextItem[][]; // Array of rich text items per paragraph
+    text: RichTextItem[][];
     images: string[];
     alt: string[];
+    caption: string[];
 }

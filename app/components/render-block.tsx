@@ -1,9 +1,12 @@
 // file that renders content blocks assigned on notion db.
 // auto-generates project pages based on notion blocks.
+'use client';
 
+import { useState } from 'react';
 import { Blocks } from '@/lib/blocksTypes';
 import { renderRichText } from '@/lib/richText';
 import Image from 'next/image';
+import GalleryImage from './gallery-image';
 
 
 type RenderBlockProps = {
@@ -13,17 +16,31 @@ type RenderBlockProps = {
 export default function RenderBlock({ block }: RenderBlockProps) {
 	switch (block.block) {
 		// ------ SECTION TITLE BLOCK ------ //
-		case 'section-header':
+		case 'section-title':
 			return (
-				<section className='w-full h-fit flex flex-col gap-6 pt-12 2xl:pt-16'>
-					<div className='flex flex-col gap-1'>
+				<section className='w-full h-fit flex flex-col gap-4 pt-12 pb-1 2xl:pt-16'>
+					<div className='w-full h-fit flex flex-col gap-1'>
 						{block.label && block.label.length > 0 && <h4 className='text-sm text-(--light-mode-grey) font-medium'>{renderRichText(block.label)}</h4>}
-						{block.heading && block.heading.length > 0 && <h2 className='font-semibold text-xl 2xl:text-2xl'>{renderRichText(block.heading)}</h2>}
+						{block.heading && block.heading.length > 0 && <h1 className='font-semibold text-xl 2xl:text-2xl'>{renderRichText(block.heading)}</h1>}
 					</div>
+				</section>
+			);
 
-					{block?.text.map((text, i) => (
-						<p key={i} className='text-base'>{renderRichText(text)}</p>
-					))} 
+
+		// ------ HEADING BLOCK ------ //
+		case 'heading':
+			return (
+				<section className='w-full h-fit pt-6'>
+					{block.heading && block.heading.length > 0 && <h2 className='font-semibold text-lg 2xl:text-xl'>{renderRichText(block.heading)}</h2>}
+				</section>
+			);
+
+
+		// ------ SUBHEADING BLOCK ------ //
+		case 'subheading':
+			return (
+				<section className='w-full h-fit gap-2 pt-4 text-(--light-black) italic'>
+					{block.heading && block.heading.length > 0 && <h3 className='font-semibold text-md 2xl:text-lg'>{renderRichText(block.heading)}</h3>}
 				</section>
 			);
 
@@ -31,9 +48,7 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 		// ------ TEXT BLOCK ------ //
 		case 'text':
 			return (
-				<section className='w-full h-fit flex flex-col gap-2 pt-4 2xl:pb-2'>
-					{block.heading && block.heading.length > 0 && <h3 className='font-semibold text-md 2xl:text-lg'>{renderRichText(block.heading)}</h3>}
-
+				<section className='w-full h-fit flex flex-col gap-4 pt-2 pb-2'>
 					{block?.text.map((text, i) => (
 						<p key={i} className='text-base'>{renderRichText(text)}</p>
 					))} 
@@ -44,9 +59,7 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 		// ------ LIST BLOCK ------ //
 		case 'list':
 			return (
-				<section className='w-full h-fit flex flex-col gap-2 pt-4 2xl:pb-2'>
-					{block.heading && block.heading.length > 0 && <h3 className='font-semibold text-md 2xl:text-lg'>{renderRichText(block.heading)}</h3>}
-
+				<section className='w-full h-fit flex flex-col gap-2'>
 					<div className='ml-6'>
 						{block?.text.map((item, i) => (
 							<li key={i} className='text-base'>{renderRichText(item)}</li>
@@ -59,22 +72,28 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 		// ------ (LEFT) TEXT + IMAGE BLOCK ------ //
 		case 'left-text-image':
 			return (
-				<section className='w-full h-fit flex flex-row justify-between pt-8 2xl:pt-12 2xl:pb-2'>
-					<div className='w-1/2 h-fit flex flex-col gap-2'>
-						{block.heading && block.heading.length > 0 && <h3 className='font-semibold text-md 2xl:text-lg mr-8'>{renderRichText(block.heading)}</h3>}
+				<section className='w-full h-full flex flex-row justify-between pt-2 pb-2'>
+					<div className='w-1/2 h-fit flex flex-col gap-4'>
 						{block.text.map((p, i) => (
 							<p key={i} className='text-base mr-8'>{renderRichText(p)}</p>
 						))}
 					</div>
-					<div className='w-1/2 aspect-4/3 relative'>
-						<Image 
-							src={block.images[0]} 
-							alt={block.alt[0]} 
-							fill
-							draggable={false}
-							unoptimized
-							className='object-contain object-center' 
-						/>
+					<div className='w-1/2 h-full flex flex-col'>
+						{block.images.length > 0 && (
+							<>
+								<div className='aspect-4/3 relative'>
+									<Image 
+										src={block.images[0]} 
+										alt={block.alt[0]} 
+										fill
+										draggable={false}
+										unoptimized
+										className='object-cover object-center' 
+									/>
+								</div>
+								<p className='text-base text-(--text-colour) w-full h-full'>{block.caption[0]}</p>
+							</>
+						)}
 					</div>
 				</section>
 			);
@@ -84,18 +103,24 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 		case 'right-text-image':
 			return (
 				<section className='w-full h-fit flex flex-row justify-between pt-8 2xl:pt-12 2xl:pb-2'>
-					<div className='w-1/2 aspect-4/3 relative'>
-						<Image 
-							src={block.images[0]} 
-							alt={block.alt[0]} 
-							fill
-							draggable={false}
-							unoptimized
-							className='object-contain object-center' 
-						/>
+					<div className='w-1/2 h-full flex flex-col'>
+						{block.images.length > 0 && (
+							<>
+								<div className='aspect-4/3 relative'>
+									<Image 
+										src={block.images[0]} 
+										alt={block.alt[0]} 
+										fill
+										draggable={false}
+										unoptimized
+										className='object-cover object-center' 
+									/>
+								</div>
+								<p className='text-base text-(--text-colour) w-full h-full'>{block.caption[0]}</p>
+							</>
+						)}
 					</div>
 					<div className='w-1/2 h-fit flex flex-col gap-2'>
-						{block.heading && block.heading.length > 0 && <h3 className='font-semibold text-md 2xl:text-lg ml-8'>{renderRichText(block.heading)}</h3>}
 						{block.text.map((p, i) => (
 							<p key={i} className='text-base ml-8'>{renderRichText(p)}</p>
 						))}
@@ -109,23 +134,93 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 		case 'image-2':
 		case 'image-3':
 			return (
-				<section className='w-full h-full flex flex-row justify-between justify-center pt-8 2xl:pt-12 2xl:pb-2'>
+				<section className='w-full h-full flex flex-row justify-between justify-center pt-6 2xl:pt-10 2xl:pb-2'>
 					{block.images.map((image, i) => (
-						<div className='w-full aspect-4/3 relative mx-2'>
-							<Image 
-								key={i} 
-								src={image} 
-								alt={block.alt[i]} 
-								fill
-								draggable={false}
-								unoptimized
-								className='object-cover object-center' 
-							/>
-						</div>
+						<>
+							<div className='w-full aspect-4/3 relative mx-2'>
+								{block.images.length > 0 && (
+									<Image 
+										key={i}
+										src={image} 
+										alt={block.alt[i]} 
+										fill
+										draggable={false}
+										unoptimized
+										className='object-cover object-center' 
+									/>
+								)}
+							</div>
+							<p className='text-base'>{block.caption[i]}</p>
+						</>
 					))}
 				</section>
 			);
 			
+		
+		// ------ CAROUSEL BLOCK ------ //
+		case 'carousel': {
+			const [current, setCurrent] = useState(0);
+
+			const images = block.images;
+			const total = images.length;
+
+			if (total === 0) return null;
+
+			const visibleThumbs = 4;
+			const start = current < visibleThumbs
+					? 0
+					: Math.min(current - 1, total - visibleThumbs);
+
+			return (
+				<section className='w-full py-6 2xl:pt-10'>
+					<div className='flex flex-row gap-4'>
+						{/* carousel images */}
+						<div className='flex flex-col gap-3 w-1/5'>
+							{images
+								.slice(start, start + visibleThumbs)
+								.map((img, i) => {
+									const index = start + i;
+									const isActive = index === current;
+
+									return (
+										<button
+											key={index}
+											onClick={() => setCurrent(index)}
+											className={`relative aspect-4/3 transition-all duration-500
+												${isActive ? 'ring-2 ring-black' : 'opacity-70 hover:opacity-100'}`}
+										>
+											<GalleryImage
+												src={img}
+												alt={block.alt?.[index] || ''}
+												className='object-cover object-center
+															transition-transform duration-500 ease-out
+															group-hover:scale-115'
+											/>
+										</button>
+									);
+								})}
+						</div>
+
+						{/* featured image */}
+						<div className='relative w-4/5 aspect-4/3'>
+							<GalleryImage
+								src={images[current]}
+								alt={block.alt?.[current] || ''}
+								className='object-cover object-center'
+							/>
+						</div>
+					</div>
+
+					{/* caption */}
+					{block.caption?.[current] && (
+						<p className='w-4/5 place-self-end text-base text-(--text-colour) px-6 pt-2'>
+							{block.caption[current]}
+						</p>
+					)}
+				</section>
+			);
+		}
+
 
 		// ------ DIVIDER BLOCK ------ //
 		case 'divider':

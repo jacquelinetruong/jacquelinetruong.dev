@@ -11,5 +11,5 @@ export type Experience = {
     startDate: string | null;
     endDate: string | null;
     current: boolean; 
-    points: RichTextItem[][]; // Array of rich text items per point
+    points: RichTextItem[][];
 }

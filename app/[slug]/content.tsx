@@ -17,6 +17,7 @@ import { useMediaQuery } from '../components/media-query';
 import Quickbar from '../components/quickbar';
 import Footer from '../components/sections/footer/footer';
 import Link from 'next/link';
+import LinkArrow from '../components/icons/link-arrow';
 
 
 type ProjectContentProps = {
@@ -76,6 +77,20 @@ export default function ProjectContent({ currentProject, blocks, projects }: Pro
 	useEffect(() => {
 		setActiveProject(currentProject);
 	}, [currentProject]);
+
+
+	// ------ NEXT PROJECT ------ //
+	const nextProject = useMemo(() => {
+		if (!projects || !currentProject) return null;
+
+		const currentIndex = projects.findIndex(
+			p => p.id === currentProject.id
+		);
+
+		if (currentIndex === -1) return null;
+
+		return projects[(currentIndex + 1) % projects.length];
+	}, [projects, currentProject]);
 
 
 	return isDesktop ? (
@@ -280,7 +295,7 @@ export default function ProjectContent({ currentProject, blocks, projects }: Pro
 						<div className='col-start-1 col-span-1 row-start-1 row-span-2 p-8 | ultrawide:px-20'>
 							<div className='sm:text-xs 2xl:text-sm 3xl:text-base
 											flex flex-col gap-8 px-6 py-8
-											border border-(--nice-grey) bg-(--white)/60 rounded-xl'>
+											border border-(--nice-grey)/60 bg-(--white)/60 rounded-xl'>
 								<div className='flex flex-col gap-4'>
 									<div className='flex flex-row justify-between relative'>
 										<p className='w-fit h-fit ml-1 text-[10px] 2xl:text-xs text-(--alt-text-colour) font-medium'>FILTERS</p>
@@ -386,23 +401,24 @@ export default function ProjectContent({ currentProject, blocks, projects }: Pro
 											<Reveal key={project.id} delay={i * 0.15}>
 												<Link
 													href={`/${project.slug}`}
-													className={`flex flex-row gap-1 2xl:gap-2 items-start
-																w-fit h-fit text-left
-																transition-all duration-300
-																cursor-pointer
+													className={`flex flex-row gap-1 2xl:gap-2 items-start min-w-0
+																text-left transition-all duration-300
 																${currentProject?.id === project.id
-																? 'font-semibold'
-																: 'text-(--alt-text-colour) hover:font-semibold hover:text-(--dark-mode-grey)'}
+																? 'cursor-default font-semibold'
+																: 'cursor-pointer text-(--alt-text-colour) hover:font-semibold hover:text-(--dark-mode-grey)'}
 													`}
 												>
 													<Image
 														src={currentProject?.id === project.id ? '/detail-arrow-black.svg' : '/detail-arrow-grey.svg'}
-														alt='arrow'
+														alt=''
 														width={16}
 														height={16}
 													/>
-													<span className='flex flex-col'>
-														<span>{project.title}</span>
+													<span
+														className='relative block whitespace-normal break-words before:content-[attr(data-text)] before:font-semibold before:invisible before:block before:h-0'
+														data-text={project.title}
+														>
+														{project.title}
 													</span>
 												</Link>
 											</Reveal>
@@ -419,7 +435,7 @@ export default function ProjectContent({ currentProject, blocks, projects }: Pro
 					<div className='grid grid-cols-5 auto-rows-max'>
 						{blocks.map((block) => (
 							<div
-								key={block.section}
+								key={`assigned-${block.section}`}
 								className='col-start-2 col-span-3 px-8 3xl:px-32'
 							>
 								<Reveal delay={0.2} className='3xl:place-self-center 3xl:w-5/6 ultrawide:w-4/6'>
@@ -441,7 +457,61 @@ export default function ProjectContent({ currentProject, blocks, projects }: Pro
 						💌 hello@jacquelinetruong.dev
 					</a>
 				</div>
-			
+				
+				{/* next project */}
+				{nextProject && (
+					<section className='relative translate-x-(--cell-width) w-(--three-cell-width) h-fit pb-12 3xl:px-32'>
+							<div className=''>
+								<Reveal delay={0}>
+									<Link
+										href={`/${nextProject.slug}`}
+										className='group block p-8 transition-all duration-500
+													bg-(--white)/40 hover:bg-(--white)/80
+													border border-(--nice-grey)/60 rounded-xl'
+									>
+										<p className='text-xs 2xl:text-sm text-(--light-mode-grey) font-medium mb-2'>
+											NEXT PROJECT
+										</p>
+
+										<div className='w-full flex flex-row justify-between gap-8'>
+											<div className='relative w-1/3 aspect-4/3 overflow-hidden'>
+												<GalleryImage
+													src={nextProject.images[0]}
+													alt={`${nextProject.title} preview`}
+													className='object-cover group-hover:scale-105 transition-transform duration-500'
+												/>
+											</div>
+											<div className='w-2/3 flex flex-col justify-between py-2'>
+												<div className='flex flex-col gap-2'>
+													<h3 className='text-lg 2xl:text-xl font-semibold'>
+														{nextProject.title}
+													</h3>
+
+													<p className='text-sm 2xl:text-base text-wrap truncate text-(--alt-text-colour)'>
+														{nextProject.description}
+													</p>
+												</div>
+
+												<a className='text-(--bg-colour) text-sm
+																flex flex-row gap-2 items-center
+																w-fit h-fit px-4 py-2.5 rounded-full 2xl:px-6 2xl:py-3.5 3xl:px-8 3xl:py-4
+																bg-(--text-colour) hover:bg-(--text-colour)/85
+																transition-colors duration-300'
+													href={`/${nextProject?.slug}`}
+												>    
+													View Project
+													<LinkArrow className='size-[16px] 2xl:size-[20px] text-(--bg-colour) group-transition-colors group:duration-300'/>
+												</a>
+											</div>
+
+											
+										</div>
+									</Link>
+								</Reveal>
+							</div>
+					</section>
+				)}
+
 				{/* footer */}
 				<section id='contact' className='section'>
 					<Grid>
