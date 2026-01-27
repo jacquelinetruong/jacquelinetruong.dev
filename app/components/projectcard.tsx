@@ -3,7 +3,6 @@
 
 import { Project } from '@/lib/projectTypes';
 import { useState, useRef, useEffect, useMemo, memo } from 'react';
-import Image from 'next/image';
 
 import { useActiveSection } from './active-section';
 import GalleryImage from '@/app/components/gallery-image';
@@ -141,18 +140,17 @@ function ProjectCard({
 			onMouseLeave={onMouseLeave}
 			className={`relative w-full h-full ${className} group overflow-hidden container-type-inline-size ${featured ? 'cursor-default' : 'cursor-pointer'}`}
 		>
-			{/* preview */}
-			<Image
+			{/* preview - native img with fetchpriority */}
+			<img
 				src={notionImage(project.images[0])}
 				alt={project.title}
-				fill
-				className={`object-cover object-center
+				fetchPriority={project.hero || featured ? 'high' : 'low'}
+				loading={project.hero || featured ? 'eager' : 'lazy'}
+				decoding="async"
+				className={`absolute inset-0 w-full h-full object-cover object-center
 						   transition-transform duration-500 ease-out
 						   ${featured ? '' : 'group-hover:scale-115'}`}
 				draggable={false}
-				priority={project.hero || featured}
-				loading={project.hero || featured ? 'eager' : 'lazy'}
-				unoptimized
 			/>	
 
 			{/* gradient for text readability */}
@@ -229,19 +227,6 @@ function ProjectCard({
 					<p className='text-xs xl:text-sm'>Focus Project</p>
 				</div>
 			)}
-
-
-			{/* ARCHIVED: show IFF next project card in overlay */}
-			{/* {isNext && (
-				<span className='font-medium text-white
-									absolute inset-0 p-6
-									opacity-100
-									transition-all duration-200
-									whitespace-nowrap
-									bg-gradient-to-t from-transparent via-black/20 via-70%  to-black/60 to-90% point-events-none'>					
-					<p className='text-xs xl:text-sm'>Next Project</p>
-				</span>
-			)} */}
 
 			{/* render any actions if I want */}
 			{featured && action && (

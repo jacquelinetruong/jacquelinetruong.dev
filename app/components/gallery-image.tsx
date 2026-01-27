@@ -1,6 +1,5 @@
 'use client';
 
-import Image from 'next/image';
 import { useState, memo } from 'react';
 
 interface GalleryImageProps {
@@ -35,17 +34,15 @@ function GalleryImage({
 			)}
 
 			{/* gallery image */}
-			<Image
+			<img
 				src={src}
 				alt={alt}
-				fill
-				draggable={false}
+				fetchPriority={priority ? 'high' : 'low'}
 				loading={priority ? 'eager' : 'lazy'}
-				decoding={priority ? 'sync' : 'async'}
-				priority={priority}
-				unoptimized
-				onLoadingComplete={() => setLoaded(true)}
-				className={`${loaded ? 'opacity-100' : 'opacity-0'} object-contain object-center transition-opacity duration-500 ease-out ${className}`}
+				decoding="async"
+				draggable={false}
+				onLoad={() => setLoaded(true)}
+				className={`absolute inset-0 w-full h-full ${loaded ? 'opacity-100' : 'opacity-0'} object-contain object-center transition-opacity duration-500 ease-out ${className}`}
 			/>
 		</div>
 	);
