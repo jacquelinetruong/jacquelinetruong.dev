@@ -88,7 +88,7 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 										className='object-contain object-center' 
 									/>
 								</div>
-								<p className='p-1 text-wrap italic text-base text-(--text-colour) w-full h-full'>{block.caption[0]}</p>
+								<p className='p-1 text-wrap italic text-sm text-(--text-colour) w-full h-full'>{block.caption[0]}</p>
 							</>
 						)}
 					</div>
@@ -101,10 +101,10 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 		case 'image-2':
 		case 'image-3':
 			return (
-				<section className='w-full h-full flex flex-row justify-between justify-center pt-6 2xl:pt-10 2xl:pb-2'>
+				<section className='w-full h-full flex flex-row justify-between justify-center gap-6 pt-6 2xl:pt-10 2xl:pb-2'>
 					{block.images.map((image, i) => (
-						<>
-							<div className='w-full aspect-4/3 relative mx-2 bg-(--nice-grey)/40'>
+						<div className='flex flex-col w-full'>
+							<div className='w-full aspect-4/3 relative bg-(--nice-grey)/40'>
 								{block.images.length > 0 && (
 									<GalleryImage 
 										key={i}
@@ -114,8 +114,8 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 									/>
 								)}
 							</div>
-							<p className='p-1 text-wrap italic text-base text-(--text-colour) w-full h-full'>{block.caption[i]}</p>
-						</>
+							<p className='p-1 text-wrap italic text-sm text-(--text-colour) w-full h-full'>{block.caption[i]}</p>
+						</div>
 					))}
 				</section>
 			);
@@ -177,7 +177,7 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 
 					{/* caption */}
 					{block.caption?.[current] && (
-						<p className='w-4/5 place-self-end text-base text-(--text-colour) px-6 pt-2'>
+						<p className='w-4/5 place-self-end text-sm text-(--text-colour) px-6 pt-2'>
 							{block.caption[current]}
 						</p>
 					)}
