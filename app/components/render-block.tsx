@@ -78,7 +78,7 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 							<p key={i} className='text-base mr-8'>{renderRichText(p)}</p>
 						))}
 					</div>
-					<div className='w-1/2 h-full relative'>
+					<div className='w-1/2 h-full relative -translate-y-8'>
 						{block.images.length > 0 && (
 							<>
 								<div className='aspect-4/3 relative bg-(--nice-grey)/40'>

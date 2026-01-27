@@ -18,6 +18,7 @@ import Quickbar from '../components/quickbar';
 import Footer from '../components/sections/footer/footer';
 import Link from 'next/link';
 import LinkArrow from '../components/icons/link-arrow';
+import { routerServerGlobal } from 'next/dist/server/lib/router-utils/router-server-context';
 
 
 type ProjectContentProps = {
@@ -492,16 +493,15 @@ export default function ProjectContent({ currentProject, blocks, projects }: Pro
 													</p>
 												</div>
 
-												<a className='text-(--bg-colour) text-sm
+												<div className='text-(--bg-colour) text-sm
 																flex flex-row gap-2 items-center
 																w-fit h-fit px-4 py-2.5 rounded-full 2xl:px-6 2xl:py-3.5 3xl:px-8 3xl:py-4
 																bg-(--text-colour) hover:bg-(--text-colour)/85
 																transition-colors duration-300'
-													href={`/${nextProject?.slug}`}
 												>    
 													View Project
 													<LinkArrow className='size-[16px] 2xl:size-[20px] text-(--bg-colour) group-transition-colors group:duration-300'/>
-												</a>
+												</div>
 											</div>
 
 											
