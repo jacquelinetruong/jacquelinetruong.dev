@@ -155,8 +155,8 @@ export default function PortfolioMobile({
                                                 rel='noopener noreferrer'
                                             >    
                                                 <Image
-                                                    src='/github-logo.svg'
-                                                    alt='github logo'
+                                                    src='/github-logo-black.svg'
+                                                    alt='See Github Repo'
                                                     width={20}
                                                     height={20}
                                                     className='sm:size-5.5'
@@ -172,8 +172,8 @@ export default function PortfolioMobile({
                                                 rel='noopener noreferrer'
                                             >    
                                                 <Image
-                                                    src='/dribbble-logo.svg'
-                                                    alt='dribbble logo'
+                                                    src='/dribbble-logo-black.svg'
+                                                    alt='See Dribbble Post'
                                                     width={20}
                                                     height={20}
                                                     className='sm:size-5.5'
