@@ -41,6 +41,21 @@ const nextConfig: NextConfig = {
             },
         ];
     },
+
+    async headers() {
+        return [
+        {
+            // cache static assets
+            source: '/:all*(svg|jpg|jpeg|png|webp|gif|woff|woff2|ttf|otf)',
+            headers: [
+            {
+                key: 'Cache-Control',
+                value: 'public, max-age=31536000, immutable',
+            },
+            ],
+        },
+        ];
+    },
 };
 
 export default nextConfig;

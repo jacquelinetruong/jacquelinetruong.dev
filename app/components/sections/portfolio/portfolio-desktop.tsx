@@ -16,7 +16,7 @@ import { notionImage } from '@/lib/notionImage';
 import GuideButton from '@/app/components/guide-button';
 import LinkArrow from '@/app/components/icons/link-arrow';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { PreloadLCPImage } from '@/app/components/preload-lcp-image';
 
 
 type PortfolioDesktopProps = {
@@ -358,6 +358,10 @@ export default function PortfolioDesktop({
 
     return (
         <>
+            {/* Preload the featured image */}
+      {featuredImage && (
+        <PreloadLCPImage src={notionImage(featuredImage)} />
+      )}
             <SectionReveal
                 fadeDistance={0}
                 fadeStart={0.4}

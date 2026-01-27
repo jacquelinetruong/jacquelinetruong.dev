@@ -5,8 +5,6 @@ import { Project } from '@/lib/projectTypes';
 import ProjectCard from '../../projectcard';
 import Grid from '../../grid';
 
-import { notionImage } from '@/lib/notionImage';
-
 import GuideButton from '../../guide-button';
 import { SectionReveal } from '../../section-reveal';
 

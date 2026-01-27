@@ -39,7 +39,7 @@ function GalleryImage({
 				alt={alt}
 				fetchPriority={priority ? 'high' : 'low'}
 				loading={priority ? 'eager' : 'lazy'}
-				decoding="async"
+				decoding={priority ? 'sync' : 'async'}
 				draggable={false}
 				onLoad={() => setLoaded(true)}
 				className={`absolute inset-0 w-full h-full ${loaded ? 'opacity-100' : 'opacity-0'} object-contain object-center transition-opacity duration-500 ease-out ${className}`}

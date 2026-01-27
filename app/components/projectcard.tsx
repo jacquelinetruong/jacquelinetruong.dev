@@ -146,7 +146,7 @@ function ProjectCard({
 				alt={project.title}
 				fetchPriority={project.hero || featured ? 'high' : 'low'}
 				loading={project.hero || featured ? 'eager' : 'lazy'}
-				decoding="async"
+				decoding={project.hero || featured ? 'sync' : 'async'}
 				className={`absolute inset-0 w-full h-full object-cover object-center
 						   transition-transform duration-500 ease-out
 						   ${featured ? '' : 'group-hover:scale-115'}`}
