@@ -66,17 +66,18 @@ export default function AboutMobile({
 
                                 {/* if jobless :heartbreak: */}
                                 {currentWork.length === 0 && (
-                                    <>
+                                    <p className='text-sm xs:text-base font-medium
+                                                flex flex-row gap-1 items-center'>
                                         <Image
-                                                src='/detail-arrow-black.svg'
-                                                alt='arrow'
-                                                width={16}
-                                                height={16}
-                                                draggable={false}
-                                                className={`sm:size-5`}
-                                            />
-                                        <p className='text-sm xs:text-base'>Open to new opportunities</p>
-                                    </>
+                                            src='/detail-arrow-black.svg'
+                                            alt='arrow'
+                                            width={16}
+                                            height={16}
+                                            draggable={false}
+                                            className={`sm:size-5`}
+                                        />
+                                        Open to new opportunities
+                                    </p>
                                 )}
 
                                 {currentWork.map((role, i) => (
@@ -103,7 +104,7 @@ export default function AboutMobile({
                                 <h4 className='text-sm xs:text-base text-(--light-mode-grey) font-medium'>Education</h4>
 
                                 <p className='text-sm xs:text-base font-medium
-                                                flex flex-row gap-1 items-center'>     
+                                                flex flex-row gap-1 items-start'>     
                                     <Image
                                         src='/detail-arrow-black.svg'
                                         alt='arrow'

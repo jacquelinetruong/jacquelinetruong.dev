@@ -103,7 +103,7 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 			return (
 				<section className='w-full h-full flex flex-row justify-between justify-center gap-6 pt-6 2xl:pt-10 2xl:pb-2'>
 					{block.images.map((image, i) => (
-						<div className='flex flex-col w-full'>
+						<div className='flex flex-col w-full -translate-y-4'>
 							<div className='w-full aspect-4/3 relative bg-(--nice-grey)/40'>
 								{block.images.length > 0 && (
 									<GalleryImage 
