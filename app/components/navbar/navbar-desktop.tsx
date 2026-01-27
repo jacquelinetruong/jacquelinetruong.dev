@@ -89,16 +89,16 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
                 <div className='navbar-items flex flex-row gap-8'>
                     {['home', 'about', 'portfolio', 'experience'].map((id) => (
                         <Link
-                        key={id}
-                        href={`/#${id}`}
-                        onClick={isHome ? scrollToSection(id) : undefined}
-                        className={`transition-colors duration-300 ${
-                            activeSection === id
-                            ? 'text-(--text-colour)'
-                            : 'text-(--alt-text-colour) hover:text-(--dark-grey)'
-                        } ${activeSection === 'portfolio' && id !== 'portfolio' ? 'text-(--alt-text-colour) hover:text-(--grey)' : ''}`}
+                            key={id}
+                            href={`/#${id}`}
+                            onClick={isHome ? scrollToSection(id) : undefined}
+                            className={`transition-colors duration-300 ${
+                                activeSection === id
+                                ? 'text-(--text-colour)'
+                                : 'text-(--alt-text-colour) hover:text-(--dark-grey)'
+                            } ${activeSection === 'portfolio' && id !== 'portfolio' ? 'text-(--alt-text-colour) hover:text-(--grey)' : ''}`}
                         >
-                        {id.charAt(0).toUpperCase() + id.slice(1)}
+                            {id.charAt(0).toUpperCase() + id.slice(1)}
                         </Link>
                     ))}
                     {/* <a href='#daily'>Daily</a> */}           {/* future page, maybe */}
@@ -107,12 +107,9 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
 
             {/* right side */}
             <div className='navbar-links flex flex-row gap-8'>
-                <a className='transition-colors duration-300 text-(--text-colour) hover:text-(--light-mode-grey)'
-                    target='_blank' href='/resume.pdf' rel='noopener noreferrer'>Resume</a>
-                <a className='transition-colors duration-300 text-(--text-colour) hover:text-(--light-mode-grey)'
-                    target='_blank' href='https://www.linkedin.com/in/jacquellinetruong'>LinkedIn</a>
-                <a className='transition-colors duration-300 text-(--text-colour) hover:text-(--light-mode-grey)'
-                    target='_blank' href='https://github.com/jacquelinetruong'>GitHub</a>
+                <a className='transition-colors duration-300 text-(--text-colour) hover:text-(--light-mode-grey)' target='_blank' href='/resume.pdf' rel='noopener noreferrer'>Resume</a>
+                <a className='transition-colors duration-300 text-(--text-colour) hover:text-(--light-mode-grey)' target='_blank' href='https://www.linkedin.com/in/jacquellinetruong' rel='noopener noreferrer'>LinkedIn</a>
+                <a className='transition-colors duration-300 text-(--text-colour) hover:text-(--light-mode-grey)' target='_blank' href='https://github.com/jacquelinetruong' rel='noopener noreferrer'>GitHub</a>
             </div>
         </div>
     );

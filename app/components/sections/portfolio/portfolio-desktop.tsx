@@ -380,6 +380,8 @@ export default function PortfolioDesktop({
                                             key={featuredProject?.id}
                                             project={derivedFeaturedProject}
                                             featured
+                                            onMouseEnter= {() => setIsHovering(true)}
+                                            onMouseLeave= {() => setIsHovering(false)}
                                             // onClick={openDetails}
                                         />
                                     )}
@@ -398,9 +400,12 @@ export default function PortfolioDesktop({
                             </div>
                         
                             {/* content */}
-                            <div className='col-start-1 col-span-2 row-start-3 row-span-1
+                            <div
+                                className='col-start-1 col-span-2 row-start-3 row-span-1
                                             flex flex-col justify-between group z-100
                                             p-8 | ultrawide:px-20'
+                                onMouseEnter={() => setIsHovering(true)}
+                                onMouseLeave={() => setIsHovering(false)}
                             >
 
                                 {/* text details */}
@@ -475,7 +480,7 @@ export default function PortfolioDesktop({
                                     <a className='text-(--bg-colour)
                                                     flex flex-row gap-2 items-center
                                                     w-fit h-fit px-4 py-2.5 rounded-full 2xl:px-6 2xl:py-3.5 3xl:px-8 3xl:py-4
-                                                    bg-(--white) hover:bg-(--white)/85
+                                                    bg-white hover:bg-(--white)
                                                     transition-colors duration-300'
                                         href={`/${featuredProject?.slug}`}
                                     >    
@@ -627,7 +632,7 @@ export default function PortfolioDesktop({
                                                     w-fit h-fit rounded-full px-6 py-3 | 2xl:px-8 2xl:py-4
                                                     border-1 bg-(--bg-colour)
                                                     transition-colors duration-400
-                                                    ${filter === 'all' ? 'text-black bg-white hover:text-black' : 'hover:border-(--light-mode-grey) text-(--text-colour) hover:bg-(--grid-line-colour)'}`}
+                                                    ${filter === 'all' ? 'text-black bg-white hover:text-black hover:bg-(--white)' : 'hover:border-(--light-mode-grey) text-(--text-colour) hover:bg-(--grid-line-colour)'}`}
                                     >
                                         All
                                     </button>
@@ -639,7 +644,7 @@ export default function PortfolioDesktop({
                                                     w-fit h-fit rounded-full px-6 py-3 | 2xl:px-8 2xl:py-4
                                                     border-1 bg-(--bg-colour)
                                                     transition-colors duration-400
-                                                    ${filter === 'design' ? 'text-black bg-white hover:text-black' : 'hover:border-(--light-mode-grey) text-(--text-colour) hover:bg-(--grid-line-colour)'}`}
+                                                    ${filter === 'design' ? 'text-black bg-white hover:text-black hover:bg-(--white)' : 'hover:border-(--light-mode-grey) text-(--text-colour) hover:bg-(--grid-line-colour)'}`}
                                     >
                                         Design
                                         <sup className={`transition-colors duration-400 ${filter === 'design' ? 'text-(--light-mode-grey)' : 'text-(--grey)'}`}>{counts.design}</sup>
@@ -652,7 +657,7 @@ export default function PortfolioDesktop({
                                                     w-fit h-fit rounded-full px-6 py-3 | 2xl:px-8 2xl:py-4
                                                     border-1 bg-(--bg-colour)
                                                     transition-colors duration-400
-                                                    ${filter === 'development' ? 'text-black bg-white hover:text-black' : 'hover:border-(--light-mode-grey) text-(--text-colour) hover:bg-(--grid-line-colour)'}`}
+                                                    ${filter === 'development' ? 'text-black bg-white hover:text-black hover:bg-(--white)' : 'hover:border-(--light-mode-grey) text-(--text-colour) hover:bg-(--grid-line-colour)'}`}
                                     >
                                         Development
                                         <sup className={`transition-colors duration-400 ${filter === 'development' ? 'text-(--light-mode-grey)' : 'text-(--grey)'}`}>{counts.development}</sup>

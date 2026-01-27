@@ -64,9 +64,9 @@ export default function FooterDesktop({ className = '' }: { className?: string }
                                     <h5 className='text-white'>Find More</h5>
                                     <div className='flex flex-row gap-6 | xl:gap-8'>
                                         <a className='w-fit transition-colors duration-300 hover:text-(--grey)' target='_blank' href='/resume.pdf' rel='noopener noreferrer'>Resume</a>
-                                        <a className='w-fit transition-colors duration-300 hover:text-(--grey)' target='_blank' href='https://www.linkedin.com/in/jacquellinetruong'>LinkedIn</a>
-                                        <a className='w-fit transition-colors duration-300 hover:text-(--grey)' target='_blank' href='https://github.com/jacquelinetruong'>GitHub</a>
-                                        <a className='w-fit transition-colors duration-300 hover:text-(--grey)' target='_blank' href='https://www.behance.net/jacqueltruong'>Behance</a>
+                                        <a className='w-fit transition-colors duration-300 hover:text-(--grey)' target='_blank' href='https://www.linkedin.com/in/jacquellinetruong' rel='noopener noreferrer'>LinkedIn</a>
+                                        <a className='w-fit transition-colors duration-300 hover:text-(--grey)' target='_blank' href='https://github.com/jacquelinetruong' rel='noopener noreferrer'>GitHub</a>
+                                        <a className='w-fit transition-colors duration-300 hover:text-(--grey)' target='_blank' href='https://www.behance.net/jacqueltruong' rel='noopener noreferrer'>Behance</a>
                                     </div>
                                 </div>
                             </Reveal>
