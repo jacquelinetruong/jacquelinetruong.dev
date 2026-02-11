@@ -29,11 +29,9 @@
 - **deployment:** Vercel
 - **design:** Figma
 
-## let's chat!
+## let's chat! 
 
-if you'd like to chat or collaborate, feel free to reach out :)
-
-💌 hello@jacquelinetruong.dev
+feel free to reach out at 💌 hello@jacquelinetruong.dev
 
 #
 
