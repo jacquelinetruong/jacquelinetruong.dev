@@ -1,5 +1,9 @@
+<p align="center">
+  <img src="https://em-content.zobj.net/source/apple/279/headphone_1f3a7.png" width="50"/>
+</p>
+
 <h1 align="center">
-  jacquelinetruong's portfolio 🦾
+  jacquelinetruong's portfolio
 </h1>
 
 <p align="center">
