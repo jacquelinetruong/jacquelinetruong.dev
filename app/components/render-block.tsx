@@ -177,7 +177,7 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 
 					{/* caption */}
 					{block.caption?.[current] && (
-						<p className='w-4/5 place-self-end text-sm text-(--text-colour) px-6 pt-2'>
+						<p className='w-4/5 place-self-end text-wrap italic text-sm text-(--text-colour) px-6 pt-2'>
 							{block.caption[current]}
 						</p>
 					)}

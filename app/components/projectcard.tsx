@@ -169,9 +169,9 @@ function ProjectCard({
 					{allTags.length > 0 && (
 						<div 
 							ref={containerRef}
-							className='font-medium text-[10px] 2xl:text-xs
+							className={`font-medium text-[10px] 2xl:text-xs
 							  		   flex flex-nowrap gap-2 justify-start items-center
-									   w-full'
+									   w-full ${featured ? 'ultrawide:px-14' : ''}`}
 						>
 							{/* show tags that fit */}
 							{allTags.slice(0, visibleCount).map(tag => (

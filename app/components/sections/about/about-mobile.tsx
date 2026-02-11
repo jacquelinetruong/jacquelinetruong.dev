@@ -46,7 +46,7 @@ export default function AboutMobile({
                                             xs:text-xl 
                                             sm:text-2xl sm:w-5/6'
                             >
-                                I'm a newgrad designer who loves bringing ideas to life through clean, functional, and high-impact products.
+                                I'm a designer who loves bringing ideas to life through clean, functional, and high-impact products.
                             </h2>
                         </Reveal>
 
