@@ -42,8 +42,6 @@ export default async function Page() {
 				<HomeClient 
 					heroProjects={heroProjects}
 					portfolioProjects={portfolioProjects}
-					currentXP={currentXP}
-					experience={experience}
 				/>
 			</div>
 		</>

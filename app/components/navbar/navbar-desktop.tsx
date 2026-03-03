@@ -1,3 +1,5 @@
+// TODO: REROUTE LOGIC 
+
 'use client';
 
 import Image from 'next/image';
@@ -15,10 +17,9 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
 
     // section themes
     const activeSection = useActiveSection(setTheme, {
-        home: 'light',
-        about: 'light',
-        portfolio: 'dark',
-        experience: 'light',
+        work: 'light',
+        archive: 'dark',
+        more: 'light',
     });
 
     // reroute if needed
@@ -72,7 +73,7 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
                         fill
                         draggable={false}
                         className={`absolute transition-opacity duration-500 ease-in-out
-                            ${activeSection !== 'portfolio' ? 'opacity-100' : 'opacity-0'}`}
+                            ${activeSection !== 'archive' ? 'opacity-100' : 'opacity-0'}`}
                     />
                     {/* white logo (dark theme) */}
                     <Image
@@ -81,13 +82,13 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
                         fill
                         draggable={false}
                         className={`absolute transition-opacity duration-500 ease-in-out
-                            ${activeSection === 'portfolio' ? 'opacity-100' : 'opacity-0'}`}
+                            ${activeSection === 'archive' ? 'opacity-100' : 'opacity-0'}`}
                     />
                 </Link>
 
                 {/* nav items */}
                 <div className='navbar-items flex flex-row gap-8'>
-                    {['home', 'about', 'portfolio', 'experience'].map((id) => (
+                    {['work', 'about', 'extras'].map((id) => (
                         <Link
                             key={id}
                             href={`/#${id}`}
@@ -96,12 +97,11 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
                                 activeSection === id
                                 ? 'text-(--text-colour)'
                                 : 'text-(--alt-text-colour) hover:text-(--dark-grey)'
-                            } ${activeSection === 'portfolio' && id !== 'portfolio' ? 'text-(--alt-text-colour) hover:text-(--grey)' : ''}`}
+                            } ${activeSection === 'archive' && id !== 'archive' ? 'text-(--alt-text-colour) hover:text-(--grey)' : ''}`}
                         >
                             {id.charAt(0).toUpperCase() + id.slice(1)}
                         </Link>
                     ))}
-                    {/* <a href='#daily'>Daily</a> */}           {/* future page, maybe */}
                 </div>
             </div>
 

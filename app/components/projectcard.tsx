@@ -155,7 +155,7 @@ function ProjectCard({
 
 			{/* gradient for text readability */}
 			<div className={`absolute inset-0 bg-gradient-to-t from-(--dark-black)/70 from-5% via-(--dark-black)/55 via-16% to-transparent to-40% point-events-none
-							${!featured && 'bg-[#13131B]/15 transition duration-300 group-hover:bg-[#13131B]/40'}`}/>
+							${!featured && 'bg-[#131319]/15 transition duration-300 group-hover:bg-[#131319]/40'}`}/>
 
 			{/* project details section */}
 			<div className='text-white

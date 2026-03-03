@@ -1,0 +1,59 @@
+// TODO: MOBILE
+// template component used for card previews
+'use client';
+
+import { useState, useRef, useEffect, useMemo, memo } from 'react';
+
+import { useActiveSection } from './active-section';
+import GalleryImage from '@/app/components/gallery-image';
+import { notionImage } from '@/lib/notionImage';
+import { useMediaQuery } from './media-query';
+import Link from 'next/link';
+import LinkArrow from '@/app/components/icons/link-arrow';
+
+
+type CardProps = {
+    className?: string;
+    coverImage: string;
+    altText: string;
+    hrefId: string;
+};
+
+export default function Card({
+    className = '',
+    coverImage,
+    altText,
+    hrefId,
+ }: CardProps) { 
+
+    // ------ VIEWPORT DISPLAY ------ //
+    const isDesktop = useMediaQuery('(min-width: 1024px)');
+
+    return (
+        <Link
+            href={`/#${hrefId}`}
+            className='relative block w-full h-full group overflow-hidden cursor-pointer'
+        >
+            {/* cover image */}
+            <img
+                src={coverImage}
+                alt={altText}
+                className='absolute inset-0 w-full h-full object-cover object-center
+                        transition-transform duration-500 ease-out
+                        group-hover:scale-115'
+                draggable={false}
+            />
+
+            {/* gradient for readability */}
+            <div className='absolute inset-0 bg-gradient-to-t from-(--dark-black)/70 from-5% via-(--dark-black)/55 via-16% to-transparent to-40%
+                            pointer-events-none transition duration-300'/>
+
+            {/* title */}
+            <div className='absolute bottom-0 left-0 w-full p-6
+                            flex justify-between items-end text-white'>
+                <h3 className='font-medium text-md truncate'>{altText}</h3>
+                <LinkArrow className='size-[40px] text-(--bg-colour)'/>
+            </div>
+        </Link>
+    )
+}

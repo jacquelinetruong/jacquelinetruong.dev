@@ -8,6 +8,8 @@ import Loader from './loader/loader';
 import Quickbar from './quickbar';
 import NameStamp from './name-stamp';
 import Hero from './sections/hero/hero';
+import MoreLinks from './sections/more-desktop';
+import Archive from './sections/archive-desktop';
 import About from './sections/about/about';
 import Portfolio from './sections/portfolio/portfolio';
 import ExperienceSection from './sections/experience/experience';
@@ -21,15 +23,11 @@ import type { Experience } from '@/lib/experienceTypes';
 type HomeClientProps = {
 	heroProjects: Project[];
 	portfolioProjects: Project[];
-	currentXP: Experience[];
-	experience: Experience[];
 };
 
 export default function HomeClient({
 	heroProjects,
 	portfolioProjects,
-	currentXP,
-	experience,
 }: HomeClientProps) {
 
 	// ------ VIEWPORT DISPLAY ------ //
@@ -85,7 +83,7 @@ export default function HomeClient({
 						</>
 					)}
 					
-					<section id='home' className='section'>
+					<section id='work' className='section'>
 						<Grid>
 							<Hero
 								isDesktop={isDesktop}
@@ -97,90 +95,23 @@ export default function HomeClient({
 						</Grid>
 					</section>
 
-					<section id='about' className='section'>
+					<section id='archive' className='section'>
 						<Grid>
-							<About
-								isDesktop={isDesktop}
+							<Archive
 								isLoading={isLoading}
-								experience={currentXP}
 								className='col-span-5 row-start-1 row-span-4'
 							/>
 						</Grid>
 					</section>
 
-					{isDesktop ? (
-						<>
-							{/* desktop: render portfolio section first */}
-							<section id='portfolio' className='section'>
-								{isDesktop ? (
-									<Grid>
-										<Portfolio
-											isDesktop={isDesktop}
-											isLoading={isLoading}
-											projects={portfolioProjects}
-											className='col-span-5 row-start-1 row-span-4'
-											featuredHeroProject={featuredProject}
-											onProjectSelect={setFeaturedProject}
-										/>
-									</Grid>
-								): (
-									<Portfolio
-										isDesktop={isDesktop}
-										isLoading={isLoading}
-										projects={portfolioProjects}
-										featuredHeroProject={featuredProject}
-										onProjectSelect={setFeaturedProject}
-									/>
-								)}
-							</section>
-
-							<section id='experience' className='section'>
-								<Grid>
-									<ExperienceSection
-										isDesktop={isDesktop}
-										isLoading={isLoading}
-										experience={experience}
-										className='col-span-5 row-start-2 row-span-4'
-									/>
-								</Grid>
-							</section>
-						</>
-					) : (
-						<>
-							{/* mobile: render experience section first */}
-							<section id='experience' className='section'>
-								<Grid>
-									<ExperienceSection
-										isDesktop={isDesktop}
-										isLoading={isLoading}
-										experience={experience}
-										className='col-span-5 row-start-2 row-span-4'
-									/>
-								</Grid>
-							</section> 
-
-							<section id='portfolio' className='section'>
-								{isDesktop ? (
-									<Grid>
-										<Portfolio
-											isDesktop={isDesktop}
-											isLoading={isLoading}
-											projects={portfolioProjects}
-											className='col-span-5 row-start-1 row-span-4'
-											featuredHeroProject={featuredProject}
-										/>
-									</Grid>
-								): (
-									<Portfolio
-										isDesktop={isDesktop}
-										isLoading={isLoading}
-										projects={portfolioProjects}
-										featuredHeroProject={featuredProject}
-									/>
-								)}
-							</section>
-						</>
-					)}
+					<section id='more' className='section'>
+						<Grid>
+							<MoreLinks
+								isLoading={isLoading}
+								className='col-span-5 row-start-1 row-span-4'
+							/>
+						</Grid>
+					</section>
 
 					<section id='contact' className='section relative'>
 						<Grid>
