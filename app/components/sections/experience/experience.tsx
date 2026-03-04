@@ -4,19 +4,20 @@ import type { Experience } from '@/lib/experienceTypes';
 
 import ExperienceDesktop from './experience-desktop';
 import ExperienceMobile from './experience-mobile';
+import { useMediaQuery } from '../../media-query';
 
 
 export default function ExperienceSection({
     className = '',
-    isDesktop,
-    isLoading,
+    isLoading = false,
     experience,
 }: {
     className?: string; 
-    isDesktop: boolean;
-    isLoading: boolean;
+    isLoading?: boolean;
     experience: Experience[];
 }) {
+    // ------ VIEWPORT DISPLAY ------ //
+    const isDesktop = useMediaQuery('(min-width: 1024px)');
 
     return isDesktop ? ( 
         <ExperienceDesktop

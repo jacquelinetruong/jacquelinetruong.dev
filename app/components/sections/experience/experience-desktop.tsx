@@ -197,9 +197,10 @@ export default function ExperienceDesktop({
                     </div>
                 </div>
 
-                <div className='col-start-1 row-start-3 row-span-1 p-2 | 3xl:p-8 | ultrawide:px-20'>
+                {/* cat */}
+                <div className='col-start-1 row-start-3 self-center place-self-center'>
                     <Reveal delay={1.6}>
-                        <Cat className={`place-self-start size-full text-(--light-mode-grey)/40`}/>
+                        <Cat className='text-(--nice-grey)'/>
                     </Reveal>
                 </div>
             </Grid>
