@@ -45,8 +45,8 @@ export default function HeroDesktop({
 				</div>
 			
 				{/* project display #2 */}
-				<div className='col-start-3 row-start-1'>
-					<Reveal delay={1.2}>
+				<div className='col-start-3 row-start-2'>
+					<Reveal delay={1.85}>
 						{projects
 							.filter(p => p.sectionId === '2')
 							.map(project => (
@@ -60,8 +60,8 @@ export default function HeroDesktop({
 				</div>
 			
 				{/* project display #3 */}
-				<div className='col-start-1 row-start-2'>
-					<Reveal delay={1.4}>
+				<div className='col-start-2 row-start-1'>
+					<Reveal delay={1.25}>
 						{projects
 							.filter(p => p.sectionId === '3')
 							.map(project => (
@@ -76,7 +76,7 @@ export default function HeroDesktop({
 
 				{/* project display #4 */}
 				<div className='col-start-2 row-start-2'>
-					<Reveal delay={1.4}>
+					<Reveal delay={1.65}>
 						{projects
 							.filter(p => p.sectionId === '3')
 							.map(project => (
@@ -90,7 +90,7 @@ export default function HeroDesktop({
 				</div>
 
 				{/* project display #5 */}
-				<div className='col-start-2 row-start-3'>
+				<div className='col-start-1 row-start-3'>
 					<Reveal delay={1.4}>
 						{projects
 							.filter(p => p.sectionId === '3')
@@ -106,7 +106,7 @@ export default function HeroDesktop({
 
 				{/* project display #6 */}
 				<div className='col-start-3 row-start-3'>
-					<Reveal delay={1.4}>
+					<Reveal delay={2.05}>
 						{projects
 							.filter(p => p.sectionId === '3')
 							.map(project => (

@@ -96,10 +96,9 @@ export default function ProjectContent({ currentProject, blocks, projects }: Pro
 
 	return isDesktop ? (
 		<section id='top' className='relative pt-(--nav-height) text-(--text-colour)'>
-			<Quickbar isLoading={false} isProjectPage/>
+			<Quickbar />
 
-			
-				<section id='project-hero' className='section'>
+				<section id='project-hero' className='section data-hero'>
 					<Grid>
 						{/* project hero */}
 						<div className='col-start-2 col-span-3 row-start-1 row-span-1
@@ -514,12 +513,9 @@ export default function ProjectContent({ currentProject, blocks, projects }: Pro
 
 				{/* footer */}
 				<section id='contact' className='section'>
-					<Grid>
-						<Footer 
-							isDesktop={isDesktop}
-							className='col-span-5 row-start-1' 
-						/>
-					</Grid>
+					<Footer 
+						className='col-span-5 row-start-1' 
+					/>
 				</section>
 		</section>
 	) : (

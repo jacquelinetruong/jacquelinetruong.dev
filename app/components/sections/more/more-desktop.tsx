@@ -1,17 +1,15 @@
 'use client';
 
-import { Reveal } from '../reveal';
-import { Project } from '@/lib/projectTypes';
-import Card from '../card';
-import Grid from '../grid';
+import { Reveal } from '../../reveal';
+import Card from '../../card';
+import Grid from '../../grid';
 
-import { SectionReveal } from '../section-reveal';
-import Link from 'next/link';
+import { SectionReveal } from '../../section-reveal';
 
 
 export default function MoreLinks({
     className = '',
-	isLoading,
+	isLoading = false,
  }: { 
 	className?: string; 
 	isLoading: boolean;
@@ -25,8 +23,10 @@ export default function MoreLinks({
 		>
 			<Grid>
 				{/* title */}
-				<div className='col-start-2 col-span-2 row-start-1 w-full h-full p-6 flex flex-col justify-end'>
-					<h1 className='font-medium text-3xl w-full text-left'>More about me</h1>
+				<div className='col-start-2 col-span-2 row-start-1 w-full h-full p-6'>
+					<Reveal delay={0.5} className='flex flex-col justify-end'>
+						<h1 className='font-medium text-3xl w-full text-left'>More about me</h1>
+					</Reveal>
 				</div>
 
 				{/* work experience link card */}
@@ -35,18 +35,18 @@ export default function MoreLinks({
                         <Card
                             coverImage='/me.jpg'
                             altText='Work experience'
-							hrefId='about'
+							hrefId='/about#experience'
                         />
 					</Reveal>
 				</div>
 
-				{/* project archive link card */}
+				{/* current fixation link card */}
 				<div className='col-start-1 row-start-2'>
 					<Reveal delay={1.2}>
                         <Card
                             coverImage='/me.jpg'
-                            altText='Project archive'
-							hrefId='archive'
+                            altText='Current fixation'
+							hrefId='link to github'
                         />
 					</Reveal>
 				</div>
@@ -57,7 +57,8 @@ export default function MoreLinks({
                         <Card
                             coverImage='/me.jpg'
                             altText='About me'
-							hrefId='about'
+							hrefId='/about'
+							big
                         />
 					</Reveal>
 				</div>
@@ -68,7 +69,7 @@ export default function MoreLinks({
                         <Card
                             coverImage='/me.jpg'
                             altText='Me, offline'
-							hrefId='extras'
+							hrefId='/extras'
                         />
 					</Reveal>
 				</div>

@@ -21,7 +21,7 @@ export function useActiveSection(
 		);
 
 		if (!sections.length) return;
-		
+
 		const updateActiveSection = (scrollY: number) => {
 			const viewportMiddle = scrollY + window.innerHeight / 2;
 
@@ -29,49 +29,42 @@ export function useActiveSection(
 
 			for (let i = sections.length - 1; i >= 0; i--) {
 				const section = sections[i];
-				const sectionTop = section.offsetTop;
-				if (viewportMiddle > sectionTop) {
+				if (viewportMiddle > section.offsetTop) {
 					current = section.id;
 					break;
 				}
 			}
 
 			setActiveSection(prev => {
-				if (prev !== current) {
-				  const nextTheme = sectionThemes?.[current];
-				  if (setTheme && nextTheme) {
-					
-					// defer theme updates until after render
-					setTimeout(() => setTheme(nextTheme), 0);
-				  }
-				  return current;
+				if (prev === current) return prev;
+
+				const nextTheme = sectionThemes?.[current];
+
+				if (setTheme && nextTheme) {
+					queueMicrotask(() => setTheme(nextTheme));
 				}
-				return prev;
-			  });
-			  
+
+				return current;
+			});
 		};
 
-		// if using lenis scroll (desktop)
-		if (lenis) {
-			const onLenisScroll = () => {
-				updateActiveSection(lenis.scroll)
-			};
+		const scrollHandler = () => {
+			const scrollPos = lenis ? lenis.scroll : window.scrollY;
+			updateActiveSection(scrollPos);
+		};
 
-			lenis.on('scroll', onLenisScroll);
+		if (lenis) {
+			lenis.on('scroll', scrollHandler);
 			updateActiveSection(lenis.scroll);
 
-			return () => {
-				lenis.off('scroll', onLenisScroll);
-			};
-		};
+			return () => lenis.off('scroll', scrollHandler);
+		}
 
-		// fallback if not (mobile scroll)
-		const onScroll = () => updateActiveSection(window.scrollY);
-		window.addEventListener('scroll', onScroll);
+		window.addEventListener('scroll', scrollHandler);
 		updateActiveSection(window.scrollY);
 
-		return() => window.removeEventListener('scroll', onScroll);
-	}, [activeSection, setTheme, sectionThemes, lenis]);
+		return () => window.removeEventListener('scroll', scrollHandler);
+	}, [lenis, setTheme, sectionThemes]);
 
 	return activeSection;
 }

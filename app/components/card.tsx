@@ -17,6 +17,7 @@ type CardProps = {
     coverImage: string;
     altText: string;
     hrefId: string;
+    big?: boolean;
 };
 
 export default function Card({
@@ -24,6 +25,7 @@ export default function Card({
     coverImage,
     altText,
     hrefId,
+    big,
  }: CardProps) { 
 
     // ------ VIEWPORT DISPLAY ------ //
@@ -31,7 +33,7 @@ export default function Card({
 
     return (
         <Link
-            href={`/#${hrefId}`}
+            href={hrefId}
             className='relative block w-full h-full group overflow-hidden cursor-pointer'
         >
             {/* cover image */}
@@ -51,8 +53,14 @@ export default function Card({
             {/* title */}
             <div className='absolute bottom-0 left-0 w-full p-6
                             flex justify-between items-end text-white'>
-                <h3 className='font-medium text-md truncate'>{altText}</h3>
-                <LinkArrow className='size-[40px] text-(--bg-colour)'/>
+                {/* <h3 className='font-medium text-md truncate'>{altText}</h3> */}
+                <span className='inline-block px-3 py-1 pointer-events-none
+                                    bg-(--black)/20 backdrop-blur-[1px] border border-white rounded-full 
+                                    text-nowrap text-[10px] 2xl:text-xs'
+                >
+                    {altText}
+                </span>
+                <LinkArrow className={`text-(--bg-colour) ${big ? 'size-[54px]' : 'size-[40px]'}`}/>
             </div>
         </Link>
     )

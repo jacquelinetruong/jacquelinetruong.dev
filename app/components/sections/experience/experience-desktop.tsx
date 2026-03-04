@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { formatDateRange } from './experience';
 
-import { Project } from '@/lib/projectTypes';
 import { Experience } from '@/lib/experienceTypes';
 import { renderRichText } from '@/lib/richText';
 
