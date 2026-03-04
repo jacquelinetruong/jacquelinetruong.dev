@@ -25,6 +25,7 @@ export async function getProjects(): Promise<Project[]> {
         .map((page): Project => ({
             id: page.id,
 
+            current: page.properties.current?.checkbox ?? false,
             casestudy: page.properties.casestudy?.checkbox ?? false,
             slug: page.properties.slug.rich_text?.[0]?.text.content
                 ?.toLowerCase()

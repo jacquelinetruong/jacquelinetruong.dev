@@ -44,9 +44,9 @@ export default function MoreLinks({
 				<div className='col-start-1 row-start-2'>
 					<Reveal delay={1.2}>
                         <Card
-                            coverImage='/me.jpg'
+                            coverImage='/current-keyboard-built-by-me.png'
                             altText='Currently building'
-							hrefId='/'
+							hrefId='/work/current'
                         />
 					</Reveal>
 				</div>

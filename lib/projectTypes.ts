@@ -3,6 +3,7 @@
 export type Project = {
     id: string;
 
+    current: boolean;
     casestudy: boolean;
     slug: string;
     

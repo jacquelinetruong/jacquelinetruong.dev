@@ -40,6 +40,7 @@ function mapProject(page: any): Project {
 	return {
 		id: page.id,
 
+		current: page.properties.current?.checkbox ?? false,
 		casestudy: page.properties.casestudy?.checkbox ?? false,
 		slug: page.properties.slug.title[0]?.plain_text ?? '',
 		

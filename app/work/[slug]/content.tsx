@@ -7,27 +7,27 @@ import { Label, Listbox, ListboxButton, ListboxOption, ListboxOptions, Transitio
 import Image from 'next/image';
 import GalleryImage from '@/app/components/gallery-image';
 import RenderBlock from '@/app/components/render-block';
-import { Reveal } from '../components/reveal';
+import { Reveal } from '../../components/reveal';
 import Grid from '@/app/components/grid';
 import { useTheme } from '@/app/components/theme-context';
 import type { Blocks } from '@/lib/blocksTypes';
 import type { Project } from '@/lib/projectTypes';
 
-import { useMediaQuery } from '../components/media-query';
-import Quickbar from '../components/quickbar';
-import Footer from '../components/sections/footer/footer';
+import { useMediaQuery } from '../../components/media-query';
+import Quickbar from '../../components/quickbar';
+import Footer from '../../components/sections/footer/footer';
 import Link from 'next/link';
-import LinkArrow from '../components/icons/link-arrow';
+import LinkArrow from '../../components/icons/link-arrow';
 import { routerServerGlobal } from 'next/dist/server/lib/router-utils/router-server-context';
 
 
 type ProjectContentProps = {
-	currentProject: Project;
+	selectedProject: Project;
 	blocks: Blocks[];
 	projects: Project[];
 };
 
-export default function ProjectContent({ currentProject, blocks, projects }: ProjectContentProps) {
+export default function ProjectContent({ selectedProject, blocks, projects }: ProjectContentProps) {
 	// ------ VIEWPORT DISPLAY ------ //
     const isDesktop = useMediaQuery('(min-width: 1024px)');
 	
@@ -76,24 +76,25 @@ export default function ProjectContent({ currentProject, blocks, projects }: Pro
 
 	// set default active project
 	useEffect(() => {
-		setActiveProject(currentProject);
-	}, [currentProject]);
+		setActiveProject(selectedProject);
+	}, [selectedProject]);
 
 
 	// ------ NEXT PROJECT ------ //
 	const nextProject = useMemo(() => {
-		if (!projects || !currentProject) return null;
+		if (!projects || !selectedProject) return null;
 
 		const currentIndex = projects.findIndex(
-			p => p.id === currentProject.id
+			p => p.id === selectedProject.id
 		);
 
 		if (currentIndex === -1) return null;
 
 		return projects[(currentIndex + 1) % projects.length];
-	}, [projects, currentProject]);
+	}, [projects, selectedProject]);
 
-
+	console.log('selectedProject.current:', selectedProject.current);
+console.log('type:', typeof selectedProject.current);
 	return isDesktop ? (
 		<section id='top' className='relative pt-(--nav-height) text-(--text-colour)'>
 			<Quickbar />
@@ -114,17 +115,28 @@ export default function ProjectContent({ currentProject, blocks, projects }: Pro
 											height={28} 
 											draggable={false}
 										/>
-										<h1 className='font-semibold lg:text-3xl 2xl:text-4xl'>{currentProject.title}</h1>
+										<h1 className='font-semibold lg:text-3xl 2xl:text-4xl'>{selectedProject.title}</h1>
 									</div>
 								</Reveal>
 
 								{/* case study label */}
-								{currentProject.casestudy && (
+								{selectedProject.casestudy && (
 									<Reveal delay={0}>
 									<span className='w-fit h-fit pointer-events-none px-2.5 py-1 2xl:px-3.5 2xl:py-1.5 3xl:py-2
 														border border-(--text-colour) rounded-full 
 														text-nowrap font-semibold text-[10px] 2xl:text-[11px] 3xl:text-xs'>
 										CASE STUDY
+									</span>
+									</Reveal>
+								)}
+
+								{/* current project label */}
+								{selectedProject.current && (
+									<Reveal delay={0}>
+									<span className='w-fit h-fit pointer-events-none px-2.5 py-1 2xl:px-3.5 2xl:py-1.5 3xl:py-2
+														border border-(--text-colour) rounded-full 
+														text-nowrap font-semibold text-[10px] 2xl:text-[11px] 3xl:text-xs'>
+										IN PROGRESS
 									</span>
 									</Reveal>
 								)}
@@ -138,7 +150,7 @@ export default function ProjectContent({ currentProject, blocks, projects }: Pro
 									<h4 className='text-[10px] 2xl:text-xs text-(--light-mode-grey) font-medium'>
 										ROLE
 									</h4>
-									<p className='capitalize text-sm 2xl:text-base 3xl:text-lg font-medium w-full'>{[...(currentProject.type ?? [])].join(' & ')}</p>
+									<p className='capitalize text-sm 2xl:text-base 3xl:text-lg font-medium w-full'>{[...(selectedProject.type ?? [])].join(' & ')}</p>
 									</Reveal>
 								</div>
 
@@ -148,18 +160,18 @@ export default function ProjectContent({ currentProject, blocks, projects }: Pro
 									<h4 className='text-[10px] 2xl:text-xs text-(--light-mode-grey) font-medium'>
 										TOOLS & FRAMEWORKS
 									</h4>
-									<p className='capitalize text-sm 2xl:text-base 3xl:text-lg font-medium w-full'>{[...(currentProject.programs ?? [])].join(', ')}</p>
+									<p className='capitalize text-sm 2xl:text-base 3xl:text-lg font-medium w-full'>{[...(selectedProject.programs ?? [])].join(', ')}</p>
 									</Reveal>
 								</div>
 
 								{/* languages */}
-								{currentProject.languages.length > 0 && (
+								{selectedProject.languages.length > 0 && (
 									<div className='w-(--cell-width) h-full px-4 pb-4 2xl:px-8 2xl:pb-8 ultrawide:px-20 ultrawide:pb-20'>
 										<Reveal delay={0.8} className='flex flex-col gap-1'>
 										<h4 className='text-[10px] 2xl:text-xs text-(--light-mode-grey) font-medium'>
 											LANGUAGES
 										</h4>
-										<p className='capitalize text-sm 2xl:text-base 3xl:text-lg font-medium w-full'>{[...(currentProject.languages ?? [])].join(', ')}</p>
+										<p className='capitalize text-sm 2xl:text-base 3xl:text-lg font-medium w-full'>{[...(selectedProject.languages ?? [])].join(', ')}</p>
 										</Reveal>
 								</div>
 								)}
@@ -170,8 +182,8 @@ export default function ProjectContent({ currentProject, blocks, projects }: Pro
 						<div className='col-start-2 col-span-3 row-start-2 row-span-3 w-(--three-cell-width) h-(--three-cell-height)'>
 							<Reveal delay={0.25}>
 								<GalleryImage
-									src={currentProject.images[0]}
-									alt={`${currentProject.title} Preview`}
+									src={selectedProject.images[0]}
+									alt={`${selectedProject.title} Preview`}
 									className='object-cover object-center'
 								/>
 							</Reveal>
@@ -180,10 +192,10 @@ export default function ProjectContent({ currentProject, blocks, projects }: Pro
 						{/* project links */}
 						<div className='col-start-5 col-span-1 row-start-2 row-span-1
 											flex flex-col gap-2 p-4 ultrawide:p-8'>
-							{currentProject?.link && (
+							{selectedProject?.link && (
 								<a 
 									target='_blank'
-									href={currentProject?.link}
+									href={selectedProject?.link}
 									rel='noopener noreferrer'
 									className='w-fit h-fit'
 								>
@@ -208,10 +220,10 @@ export default function ProjectContent({ currentProject, blocks, projects }: Pro
 									</Reveal>
 								</a>
 							)}
-							{currentProject?.github && (
+							{selectedProject?.github && (
 								<a 
 									target='_blank'
-									href={currentProject?.link}
+									href={selectedProject?.link}
 									rel='noopener noreferrer'
 									className='w-fit h-fit'
 								>
@@ -236,10 +248,10 @@ export default function ProjectContent({ currentProject, blocks, projects }: Pro
 									</Reveal>
 								</a>
 							)}
-							{currentProject?.dribbble && (
+							{selectedProject?.dribbble && (
 								<a 
 									target='_blank'
-									href={currentProject?.link}
+									href={selectedProject?.link}
 									rel='noopener noreferrer'
 									className='w-fit h-fit'
 								>
@@ -400,16 +412,16 @@ export default function ProjectContent({ currentProject, blocks, projects }: Pro
 										{group.projects.map((project, i) => (
 											<Reveal key={project.id} delay={i * 0.15}>
 												<Link
-													href={`/${project.slug}`}
+													href={`/work/${project.slug}`}
 													className={`flex flex-row gap-1 2xl:gap-2 items-start min-w-0
 																text-left transition-all duration-300
-																${currentProject?.id === project.id
+																${selectedProject?.id === project.id
 																? 'cursor-default font-semibold'
 																: 'cursor-pointer text-(--alt-text-colour) hover:font-semibold hover:text-(--dark-mode-grey)'}
 													`}
 												>
 													<Image
-														src={currentProject?.id === project.id ? '/detail-arrow-black.svg' : '/detail-arrow-grey.svg'}
+														src={selectedProject?.id === project.id ? '/detail-arrow-black.svg' : '/detail-arrow-grey.svg'}
 														alt=''
 														width={16}
 														height={16}

@@ -38,6 +38,11 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
   return {
     id: page.id,
 
+    current:
+      page.properties.current?.type === 'checkbox'
+        ? page.properties.current.checkbox
+        : false,
+        
     casestudy:
       page.properties.casestudy?.type === 'checkbox'
         ? page.properties.casestudy.checkbox

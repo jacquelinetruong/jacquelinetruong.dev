@@ -19,17 +19,17 @@ export default async function ProjectPage(props: ProjectPageProps) {
 		notFound();
 	}
 
-	// get current project data from slug
-	const currentProject = await getProjectBySlug(slug);
-	if (!currentProject) {
+	// get selected project data from slug
+	const selectedProject = await getProjectBySlug(slug);
+	if (!selectedProject) {
 		notFound();
-	}
+	} 
 
-	// get current project blocks
-	const blocks: Blocks[] = await getBlocks(currentProject.id);
+	// get active project blocks
+	const blocks: Blocks[] = await getBlocks(selectedProject.id);
 
 	// get other projects
 	const projects = await getProjects();
 
-	return <ProjectContent currentProject={currentProject} blocks={blocks} projects={projects}/>;
+	return <ProjectContent selectedProject={selectedProject} blocks={blocks} projects={projects}/>
 }
