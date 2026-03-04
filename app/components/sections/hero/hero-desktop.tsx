@@ -78,7 +78,7 @@ export default function HeroDesktop({
 				<div className='col-start-2 row-start-2'>
 					<Reveal delay={1.65}>
 						{projects
-							.filter(p => p.sectionId === '3')
+							.filter(p => p.sectionId === '4')
 							.map(project => (
 								<ProjectCard
 									key={project.id}
@@ -93,7 +93,7 @@ export default function HeroDesktop({
 				<div className='col-start-1 row-start-3'>
 					<Reveal delay={1.4}>
 						{projects
-							.filter(p => p.sectionId === '3')
+							.filter(p => p.sectionId === '5')
 							.map(project => (
 								<ProjectCard
 									key={project.id}
@@ -108,7 +108,7 @@ export default function HeroDesktop({
 				<div className='col-start-3 row-start-3'>
 					<Reveal delay={2.05}>
 						{projects
-							.filter(p => p.sectionId === '3')
+							.filter(p => p.sectionId === '6')
 							.map(project => (
 								<ProjectCard
 									key={project.id}
