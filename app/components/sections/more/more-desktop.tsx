@@ -33,20 +33,20 @@ export default function MoreLinks({
 				<div className='col-start-1 row-start-1'>
 					<Reveal delay={1.2}>
                         <Card
-                            coverImage='/me.jpg'
+                            coverImage='/office.png'
                             altText='Work experience'
 							hrefId='/about#experience'
                         />
 					</Reveal>
 				</div>
 
-				{/* current fixation link card */}
+				{/* current build link card */}
 				<div className='col-start-1 row-start-2'>
 					<Reveal delay={1.2}>
                         <Card
                             coverImage='/me.jpg'
-                            altText='Current fixation'
-							hrefId='link to github'
+                            altText='Currently building'
+							hrefId='/'
                         />
 					</Reveal>
 				</div>
@@ -67,8 +67,8 @@ export default function MoreLinks({
 				<div className='col-start-4 row-start-3'>
 					<Reveal delay={1.2}>
                         <Card
-                            coverImage='/me.jpg'
-                            altText='Me, offline'
+                            coverImage='/summer-person.png'
+                            altText='More me, offline'
 							hrefId='/extras'
                         />
 					</Reveal>

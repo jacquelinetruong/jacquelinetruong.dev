@@ -146,8 +146,8 @@ export default function AboutDesktop({
                 <div className='col-start-5 row-start-3'>
                     <Reveal delay={4.25}>
                         <Card
-                            coverImage='/me.jpg'
-                            altText='Me, offline'
+                            coverImage='/summer-person.png'
+                            altText='More me, offline'
                             hrefId='extras'
                         />
                     </Reveal>
