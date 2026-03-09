@@ -17,6 +17,7 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
 
     // only for work page (home page) theme changes
     const activeSection = useActiveSection(setTheme, {
+        home: 'light',
         work: 'light',
         archive: 'dark',
         more: 'light',
@@ -31,6 +32,7 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
 
     const navItems = [
         { label: 'Work', href: '/' },
+        { label: 'Process', href: '/work/process' },
         { label: 'About', href: '/about' },
         { label: 'Extras', href: '/extras' },
     ];
