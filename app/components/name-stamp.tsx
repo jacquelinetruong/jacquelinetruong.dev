@@ -77,7 +77,7 @@ export default function NameStamp({ className = '' }: { className?: string }) {
 								href='mailto:hello@jacquelinetruong.dev'
 							>	
 								<Coffee className='size-[24px] text-(--bg-colour)'/>
-								Say Hi!
+								Get in touch
 							</a>
 						</Reveal>
 

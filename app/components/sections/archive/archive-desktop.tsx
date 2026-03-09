@@ -35,8 +35,9 @@ export default function MoreLinks({
 				<div className='col-start-1 row-start-1'>
 					<Reveal delay={0.35}>
                         <ArchivedProjectCard
-                            title='Project Test 1'
-                            description='This is a short description of the project.'
+							image='/eg.webp'
+                            title='Egyptian Real Estate Portal'
+                            description='A cross-continental property marketplace connecting agents in Egypt and Canada with a multi-parameter search system for urban listings.'
                         />
 					</Reveal>
 				</div>
@@ -45,8 +46,9 @@ export default function MoreLinks({
 				<div className='col-start-2 row-start-2'>
 					<Reveal delay={0.7}>
                         <ArchivedProjectCard
-                            title='Project Test 1'
-                            description='This is a short description of the project.'
+							image='/sh.webp'
+                            title='SpurHacks Landing'
+                            description='A high-performance quantum event landing page designed with a strict mobile-first approach.'
                         />
 					</Reveal>
 				</div>
@@ -55,8 +57,9 @@ export default function MoreLinks({
 				<div className='col-start-3 row-start-2'>
 					<Reveal delay={0.85}>
                         <ArchivedProjectCard
-                            title='Project Test 1'
-                            description='This is a short description of the project.'
+							image='/port.webp'
+                            title='Creative Writer Portfolio'
+                            description='A minimalist, typography-focused digital portfolio designed to highlight narrative work and editorial projects.'
                         />
 					</Reveal>
 				</div>
@@ -65,8 +68,9 @@ export default function MoreLinks({
 				<div className='col-start-1 row-start-3'>
 					<Reveal delay={0.5}>
                         <ArchivedProjectCard
-                            title='Project Test 1'
-                            description='This is a short description of the project.'
+							image='/hh.webp'
+                            title='Hackathon Auth Flow'
+                            description='A streamlined, secure login and onboarding experience designed as part of a rapid-prototyping hackathon initiative.'
                         />
 					</Reveal>
 				</div>
@@ -75,8 +79,9 @@ export default function MoreLinks({
 				<div className='col-start-3 row-start-3'>
 					<Reveal delay={1}>
                         <ArchivedProjectCard
-                            title='Project Test 1'
-                            description='This is a short description of the project.'
+							image='/acc.webp'
+                            title='Retail E-commerce Experience'
+                            description='A full-funnel retail concept featuring dynamic product galleries, type-selection, and a conversion-optimized checkout flow.'
                         />
 					</Reveal>
 				</div>
@@ -85,8 +90,9 @@ export default function MoreLinks({
 				<div className='col-start-4 row-start-3'>
 					<Reveal delay={1.2}>
                         <ArchivedProjectCard
-                            title='Project Test 1'
-                            description='This is a short description of the project.'
+							image='/lcs.webp'
+                            title='Club Brand & Web Identity'
+                            description='A foundational digital ecosystem for a Computer Science organization, with established brand identity, custom assets, and a scalable design system.'
                         />
 					</Reveal>
 				</div>
