@@ -18,7 +18,6 @@ import Quickbar from '../../components/quickbar';
 import Footer from '../../components/sections/footer/footer';
 import Link from 'next/link';
 import LinkArrow from '../../components/icons/link-arrow';
-import { routerServerGlobal } from 'next/dist/server/lib/router-utils/router-server-context';
 
 
 type ProjectContentProps = {
@@ -391,8 +390,8 @@ console.log('type:', typeof selectedProject.current);
 															: 'font-medium text-(--light-mode-grey) hover:text-(--dark-grey) hover:bg-(--white)/50 border-(--grey)'}
 											`}
 										>
-											<Image 
-												src={caseStudyOnly ? 'check.svg' : 'plus.svg'}
+											<img 
+												src={caseStudyOnly ? '/check.svg' : '/plus.svg'}
 												alt=''
 												width={10}
 												height={10}
