@@ -30,7 +30,7 @@ export default function HeroDesktop({
 				{/* ------ 3 project layout ------ */}
 				{/* project display #1 */}
 				<div className='col-start-1 col-span-2 row-start-2 row-span-2'>
-					<Reveal delay={1}>
+					<Reveal delay={1.2}>
 						{projects
 							.filter(p => p.sectionId === '1')
 							.map(project => (
@@ -44,7 +44,7 @@ export default function HeroDesktop({
 
 				{/* project display #2 */}
 				<div className='col-start-2 row-start-1'>
-					<Reveal delay={1.85}>
+					<Reveal delay={1}>
 						{projects
 							.filter(p => p.sectionId === '2')
 							.map(project => (
@@ -58,7 +58,7 @@ export default function HeroDesktop({
 			
 				{/* project display #3 */}
 				<div className='col-start-4 row-start-3'>
-					<Reveal delay={1.25}>
+					<Reveal delay={1.4}>
 						{projects
 							.filter(p => p.sectionId === '3')
 							.map(project => (
