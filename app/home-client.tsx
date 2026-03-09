@@ -52,16 +52,6 @@ export default function HomeClient({
 		};
 	}, []);
 
-	// hero--portfolio project card interaction
-	const [featuredProject, setFeaturedProject] = useState<Project | null>(null);
-
-	// hero project card click -> set as featured in portfolio
-	const handleHeroClick = (project: Project) => {
-		setFeaturedProject(project);
-
-		const portfolio = document.getElementById('portfolio');
-		portfolio?.scrollIntoView({ behavior: 'smooth' });
-	};
 
 	return (
 		<>
@@ -86,7 +76,6 @@ export default function HomeClient({
 								isLoading={isLoading}
 								projects={heroProjects}
 								className='col-span-5 row-start-1 row-span-4'
-								onProjectClick={handleHeroClick}
 							/>
 						</Grid>
 					</section>

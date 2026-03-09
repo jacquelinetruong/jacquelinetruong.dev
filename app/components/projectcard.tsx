@@ -21,7 +21,6 @@ type ProjectCardProps = {
 	featured?: boolean;
 	onMouseEnter?: () => void;
 	onMouseLeave?: () => void;
-	action?: React.ReactNode;
 };
 
 function ProjectCard({
@@ -33,62 +32,12 @@ function ProjectCard({
 	featured = false,
 	onMouseEnter,
 	onMouseLeave,
-	action,
  }: ProjectCardProps) { 
 
 	// ------ VIEWPORT DISPLAY ------ //
 	const isDesktop = useMediaQuery('(min-width: 1024px)');
 
 	// ------ DESKTOP ------ //
-		// tags for each project
-		const allTags = useMemo(() => {
-			return [...(project.category ?? []), ...(project.programs ?? [])];
-		}, [project.category, project.programs]);
-
-		// for tag collapsing
-		const containerRef = useRef<HTMLDivElement>(null);
-		const measurerRef = useRef<HTMLSpanElement>(null);
-
-		const [visibleCount, setVisibleCount] = useState(allTags.length);
-
-		// measure tag visibility
-		useEffect(() => {
-			if (!containerRef.current || !measurerRef.current) return;
-
-			const measureTags = () => {
-				window.requestAnimationFrame(() => {
-					const containerWidth = containerRef.current!.clientWidth;
-					let used = 0;
-					let count = 0;
-
-					const temp = measurerRef.current!;
-					temp.innerHTML = '';
-
-					for (let tag of allTags) {
-						const span = document.createElement('span');
-						span.className = 'inline-block px-3 py-1 border border-white rounded-full text-nowrap font-medium text-[10px] 2xl:text-xs';
-						span.textContent = tag;
-						temp.appendChild(span);
-
-						const tagWidth = span.offsetWidth + 24;
-						if (used + tagWidth > containerWidth) break;
-						used += tagWidth;
-						count++;
-					}
-
-					setVisibleCount(count);
-				});
-			};
-
-			measureTags();
-			window.addEventListener('resize', measureTags);
-			return () => window.removeEventListener('resize', measureTags);
-		}, [allTags]);
-
-		// for hover prompts/messages
-		const isHeroProject = project.hero === true;
-		const activeSection = useActiveSection();
-
 		// only open external link if featured portfolio card
 		const handleClick = () => {
 			onClick?.();
@@ -140,7 +89,7 @@ function ProjectCard({
 
 	return isDesktop ? (
 		<Link
-            href={`/${project.slug}`}
+            href={`/work/${project.slug}`}
             className='relative block w-full h-full group overflow-hidden cursor-pointer'
         >
 			<div onClick={handleClick}

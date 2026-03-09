@@ -14,12 +14,10 @@ export default function HeroDesktop({
     className = '',
 	isLoading,
 	projects,
-	onProjectClick,
  }: { 
 	className?: string; 
 	isLoading: boolean;
 	projects: Project[];
-	onProjectClick?: (project: Project) => void;
  }) {
 
     return (
@@ -29,7 +27,52 @@ export default function HeroDesktop({
 			fadeEnd={0.7}
 		>
 			<Grid>
+				{/* ------ 3 project layout ------ */}
 				{/* project display #1 */}
+				<div className='col-start-1 col-span-2 row-start-2 row-span-2'>
+					<Reveal delay={1}>
+						{projects
+							.filter(p => p.sectionId === '1')
+							.map(project => (
+								<ProjectCard
+									key={project.id}
+									project={project}
+								/>
+							))}
+					</Reveal>
+				</div>
+
+				{/* project display #2 */}
+				<div className='col-start-2 row-start-1'>
+					<Reveal delay={1.85}>
+						{projects
+							.filter(p => p.sectionId === '2')
+							.map(project => (
+								<ProjectCard
+									key={project.id}
+									project={project}
+								/>
+							))}
+					</Reveal>
+				</div>
+			
+				{/* project display #3 */}
+				<div className='col-start-4 row-start-3'>
+					<Reveal delay={1.25}>
+						{projects
+							.filter(p => p.sectionId === '3')
+							.map(project => (
+								<ProjectCard
+									key={project.id}
+									project={project}
+								/>
+							))}
+					</Reveal>
+				</div>
+
+
+				{/* ------ 6 project layout ------ */}
+				{/* project display #1
 				<div className='col-start-1 row-start-1'>
 					<Reveal delay={1}>
 						{projects
@@ -38,13 +81,12 @@ export default function HeroDesktop({
 								<ProjectCard
 									key={project.id}
 									project={project}
-									onClick={() => onProjectClick?.(project)}
 								/>
 							))}
 					</Reveal>
 				</div>
 			
-				{/* project display #2 */}
+				project display #2
 				<div className='col-start-3 row-start-2'>
 					<Reveal delay={1.85}>
 						{projects
@@ -53,13 +95,12 @@ export default function HeroDesktop({
 								<ProjectCard
 									key={project.id}
 									project={project}
-									onClick={() => onProjectClick?.(project)}
 								/>
 							))}
 					</Reveal>
 				</div>
 			
-				{/* project display #3 */}
+				project display #3
 				<div className='col-start-2 row-start-1'>
 					<Reveal delay={1.25}>
 						{projects
@@ -68,13 +109,12 @@ export default function HeroDesktop({
 								<ProjectCard
 									key={project.id}
 									project={project}
-									onClick={() => onProjectClick?.(project)}
 								/>
 							))}
 					</Reveal>
-				</div>
+				</div> */}
 
-				{/* project display #4 */}
+				{/* project display #4
 				<div className='col-start-2 row-start-2'>
 					<Reveal delay={1.65}>
 						{projects
@@ -83,13 +123,12 @@ export default function HeroDesktop({
 								<ProjectCard
 									key={project.id}
 									project={project}
-									onClick={() => onProjectClick?.(project)}
 								/>
 							))}
 					</Reveal>
 				</div>
 
-				{/* project display #5 */}
+				project display #5
 				<div className='col-start-1 row-start-3'>
 					<Reveal delay={1.4}>
 						{projects
@@ -98,13 +137,12 @@ export default function HeroDesktop({
 								<ProjectCard
 									key={project.id}
 									project={project}
-									onClick={() => onProjectClick?.(project)}
 								/>
 							))}
 					</Reveal>
 				</div>
 
-				{/* project display #6 */}
+				project display #6
 				<div className='col-start-3 row-start-3'>
 					<Reveal delay={2.05}>
 						{projects
@@ -113,11 +151,10 @@ export default function HeroDesktop({
 								<ProjectCard
 									key={project.id}
 									project={project}
-									onClick={() => onProjectClick?.(project)}
 								/>
 							))}
 					</Reveal>
-				</div>
+				</div> */}
 
 			</Grid>
 		</SectionReveal>
