@@ -33,7 +33,7 @@ export default function MoreLinks({
 				<div className='col-start-1 row-start-1'>
 					<Reveal delay={1.2}>
                         <Card
-                            coverImage='/office.png'
+                            coverImage='/office.webp'
                             altText='Work experience'
 							hrefId='/about#experience'
                         />
@@ -44,7 +44,7 @@ export default function MoreLinks({
 				<div className='col-start-1 row-start-2'>
 					<Reveal delay={1.2}>
                         <Card
-                            coverImage='/current-keyboard-built-by-me.png'
+                            coverImage='/current-keyboard-built-by-me.webp'
                             altText='Currently building'
 							hrefId='/work/current'
                         />
@@ -67,7 +67,7 @@ export default function MoreLinks({
 				<div className='col-start-4 row-start-3'>
 					<Reveal delay={1.2}>
                         <Card
-                            coverImage='/summer-person.png'
+                            coverImage='/summer-person.webp'
                             altText='More me, offline'
 							hrefId='/extras'
                         />

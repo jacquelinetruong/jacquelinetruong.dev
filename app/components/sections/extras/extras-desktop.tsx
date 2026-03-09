@@ -48,7 +48,7 @@ export default function Extras({
                 <div className='col-start-4 row-start-1 w-full h-full relative'>
                     <Reveal delay={0.75}>
                         <Image 
-                            src='/summer-person.png'
+                            src='/summer-person.webp'
                             alt='Beach photo'
                             fill
                             className='object-cover object-center pointer-events-none'
@@ -59,7 +59,7 @@ export default function Extras({
                 <div className='col-start-5 row-start-1 w-full h-full relative'>
                     <Reveal delay={1.2}>
                         <Image 
-                            src='/tranquil-outdoors.png'
+                            src='/tranquil-outdoors.webp'
                             alt='Tranquil campsite'
                             fill
                             className='object-cover object-center pointer-events-none'
@@ -70,7 +70,7 @@ export default function Extras({
                 <div className='col-start-3 row-start-2 w-full h-full relative'>
                     <Reveal delay={0.6}>
                         <Image 
-                            src='/current-keyboard-built-by-me.png'
+                            src='/current-keyboard-built-by-me.webp'
                             alt='Built my custom keyboard'
                             fill
                             className='object-cover object-center pointer-events-none'
@@ -81,7 +81,7 @@ export default function Extras({
                 <div className='col-start-4 row-start-2 w-full h-full relative'>
                     <Reveal delay={1}>
                         <Image 
-                            src='/fav-nails-by-me.png'
+                            src='/fav-nails-by-me.webp'
                             alt='Favourite nail set by me'
                             fill
                             className='object-cover object-center pointer-events-none'
@@ -92,7 +92,7 @@ export default function Extras({
                 <div className='col-start-2 row-start-3 w-full h-full relative'>
                     <Reveal delay={0.35}>
                         <Image 
-                            src='/perfect-table-spread.png'
+                            src='/perfect-table-spread.webp'
                             alt='Camera eats first'
                             fill
                             className='object-cover object-center pointer-events-none'
@@ -103,7 +103,7 @@ export default function Extras({
                 <div className='col-start-4 row-start-3 w-full h-full relative'>
                     <Reveal delay={0.85}>
                         <Image 
-                            src='/always-matcha.png'
+                            src='/always-matcha.webp'
                             alt='Never skip my daily matcha'
                             fill
                             className='object-cover object-center pointer-events-none'
@@ -114,7 +114,7 @@ export default function Extras({
                 <div className='col-start-5 row-start-3 w-full h-full relative'>
                     <Reveal delay={1.4}>
                         <Image 
-                            src='/sweet-treats.png'
+                            src='/sweet-treats.webp'
                             alt='Always room for dessert'
                             fill
                             className='object-cover object-center pointer-events-none'
