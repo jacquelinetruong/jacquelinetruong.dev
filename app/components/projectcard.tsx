@@ -8,83 +8,36 @@ import { useActiveSection } from './active-section';
 import GalleryImage from '@/app/components/gallery-image';
 import { notionImage } from '@/lib/notionImage';
 import { useMediaQuery } from './media-query';
+import LinkArrow from '@/app/components/icons/link-arrow';
+import Link from 'next/link';
 
 
 type ProjectCardProps = {
 	project: Project;
 	isNext?: boolean;
 	className?: string;
+	big?: boolean;
 	onClick?: () => void;
 	featured?: boolean;
 	onMouseEnter?: () => void;
 	onMouseLeave?: () => void;
-	action?: React.ReactNode;
 };
 
 function ProjectCard({
 	project,
 	isNext,
 	className = '',
+	big,
 	onClick,
 	featured = false,
 	onMouseEnter,
 	onMouseLeave,
-	action,
  }: ProjectCardProps) { 
 
 	// ------ VIEWPORT DISPLAY ------ //
 	const isDesktop = useMediaQuery('(min-width: 1024px)');
 
 	// ------ DESKTOP ------ //
-		// tags for each project
-		const allTags = useMemo(() => {
-			return [...(project.category ?? []), ...(project.programs ?? [])];
-		}, [project.category, project.programs]);
-
-		// for tag collapsing
-		const containerRef = useRef<HTMLDivElement>(null);
-		const measurerRef = useRef<HTMLSpanElement>(null);
-
-		const [visibleCount, setVisibleCount] = useState(allTags.length);
-
-		// measure tag visibility
-		useEffect(() => {
-			if (!containerRef.current || !measurerRef.current) return;
-
-			const measureTags = () => {
-				window.requestAnimationFrame(() => {
-					const containerWidth = containerRef.current!.clientWidth;
-					let used = 0;
-					let count = 0;
-
-					const temp = measurerRef.current!;
-					temp.innerHTML = '';
-
-					for (let tag of allTags) {
-						const span = document.createElement('span');
-						span.className = 'inline-block px-3 py-1 border border-white rounded-full text-nowrap font-medium text-[10px] 2xl:text-xs';
-						span.textContent = tag;
-						temp.appendChild(span);
-
-						const tagWidth = span.offsetWidth + 24;
-						if (used + tagWidth > containerWidth) break;
-						used += tagWidth;
-						count++;
-					}
-
-					setVisibleCount(count);
-				});
-			};
-
-			measureTags();
-			window.addEventListener('resize', measureTags);
-			return () => window.removeEventListener('resize', measureTags);
-		}, [allTags]);
-
-		// for hover prompts/messages
-		const isHeroProject = project.hero === true;
-		const activeSection = useActiveSection();
-
 		// only open external link if featured portfolio card
 		const handleClick = () => {
 			onClick?.();
@@ -135,106 +88,56 @@ function ProjectCard({
 		}, [scrollTimer]);
 
 	return isDesktop ? (
-		<div onClick={handleClick}
-			onMouseEnter={onMouseEnter}
-			onMouseLeave={onMouseLeave}
-			className={`relative w-full h-full ${className} group overflow-hidden container-type-inline-size ${featured ? 'cursor-default' : 'cursor-pointer'}`}
-		>
-			{/* preview - native img with fetchpriority */}
-			<img
-				src={notionImage(project.images[0])}
-				alt={project.title}
-				fetchPriority={project.hero || featured ? 'high' : 'low'}
-				loading={project.hero || featured ? 'eager' : 'lazy'}
-				decoding={project.hero || featured ? 'sync' : 'async'}
-				className={`absolute inset-0 w-full h-full object-cover object-center
-						   transition-transform duration-500 ease-out
-						   ${featured ? '' : 'group-hover:scale-115'}`}
-				draggable={false}
-			/>	
+		<Link
+            href={`/work/${project.slug}`}
+            className='relative block w-full h-full group overflow-hidden cursor-pointer'
+        >
+			<div onClick={handleClick}
+				onMouseEnter={onMouseEnter}
+				onMouseLeave={onMouseLeave}
+				className={`relative w-full h-full ${className} group overflow-hidden container-type-inline-size ${featured ? 'cursor-default' : 'cursor-pointer'}`}
+			>
+				{/* preview - native img with fetchpriority */}
+				<img
+					src={notionImage(project.images[0])}
+					alt={project.title}
+					fetchPriority={project.hero || featured ? 'high' : 'low'}
+					loading={project.hero || featured ? 'eager' : 'lazy'}
+					decoding={project.hero || featured ? 'sync' : 'async'}
+					className={`absolute inset-0 w-full h-full object-cover object-center
+							transition-transform duration-500 ease-out
+							${featured ? '' : 'group-hover:scale-115'}`}
+					draggable={false}
+				/>	
 
-			{/* gradient for text readability */}
-			<div className={`absolute inset-0 bg-gradient-to-t from-(--dark-black)/70 from-5% via-(--dark-black)/55 via-16% to-transparent to-40% point-events-none
-							${!featured && 'bg-[#13131B]/15 transition duration-300 group-hover:bg-[#13131B]/40'}`}/>
+				{/* gradient for text readability */}
+				<div className={`absolute inset-0 bg-gradient-to-t from-(--dark-black)/70 from-5% via-(--dark-black)/55 via-16% to-transparent to-40% point-events-none
+								${!featured && 'bg-[#131319]/15 transition duration-300 group-hover:bg-[#131319]/40'}`}/>
 
-			{/* project details section */}
-			<div className='text-white
-							flex flex-row justify-between items-end
-							absolute bottom-0 left-0 w-full p-6'>
-
-				{/* content */}
-				<div className='flex flex-col gap-1 flex-grow min-w-0 pr-6'>
-
-					{/* tags */}
-					{allTags.length > 0 && (
-						<div 
-							ref={containerRef}
-							className={`font-medium text-[10px] 2xl:text-xs
-							  		   flex flex-nowrap gap-2 justify-start items-center
-									   w-full ${featured ? 'ultrawide:px-14' : ''}`}
-						>
-							{/* show tags that fit */}
-							{allTags.slice(0, visibleCount).map(tag => (
-								<span key={tag} className='inline-block px-3 py-1 pointer-events-none
-															bg-(--black)/20 backdrop-blur-[1px] border border-white rounded-full 
-															text-nowrap text-[10px] 2xl:text-xs'
-								>
-									{tag}
-								</span>
-							))}
-
-							{/* show number of tags that don't fit */}
-							{visibleCount < allTags.length && (
-								<span className='inline-block px-3 py-1 pointer-events-none
-													bg-(--black)/20 backdrop-blur-[1px] border border-white rounded-full 
-													text-nowrap text-[10px] 2xl:text-xs'
-								>
-									+{allTags.length - visibleCount}
-								</span>		
-							)}
-
-							{/* hidden element span */}
-							<span
-								ref={measurerRef}
-								className='absolute opacity-0 px-3 py-1 pointer-events-none
-											bg-(--black)/20 backdrop-blur-[1px] border border-white rounded-full 
-											text-nowrap text-[10px] 2xl:text-xs'
-								>
-							</span>
-						</div>
-					)}
-					{/* project title */}
-					{!featured && <h3 className='font-medium text-md truncate'>{project.title}</h3>}
+				{/* title */}
+				<div className='absolute bottom-0 left-0 w-full p-6
+								flex justify-between items-end text-white'>
+					<h3 className='font-medium text-md  w-2/3'>{project.title}</h3>
+					{/* <span className='inline-block px-3 py-1 pointer-events-none
+										bg-(--black)/20 backdrop-blur-[1px] border border-white rounded-full 
+										text-nowrap text-[10px] 2xl:text-xs'
+					>
+						{project.title}
+					</span> */}
+					<LinkArrow className={`text-(--bg-colour) ${big ? 'size-[54px]' : 'size-[40px]'}`}/>
 				</div>
+
+				{/* hover: nav to project case study */}
+				<div className='absolute inset-0 place-self-center
+								text-white font-medium text-nowrap drop-shadow-md
+								opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0
+								transition-all duration-100'>	
+					<p className='text-xs xl:text-sm'>View case study</p>
+				</div>
+
+				
 			</div>
-
-			{/* hover: scroll to project (hero project) */}
-			{isHeroProject && activeSection === 'home' && (
-				<div className='absolute inset-0 place-self-center
-								text-white font-medium text-nowrap drop-shadow-md
-								opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0
-								transition-all duration-100'>	
-					<p className='text-xs xl:text-sm'>Scroll to Project</p>
-				</div>
-			)}
-
-			{/* hover: focus project prompt (only show IFF portfolio project card, and NOT next project in overlay) */}
-			{activeSection === 'portfolio' && !featured && !isNext && (
-				<div className='absolute inset-0 place-self-center
-								text-white font-medium text-nowrap drop-shadow-md
-								opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0
-								transition-all duration-100'>	
-					<p className='text-xs xl:text-sm'>Focus Project</p>
-				</div>
-			)}
-
-			{/* render any actions if I want */}
-			{featured && action && (
-				<div className='absolute bottom-4 right-4 z-20'>
-					{action}
-				</div>
-			)}
-		</div>
+		</Link>
 	): (
 		// mobile
 		<div className='relative w-full h-full overflow-hidden'>

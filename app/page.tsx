@@ -1,4 +1,4 @@
-import HomeClient from './components/home-client';
+import HomeClient from './home-client';
 import { getProjects } from '@/lib/getProjects';
 import { getExperience } from '@/lib/getExperience';
 import { notionImage } from '@/lib/notionImage';
@@ -42,8 +42,6 @@ export default async function Page() {
 				<HomeClient 
 					heroProjects={heroProjects}
 					portfolioProjects={portfolioProjects}
-					currentXP={currentXP}
-					experience={experience}
 				/>
 			</div>
 		</>
