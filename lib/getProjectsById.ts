@@ -49,7 +49,9 @@ function mapProject(page: any): Project {
 
 		title: page.properties.title.title[0]?.plain_text ?? '',
 		type: page.properties.type.multi_select?.map((t: any) => t.name) ?? 'design',
-
+		role: page.properties.role.multi_select?.map((r: any) => r.name) ?? [],
+        tags: page.properties.tags.multi_select?.map((g: any) => g.name) ?? [],
+		
 		images:
 			page.properties.images.files
 				?.map((file: any) =>
@@ -65,20 +67,11 @@ function mapProject(page: any): Project {
 			.map((t: any) => t.plain_text)
 			.join(''),
 
-		points:
-			page.properties.points.rich_text
-				.map((t: any) => t.plain_text)
-				.join('')
-				.split('\n')
-				.map((p: string) => p.replace(/^-\s*/, '').trim())
-				.filter(Boolean),
-
 		languages: page.properties.languages.multi_select?.map((l: any) => l.name) ?? [],
 		programs: page.properties.programs.multi_select?.map((p: any) => p.name) ?? [],
 		category: page.properties.category.multi_select?.map((c: any) => c.name) ?? [],
 
 		link: page.properties.link?.url ?? '',
 		github: page.properties.github?.url ?? '',
-		dribbble: page.properties.dribbble?.url ?? '',
 	};
 }

@@ -103,8 +103,43 @@ console.log('type:', typeof selectedProject.current);
 						{/* project hero */}
 						<div className='col-start-2 col-span-3 row-start-1 row-span-1
 										flex flex-col justify-between'>
-							{/* title */}
+							
 							<div className='flex flex-col gap-2 2xl:gap-4 ultrawide:gap-6 px-4 pt-8 2xl:px-8 2xl:pt-10 ultrawide:px-20 ultrawide:pt-20'>
+								<div className='flex flex-row gap-2'>
+									{/* case study label */}
+									{selectedProject.casestudy && (
+										<span className='w-fit h-fit'>
+											<Reveal delay={0} className='pointer-events-none px-2.5 py-1 2xl:px-3.5 2xl:py-1.5 3xl:py-2
+																border border-(--text-colour) rounded-full 
+																text-nowrap font-semibold text-[10px] 2xl:text-[11px] 3xl:text-xs'>
+												CASE STUDY
+											</Reveal>
+										</span>
+									)}
+
+									{/* current project label */}
+									{selectedProject.current && (
+										<span className='w-fit h-fit'>
+											<Reveal delay={0} className='pointer-events-none px-2.5 py-1 2xl:px-3.5 2xl:py-1.5 3xl:py-2
+																border border-(--text-colour) rounded-full 
+																text-nowrap font-semibold text-[10px] 2xl:text-[11px] 3xl:text-xs'>
+												IN PROGRESS
+											</Reveal>
+										</span>
+									)}
+									{/* other labels */}
+									{selectedProject.tags.map((tag) => (
+										<span className='w-fit h-fit'>
+											<Reveal key={tag} delay={0} className='pointer-events-none px-2.5 py-1 2xl:px-3.5 2xl:py-1.5 3xl:py-2
+																border border-(--text-colour) rounded-full 
+																text-nowrap font-semibold text-[10px] 2xl:text-[11px] 3xl:text-xs'>
+												{tag.toUpperCase()}
+											</Reveal>
+										</span>
+									))}
+								</div>
+								
+								{/* title */}
 								<Reveal delay={0}>
 									<div className='flex flex-row gap-4 items-center'>
 										<Image 
@@ -117,28 +152,6 @@ console.log('type:', typeof selectedProject.current);
 										<h1 className='font-semibold lg:text-3xl 2xl:text-4xl'>{selectedProject.title}</h1>
 									</div>
 								</Reveal>
-
-								{/* case study label */}
-								{selectedProject.casestudy && (
-									<Reveal delay={0}>
-									<span className='w-fit h-fit pointer-events-none px-2.5 py-1 2xl:px-3.5 2xl:py-1.5 3xl:py-2
-														border border-(--text-colour) rounded-full 
-														text-nowrap font-semibold text-[10px] 2xl:text-[11px] 3xl:text-xs'>
-										CASE STUDY
-									</span>
-									</Reveal>
-								)}
-
-								{/* current project label */}
-								{selectedProject.current && (
-									<Reveal delay={0}>
-									<span className='w-fit h-fit pointer-events-none px-2.5 py-1 2xl:px-3.5 2xl:py-1.5 3xl:py-2
-														border border-(--text-colour) rounded-full 
-														text-nowrap font-semibold text-[10px] 2xl:text-[11px] 3xl:text-xs'>
-										IN PROGRESS
-									</span>
-									</Reveal>
-								)}
 							</div>
 
 							{/* tags */}
@@ -149,7 +162,7 @@ console.log('type:', typeof selectedProject.current);
 									<h4 className='text-[10px] 2xl:text-xs text-(--light-mode-grey) font-medium'>
 										ROLE
 									</h4>
-									<p className='capitalize text-sm 2xl:text-base 3xl:text-lg font-medium w-full'>{[...(selectedProject.type ?? [])].join(' & ')}</p>
+									<p className='capitalize text-sm 2xl:text-base 3xl:text-lg font-medium w-full'>{[...(selectedProject.role ?? [])].join(', ')}</p>
 									</Reveal>
 								</div>
 
@@ -247,34 +260,6 @@ console.log('type:', typeof selectedProject.current);
 									</Reveal>
 								</a>
 							)}
-							{selectedProject?.dribbble && (
-								<a 
-									target='_blank'
-									href={selectedProject?.link}
-									rel='noopener noreferrer'
-									className='w-fit h-fit'
-								>
-									<Reveal delay={2.4} className='flex flex-row gap-2 items-center cursor-pointer group
-																	px-3 py-2.5 2xl:px-4 2xl:py-3.5 rounded-full 
-																	bg-(--nice-grey) hover:bg-(--grey)
-																	transition-colours duration-300'
-									>    
-										<Image
-											src='/dribbble-logo-black.svg'
-											alt='See Dribbble Post'
-											width={20}
-											height={20}
-										/>
-										{/* tooltip */}
-										<span className='absolute translate-x-12
-															w-fit h-fit rounded-xl px-3 py-2
-															shadow-sm bg-(--light-black)
-															hidden group-hover:block'>
-											<p className='font-medium text-xs text-(--bg-colour) whitespace-nowrap'>See Dribbble Post</p>
-										</span>
-									</Reveal>
-								</a>
-							)}	
 							<a 
 								href='mailto:hello@jacquelinetruong.dev'
 								target='_blank'

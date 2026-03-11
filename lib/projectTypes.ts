@@ -11,16 +11,16 @@ export type Project = {
     sectionId: '1' | '2' | '3' | '4' | '5' | '6';
 
     type: 'design' | 'development';
+    role: string[];
+    tags: string[];
     title: string;
     images: string[];
 
     description: string;
-    points?: string[];
     languages: string[];
     programs: string[];
     category: string[];
 
     link?: string;
     github?: string;
-    dribbble?: string;
 };

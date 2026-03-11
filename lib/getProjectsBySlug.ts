@@ -65,6 +65,12 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
     type:
       page.properties.type.multi_select?.map((t: any) => t.name) ?? 'design',
 
+    role:
+      page.properties.role.multi_select?.map((r: any) => r.name) ?? [],
+    
+    tags:
+      page.properties.tags.multi_select?.map((g: any) => g.name) ?? [],
+    
     images:
       page.properties.images.files
         ?.map((file: any) => {
@@ -77,14 +83,6 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
     description:
       page.properties.description.rich_text[0]?.plain_text ?? '',
 
-    points:
-      page.properties.points.rich_text
-        .map((t: any) => t.plain_text)
-        .join('')
-        .split('\n')
-        .map((p: string) => p.replace(/^-\s*/, '').trim())
-        .filter(Boolean) ?? [],
-
     languages:
       page.properties.languages.multi_select?.map((l: any) => l.name) ?? [],
 
@@ -96,6 +94,5 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
 
     link: page.properties.link?.url ?? '',
     github: page.properties.github?.url ?? '',
-    dribbble: page.properties.dribbble?.url ?? '',
   };
 }
