@@ -12,8 +12,7 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
     const { theme, setTheme } = useTheme();
     const pathname = usePathname();
 
-    const isHome = pathname === '/';
-    const isProjectPage = pathname.startsWith('/projects');
+    const isProjectPage = pathname.startsWith('/work/');
 
     // only for work page (home page) theme changes
     const activeSection = useActiveSection(setTheme, {
@@ -87,7 +86,7 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
                     {navItems.map((item) => {
                         const isActive =
                             pathname === item.href ||
-                            (item.href === '/' && isProjectPage);
+                            (item.href === '/work/process' && isProjectPage);
 
                         return (
                             <Link
