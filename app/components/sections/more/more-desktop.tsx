@@ -44,7 +44,7 @@ export default function MoreLinks({
 				<div className='col-start-1 row-start-2'>
 					<Reveal delay={1.2}>
                         <Card
-                            coverImage='/current-keyboard-built-by-me.webp'
+                            coverImage='/blurrypreview.webp'
                             altText='Currently building'
 							hrefId='/work/current'
                         />
