@@ -105,6 +105,20 @@ console.log('type:', typeof selectedProject.current);
 										flex flex-col justify-between'>
 							
 							<div className='flex flex-col gap-2 2xl:gap-4 ultrawide:gap-6 px-4 pt-8 2xl:px-8 2xl:pt-10 ultrawide:px-20 ultrawide:pt-20'>
+								{/* title */}
+								<Reveal delay={0}>
+									<div className='flex flex-row gap-4 items-center'>
+										<Image 
+											src='/chrome-ball.png' 
+											alt='' 
+											width={28} 
+											height={28} 
+											draggable={false}
+										/>
+										<h1 className='font-semibold lg:text-3xl 2xl:text-4xl'>{selectedProject.title}</h1>
+									</div>
+								</Reveal>
+
 								<div className='flex flex-row gap-2'>
 									{/* case study label */}
 									{selectedProject.casestudy && (
@@ -138,20 +152,6 @@ console.log('type:', typeof selectedProject.current);
 										</span>
 									))}
 								</div>
-								
-								{/* title */}
-								<Reveal delay={0}>
-									<div className='flex flex-row gap-4 items-center'>
-										<Image 
-											src='/chrome-ball.png' 
-											alt='' 
-											width={28} 
-											height={28} 
-											draggable={false}
-										/>
-										<h1 className='font-semibold lg:text-3xl 2xl:text-4xl'>{selectedProject.title}</h1>
-									</div>
-								</Reveal>
 							</div>
 
 							{/* tags */}
@@ -235,7 +235,7 @@ console.log('type:', typeof selectedProject.current);
 							{selectedProject?.github && (
 								<a 
 									target='_blank'
-									href={selectedProject?.link}
+									href={selectedProject?.github}
 									rel='noopener noreferrer'
 									className='w-fit h-fit'
 								>
@@ -460,7 +460,7 @@ console.log('type:', typeof selectedProject.current);
 							<div className=''>
 								<Reveal delay={0}>
 									<Link
-										href={`/${nextProject.slug}`}
+										href={`/work/${nextProject.slug}`}
 										className='group block p-8 transition-all duration-500
 													bg-(--white)/40 hover:bg-(--white)/80
 													border border-(--nice-grey)/60 rounded-xl'
