@@ -6,7 +6,7 @@ export type Blocks = {
     id: string;
     section: string;
     order: number;
-    block: 'section-title' | 'heading' | 'subheading' | 'text' | 'list' | 'left-text-image' | 'image-1' | 'image-2' | 'image-3' | 'carousel' | 'divider';
+    block: 'big' | 'section-title' | 'heading' | 'subheading' | 'text' | 'list' | 'left-text-image' | 'image-1' | 'image-2' | 'image-3' | 'stat-1' | 'stat-2' | 'stat-3' | 'carousel' | 'divider';
     label: RichTextItem[];
     heading: RichTextItem[];
     text: RichTextItem[][];
