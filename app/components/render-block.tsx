@@ -15,6 +15,18 @@ type RenderBlockProps = {
 
 export default function RenderBlock({ block }: RenderBlockProps) {
 	switch (block.block) {
+		// ------ BIG TEXT BLOCK ------ //
+		case 'big':
+			return (
+				<section className='w-full h-fit flex flex-col gap-4 pt-12 pb-4 2xl:pt-16'>
+					<div className='w-full h-fit flex flex-col gap-1'>
+						{block.label && block.label.length > 0 && <h4 className='text-sm text-(--light-mode-grey) font-medium'>{renderRichText(block.label)}</h4>}
+						{block.heading && block.heading.length > 0 && <h1 className='font-semibold text-2xl 2xl:text-3xl'>{renderRichText(block.heading)}</h1>}
+					</div>
+				</section>
+			);
+
+
 		// ------ SECTION TITLE BLOCK ------ //
 		case 'section-title':
 			return (
@@ -58,13 +70,30 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 
 		// ------ LIST BLOCK ------ //
 		case 'list':
+			const headings = block.heading?.[0]?.plain_text?.split('\n') ?? [];
+			const hasHeadings = headings.length > 0 && headings[0].trim() !== '';
+
 			return (
-				<section className='w-full h-fit flex flex-col gap-2'>
-					<div className='ml-6'>
-						{block?.text.map((item, i) => (
-							<li key={i} className='text-base'>{renderRichText(item)}</li>
-						))} 
-					</div>
+				<section className='w-full h-fit pt-4 pb-2'>
+					<ul className='ml-12 ultrawide:ml-16 list-disc flex flex-col gap-4'>
+						{hasHeadings
+							? headings.map((heading, i) => (
+								<li key={i}>
+									<div className='flex flex-col gap-1'>
+										<h3 className='font-semibold text-lg 2xl:text-xl'>{heading}</h3>
+
+										{block.text?.[i] && (
+											<p className='text-base'>{renderRichText(block.text[i])}</p>
+										)}
+									</div>
+								</li>
+								))
+
+							: block.text?.map((item, i) => (
+								<li key={i} className='text-base'>{renderRichText(item)}</li>
+							))
+						}
+					</ul>
 				</section>
 			);
 
@@ -99,7 +128,7 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 		// ------ IMAGE(S) BLOCK ------ //	
 		case 'image-1':
 		case 'image-2':
-		case 'image-3':
+		case 'image-3':			
 			return (
 				<section className='w-full h-full flex flex-row justify-between justify-center gap-6 pt-6 2xl:pt-10 2xl:pb-2'>
 					{block.images.map((image, i) => (
@@ -117,6 +146,34 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 							<p className='p-1 text-wrap italic text-sm text-(--text-colour) w-full h-full'>{block.caption[i]}</p>
 						</div>
 					))}
+				</section>
+			);
+		
+			
+		// ------ STAT(S) BLOCK ------ //	
+		case 'stat-1':
+		case 'stat-2':
+		case 'stat-3':
+			const stats = block.heading?.[0]?.plain_text?.split('\n') ?? [];
+			const labels = block.label?.[0]?.plain_text?.split('\n') ?? [];
+
+			return (
+				<section className='w-full h-full flex flex-col gap-1 pt-10 2xl:pt-12 2xl:pb-2'>
+					<div className='flex gap-28'>
+						{stats.map((stat, i) => (
+							<span key={i} className='flex flex-col gap-2'>
+							<h1 className='font-medium text-4xl 2xl:text-5xl'>
+								{stat}
+							</h1>
+
+							{labels[i] && (
+								<h4 className='text-base text-(--dark-grey) font-medium'>
+								{labels[i]}
+								</h4>
+							)}
+							</span>
+						))}
+					</div>
 				</section>
 			);
 			
