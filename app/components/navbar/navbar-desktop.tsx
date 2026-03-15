@@ -12,8 +12,6 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
     const { theme, setTheme } = useTheme();
     const pathname = usePathname();
 
-    const isProjectPage = pathname.startsWith('/work/');
-
     // only for work page (home page) theme changes
     const activeSection = useActiveSection(setTheme, {
         // home page
@@ -34,8 +32,15 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
         extras: 'light',
     });
 
+    // reset themes when nav-ing pages
+    useEffect(() => {
+        setTheme('light');
+    }, [pathname, setTheme]);
+
     // specific cases
     const isWhiteLogo = (pathname === '/' || pathname === '/work') && activeSection === 'contact';
+    const isProjectPage = pathname.startsWith('/work/');
+    const isDark = activeSection === 'more' || activeSection === 'archive';
 
     const navItems = [
         { label: 'Work', href: '/work' },
@@ -102,8 +107,13 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
                                 className={`transition-colors duration-300 ${
                                     isActive
                                         ? 'text-(--text-colour)'
-                                        : 'text-(--alt-text-colour) hover:text-(--dark-grey)'
-                                }`}
+                                        : 'text-(--alt-text-colour)'
+                                }
+                                    ${isDark 
+                                        ? 'hover:text-(--grey)'
+                                        : 'hover:text-(--dark-grey)'
+                                    }
+                                `}
                             >
                                 {item.label}
                             </Link>

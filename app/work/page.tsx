@@ -23,7 +23,7 @@ export default async function Page() {
                     </Grid>
                 </section>
 
-                <section id='archive' className='section data-hero'>
+                <section id='archive' className='section'>
                     <Grid>
                         <Archive />
                     </Grid>

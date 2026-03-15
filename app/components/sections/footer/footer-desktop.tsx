@@ -71,10 +71,34 @@ export default function FooterDesktop({ className = '' }: { className?: string }
                                 <div className='flex flex-col gap-2'>
                                     <h5 className={`${isDark ? 'text-(--grey)' : 'text-(--light-black)'}`}>Find More</h5>
                                     <div className='flex flex-row gap-6 | xl:gap-8'>
-                                        <a className={`w-fit transition-colors duration-300 ${isDark ? 'hover:text-(--light-black)' : 'hover:text-(--grey)'}`} target='_blank' href='/resume.pdf' rel='noopener noreferrer'>Resume</a>
-                                        <a className={`w-fit transition-colors duration-300 ${isDark ? 'hover:text-(--light-black)' : 'hover:text-(--grey)'}`} target='_blank' href='https://www.linkedin.com/in/jacquellinetruong' rel='noopener noreferrer'>LinkedIn</a>
-                                        <a className={`w-fit transition-colors duration-300 ${isDark ? 'hover:text-(--light-black)' : 'hover:text-(--grey)'}`} target='_blank' href='https://github.com/jacquelinetruong' rel='noopener noreferrer'>GitHub</a>
-                                        <a className={`w-fit transition-colors duration-300 ${isDark ? 'hover:text-(--light-black)' : 'hover:text-(--grey)'}`} target='_blank' href='https://www.behance.net/jacqueltruong' rel='noopener noreferrer'>Behance</a>
+                                        <a 
+                                            className={`w-fit transition-colors duration-300 ${isDark ? 'text-(--dark-grey) hover:text-(--light-mode-grey)' : 'hover:text-(--off-white)'}`} 
+                                            target='_blank' 
+                                            href='/resume.pdf' 
+                                            rel='noopener noreferrer'>
+                                                Resume
+                                        </a>
+                                        <a 
+                                            className={`w-fit transition-colors duration-300 ${isDark ? 'text-(--dark-grey) hover:text-(--light-mode-grey)' : 'hover:text-(--off-white)'}`} 
+                                            target='_blank' 
+                                            href='https://www.linkedin.com/in/jacquellinetruong' 
+                                            rel='noopener noreferrer'>
+                                                LinkedIn
+                                        </a>
+                                        <a 
+                                            className={`w-fit transition-colors duration-300 ${isDark ? 'text-(--dark-grey) hover:text-(--light-mode-grey)' : 'hover:text-(--off-white)'}`} 
+                                            target='_blank' 
+                                            href='https://github.com/jacquelinetruong' 
+                                            rel='noopener noreferrer'>
+                                                GitHub
+                                        </a>
+                                        <a 
+                                            className={`w-fit transition-colors duration-300 ${isDark ? 'text-(--dark-grey) hover:text-(--light-mode-grey)' : 'hover:text-(--off-white)'}`} 
+                                            target='_blank' 
+                                            href='https://www.behance.net/jacquelinetruong' 
+                                            rel='noopener noreferrer'>
+                                                Behance
+                                        </a>
                                     </div>
                                 </div>
                             </Reveal>
@@ -112,7 +136,7 @@ export default function FooterDesktop({ className = '' }: { className?: string }
                                     />
                                 )}
                             </div>
-                            <h5 className='text-(--alt-text-colour) text-right leading-5'>© 2026 built & designed by jacqueline truong</h5>
+                            <h5 className={`${isDark ? 'text-(--dark-grey)' : 'text-(--light-mode-grey)'} text-right leading-5`}>© 2026 built & designed by jacqueline truong</h5>
                         </Reveal>
                     </div>
                 

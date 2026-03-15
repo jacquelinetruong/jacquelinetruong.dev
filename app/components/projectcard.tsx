@@ -14,34 +14,22 @@ import Link from 'next/link';
 
 type ProjectCardProps = {
 	project: Project;
-	isNext?: boolean;
 	className?: string;
 	big?: boolean;
-	onClick?: () => void;
-	featured?: boolean;
 	onMouseEnter?: () => void;
 	onMouseLeave?: () => void;
 };
 
 function ProjectCard({
 	project,
-	isNext,
 	className = '',
 	big,
-	onClick,
-	featured = false,
 	onMouseEnter,
 	onMouseLeave,
  }: ProjectCardProps) { 
 
 	// ------ VIEWPORT DISPLAY ------ //
 	const isDesktop = useMediaQuery('(min-width: 1024px)');
-
-	// ------ DESKTOP ------ //
-		// only open external link if featured portfolio card
-		const handleClick = () => {
-			onClick?.();
-		};
 	
 	// ------ MOBILE ------ //
 		// ------ MOBILE STATE ------
@@ -92,38 +80,31 @@ function ProjectCard({
             href={`/work/${project.slug}`}
             className='relative block w-full h-full group overflow-hidden cursor-pointer'
         >
-			<div onClick={handleClick}
+			<div
 				onMouseEnter={onMouseEnter}
 				onMouseLeave={onMouseLeave}
-				className={`relative w-full h-full ${className} group overflow-hidden container-type-inline-size ${featured ? 'cursor-default' : 'cursor-pointer'}`}
+				className={`relative w-full h-full ${className} group overflow-hidden container-type-inline-size cursor-pointer`}
 			>
 				{/* preview - native img with fetchpriority */}
 				<img
 					src={notionImage(project.images[0])}
 					alt={project.title}
-					fetchPriority={project.hero || featured ? 'high' : 'low'}
-					loading={project.hero || featured ? 'eager' : 'lazy'}
-					decoding={project.hero || featured ? 'sync' : 'async'}
+					fetchPriority={project.hero ? 'high' : 'low'}
+					loading={project.hero  ? 'eager' : 'lazy'}
+					decoding={project.hero ? 'sync' : 'async'}
 					className={`absolute inset-0 w-full h-full object-cover object-center
-							transition-transform duration-500 ease-out
-							${featured ? '' : 'group-hover:scale-115'}`}
+							transition-transform duration-500 ease-out group-hover:scale-115`}
 					draggable={false}
 				/>	
 
 				{/* gradient for text readability */}
 				<div className={`absolute inset-0 bg-gradient-to-t from-(--dark-black)/70 from-5% via-(--dark-black)/55 via-16% to-transparent to-40% point-events-none
-								${!featured && 'bg-[#131319]/15 transition duration-300 group-hover:bg-[#131319]/40'}`}/>
+								bg-[#131319]/15 transition duration-300 group-hover:bg-[#131319]/40`}/>
 
 				{/* title */}
 				<div className='absolute bottom-0 left-0 w-full p-6
 								flex justify-between items-end text-white'>
 					<h3 className='font-medium text-md  w-2/3'>{project.title}</h3>
-					{/* <span className='inline-block px-3 py-1 pointer-events-none
-										bg-(--black)/20 backdrop-blur-[1px] border border-white rounded-full 
-										text-nowrap text-[10px] 2xl:text-xs'
-					>
-						{project.title}
-					</span> */}
 					<LinkArrow className={`text-(--bg-colour) ${big ? 'size-[54px]' : 'size-[40px]'}`}/>
 				</div>
 

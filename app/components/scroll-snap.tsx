@@ -8,13 +8,24 @@ import { useMediaQuery } from './media-query'
 // makes lenis smooth scroll and snap to sections on desktop
 export function LenisSnap() {
 	const pathname = usePathname()
-	const SNAP_ROUTES = ['/', '/about', '/portfolio', '/experience', '/contact']
-	const shouldSnap = SNAP_ROUTES.includes(pathname)
+	const shouldSnap =
+		pathname === '/' ||
+		pathname === '/work' ||
+		pathname === '/about' ||
+		pathname === '/extras';
 
 	const isDesktop = useMediaQuery('(min-width: 1024px)')
 	const lenis = useLenis()
 
 	const timeoutId = useRef<number | null>(null)
+
+	// reset scroll when navigating pages
+	useEffect(() => {
+		if (!lenis) return
+
+		lenis.scrollTo(0, { immediate: true })
+
+	}, [pathname, lenis])
 
 	// get nav height for offset
 	const getNavHeight = () =>

@@ -54,6 +54,7 @@ export default function RootLayout({
 				className={`${font.variable} antialiased select-none`}
 				style = {{overflowX: 'hidden'}}
 			>
+				{/* vercel deployment insights */}
 				<SpeedInsights />
 				<Analytics />
 				
