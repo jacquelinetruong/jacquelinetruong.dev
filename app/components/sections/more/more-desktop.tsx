@@ -29,19 +29,8 @@ export default function MoreLinks({
 					</Reveal>
 				</div>
 
-				{/* work experience link card */}
-				<div className='col-start-1 row-start-1'>
-					<Reveal delay={1.2}>
-                        <Card
-                            coverImage='/office.webp'
-                            altText='Work experience'
-							hrefId='/about#experience'
-                        />
-					</Reveal>
-				</div>
-
 				{/* current build link card */}
-				<div className='col-start-1 row-start-2'>
+				<div className='col-start-1 row-start-1'>
 					<Reveal delay={1.2}>
                         <Card
                             coverImage='/blurrypreview.webp'
@@ -52,13 +41,35 @@ export default function MoreLinks({
 				</div>
 
 				{/* about me link card */}
-				<div className='col-start-2 col-span-2 row-start-2 row-span-2'>
+				<div className='col-start-1 col-span-2 row-start-2 row-span-2'>
 					<Reveal delay={1.2}>
                         <Card
                             coverImage='/me.jpg'
                             altText='About me'
 							hrefId='/about'
 							big
+                        />
+					</Reveal>
+				</div>
+
+				{/* work experience link card */}
+				<div className='col-start-3 row-start-2'>
+					<Reveal delay={1.2}>
+                        <Card
+                            coverImage='/office.webp'
+                            altText='Work experience'
+							hrefId='/about#experience'
+                        />
+					</Reveal>
+				</div>
+
+				{/* skills link card */}
+				<div className='col-start-3 row-start-3'>
+					<Reveal delay={1.2}>
+                        <Card
+                            coverImage='/skills.webp'
+                            altText='Skills'
+							hrefId='/about#skills'
                         />
 					</Reveal>
 				</div>

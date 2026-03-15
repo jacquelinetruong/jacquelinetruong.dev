@@ -12,26 +12,38 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
     const { theme, setTheme } = useTheme();
     const pathname = usePathname();
 
-    const isProjectPage = pathname.startsWith('/work/');
-
     // only for work page (home page) theme changes
     const activeSection = useActiveSection(setTheme, {
+        // home page
         home: 'light',
+        featured: 'light',
+        more: 'dark',
+
+        // work page
         work: 'light',
         archive: 'dark',
-        more: 'light',
+
+        // about page
+        about: 'light',
+        experience: 'light',
+        skills: 'light',
+
+        // extras page
+        extras: 'light',
     });
 
-    // force default light mode when not home page
+    // reset themes when nav-ing pages
     useEffect(() => {
-        if (pathname !== '/') {
-            setTheme('light');
-        }
+        setTheme('light');
     }, [pathname, setTheme]);
 
+    // specific cases
+    const isWhiteLogo = (pathname === '/' || pathname === '/work') && activeSection === 'contact';
+    const isProjectPage = pathname.startsWith('/work/');
+    const isDark = activeSection === 'more' || activeSection === 'archive';
+
     const navItems = [
-        { label: 'Work', href: '/' },
-        { label: 'Process', href: '/work/process' },
+        { label: 'Work', href: '/work' },
         { label: 'About', href: '/about' },
         { label: 'Extras', href: '/extras' },
     ];
@@ -61,7 +73,7 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
                         draggable={false}
                         className={`absolute transition-opacity duration-500 ease-in-out
                             ${
-                                activeSection !== 'archive'
+                                !isWhiteLogo && activeSection !== 'more' && activeSection !== 'archive'
                                     ? 'opacity-100'
                                     : 'opacity-0'
                             }`}
@@ -74,7 +86,7 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
                         draggable={false}
                         className={`absolute transition-opacity duration-500 ease-in-out
                             ${
-                                activeSection === 'archive'
+                                isWhiteLogo || activeSection === 'more' || activeSection === 'archive'
                                     ? 'opacity-100'
                                     : 'opacity-0'
                             }`}
@@ -95,8 +107,13 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
                                 className={`transition-colors duration-300 ${
                                     isActive
                                         ? 'text-(--text-colour)'
-                                        : 'text-(--alt-text-colour) hover:text-(--dark-grey)'
-                                }`}
+                                        : 'text-(--alt-text-colour)'
+                                }
+                                    ${isDark 
+                                        ? 'hover:text-(--grey)'
+                                        : 'hover:text-(--dark-grey)'
+                                    }
+                                `}
                             >
                                 {item.label}
                             </Link>

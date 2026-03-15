@@ -13,7 +13,7 @@ export function useActiveSection(
 	sectionThemes?: SectionThemeMap
 ) {
 	const lenis = useLenis();
-	const [activeSection, setActiveSection] = useState('home');
+	const [activeSection, setActiveSection] = useState('');
 
 	useEffect(() => {
 		const sections = Array.from(

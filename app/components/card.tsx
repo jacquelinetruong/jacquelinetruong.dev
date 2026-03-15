@@ -60,7 +60,7 @@ export default function Card({
                 >
                     {altText}
                 </span>
-                <LinkArrow className={`text-(--bg-colour) ${big ? 'size-[54px]' : 'size-[40px]'}`}/>
+                <LinkArrow className={`text-(--white) ${big ? 'size-[54px]' : 'size-[40px]'}`}/>
             </div>
         </Link>
     )

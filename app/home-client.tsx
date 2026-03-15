@@ -14,16 +14,17 @@ import Footer from './components/sections/footer/footer';
 import Grid from './components/grid';
 
 import type { Project } from '@/lib/projectTypes';
+import Featured from './components/sections/featured/featured-desktop';
 
 
 type HomeClientProps = {
 	heroProjects: Project[];
-	portfolioProjects: Project[];
+	featuredProjects: Project[];
 };
 
 export default function HomeClient({
 	heroProjects,
-	portfolioProjects,
+	featuredProjects,
 }: HomeClientProps) {
 
 	// ------ VIEWPORT DISPLAY ------ //
@@ -69,7 +70,7 @@ export default function HomeClient({
 						</>
 					)}
 					
-					<section id='work' className='section data-hero'>
+					<section id='home-hero' className='section data-hero'>
 						<Grid>
 							<Hero
 								isDesktop={isDesktop}
@@ -80,24 +81,27 @@ export default function HomeClient({
 						</Grid>
 					</section>
 
-					<section id='archive' className='section'>
-						<Grid>
-							<Archive
-								isLoading={isLoading}
-								className='col-span-5 row-start-1 row-span-4'
-							/>
-						</Grid>
-					</section>
+					{isDesktop && (
+						<>
+						<section id='featured' className='section'>
+							<Grid>
+								<Featured 
+									featuredProjects={featuredProjects}
+								/>
+							</Grid>
+						</section>
 
-					<section id='more' className='section'>
-						<Grid>
-							<MoreLinks
-								isLoading={isLoading}
-								className='col-span-5 row-start-1 row-span-4'
-							/>
-						</Grid>
-					</section>
-
+						<section id='more' className='section'>
+							<Grid>
+								<MoreLinks
+									isLoading={isLoading}
+									className='col-span-5 row-start-1 row-span-4'
+								/>
+							</Grid>
+						</section>
+						</>
+					)}
+					
 					<section id='contact' className='section relative'>
 						<Footer className='col-span-5 row-start-1'/>
 					</section>

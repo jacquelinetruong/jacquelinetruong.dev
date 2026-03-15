@@ -1,6 +1,5 @@
 import HomeClient from './home-client';
 import { getProjects } from '@/lib/getProjects';
-import { getExperience } from '@/lib/getExperience';
 import { notionImage } from '@/lib/notionImage';
 
 // disable RSC caching; force fresh notion query 
@@ -14,14 +13,10 @@ export default async function Page() {
 	// get projects for each section
 	const projects = await getProjects();
 	const heroProjects = projects.filter(p => p.hero === true);
-	const portfolioProjects = projects;
-	
-	// get experience data
-	const experience = await getExperience();
-	const currentXP = experience.filter(e => e.category === 'work' && e.current === true);
+	const featuredProjects = projects.filter(p => p.sectionId !== 'x');
 
 	// preload LCP image (first hero project)
-	const lcpProject = projects.find(p => p.sectionId === '2');
+	const lcpProject = projects.find(p => p.sectionId === '1');
 	const lcpImageUrl = lcpProject?.images?.[0] ? notionImage(lcpProject.images[0]) : null;
 
 	return (
@@ -41,7 +36,7 @@ export default async function Page() {
 				{/* give each section appropriate data */}
 				<HomeClient 
 					heroProjects={heroProjects}
-					portfolioProjects={portfolioProjects}
+					featuredProjects={featuredProjects}
 				/>
 			</div>
 		</>
