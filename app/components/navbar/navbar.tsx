@@ -17,8 +17,9 @@ export default function Navbar() {
             isLoading={isLoading}
         />
     ): (
-        <NavbarMobile
-            isLoading={isLoading}
-        />
+        // <NavbarMobile
+        //     isLoading={isLoading}
+        // />
+        <></>
     );
 }
