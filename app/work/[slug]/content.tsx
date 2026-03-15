@@ -92,8 +92,7 @@ export default function ProjectContent({ selectedProject, blocks, projects }: Pr
 		return projects[(currentIndex + 1) % projects.length];
 	}, [projects, selectedProject]);
 
-	console.log('selectedProject.current:', selectedProject.current);
-console.log('type:', typeof selectedProject.current);
+	
 	return isDesktop ? (
 		<section id='top' className='relative pt-(--nav-height) text-(--text-colour)'>
 			<Quickbar />

@@ -8,12 +8,10 @@ import Grid from '../../grid';
 import { SectionReveal } from '../../section-reveal';
 
 
-export default function MoreLinks({
+export default function Archive({
     className = '',
-	isLoading,
  }: { 
 	className?: string; 
-	isLoading: boolean;
  }) {
 
     return (

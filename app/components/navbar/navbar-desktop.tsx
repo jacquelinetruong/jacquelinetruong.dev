@@ -16,22 +16,29 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
 
     // only for work page (home page) theme changes
     const activeSection = useActiveSection(setTheme, {
+        // home page
         home: 'light',
+        featured: 'light',
+        more: 'dark',
+
+        // work page
         work: 'light',
         archive: 'dark',
-        more: 'light',
+
+        // about page
+        about: 'light',
+        experience: 'light',
+        skills: 'light',
+
+        // extras page
+        extras: 'light',
     });
 
-    // force default light mode when not home page
-    useEffect(() => {
-        if (pathname !== '/') {
-            setTheme('light');
-        }
-    }, [pathname, setTheme]);
+    // specific cases
+    const isWhiteLogo = (pathname === '/' || pathname === '/work') && activeSection === 'contact';
 
     const navItems = [
-        { label: 'Work', href: '/' },
-        { label: 'Process', href: '/work/process' },
+        { label: 'Work', href: '/work' },
         { label: 'About', href: '/about' },
         { label: 'Extras', href: '/extras' },
     ];
@@ -61,7 +68,7 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
                         draggable={false}
                         className={`absolute transition-opacity duration-500 ease-in-out
                             ${
-                                activeSection !== 'archive'
+                                !isWhiteLogo && activeSection !== 'more' && activeSection !== 'archive'
                                     ? 'opacity-100'
                                     : 'opacity-0'
                             }`}
@@ -74,7 +81,7 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
                         draggable={false}
                         className={`absolute transition-opacity duration-500 ease-in-out
                             ${
-                                activeSection === 'archive'
+                                isWhiteLogo || activeSection === 'more' || activeSection === 'archive'
                                     ? 'opacity-100'
                                     : 'opacity-0'
                             }`}

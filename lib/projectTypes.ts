@@ -8,7 +8,7 @@ export type Project = {
     slug: string;
     
     hero: boolean;
-    sectionId: '1' | '2' | '3' | '4' | '5' | '6';
+    sectionId: '1' | '2' | '3' | '4' | '5' | '6' | 'x';
 
     type: 'design' | 'development';
     role: string[];
