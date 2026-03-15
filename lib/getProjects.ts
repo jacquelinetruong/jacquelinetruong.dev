@@ -12,12 +12,12 @@ export async function getProjects(): Promise<Project[]> {
 
     const response = await notion.databases.query({
         database_id: databaseId,
-        // filter: {
-        //     property: 'exclude',
-        //     checkbox: {
-        //         does_not_equal: true, // filter out projects not used on site
-        //     }
-        // }
+        filter: {
+            property: 'exclude',
+            checkbox: {
+                does_not_equal: true, // filter out projects not used on site
+            }
+        }
     });
 
     return response.results
