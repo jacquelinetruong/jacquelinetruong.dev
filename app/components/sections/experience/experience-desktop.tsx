@@ -40,8 +40,7 @@ export default function ExperienceDesktop({
     const xpCategorized = {
         work: orderedExperience.filter(e => e.category === 'work'),
         clients: orderedExperience.filter(e => e.category === 'clients'),
-        proficiencies: orderedExperience.filter(e => e.category === 'proficiencies'),
-    }
+    };
 
     // active experience
     const [activeExperience, setActiveExperience] = useState<Experience | null>(null);
@@ -49,7 +48,7 @@ export default function ExperienceDesktop({
     // set default active experience
     useEffect(() => {
         setActiveExperience(xpCategorized.work[0] ?? null);
-    }, []);
+    }, [xpCategorized]);
 
     return (
         <SectionReveal
@@ -129,7 +128,7 @@ export default function ExperienceDesktop({
                                                 flex flex-row gap-2'>
                                         <Image 
                                             src='/detail-arrow-grey.svg'
-                                            alt='arrow'
+                                            alt=''
                                             width={24}
                                             height={24}
                                         />
@@ -144,7 +143,8 @@ export default function ExperienceDesktop({
                                 className='flex flex-col gap-4'>
                                 {activeExperience?.points?.map((point, i) => (
                                     <Reveal key={`${activeExperience.id}-point-${i}`} delay={0.2 + i * 0.2}>
-                                        <li className='ml-6 sm:text-[10px] md:text-sm 2xl:text-base 3xl:text-lg 3xl:w-4/5'>
+                                        <li className='flex gap-2 ml-4 sm:text-[10px] md:text-sm 2xl:text-base 3xl:text-lg 3xl:w-4/5'>
+                                            <p className='text-2xl text-(--light-mode-grey)'>*</p>
                                             {point ? renderRichText(point) : null}
                                         </li>
                                     </Reveal>
