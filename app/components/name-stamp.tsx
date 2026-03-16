@@ -64,14 +64,17 @@ export default function NameStamp({ className = '' }: { className?: string }) {
 					<div className='col-start-4 col-span-2 row-start-1 row-span-1 w-(--two-cell-width) h-(--cell-height)
 									flex flex-col justify-between right-0 p-8 | ultrawide:px-20 
 									pointer-events-auto'>
-						{/* "say hi" button */}
+						{/* contact button */}
 						<Reveal delay={2.75} className='flex justify-end'>
 							<a
 								className={`font-normal text-sm 3xl:text-lg text-(--bg-colour) group
 										flex flex-row gap-2 items-center
 										w-fit h-fit px-5 py-4 rounded-full 2xl:px-6 2xl:py-4
-										${activeSection === 'home-hero' ? 'bg-(--text-colour) hover:bg-(--light-black)' : 'bg-(--white) text-(--dark-black) hover:bg-(--dark-black) hover:text-(--white)'}
-										${activeSection === 'more' ? 'hover:bg-(--light-black)' : ''}
+										${activeSection === 'home-hero' 
+											? 'bg-(--text-colour) hover:bg-(--light-black)' 
+											: activeSection === 'more' 
+												? 'bg-(--white) text-(--dark-black) hover:bg-(--true-black)' 
+												: 'bg-(--white) text-(--dark-black) hover:bg-(--dark-black) hover:text-(--white)'}
 										transition-colors duration-300`}
 								target='_blank'
 								href='mailto:hello@jacquelinetruong.dev'
