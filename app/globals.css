@@ -9,6 +9,7 @@
 
 :root {
   /* colours */
+  --true-white: #FFFFFF;
   --white: #F4F4F6;
   --off-white: #EAE9EE;
   --nice-grey: #D7D6DD;
@@ -20,6 +21,7 @@
   --light-black: #3F3F44;
   --black: #292A2D;
   --dark-black: #1B1C1D;
+  --true-black: #060607;
 
   /* dimension variables */
   --vh: 100vh;
