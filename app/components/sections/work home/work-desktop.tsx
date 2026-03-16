@@ -57,7 +57,7 @@ export default function Work({
                                     bg-(--black) hover:bg-(--light-black)
                                     transition-colors duration-300'
                         target='_blank'
-                        href='/work'
+                        href='mailto:hello@jacquelinetruong.dev'
                     >	
                         <Coffee className={`size-[24px] transition-colors duration-300 text-(--white) group-hover:text-(--white)`}/>
                         Get in touch
