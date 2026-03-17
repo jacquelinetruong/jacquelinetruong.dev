@@ -90,7 +90,7 @@ function ProjectCard({
 					src={notionImage(project.images[0])}
 					alt={project.title}
 					fetchPriority={project.hero ? 'high' : 'low'}
-					loading={project.hero  ? 'eager' : 'lazy'}
+					loading={project.hero ? 'eager' : 'lazy'}
 					decoding={project.hero ? 'sync' : 'async'}
 					className={`absolute inset-0 w-full h-full object-cover object-center
 							transition-transform duration-500 ease-out group-hover:scale-115`}
@@ -113,7 +113,12 @@ function ProjectCard({
 								text-white font-medium text-nowrap drop-shadow-md
 								opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0
 								transition-all duration-100'>	
-					<p className='text-xs xl:text-sm'>View case study</p>
+					{project.current ? (
+						<p className='text-xs xl:text-sm'>Project in progress</p>
+					): (
+						<p className='text-xs xl:text-sm'>View case study</p>
+					)}
+					
 				</div>
 
 				

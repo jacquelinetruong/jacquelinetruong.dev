@@ -12,14 +12,14 @@ export default function Quickbar({ isProjectPage = false }: {
 }) {
 
   const pathname = usePathname();
-  const isWork = pathname === '/';
+  const isHome = pathname === '/';
+  const isWork = pathname === '/work';
 
   const notTop = useScrolledPastHero();
   const dockY = useFooterDock(-90);
 
-  // never show coffee button on work page
-  const showCoffee = !isWork && notTop;
-
+  // show cases
+  const showCoffee = !isHome && !isWork && notTop;
   const showTop = notTop;
 
   return (

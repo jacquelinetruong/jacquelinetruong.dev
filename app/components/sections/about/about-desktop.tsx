@@ -8,7 +8,7 @@ import Grid from '@/app/components/grid';
 import Cat from '../../icons/cat-icon';
 import { SectionReveal } from '@/app/components/section-reveal';
 import { Reveal } from '@/app/components/reveal';
-import Card from '../../card';
+import Card from '../../link-card';
 
 
 export default function AboutDesktop({

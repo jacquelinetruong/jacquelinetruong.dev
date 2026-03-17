@@ -411,7 +411,7 @@ export default function ProjectContent({ selectedProject, blocks, projects }: Pr
 														height={16}
 													/>
 													<span
-														className='relative block whitespace-normal break-words before:content-[attr(data-text)] before:font-semibold before:invisible before:block before:h-0'
+														className='relative w-5/6 block whitespace-normal break-words before:content-[attr(data-text)] before:font-semibold before:invisible before:block before:h-0'
 														data-text={project.title}
 														>
 														{project.title}
