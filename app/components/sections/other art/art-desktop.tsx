@@ -16,7 +16,7 @@ export default function Art({
     className?: string; 
  }) {
 
-    const artCount = '[8 pieces in collection]';
+    const artCount = '[5 pieces in collection]';
 
     return (
         <SectionReveal
