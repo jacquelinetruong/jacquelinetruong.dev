@@ -7,10 +7,13 @@ import Grid from '../components/grid';
 import Quickbar from '../components/quickbar';
 import { getProjects } from '@/lib/getProjects';
 
+// ISR: must match `PROJECTS_REVALIDATE_SECONDS` in `@/lib/getProjects`
+export const revalidate = 300;
+
 export default async function Page() {
 
-    // get case study projects
-    const projects = await getProjects();
+    const allProjects = await getProjects();
+    const projects = allProjects.slice(0, 8);
     
     return (
         <>

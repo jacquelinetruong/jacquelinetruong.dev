@@ -65,7 +65,7 @@ export default function Work({
                 </Reveal>
 
                 {/* --- PROJECT CARDS --- */}
-                {projects.slice(0,8).map((project, i) => {
+                {projects.map((project, i) => {
                     // slot into grid layout
                     const positions: { colStart: number; rowStart: number; }[] = [
                         { colStart: 1, rowStart: 2 },
