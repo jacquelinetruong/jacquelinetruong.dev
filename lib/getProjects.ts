@@ -2,12 +2,12 @@
 
 import { notion } from './notion';
 import type { Project } from './projectTypes';
-import { unstable_noStore } from 'next/cache';
+import { unstable_cache } from 'next/cache';
 
-export async function getProjects(): Promise<Project[]> {
-    // do not cache ever
-    unstable_noStore();
+/** Keep in sync with `export const revalidate` on routes that use `getProjects`. */
+export const PROJECTS_REVALIDATE_SECONDS = 300;
 
+async function queryProjectsFromNotion(): Promise<Project[]> {
     const databaseId = process.env.NOTION_DB_PROJECTS_ID!;
 
     const response = await notion.databases.query({
@@ -57,3 +57,7 @@ export async function getProjects(): Promise<Project[]> {
             github: page.properties.github?.url ?? '',
         }));
 }
+
+export const getProjects = unstable_cache(queryProjectsFromNotion, ['notion-projects-all'], {
+    revalidate: PROJECTS_REVALIDATE_SECONDS,
+});

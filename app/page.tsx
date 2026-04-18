@@ -2,10 +2,7 @@ import HomeClient from './home-client';
 import { getProjects } from '@/lib/getProjects';
 import { notionImage } from '@/lib/notionImage';
 
-// disable RSC caching; force fresh notion query 
-// export const dynamic = 'force-dynamic';
-
-// cache for 5 min
+// ISR: must match `PROJECTS_REVALIDATE_SECONDS` in `@/lib/getProjects`
 export const revalidate = 300;
 
 export default async function Page() {
