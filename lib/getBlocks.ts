@@ -2,8 +2,9 @@
 
 import { notion } from './notion';
 import type { Blocks } from './blocksTypes';
+import { unstable_cache } from 'next/cache';
 
-export async function getBlocks(projectId: string): Promise<Blocks[]> {
+async function queryBlocks(projectId: string): Promise<Blocks[]> {
     if (!projectId) throw new Error('projectId is required for getBlocks');
     
     const databaseId = process.env.NOTION_DB_BLOCKS_ID!;
@@ -104,3 +105,10 @@ export async function getBlocks(projectId: string): Promise<Blocks[]> {
                     .filter(Boolean) ?? [],
         }));
 }
+
+/**
+ * cache per project id
+ */
+export const getBlocks = unstable_cache(queryBlocks, ['notion-blocks-by-project'], {
+    revalidate: 300,
+});
