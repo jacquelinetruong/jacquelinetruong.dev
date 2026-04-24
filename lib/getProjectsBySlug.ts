@@ -2,10 +2,10 @@
 
 import { notion } from './notion';
 import type { Project } from './projectTypes';
-import { unstable_noStore } from 'next/cache';
+import { unstable_cache } from 'next/cache';
 
-export async function getProjectBySlug(slug: string): Promise<Project | null> {
-  unstable_noStore();
+async function queryProjectBySlug(slug: string): Promise<Project | null> {
+  if (!slug) return null;
 
   const databaseId = process.env.NOTION_DB_PROJECTS_ID!;
 
@@ -96,3 +96,12 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
     github: page.properties.github?.url ?? '',
   };
 }
+
+/**
+ * cache per project slug
+ */
+export const getProjectBySlug = unstable_cache(
+  queryProjectBySlug,
+  ['notion-project-by-slug'],
+  { revalidate: 300 }
+);

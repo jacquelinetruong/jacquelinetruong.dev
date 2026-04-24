@@ -12,6 +12,9 @@ type ProjectPageProps = {
 	params: { slug: string } | Promise<{ slug: string }>;
 };
 
+// ISR: must match the Notion cache wrappers (`revalidate: 300`)
+export const revalidate = 300;
+
 export default async function ProjectPage(props: ProjectPageProps) {
 	// ensure valid project slug
 	const { slug } = 'then' in props.params ? await props.params : props.params;
@@ -19,16 +22,13 @@ export default async function ProjectPage(props: ProjectPageProps) {
 		notFound();
 	}
 
-	const [selectedProject, projects] = await Promise.all([
-		getProjectBySlug(slug),
+	const selectedProject = await getProjectBySlug(slug);
+	if (!selectedProject) notFound();
+
+	const [blocks, projects] = await Promise.all([
+		getBlocks(selectedProject.id) as Promise<Blocks[]>,
 		getProjects(),
 	]);
-
-	if (!selectedProject) {
-		notFound();
-	}
-
-	const blocks: Blocks[] = await getBlocks(selectedProject.id);
 
 	return <ProjectContent selectedProject={selectedProject} blocks={blocks} projects={projects}/>
 }
