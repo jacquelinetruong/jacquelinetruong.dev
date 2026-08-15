@@ -5,7 +5,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 
 import Grid from './grid';
 import RightArrow from '@/app/components/icons/right-arrow';
-import { notionImage } from '@/lib/notionImage';
+import { notionProjectImage } from '@/lib/notionImage';
 import { Project } from '@/lib/projectTypes';
 
 type CarouselImage = {
@@ -68,7 +68,7 @@ export default function Carousel({
 					)
 					.map((project) => ({
 						id: project.id,
-						image: notionImage(project.images[0]),
+						image: notionProjectImage(project.id, 0),
 						alt: project.title,
 						title: project.title,
 						description: project.description,

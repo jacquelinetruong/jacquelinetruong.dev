@@ -1,6 +1,6 @@
 import HomeClient from './home-client';
 import { getProjects } from '@/lib/getProjects';
-import { notionImage } from '@/lib/notionImage';
+import { notionProjectImage } from '@/lib/notionImage';
 
 // ISR: must match `PROJECTS_REVALIDATE_SECONDS` in `@/lib/getProjects`
 export const revalidate = 300;
@@ -14,7 +14,7 @@ export default async function Page() {
 
 	// preload LCP image (first hero project)
 	const lcpProject = projects.find(p => p.sectionId === '1');
-	const lcpImageUrl = lcpProject?.images?.[0] ? notionImage(lcpProject.images[0]) : null;
+	const lcpImageUrl = lcpProject?.images?.[0] ? notionProjectImage(lcpProject.id, 0) : null;
 
 	return (
 		<>

@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState, Fragment } from 'react';
 import { Label, Listbox, ListboxButton, ListboxOption, ListboxOptions, Transition } from '@headlessui/react'
 import Image from 'next/image';
 import GalleryImage from '@/app/components/gallery-image';
+import { notionProjectImage } from '@/lib/notionImage';
 import RenderBlock from '@/app/components/render-block';
 import { Reveal } from '../../components/reveal';
 import Grid from '@/app/components/grid';
@@ -195,7 +196,7 @@ export default function ProjectContent({ selectedProject, blocks, projects }: Pr
 						<div className='col-start-2 col-span-3 row-start-2 row-span-3 w-(--three-cell-width) h-(--three-cell-height)'>
 							<Reveal delay={0.25}>
 								<GalleryImage
-									src={selectedProject.images[0]}
+									src={notionProjectImage(selectedProject.id, 0)}
 									alt={`${selectedProject.title} Preview`}
 									className='object-cover object-center'
 								/>
@@ -473,7 +474,7 @@ export default function ProjectContent({ selectedProject, blocks, projects }: Pr
 										<div className='w-full flex flex-row justify-between gap-8'>
 											<div className='relative w-1/3 aspect-4/3 overflow-hidden'>
 												<GalleryImage
-													src={nextProject.images[0]}
+													src={notionProjectImage(nextProject.id, 0)}
 													alt={`${nextProject.title} preview`}
 													className='object-cover group-hover:scale-105 transition-transform duration-500'
 												/>
@@ -599,7 +600,7 @@ export default function ProjectContent({ selectedProject, blocks, projects }: Pr
 						<div className='col-start-1 col-span-3 row-start-3 row-span-2 w-(--three-cell-width) h-(--two-cell-height)'>
 							<Reveal delay={0.25} className='h-full'>
 								<GalleryImage
-									src={selectedProject.images[0]}
+									src={notionProjectImage(selectedProject.id, 0)}
 									alt={`${selectedProject.title} Preview`}
 									className='object-cover object-center'
 									priority
@@ -658,7 +659,7 @@ export default function ProjectContent({ selectedProject, blocks, projects }: Pr
 
 											<div className='relative w-full aspect-4/3 overflow-hidden'>
 												<GalleryImage
-													src={nextProject.images[0]}
+													src={notionProjectImage(nextProject.id, 0)}
 													alt={`${nextProject.title} preview`}
 													className='object-cover group-hover:scale-105 transition-transform duration-500'
 													gradient

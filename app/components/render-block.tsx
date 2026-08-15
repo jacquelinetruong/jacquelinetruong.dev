@@ -7,6 +7,7 @@ import { Blocks } from '@/lib/blocksTypes';
 import { renderRichText } from '@/lib/richText';
 import Image from 'next/image';
 import GalleryImage from './gallery-image';
+import { notionBlockImage } from '@/lib/notionImage';
 
 
 type RenderBlockProps = {
@@ -112,7 +113,7 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 							<>
 								<div className='aspect-4/3 relative bg-(--nice-grey)/40'>
 									<GalleryImage 
-										src={block.images[0]} 
+										src={notionBlockImage(block.id, 0)} 
 										alt={block.alt[0]} 
 										className='object-contain object-center' 
 									/>
@@ -137,7 +138,7 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 								{block.images.length > 0 && (
 									<GalleryImage 
 										key={i}
-										src={image} 
+										src={notionBlockImage(block.id, i)} 
 										alt={block.alt[i]} 
 										className='object-cover object-center' 
 									/>
@@ -211,7 +212,7 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 												${isActive ? 'ring-2 ring-black' : 'opacity-70 hover:opacity-100'}`}
 										>
 											<GalleryImage
-												src={img}
+												src={notionBlockImage(block.id, index)}
 												alt={block.alt?.[index] || ''}
 												className='object-cover object-center
 															transition-transform duration-500 ease-out
@@ -225,7 +226,7 @@ export default function RenderBlock({ block }: RenderBlockProps) {
 						{/* featured image */}
 						<div className='relative w-4/5 aspect-4/3'>
 							<GalleryImage
-								src={images[current]}
+								src={notionBlockImage(block.id, current)}
 								alt={block.alt?.[current] || ''}
 								className='object-cover object-center'
 							/>

@@ -6,7 +6,7 @@ import { useState, useRef, useEffect, useMemo, memo } from 'react';
 
 import { useActiveSection } from './active-section';
 import GalleryImage from '@/app/components/gallery-image';
-import { notionImage } from '@/lib/notionImage';
+import { notionProjectImage } from '@/lib/notionImage';
 import { useMediaQuery } from './media-query';
 import LinkArrow from '@/app/components/icons/link-arrow';
 import Link from 'next/link';
@@ -87,7 +87,7 @@ function ProjectCard({
 			>
 				{/* preview - native img with fetchpriority */}
 				<img
-					src={notionImage(project.images[0])}
+					src={notionProjectImage(project.id, 0)}
 					alt={project.title}
 					fetchPriority={project.hero ? 'high' : 'low'}
 					loading={project.hero ? 'eager' : 'lazy'}
@@ -137,13 +137,13 @@ function ProjectCard({
 								scrollbar-none scroll-smooth'
 				>
 					{/* project images */}
-					{project.images.map((img, i) => (		
+					{project.images.map((_, i) => (		
 						<div
 							key={i}
 							className='relative min-w-full h-full snap-center snap-always bg-(--bg-colour)'
 							>
 								<GalleryImage
-									src={notionImage(img)}
+									src={notionProjectImage(project.id, i)}
 									alt={`${project.title} image ${i + 1}`}
 									className='absolute object-contain object-bottom sm:object-cover sm:object-center'
 									onHoverStart={onMouseEnter}

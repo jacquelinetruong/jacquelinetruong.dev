@@ -24,14 +24,24 @@ function GalleryImage({
 	const [loaded, setLoaded] = useState(false);
 	const imgRef = useRef<HTMLImageElement>(null);
 
-	// handle cached images where onLoad fires before the handler is attached
+	useEffect(() => {
+		setLoaded(false);
+	}, [src]);
+
+	// handle cached/preloaded images where onLoad fires before the handler is attached
 	useEffect(() => {
 		const img = imgRef.current;
-		if (img?.complete && img.naturalWidth > 0) {
-			setLoaded(true);
-		} else {
-			setLoaded(false);
+		if (!img) return;
+
+		const markLoaded = () => setLoaded(true);
+
+		if (img.complete && img.naturalWidth > 0) {
+			markLoaded();
+			return;
 		}
+
+		img.addEventListener('load', markLoaded);
+		return () => img.removeEventListener('load', markLoaded);
 	}, [src]);
 
 	return (
