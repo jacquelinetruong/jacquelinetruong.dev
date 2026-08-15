@@ -18,7 +18,7 @@
 </p>
 
 <p align="center">
-  <img src="./public/repocover2.png" alt="landing preview"/>
+  <img src="./public/repocover.png" alt="landing preview"/>
 </p>
 
 ## tech stack
