@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState, Fragment } from 'react';
 import { Label, Listbox, ListboxButton, ListboxOption, ListboxOptions, Transition } from '@headlessui/react'
 import Image from 'next/image';
 import GalleryImage from '@/app/components/gallery-image';
+import { notionProjectImage } from '@/lib/notionImage';
 import RenderBlock from '@/app/components/render-block';
 import { Reveal } from '../../components/reveal';
 import Grid from '@/app/components/grid';
@@ -18,6 +19,7 @@ import Quickbar from '../../components/quickbar';
 import Footer from '../../components/sections/footer/footer';
 import Link from 'next/link';
 import LinkArrow from '../../components/icons/link-arrow';
+import RightArrow from '@/app/components/icons/right-arrow';
 import Coffee from '@/app/components/icons/coffee';
 
 
@@ -120,7 +122,7 @@ export default function ProjectContent({ selectedProject, blocks, projects }: Pr
 								</Reveal>
 
 								<div className='flex flex-row gap-2'>
-									{/* case study label */}
+									{/* case study badge */}
 									{selectedProject.casestudy && (
 										<span className='w-fit h-fit'>
 											<Reveal delay={0} className='pointer-events-none px-2.5 py-1 2xl:px-3.5 2xl:py-1.5 3xl:py-2
@@ -131,7 +133,7 @@ export default function ProjectContent({ selectedProject, blocks, projects }: Pr
 										</span>
 									)}
 
-									{/* current project label */}
+									{/* current project badge */}
 									{selectedProject.current && (
 										<span className='w-fit h-fit'>
 											<Reveal delay={0} className='pointer-events-none px-2.5 py-1 2xl:px-3.5 2xl:py-1.5 3xl:py-2
@@ -141,7 +143,7 @@ export default function ProjectContent({ selectedProject, blocks, projects }: Pr
 											</Reveal>
 										</span>
 									)}
-									{/* other labels */}
+									{/* other badges */}
 									{selectedProject.tags.map((tag) => (
 										<span className='w-fit h-fit'>
 											<Reveal key={tag} delay={0} className='pointer-events-none px-2.5 py-1 2xl:px-3.5 2xl:py-1.5 3xl:py-2
@@ -194,7 +196,7 @@ export default function ProjectContent({ selectedProject, blocks, projects }: Pr
 						<div className='col-start-2 col-span-3 row-start-2 row-span-3 w-(--three-cell-width) h-(--three-cell-height)'>
 							<Reveal delay={0.25}>
 								<GalleryImage
-									src={selectedProject.images[0]}
+									src={notionProjectImage(selectedProject.id, 0)}
 									alt={`${selectedProject.title} Preview`}
 									className='object-cover object-center'
 								/>
@@ -472,7 +474,7 @@ export default function ProjectContent({ selectedProject, blocks, projects }: Pr
 										<div className='w-full flex flex-row justify-between gap-8'>
 											<div className='relative w-1/3 aspect-4/3 overflow-hidden'>
 												<GalleryImage
-													src={nextProject.images[0]}
+													src={notionProjectImage(nextProject.id, 0)}
 													alt={`${nextProject.title} preview`}
 													className='object-cover group-hover:scale-105 transition-transform duration-500'
 												/>
@@ -515,132 +517,175 @@ export default function ProjectContent({ selectedProject, blocks, projects }: Pr
 				</section>
 		</section>
 	) : (
-		<section className='pt-(--nav-height) relative'>
-			<Grid>
-				{/* hey! */}
-				<div className='col-start-1 col-span-2 row-start-1 row-span-1 
-								w-full h-full relative'>
-					<Reveal delay={0}>
-						<Image
-							src='/hey.svg'
-							alt='Hey, welcome to my portfolio site!'
-							fill
-							className='p-5 object-contain object-left'
-						/>
-					</Reveal>
-				</div>
+			<section className='pt-(--nav-height) relative'>
+				<section id='project-hero' className='section data-hero'>
+					<Grid>
+						{/* project title */}
+						<div className='col-start-1 col-span-3 row-start-1 px-5 py-6 self-end flex flex-col gap-2'>
+						
+							{/* badges */}
+							<div className='flex flex-row gap-2'>
+								{/* case study label */}
+								{selectedProject.casestudy && (
+									<span className='w-fit h-fit'>
+										<Reveal delay={0} className='pointer-events-none px-2.5 py-1 2xl:px-3.5 2xl:py-1.5 3xl:py-2
+															border border-(--text-colour) rounded-full 
+															text-nowrap font-semibold text-[10px] 2xl:text-[11px] 3xl:text-xs'>
+											CASE STUDY
+										</Reveal>
+									</span>
+								)}
 
-				{/* better on desktop message */}
-				<div className='col-start-3 col-span-1 row-start-1 row-span-1 relative'>
-					<Reveal delay={0.25}>
-						<Image 
-							src='/better.svg'
-							alt='better on desktop!'
-							fill
-							className='object-contain object-bottom-right p-4 | xs:p-5 | sm:p-8 | md:px-12'
-						/>
-					</Reveal>
-				</div>
+								{/* current project label */}
+								{selectedProject.current && (
+									<span className='w-fit h-fit'>
+										<Reveal delay={0} className='pointer-events-none px-2.5 py-1 2xl:px-3.5 2xl:py-1.5 3xl:py-2
+															border border-(--text-colour) rounded-full 
+															text-nowrap font-semibold text-[10px] 2xl:text-[11px] 3xl:text-xs'>
+											IN PROGRESS
+										</Reveal>
+									</span>
+								)}
+								{/* other labels */}
+								{selectedProject.tags.map((tag) => (
+									<span className='w-fit h-fit'>
+										<Reveal key={tag} delay={0} className='pointer-events-none px-2.5 py-1 2xl:px-3.5 2xl:py-1.5 3xl:py-2
+															border border-(--text-colour) rounded-full 
+															text-nowrap font-semibold text-[10px] 2xl:text-[11px] 3xl:text-xs'>
+											{tag.toUpperCase()}
+										</Reveal>
+									</span>
+								))}
+							</div>
 
-				{/* name and title */}
-				<div className='col-start-1 col-span-3 row-start-2 row-span-1 
-								w-full h-full p-5
-								flex flex-col justify-between items-end'>
-					<div className='w-full aspect-5/2 relative'>
-						<Reveal delay={0.25}>
-							<Image
-								src='/jt-black.svg'
-								alt='my namestamp'
-								fill
-								className='object-contain object-right xs:p-2| sm:px-4'
-							/>
-						</Reveal>
+							<h2 className='text-(--text-colour) text-3xl font-medium'>{selectedProject.title}</h2>
+						</div>
+
+						{/* project tags */}
+						<div className='col-start-1 col-span-3 row-start-2 row-span-1 px-5 py-6 flex flex-col w-full h-fit'>
+							{/* role */}
+							<div className='w-full h-full pb-4 2xl:px-8 2xl:pb-8 ultrawide:px-20 ultrawide:pb-20'>
+								<Reveal delay={0.5} className='flex flex-col gap-1'>
+								<h4 className='text-[10px] 2xl:text-xs text-(--light-mode-grey) font-medium'>
+									ROLE
+								</h4>
+								<p className='capitalize text-sm 2xl:text-base 3xl:text-lg font-medium w-full'>{[...(selectedProject.role ?? [])].join(', ')}</p>
+								</Reveal>
+							</div>
+
+							{/* tools */}
+							<div className='w-full h-full pb-4 2xl:px-8 2xl:pb-8 ultrawide:px-20 ultrawide:pb-20'>
+								<Reveal delay={0.7} className='flex flex-col gap-1'>
+								<h4 className='text-[10px] 2xl:text-xs text-(--light-mode-grey) font-medium'>
+									TOOLS & FRAMEWORKS
+								</h4>
+								<p className='capitalize text-sm 2xl:text-base 3xl:text-lg font-medium w-full'>{[...(selectedProject.programs ?? [])].join(', ')}</p>
+								</Reveal>
+							</div>
+
+							{/* languages */}
+							{selectedProject.languages.length > 0 && (
+								<div className='w-full h-full pb-4 2xl:px-8 2xl:pb-8 ultrawide:px-20 ultrawide:pb-20'>
+									<Reveal delay={0.8} className='flex flex-col gap-1'>
+									<h4 className='text-[10px] 2xl:text-xs text-(--light-mode-grey) font-medium'>
+										LANGUAGES
+									</h4>
+									<p className='capitalize text-sm 2xl:text-base 3xl:text-lg font-medium w-full'>{[...(selectedProject.languages ?? [])].join(', ')}</p>
+									</Reveal>
+							</div>
+							)}
+						</div>
+
+						{/* project preview image */}
+						<div className='col-start-1 col-span-3 row-start-3 row-span-2 w-(--three-cell-width) h-(--two-cell-height)'>
+							<Reveal delay={0.25} className='h-full'>
+								<GalleryImage
+									src={notionProjectImage(selectedProject.id, 0)}
+									alt={`${selectedProject.title} Preview`}
+									className='object-cover object-center'
+									priority
+								/>
+							</Reveal>
+						</div>
+					</Grid>
+				</section>
+
+				<section className='relative'>
+					<div className='grid grid-cols-3 auto-rows-max'>
+						{blocks.map((block) => (
+							<div
+								key={`assigned-${block.section}`}
+								className='col-start-1 col-span-3 px-5'
+							>
+								<Reveal delay={0.2}>
+									<RenderBlock block={block}/>
+								</Reveal>
+							</div>
+						))}
 					</div>
-					{/* <div className='w-full h-fit'>
-						<Reveal delay={0.1}>
-							<h2 className='text-right text-lg | sm:text-2xl'>Designer & Developer</h2>
-						</Reveal>
-					</div> */}
+				</section>
+
+				{/* sign off */}
+				<div className='flex flex-col gap-2 w-(--three-cell-width) h-fit px-5 py-(--nav-height)'>
+					<p className='text-base font-semibold'>Have any questions? Let's talk!</p>
+					<a
+						href='mailto:hello@jacquelinetruong.dev'
+						target='_blank' 
+						className='w-fit h-fit text-base font-[450]'
+					>
+						💌 hello@jacquelinetruong.dev
+					</a>
 				</div>
 
-				{/* text, cta */}
-				{/* <div className='col-start-1 col-span-3 row-start-3 row-span-1
-								flex flex-col items-end p-5
-								gap-2 | sm:gap-6'
-				> */}
-				<div className='col-start-1 col-span-3 row-start-3 row-span-1
-								flex flex-col items-end p-5
-								justify-between'
-				>
-						{/* <div className='w-full h-fit'>
-							<Reveal delay={1.5}>
-								<h2 className='text-sm font-medium text-right place-self-end
-												xs:text-base
-												sm:text-xl sm:w-7/8 sm:leading-[1.3]'
-								>
-									Focused on crafting digital experiences and turning everyday ideas into art.
-								</h2>
-							</Reveal>
-						</div>
+				{/* next project */}
+				{nextProject && (
+					<section className='relative w-(--three-cell-width) h-fit pb-12'>
+							<div className=''>
+								<Reveal delay={0}>
+									<Link
+										href={`/work/${nextProject.slug}`}
+										className='group block p-8 transition-all duration-500
+													bg-(--white)/40 hover:bg-(--white)/80
+													border border-(--nice-grey)/60 rounded-xl'
+									>
+										<div className='flex flex-col gap-2'>
+											<p className='text-xs text-(--light-mode-grey) font-medium mb-2'>
+												NEXT PROJECT
+											</p>
+											<h3 className='text-lg pb-4 font-semibold'>
+												{nextProject.title}
+											</h3>
+										</div>
 
-						<div className='w-full h-fit'>
-							<Reveal delay={1.7}>
-								<h2 className='text-sm font-medium text-right text-(--light-mode-grey)  place-self-end
-												xs:text-base | sm:text-xl'>
-									Based in Toronto, CA.
-								</h2>
-							</Reveal>
-						</div> */}
+											<div className='relative w-full aspect-4/3 overflow-hidden'>
+												<GalleryImage
+													src={notionProjectImage(nextProject.id, 0)}
+													alt={`${nextProject.title} preview`}
+													className='object-cover group-hover:scale-105 transition-transform duration-500'
+													gradient
+												/>
 
-						{/* ----- vv TEMPORARY vv ----- */}
-						<Reveal delay={1} className='text-5xl text-right'>
-							🚧🚧🚧
-						</Reveal>
-						<div className='w-full h-fit'>
-							<Reveal delay={1.2}>
-								<h2 className='text-sm font-medium text-right place-self-end
-												xs:text-xl xs:w-full
-												sm:text-xl sm:w-7/8 sm:leading-[1.3]'
-								>
-									I'm currently rebuilding my mobile experience. In the meantime, <strong>visit on desktop!</strong>
-								</h2>
-							</Reveal>
-						</div>
-						{/* ----- ^^ TEMPORARY ^^ ----- */}
+												<div className='absolute inset-0 p-4 z-100 flex items-end justify-between text-(--off-white)'>
+													<span className='rounded-full border border-(--off-white) px-4 py-2 text-xs text-(--off-white)'>
+														See project
+													</span>
+													<RightArrow className='size-8'/>
+												</div>
+											</div>
+												
+												
+									</Link>
+								</Reveal>
+							</div>
+					</section>
+				)}
 
-						{/* <div className='w-full h-fit'>
-							<Reveal delay={1.9}>
-								<a 
-									target='_blank'
-									href='mailto:hello@jacquelinetruong.dev'
-									className='flex flex-row gap-2 items-center place-self-start
-												w-fit h-fit bg-(--black) rounded-full
-												px-5 py-4 | sm:px-6 sm:py-5 | 
-												text-white text-xs | xs:text-sm | sm:text-base'
-								>
-									<Coffee className='size-[20px] sm:size-[24px]'/>
-									Get in touch
-								</a>
-							</Reveal>
-						</div> */}
-				</div>
-
-				<div className='p-5 col-start-1 col-span-3 row-start-4'>
-					<Reveal delay={2.5}>
-						<a 
-							target='_blank'
-							href='mailto:hello@jacquelinetruong.dev'
-							className='flex flex-row gap-4 justify-center items-center place-self-center
-										w-5/6 h-fit bg-(--black) rounded-full
-										px-6 py-5 | sm:px-7 sm:py-6 | 
-										text-white text-sm | xs:text-base | sm:text-lg'
-						>
-							<Coffee className='size-[20px] sm:size-[24px]'/>
-							Get in touch
-						</a>
-					</Reveal>
-				</div>
-			</Grid>
-		</section>
+				{/* footer */}
+				<section id='contact' className='section'>
+					<Footer 
+						className='col-span-5 row-start-1' 
+					/>
+				</section>
+			</section>
 	);
 }

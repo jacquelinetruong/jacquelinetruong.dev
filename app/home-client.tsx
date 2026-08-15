@@ -8,13 +8,14 @@ import Loader from './components/loader/loader';
 import Quickbar from './components/quickbar';
 import NameStamp from './components/name-stamp';
 import Hero from './components/sections/hero/hero';
-import MoreLinks from './components/sections/more/more-desktop';
+import MoreLinks from './components/sections/more/more';
 import Archive from './components/sections/archive/archive-desktop';
 import Footer from './components/sections/footer/footer';
 import Grid from './components/grid';
 
 import type { Project } from '@/lib/projectTypes';
-import Featured from './components/sections/featured/featured-desktop';
+import Featured from './components/sections/featured/featured';
+import ButtonOverlay from './components/button-overlay';
 
 
 type HomeClientProps = {
@@ -63,11 +64,13 @@ export default function HomeClient({
 
 			{!isLoading && (
 				<>
-					{isDesktop && (
+					{isDesktop ? (
 						<>
 							<Quickbar/>
 							<NameStamp />
 						</>
+					): (
+						<ButtonOverlay />
 					)}
 					
 					<section id='home-hero' className='section data-hero'>
@@ -81,11 +84,12 @@ export default function HomeClient({
 						</Grid>
 					</section>
 
-					{isDesktop && (
-						<>
+					<>
 						<section id='featured' className='section'>
 							<Grid>
 								<Featured 
+									isLoading={isLoading}
+									isDesktop={isDesktop}
 									featuredProjects={featuredProjects}
 								/>
 							</Grid>
@@ -95,12 +99,12 @@ export default function HomeClient({
 							<Grid>
 								<MoreLinks
 									isLoading={isLoading}
+									isDesktop={isDesktop}
 									className='col-span-5 row-start-1 row-span-4'
 								/>
 							</Grid>
 						</section>
-						</>
-					)}
+					</>
 					
 					<section id='contact' className='section relative'>
 						<Footer className='col-span-5 row-start-1'/>

@@ -6,7 +6,7 @@ import { useState, useRef, useEffect, useMemo, memo } from 'react';
 
 import { useActiveSection } from './active-section';
 import GalleryImage from '@/app/components/gallery-image';
-import { notionImage } from '@/lib/notionImage';
+import { notionProjectImage } from '@/lib/notionImage';
 import { useMediaQuery } from './media-query';
 import LinkArrow from '@/app/components/icons/link-arrow';
 import Link from 'next/link';
@@ -87,7 +87,7 @@ function ProjectCard({
 			>
 				{/* preview - native img with fetchpriority */}
 				<img
-					src={notionImage(project.images[0])}
+					src={notionProjectImage(project.id, 0)}
 					alt={project.title}
 					fetchPriority={project.hero ? 'high' : 'low'}
 					loading={project.hero ? 'eager' : 'lazy'}
@@ -137,34 +137,21 @@ function ProjectCard({
 								scrollbar-none scroll-smooth'
 				>
 					{/* project images */}
-					{project.images.map((img, i) => (		
+					{project.images.map((_, i) => (		
 						<div
 							key={i}
 							className='relative min-w-full h-full snap-center snap-always bg-(--bg-colour)'
 							>
 								<GalleryImage
-									src={notionImage(img)}
+									src={notionProjectImage(project.id, i)}
 									alt={`${project.title} image ${i + 1}`}
 									className='absolute object-contain object-bottom sm:object-cover sm:object-center'
 									onHoverStart={onMouseEnter}
 									onHoverEnd={onMouseLeave}
 									priority={i === 0}
 								/>
-								{/* gradient for scrollbar visibility */}
-								<div className={`absolute inset-0 mx-2 bg-gradient-to-t from-(--dark-black)/30 from-5% via-(--dark-black)/15 via-16% to-transparent to-40% point-events-auto`}/>
 						</div>
 					))}
-					{/* progress bar */}
-					{project.images.length > 1 && (
-						<div className={`absolute bottom-6 left-0 w-full h-[6px] overflow-hidden transition-opacity duration-500
-										${showScrollbar ? 'opacity-100' : 'opacity-0'}`}
-						>
-							<div
-								ref={indicatorRef}
-								className='drop-shadow-lg h-full rounded-full bg-white/70 transition-transform duration-100 ease-out'
-							/>
-						</div>
-					)}
 				</div>
 			</div>
 		</div>
