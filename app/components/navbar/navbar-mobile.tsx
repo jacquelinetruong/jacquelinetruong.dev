@@ -125,7 +125,7 @@ export default function NavbarMobile({ isLoading }: { isLoading: boolean }) {
 								</a>
 								<a
 									target='_blank'
-									href='https://www.linkedin.com/in/jacquellinetruong'
+									href='https://www.linkedin.com/in/jacquelinetruong'
 								>
 									<Reveal delay={0.9}>LinkedIn</Reveal>
 								</a>
