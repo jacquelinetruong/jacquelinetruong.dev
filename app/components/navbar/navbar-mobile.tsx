@@ -17,7 +17,7 @@ export default function NavbarMobile({ isLoading }: { isLoading: boolean }) {
 	const [menuState, setMenuState] = useState<'closed' | 'opening' | 'open' | 'closing'>('closed');
 
 	// nav links
-	const navLinks = ['home', 'about', 'portfolio', 'experience', 'contact'];
+	const navLinks = ['home', 'work', 'about', 'extras'];
 	
 	// active section
 	const activeSection = useActiveSection();
@@ -100,7 +100,7 @@ export default function NavbarMobile({ isLoading }: { isLoading: boolean }) {
 
 			{/* overlay menu */}
 			{menuState !== 'closed' && (
-				<div className={`fixed w-full h-full z-40 pt-40 pb-16  bg-(--grey)
+				<div className={`fixed w-full h-full z-40 pt-40 pb-16  bg-(--grey) pointer-events-auto
 								flex flex-col items-center justify-between
 								${menuState === 'opening' ? 'animate-open' : ''}
 								${menuState === 'closing' ? 'animate-close': ''}`}
@@ -112,7 +112,7 @@ export default function NavbarMobile({ isLoading }: { isLoading: boolean }) {
 							<p className='px-5 pb-2 text-(--dark-grey) font-medium text-sm | xs:text-base | sm:text-md'>Navigation</p>
 							{navLinks.map((id, i) => (
 								<Link
-									href={`/#${id}`}
+									href={`/${id}`}
 									key={id}
 									onClick={scrollToSection(id)}
 									className={`nav-button block

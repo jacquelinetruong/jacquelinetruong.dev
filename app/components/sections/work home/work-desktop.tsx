@@ -11,11 +11,13 @@ import type { Project } from '@/lib/projectTypes';
 import Coffee from '../../icons/coffee';
 
 
-export default function Work({
+export default function WorkDesktop({
     className = '',
+    isLoading,
     projects,
  }: { 
     className?: string; 
+    isLoading: boolean;
     projects: Project[];
  }) {
     

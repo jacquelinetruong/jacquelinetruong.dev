@@ -59,55 +59,9 @@ export default function ExperienceMobile({
             <Grid className=''>
                 {/* title and filters */}
                 <div className='col-start-1 col-span-3 row-start-1 row-span-1 
-                                w-full h-full px-5 py-6
-                                flex flex-col justify-between items-end'>
-                    {/* title */}
-                    <div className='w-full aspect-4/1 relative'>
-                        <Image
-                            src='/experience.svg'
-                            alt='my namestamp'
-                            fill
-                            className='object-contain object-left pb-2'
-                        />
-                    </div>
-
-                    {/* filter buttons */}
-                    <div className='text-xs | xs:text-sm 
-                                    flex flex-row gap-2 w-full h-fit'>
-                        {/* work button */}
-                        <button 
-                            onClick={() => setFilter('work')}
-                            className={`flex flex-row gap-2 items-center cursor-pointer
-                                        w-fit h-fit rounded-full border
-                                        px-6 py-3 | sm:px-7 sm:py-4
-                                        transition-colors duration-400
-                                        ${filter === 'work' ? 'text-white border-(--black) bg-(--black)' : 'text-(--text-colour) border-(--grey) bg-(--off-white)'}`}
-                        >
-                            Work
-                        </button>
-
-                        {/* clients button */}
-                        <button 
-                            onClick={() => setFilter('clients')}
-                            className={`flex flex-row gap-1 items-center cursor-pointer
-                                        w-fit h-fit px-6 py-3 sm:px-7 sm:py-4 rounded-full border
-                                        transition-colors duration-400
-                                        ${filter === 'clients' ? 'text-white border-(--black) bg-(--black)' : 'text-(--text-colour) border-(--grey) bg-(--off-white)'}`}
-                        >
-                            Clients
-                        </button>
-
-                        {/* proficiencies button */}
-                        <button 
-                            onClick={() => setFilter('proficiencies')}
-                            className={`flex flex-row gap-1 items-center cursor-pointer
-                                        w-fit h-fit px-6 py-3 sm:px-7 sm:py-4 rounded-full border
-                                        transition-colors duration-400
-                                        ${filter === 'proficiencies' ? 'text-white border-(--black) bg-(--black)' : 'text-(--text-colour) border-(--grey) bg-(--off-white)'}`}
-                        >
-                            Proficiencies
-                        </button>
-                    </div>
+                                w-full h-full px-5 pb-6
+                                flex flex-col justify-end'>
+                    <p className='text-(--grey) text-2xl font-normal'>work experience</p>
                 </div>
 
                 {/* category items */}

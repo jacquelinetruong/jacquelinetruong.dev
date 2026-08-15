@@ -150,21 +150,8 @@ function ProjectCard({
 									onHoverEnd={onMouseLeave}
 									priority={i === 0}
 								/>
-								{/* gradient for scrollbar visibility */}
-								<div className={`absolute inset-0 mx-2 bg-gradient-to-t from-(--dark-black)/30 from-5% via-(--dark-black)/15 via-16% to-transparent to-40% point-events-auto`}/>
 						</div>
 					))}
-					{/* progress bar */}
-					{project.images.length > 1 && (
-						<div className={`absolute bottom-6 left-0 w-full h-[6px] overflow-hidden transition-opacity duration-500
-										${showScrollbar ? 'opacity-100' : 'opacity-0'}`}
-						>
-							<div
-								ref={indicatorRef}
-								className='drop-shadow-lg h-full rounded-full bg-white/70 transition-transform duration-100 ease-out'
-							/>
-						</div>
-					)}
 				</div>
 			</div>
 		</div>

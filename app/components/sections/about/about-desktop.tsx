@@ -23,7 +23,7 @@ export default function AboutDesktop({
 
     const smiley = ':)';
 
-    return(
+    return (
         <SectionReveal
             fadeDistance={0}
             fadeStart={0.4}
