@@ -34,12 +34,6 @@ export default function MoreMobile({
                                 href: '/work/current',
                                 alt: "My current project in the works!"
                             },
-                            {   image: '/skills.webp', 
-                                title: 'Skills', 
-                                description: '...', 
-                                href: '/about#skills',
-                                alt: 'My skills & proficiencies'
-                            },
                             {   image: '/summer-person.webp', 
                                 title: 'Extras', 
                                 description: '...', 
