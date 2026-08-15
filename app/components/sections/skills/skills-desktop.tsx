@@ -37,38 +37,38 @@ export default function Skills({
         >
             <Grid>
                 {/* skill categories menu */}
-                <div className='sm:text-xl lg:text-2xl 2xl:text-3xl 3xl:text-4xl
+                <div className='sm:text-xl lg:text-2xl 2xl:text-3xl 
                                 col-start-1 col-span-2 row-start-2 row-span-2
-                                flex flex-col justify-between
+                                flex flex-col gap-4 2xl:gap-6
                                 p-8 | ultrawide:px-20'
                 >
                     {skills.map((item, i) => (
-                        <Reveal key={item.id} delay={i * 0.15}>
                             <button
                                 onClick={() => setActiveSkill(item)}
                                 className={`
-                                    flex flex-row gap-2 2xl:gap-4 items-start
-                                    pr-8 w-fit h-full text-left text-nowrap
+                                    2xl:gap-4 items-start
+                                    pr-8 w-fit text-left text-nowrap
                                     transition-all duration-300 cursor-pointer
                                     ${activeSkill?.id === item.id
                                         ? 'font-semibold text-(--light-black)'
                                         : 'text-(--grey) hover:font-semibold hover:text-[#B7B6BD]'}
                                 `}
                             >
-                                <Image 
-                                    src={
-                                        activeSkill?.id === item.id
-                                            ? '/detail-arrow-black.svg'
-                                            : '/detail-arrow-grey.svg'
-                                    }
-                                    alt=''
-                                    width={28}
-                                    height={28}
-                                />
+                                <Reveal key={item.id} delay={i * 0.15} className='flex flex-row gap-2'>
+                                    <Image 
+                                        src={
+                                            activeSkill?.id === item.id
+                                                ? '/detail-arrow-black.svg'
+                                                : '/detail-arrow-grey.svg'
+                                        }
+                                        alt=''
+                                        width={28}
+                                        height={28}
+                                    />
 
-                                {item.menuTitle}
+                                    {item.menuTitle}
+                                </Reveal>
                             </button>
-                        </Reveal>
                     ))}
                 </div>
 

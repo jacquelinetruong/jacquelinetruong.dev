@@ -115,11 +115,11 @@ export default function AboutDesktop({
 
                     {/* education */}
                     <div className='flex flex-col gap-0.5'>
-                        <Reveal delay={(currentWork.length + 1) * 1.75}>
+                        <Reveal delay={(currentWork.length + 1)}>
                             <h4 className='font-medium sm:text-xs md:text-sm 2xl:text-base 3xl:text-lg text-(--alt-text-colour)'>Education</h4>
                         </Reveal>
 
-                        <Reveal delay={(currentWork.length + 2) * 1}>
+                        <Reveal delay={(currentWork.length + 1.25)}>
                         <p className='font-semibold sm:text-xs md:text-sm 2xl:text-base 3xl:text-lg
                                         flex flex-row gap-2 items-start'>
                             <Image 
@@ -137,14 +137,14 @@ export default function AboutDesktop({
 
                 {/* cat */}
                 <div className='col-start-5 row-start-1 self-center place-self-center'>
-                    <Reveal delay={3.5}>
+                    <Reveal delay={2.25}>
                         <Cat className='text-(--nice-grey)'/>
                     </Reveal>
                 </div>
 
                 {/* card link to extras page */}
                 <div className='col-start-5 row-start-3'>
-                    <Reveal delay={4.25}>
+                    <Reveal delay={2.75}>
                         <Card
                             coverImage='/summer-person.webp'
                             altText='More me, offline'

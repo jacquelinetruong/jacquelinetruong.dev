@@ -72,14 +72,6 @@ export default function AboutClient({
 						</Grid>
 					</section>
 
-					{isDesktop && (
-						<section id='skills' className='section'>
-							<Grid>
-								<Skills skills={skills} />
-							</Grid>
-						</section>
-					)}
-
 					<section id='experience' className='section'>
 						<Grid>
 							<ExperienceSection
@@ -88,6 +80,14 @@ export default function AboutClient({
 							/>
 						</Grid>
 					</section>
+
+					{isDesktop && (
+						<section id='skills' className='section'>
+							<Grid>
+								<Skills skills={skills} />
+							</Grid>
+						</section>
+					)}
 
 					<section id='contact' className='section'>
 						<Footer />
