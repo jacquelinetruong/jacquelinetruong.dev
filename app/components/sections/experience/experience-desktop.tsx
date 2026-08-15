@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Image from 'next/image';
 import { formatDateRange } from './experience';
 
@@ -25,25 +25,31 @@ export default function ExperienceDesktop({
  }) {
 
     // sort experience by date
-    const orderedExperience = [...experience]
-        .filter(e => e.startDate)
-        .sort((a, b) => {
-            const startDiff = new Date(b.startDate!).getTime() - new Date(a.startDate!).getTime();
-            if (startDiff !== 0) return startDiff;
-
-            const aEnd = a.endDate ? new Date(a.endDate).getTime() : Date.now();
-            const bEnd = b.endDate ? new Date(b.endDate).getTime() : Date.now();
-            return bEnd - aEnd;
-        });
-        
-    // filter by experience category
-    const xpCategorized = {
-        work: orderedExperience.filter(e => e.category === 'work'),
-        clients: orderedExperience.filter(e => e.category === 'clients'),
-    };
-
+    const xpCategorized = useMemo(() => {
+        const orderedExperience = [...experience]
+            .filter(e => e.startDate)
+            .sort((a, b) => {
+                const startDiff = new Date(b.startDate!).getTime() - new Date(a.startDate!).getTime();
+                if (startDiff !== 0) return startDiff;
+    
+                const aEnd = a.endDate ? new Date(a.endDate).getTime() : Date.now();
+                const bEnd = b.endDate ? new Date(b.endDate).getTime() : Date.now();
+                return bEnd - aEnd;
+            });
+    
+        return {
+            // filter experience by category
+            work: orderedExperience.filter(e => e.category === 'work'),
+            clients: orderedExperience.filter(e => e.category === 'clients'),
+        };
+    }, [experience]);
+    
     // active experience
     const [activeExperience, setActiveExperience] = useState<Experience | null>(null);
+    
+    useEffect(() => {
+        setActiveExperience(xpCategorized.work[0] ?? null);
+    }, [xpCategorized]);
 
     // set default active experience
     useEffect(() => {
