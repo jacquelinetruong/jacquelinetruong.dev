@@ -29,10 +29,11 @@ export default function ButtonOverlay({ className = '' }: { className?: string }
                     <a 
                         target='_blank'
                         href='mailto:hello@jacquelinetruong.dev'
-                        className='flex flex-row gap-2 justify-center items-center place-self-center
-                                    w-full h-fit bg-(--nice-grey) rounded-full
+                        className={`flex flex-row gap-2 justify-center items-center place-self-center
+                                    w-full h-fit rounded-full
                                     px-6 py-4 | sm:px-7 sm:py-6 | 
-                                    text-(--dark-black) font-medium text-xs | xs:text-sm | sm:text-base'
+                                    font-medium text-xs | xs:text-sm | sm:text-base
+                                    ${activeSection !== 'work' && activeSection !== 'archive' ? 'bg-(--nice-grey) text-(--dark-black)' : 'bg-(--dark-black) text-white'}`}
                     >
                         <Coffee className='size-[16px] sm:size-[24px]'/>
                         Get in touch

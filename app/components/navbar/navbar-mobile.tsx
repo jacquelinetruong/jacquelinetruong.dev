@@ -1,26 +1,24 @@
 'use client'
 
 import { useState } from 'react';
-import { useLenis } from 'lenis/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { Reveal } from '@/app/components/reveal';
-import { useActiveSection } from '@/app/components/active-section';
 
 import Cat from '@/app/components/icons/cat-icon';
 
+const navItems = [
+	{ label: 'Home', href: '/' },
+	{ label: 'Work', href: '/work' },
+	{ label: 'About', href: '/about' },
+	{ label: 'Extras', href: '/extras' },
+];
 
 export default function NavbarMobile({ isLoading }: { isLoading: boolean }) {
-	const lenis = useLenis();
 	const [menuState, setMenuState] = useState<'closed' | 'opening' | 'open' | 'closing'>('closed');
-
-	// nav links
-	const navLinks = ['home', 'work', 'about', 'extras'];
-	
-	// active section
-	const activeSection = useActiveSection();
+	const pathname = usePathname();
 
 	// change menu state upon open or close
 	const toggleMenu = () => {
@@ -43,38 +41,16 @@ export default function NavbarMobile({ isLoading }: { isLoading: boolean }) {
 		};
 	};
 
-	// reroute if needed
-    const pathname = usePathname();
-    const isHome = pathname === '/';
+	const closeMenu = () => {
+		if (menuState === 'open' || menuState === 'opening') {
+			setMenuState('closing');
+		}
+	};
 
-	// smooth scroll to section
-	const scrollToSection = (id: string) => (e?: React.MouseEvent) => {
-		// reroute if on project or 404 page
-        if (!isHome) return;
-		
-		e?.preventDefault();
-
-		const el = document.getElementById(id);
-		if (!el) return;
-
-		const navHeight =
-			parseFloat(
-				getComputedStyle(document.documentElement).getPropertyValue('--nav-height')
-			) || 0;
-
-		const y = el.getBoundingClientRect().top + (lenis?.scroll ?? window.scrollY - navHeight);
-
-		if (lenis) {
-			lenis.scrollTo(y, {
-				duration: 0.8,
-				easing: (t) => 1 - Math.pow(1 - t, 3),
-			});
-		} else {
-			window.scrollTo({ top: y, behavior: 'smooth' });
-		};
-
-		setMenuState('closing');
-	}
+	const isNavActive = (href: string) =>
+		href === '/'
+			? pathname === '/'
+			: pathname === href || (href === '/work' && pathname.startsWith('/work/'));
 
 	return (
 		<div>
@@ -110,23 +86,23 @@ export default function NavbarMobile({ isLoading }: { isLoading: boolean }) {
 						{/* nav items */}
 						<div className='mb-20'>
 							<p className='px-5 pb-2 text-(--dark-grey) font-medium text-sm | xs:text-base | sm:text-md'>Navigation</p>
-							{navLinks.map((id, i) => (
+							{navItems.map(({ label, href }, i) => (
 								<Link
-									href={`/${id}`}
-									key={id}
-									onClick={scrollToSection(id)}
+									href={href}
+									key={href}
+									onClick={closeMenu}
 									className={`nav-button block
 												w-full h-fit px-5 py-1.5
 												text-4xl sm: text-5xl font-[450] text-left
 												transition-colors duration-300 place-self-end
-												${activeSection === id ? 'text-(--light-black)' : 'text-white'}`}
+												${isNavActive(href) ? 'text-(--light-black)' : 'text-white'}`}
 									style={{ 
 										animationDelay: `${0.1 + i * 0.08}s`, 
 										animationDuration: `${0.4 + i * 0.12}s`,
 									}}
 								>
-									{id.charAt(0).toUpperCase() + id.slice(1)}
-									{activeSection === id && (
+									{label}
+									{isNavActive(href) && (
 										' —' // lol it's a face!
 									)}
 								</Link>

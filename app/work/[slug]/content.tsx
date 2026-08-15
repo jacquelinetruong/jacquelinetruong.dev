@@ -597,11 +597,12 @@ export default function ProjectContent({ selectedProject, blocks, projects }: Pr
 
 						{/* project preview image */}
 						<div className='col-start-1 col-span-3 row-start-3 row-span-2 w-(--three-cell-width) h-(--two-cell-height)'>
-							<Reveal delay={0.25}>
+							<Reveal delay={0.25} className='h-full'>
 								<GalleryImage
 									src={selectedProject.images[0]}
 									alt={`${selectedProject.title} Preview`}
 									className='object-cover object-center'
+									priority
 								/>
 							</Reveal>
 						</div>

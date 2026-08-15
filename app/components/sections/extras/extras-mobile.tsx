@@ -13,7 +13,7 @@ export default function ExtrasMobile({
 		<>
 			<Carousel 
 				section='extras'
-				title='moments out of office'
+				title='Moments out of office'
 				description="A collection of hobbies and favourites from my camera roll. Each photo represents a little bit of me, offline."
 				images={[
 					{   image: '/summer-person.webp', 
@@ -42,7 +42,7 @@ export default function ExtrasMobile({
 
 			<Carousel 
 				section='artworks'
-				title='painting my dreams'
+				title='Painting my dreams'
 				description="When I'm not designing digital experiences, I'm busy recreating the fantasy world of my dreams—literally. These are a few of my proudest pieces; I hope they spark the same wistful longing in you, too."
 				images={[
 					{   image: '/falls.webp', 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, memo } from 'react';
+import { useState, memo, useRef, useEffect } from 'react';
 
 interface GalleryImageProps {
 	src: string;
@@ -21,8 +21,18 @@ function GalleryImage({
 	priority = false,
 	gradient = false,
 }: GalleryImageProps) {
-	// get notion image done state
 	const [loaded, setLoaded] = useState(false);
+	const imgRef = useRef<HTMLImageElement>(null);
+
+	// handle cached images where onLoad fires before the handler is attached
+	useEffect(() => {
+		const img = imgRef.current;
+		if (img?.complete && img.naturalWidth > 0) {
+			setLoaded(true);
+		} else {
+			setLoaded(false);
+		}
+	}, [src]);
 
 	return (
 		<div
@@ -37,6 +47,7 @@ function GalleryImage({
 
 			{/* gallery image */}
 			<img
+				ref={imgRef}
 				src={src}
 				alt={alt}
 				fetchPriority={priority ? 'high' : 'low'}
