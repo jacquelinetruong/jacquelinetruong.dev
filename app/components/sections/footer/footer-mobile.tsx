@@ -66,7 +66,7 @@ export default function FooterMobile({ className = '' }:{ className?: string; })
                     <div className='font-regular text-white text-sm | xs:text-base w-fit 
                                     flex flex-row gap-4 sm:gap-6'>
                         <a target='_blank' href='/resume.pdf' rel='noopener noreferrer'>Resume</a>
-                        <a target='_blank' href='https://www.linkedin.com/in/jacquellinetruong' rel='noopener noreferrer'>LinkedIn</a>
+                        <a target='_blank' href='https://www.linkedin.com/in/jacquelinetruong' rel='noopener noreferrer'>LinkedIn</a>
                         <a target='_blank' href='https://github.com/jacquelinetruong' rel='noopener noreferrer'>GitHub</a>
                         <a target='_blank' href='https://www.behance.net/jacqueltruong' rel='noopener noreferrer'>Behance</a>
                     </div>

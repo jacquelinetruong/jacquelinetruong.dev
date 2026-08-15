@@ -135,7 +135,7 @@ export default function NavbarDesktop({ isLoading }: { isLoading: boolean }) {
                 <a
                     className='transition-colors duration-300 text-(--text-colour) hover:text-(--light-mode-grey)'
                     target='_blank'
-                    href='https://www.linkedin.com/in/jacquellinetruong'
+                    href='https://www.linkedin.com/in/jacquelinetruong'
                     rel='noopener noreferrer'
                 >
                     LinkedIn

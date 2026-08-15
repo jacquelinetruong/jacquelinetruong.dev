@@ -81,7 +81,7 @@ export default function FooterDesktop({ className = '' }: { className?: string }
                                         <a 
                                             className={`w-fit transition-colors duration-300 ${isDark ? 'text-(--dark-grey) hover:text-(--light-mode-grey)' : 'hover:text-(--off-white)'}`} 
                                             target='_blank' 
-                                            href='https://www.linkedin.com/in/jacquellinetruong' 
+                                            href='https://www.linkedin.com/in/jacquelinetruong' 
                                             rel='noopener noreferrer'>
                                                 LinkedIn
                                         </a>
