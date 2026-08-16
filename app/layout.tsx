@@ -1,6 +1,6 @@
-import './globals.css'
+import './globals.css';
 
-import { Analytics } from '@vercel/analytics/next'
+import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
 		description: 'a collection of my ideas — blending design, development, and thoughtful digital experiences.',
 		url: 'https://jacquelinetruong.dev',
 		siteName: 'jacqueline truong | designer & developer',
-		images: { url: '/og-image.png' },
+		images: { url: '/jt-opengraph.png' },
 		type: 'website',
 	},
 	
